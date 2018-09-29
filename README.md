@@ -18,4 +18,4 @@ Example
 * verify: '$.age'=18
 ```
 
-More [!Usage](doc/usage.md)
+More [Usage](doc/usage.md)
