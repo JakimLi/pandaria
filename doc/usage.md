@@ -60,6 +60,27 @@ Scenario: simple post with jsn
 * request body: classpath:user.json
 ```
 
+### basic uri
+In order to shorten the uri and reduce the duplication, you can configure a `basic uri` and then use relative uri when
+sending requests.
+
+```
+Feature: Http feature
+  Basic http operations with verifications
+
+  Background:
+    * dir: features/http
+    * base uri: http://localhost:10080
+
+  Scenario: simple get
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.age'=18
+```
+
+You can still use absolute uri with `uri: http://host:port`
 
 
 BASIC HTTP REQUEST

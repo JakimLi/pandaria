@@ -7,9 +7,14 @@ import org.springframework.stereotype.Component;
 @Scope("cucumber-glue")
 public class FeatureConfiguration {
     private String dir;
+    private String baseUri;
 
     public void dir(String dir) {
         this.dir = dir;
+    }
+
+    public void baseUri(String baseUri) {
+        this.baseUri = baseUri;
     }
 
     public String classpathFile(String file) {
@@ -17,5 +22,19 @@ public class FeatureConfiguration {
             return file.replace("classpath:", "");
         }
         return dir + "/" + file;
+    }
+
+    public String uri(String uri) {
+        if (uri.startsWith("http")) {
+            return uri;
+        }
+        return this.baseUri + prefixSlash(uri);
+    }
+
+    private String prefixSlash(String uri) {
+        if (uri.startsWith("/")) {
+            return uri;
+        }
+        return "/" + uri;
     }
 }

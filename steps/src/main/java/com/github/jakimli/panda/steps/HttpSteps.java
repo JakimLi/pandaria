@@ -29,7 +29,7 @@ public class HttpSteps {
 
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
-        context.uri(URI.create(url));
+        context.uri(URI.create(configuration.uri(url)));
     }
 
     @Given("^request body:$")
