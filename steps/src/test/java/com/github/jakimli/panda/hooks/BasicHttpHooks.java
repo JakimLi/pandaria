@@ -11,6 +11,7 @@ import static com.github.dreamhead.moco.Moco.eq;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
 import static com.github.dreamhead.moco.Moco.method;
+import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.uri;
 import static com.google.common.collect.ImmutableMap.of;
 
@@ -24,6 +25,11 @@ public class BasicHttpHooks {
         server.server()
                 .get(by(uri("/users/me")))
                 .response(json(of("username", "jakim", "age", 18)));
+
+        server.server()
+                .post(by(uri("/empty_request")))
+                .response(status(201))
+                .response(json(of("name", "someone")));
 
         server.server()
                 .post(and(

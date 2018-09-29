@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import static com.github.jakimli.panda.utils.JsonContext.json;
 import static com.github.jakimli.panda.utils.JsonUtil.jsonToObject;
+import static com.github.jakimli.panda.utils.StringUtil.assertNotEmpty;
 
 @Component
 @Scope("cucumber-glue")
@@ -20,6 +21,8 @@ public class JsonVerificationContext {
     }
 
     public void toBeVerified(String toBeVerified) throws IOException {
+        assertNotEmpty(toBeVerified);
         this.toBeVerified = jsonToObject(toBeVerified);
     }
+
 }

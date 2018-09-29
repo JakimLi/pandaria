@@ -24,6 +24,12 @@ Feature: Http feature
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
 
+  Scenario: simple post without request body
+    * uri: http://localhost:10080/empty_request
+    * send: POST
+    * status: 201
+    * verify: '$.name'='someone'
+
   Scenario: simple post with json from file
     * uri: http://localhost:10080/users
     * request body: requests/user.json
