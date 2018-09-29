@@ -1,0 +1,5 @@
+rootProject.name = 'panda'
+
+include 'core'
+include 'steps'
+include 'doc'
