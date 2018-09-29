@@ -11,10 +11,10 @@ import java.net.URI;
 public class HttpContext {
     private URI uri;
     private HttpMethod method;
+    private String requestBody;
 
     private String responseBody;
     private int responseStatus;
-    private String requestBody;
 
     public void uri(URI uri) {
         this.uri = uri;
@@ -54,5 +54,13 @@ public class HttpContext {
 
     public String requestBody() {
         return requestBody;
+    }
+
+    public void reset() {
+        this.uri = null;
+        this.method = null;
+        this.requestBody = null;
+        this.responseBody = null;
+        this.responseStatus = 0;
     }
 }
