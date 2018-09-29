@@ -42,6 +42,25 @@ Feature: Http feature
     * verify: '$.age'=18
 ```
 
+`dir` supports relative path and absolute path(relative to classpath)
+
+#### relative
+
+```
+Background:
+* dir: features/http
+
+Scenario: simple post with jsn
+* uri: http://localhost:10080/users
+* request body: requests/user.json
+```
+
+#### absolute, add classpath as prefix
+```
+* request body: classpath:user.json
+```
+
+
 
 BASIC HTTP REQUEST
 ------------------
