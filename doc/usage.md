@@ -15,19 +15,15 @@ the directory of the current feature file, suggest to put it in the `Background`
 
 If we have below directory structure.
 
+```
 ── resources
-
    └── features
-   
        └── http
-       
             ├── http.feature
-            
             └── requests
-            
             └── user.json
-            
-            
+```
+
 We can use the json file as request body as below
 ```
 Feature: Http feature
