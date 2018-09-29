@@ -1,1 +1,21 @@
 apply plugin: 'java'
+
+allprojects {
+    group = 'com.github.jakimli.panda'
+    version = '0.1.0'
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    ext {
+        springboot = '2.0.0.RELEASE'
+        cucumber = '4.0.0'
+    }
+}
