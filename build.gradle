@@ -17,5 +17,13 @@ subprojects {
     ext {
         springboot = '2.0.0.RELEASE'
         cucumber = '4.0.0'
+
+        jersey = '2.27'
+
+        moco = '0.12.0'
+
+        jsonpath = '2.4.0'
+
+        junit = '4.12'
     }
 }

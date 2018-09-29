@@ -1,5 +1,15 @@
 dependencies {
     compile(
-            "org.springframework.boot:spring-boot-starter:${springboot}"
+            "org.springframework.boot:spring-boot-starter:${springboot}",
+
+            "com.jayway.jsonpath:json-path:${jsonpath}",
+
+            "junit:junit:${junit}",
+            
+            "org.glassfish.jersey.core:jersey-client:${jersey}",
+            "org.glassfish.jersey.core:jersey-common:${jersey}",
+            "org.glassfish.jersey.media:jersey-media-json-jackson:${jersey}",
+            "org.glassfish.jersey.media:jersey-media-multipart:${jersey}",
+            "org.glassfish.jersey.inject:jersey-hk2:${jersey}"
     )
 }

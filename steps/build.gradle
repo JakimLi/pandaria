@@ -3,11 +3,17 @@ dependencies {
 
     compile(
             "io.cucumber:cucumber-java:${cucumber}",
+            "io.cucumber:cucumber-spring:${cucumber}",
+
             "org.springframework.boot:spring-boot-starter-test:${springboot}"
     )
 
     testCompile(
-            "io.cucumber:cucumber-junit:${cucumber}"
+            "io.cucumber:cucumber-junit:${cucumber}",
+
+            "com.github.dreamhead:moco-core:${moco}",
+            "com.github.dreamhead:moco-runner:${moco}",
+            "com.github.dreamhead:moco-junit:${moco}"
     )
 }
 
