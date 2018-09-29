@@ -9,7 +9,7 @@ This page demonstrates the usage of the DSLs
 BASIC HTTP REQUEST
 ------------------
 
-* GET
+### GET
 
 ```gherkin
 * uri: http://localhost:10080/users/me
@@ -19,7 +19,7 @@ BASIC HTTP REQUEST
 * verify: '$.age'=18
 ```
 
-* POST
+### POST
 
 ```gherkin
 * uri: http://localhost:10080/users
@@ -34,7 +34,7 @@ BASIC HTTP REQUEST
 * verify: '$.age'=18
 ```
 
-* POST request body from file
+### POST request body from file
 
 ```
 * uri: http://localhost:10080/users
