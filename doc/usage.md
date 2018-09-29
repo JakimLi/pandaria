@@ -55,7 +55,7 @@ Scenario: simple post with jsn
 * request body: requests/user.json
 ```
 
-#### absolute, add classpath as prefix
+#### absolute, add `classpath:` as prefix
 ```
 * request body: classpath:user.json
 ```
