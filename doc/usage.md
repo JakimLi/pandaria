@@ -60,8 +60,8 @@ Scenario: simple post with jsn
 * request body: classpath:user.json
 ```
 
-### basic uri
-In order to shorten the uri and reduce the duplication, you can configure a `basic uri` and then use relative uri when
+### base uri
+In order to shorten the uri and reduce the duplication, you can configure a `base uri` and then use relative uri when
 sending requests.
 
 ```
