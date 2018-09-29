@@ -9,8 +9,39 @@ This page demonstrates the usage of the DSLs
 BASIC HTTP REQUEST
 ------------------
 
+* GET
+
 ```gherkin
-* url: http://localhost:3000/user/123
+* uri: http://localhost:10080/users/me
 * send: GET
-* verify: '$.name'="jakim"
+* status: 200
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+* POST
+
+```gherkin
+* uri: http://localhost:10080/users
+* request body:
+"""
+{"username": "jakim", "age": 18}
+"""
+* send: POST
+* status: 200
+* verify: '$.id'='auto-generated'
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+* POST request body from file
+
+```
+* uri: http://localhost:10080/users
+* request body: requests/user.json
+* send: POST
+* status: 200
+* verify: '$.id'='auto-generated'
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
 ```
