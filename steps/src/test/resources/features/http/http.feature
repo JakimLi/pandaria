@@ -9,7 +9,7 @@ Feature: Http feature
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
 
-  Scenario: simple post
+  Scenario: simple post with json
     * uri: http://localhost:10080/users
     * request body:
     """
