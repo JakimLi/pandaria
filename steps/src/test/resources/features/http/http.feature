@@ -24,9 +24,18 @@ Feature: Http feature
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
 
-  Scenario: simple post with jsn
+  Scenario: simple post with json from file
     * uri: http://localhost:10080/users
     * request body: requests/user.json
+    * send: POST
+    * status: 200
+    * verify: '$.id'='auto-generated'
+    * verify: '$.username'='jakim'
+    * verify: '$.age'=18
+
+  Scenario: simple post with from file in absolute path
+    * uri: http://localhost:10080/users
+    * request body: classpath:user.json
     * send: POST
     * status: 200
     * verify: '$.id'='auto-generated'
