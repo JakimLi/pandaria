@@ -33,3 +33,5 @@ task cucumber() {
         }
     }
 }
+
+build.dependsOn tasks.cucumber
