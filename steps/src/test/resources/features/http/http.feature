@@ -1,6 +1,6 @@
 @http
 Feature: Http feature
-  This contains scenarios that different kind of http methods
+  Basic http operations with verifications
 
   Scenario: simple get
     * uri: http://localhost:10080/users/me
