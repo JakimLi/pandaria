@@ -5,7 +5,8 @@ import com.github.jakimli.panda.domain.http.HttpContext;
 import java.util.function.Supplier;
 
 public enum HttpMethod {
-    GET(HttpGet::new);
+    GET(HttpGet::new),
+    POST(HttpPost::new);
 
     private Supplier<HttpClient> client;
 

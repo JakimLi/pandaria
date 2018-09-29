@@ -14,6 +14,7 @@ public class HttpContext {
 
     private String responseBody;
     private int responseStatus;
+    private String requestBody;
 
     public void uri(URI uri) {
         this.uri = uri;
@@ -45,5 +46,13 @@ public class HttpContext {
 
     public String responseBody() {
         return responseBody;
+    }
+
+    public void requestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
+    public String requestBody() {
+        return requestBody;
     }
 }

@@ -4,7 +4,9 @@ import com.github.jakimli.panda.domain.http.HttpContext;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Response;
+import java.util.function.Function;
 
 class AbstractHttpClient {
 
@@ -14,7 +16,13 @@ class AbstractHttpClient {
         client = ClientBuilder.newBuilder().build();
     }
 
-    void updateHttpContext(Response response, HttpContext context) {
+    void request(HttpContext context, Function<Builder, Response> method) {
+        Builder target = client.target(context.uri()).request();
+        Response response = method.apply(target);
+        updateHttpContext(response, context);
+    }
+
+    private void updateHttpContext(Response response, HttpContext context) {
         context.responseBody(response.readEntity(String.class));
         context.status(response.getStatus());
     }

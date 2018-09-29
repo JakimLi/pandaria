@@ -27,6 +27,11 @@ public class HttpSteps {
         context.uri(URI.create(url));
     }
 
+    @Given("^request body:$")
+    public void requestBody(String body) {
+        context.requestBody(body);
+    }
+
     @When("^send: ([^\"]*)$")
     public void send(String method) throws IOException {
         context.method(HttpMethod.valueOf(method));
