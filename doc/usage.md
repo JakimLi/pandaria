@@ -140,3 +140,16 @@ Scenario: get with http header
 success
 """
 ```
+
+### PUT
+```
+Scenario: simple put
+  * uri: /users/me
+  * request body:
+  """
+  {"username": "lj"}
+  """
+  * send: PUT
+  * status: 200
+  * verify: '$.username'='lj'
+```

@@ -65,3 +65,13 @@ Feature: Http feature
     * send: GET
     * status: 200
     * response body: responses/success.txt
+
+  Scenario: simple put
+    * uri: /users/me
+    * request body:
+    """
+    {"username": "lj"}
+    """
+    * send: PUT
+    * status: 200
+    * verify: '$.username'='lj'

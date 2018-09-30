@@ -52,6 +52,13 @@ public class BasicHttpHooks {
                 ))
                 .response(text("success"));
 
+        server.server()
+                .put(and(
+                        by(uri("/users/me")),
+                        eq(jsonPath("$.username"), "lj")
+                ))
+                .response(json(of("username", "lj")));
+
         server.start();
     }
 }
