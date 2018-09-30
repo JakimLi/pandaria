@@ -70,12 +70,12 @@ public class HttpSteps {
 
     @Then("^response body:$")
     public void verifyResponseBody(String expected) {
-        assertThat(context.responseBody(), is(expected));
+        assertThat(context.responseBody(), is(variables.interpret(expected)));
     }
 
     @Then("^response body: ([^\"]*)$")
     public void verifyResponseBodyAgainstFile(String file) throws IOException {
-        String content = read(configuration.classpathFile(file));
+        String content = variables.interpret(read(configuration.classpathFile(file)));
         assertThat(context.responseBody(), is(content));
     }
 

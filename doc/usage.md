@@ -31,6 +31,7 @@ Table of Contents
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
         * [In File](#in-file)
+        * [In Text](#in-text)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
@@ -317,6 +318,14 @@ Scenario: variable used in request file
   * request body: requests/someone.json
   * send: POST
   * status: 201
+```
+
+#### In text
+```
+* response body:
+"""
+{"user":"${username}"}
+"""
 ```
 
 

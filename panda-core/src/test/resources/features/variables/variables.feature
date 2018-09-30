@@ -51,3 +51,15 @@ Feature: Variables
     * send: POST
     * status: 201
 
+  Scenario: variable used in request file and response body
+    * var: 'name'='someone'
+    * uri: /users
+    * request body: requests/someone.json
+    * send: POST
+    * status: 201
+    * var: 'username'='someone_created'
+    * response body: responses/response.json
+    * response body:
+    """
+    {"user":"${username}"}
+    """

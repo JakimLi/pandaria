@@ -35,7 +35,8 @@ public class BasicHttpHooks {
                 .post(and(
                         by(uri("/users")),
                         eq(jsonPath("$.name"), "someone")))
-                .response(status(201));
+                .response(status(201))
+                .response(json(of("user", "someone_created")));
 
         server.start();
     }
