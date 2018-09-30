@@ -375,6 +375,8 @@ verify as text in file
 ### Verify String
 
 #### Equals
+`=` for equals, `!=` for not equals
+
 ```
 Scenario: equals
   * uri: /users/me
