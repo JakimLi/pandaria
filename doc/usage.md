@@ -27,7 +27,7 @@ Table of Contents
         * [Literal string](#literal-string)
         * [String](#string)
         * [Integer](#integer)
-        * [Extract from response body](#extract from respose body)
+        * [Extract from response body](#extract-from-respose-body)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
