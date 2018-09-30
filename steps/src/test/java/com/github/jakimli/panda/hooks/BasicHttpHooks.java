@@ -8,10 +8,12 @@ import static com.github.dreamhead.moco.HttpMethod.POST;
 import static com.github.dreamhead.moco.Moco.and;
 import static com.github.dreamhead.moco.Moco.by;
 import static com.github.dreamhead.moco.Moco.eq;
+import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
 import static com.github.dreamhead.moco.Moco.method;
 import static com.github.dreamhead.moco.Moco.status;
+import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
 import static com.google.common.collect.ImmutableMap.of;
 
@@ -42,6 +44,13 @@ public class BasicHttpHooks {
                         "username", "jakim",
                         "age", 18
                 )));
+
+        server.server()
+                .get(and(
+                        by(uri("/custom_header")),
+                        eq(header("Accept"), "text.plain")
+                ))
+                .response(text("success"));
 
         server.start();
     }

@@ -2,7 +2,7 @@ package com.github.jakimli.panda.steps;
 
 import com.github.jakimli.panda.domain.http.HttpContext;
 import com.github.jakimli.panda.domain.http.client.HttpMethod;
-import com.github.jakimli.panda.domain.verification.JsonVerificationContext;
+import com.github.jakimli.panda.domain.verification.VerificationContext;
 import com.github.jakimli.panda.utils.FeatureConfiguration;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -22,7 +22,7 @@ public class HttpSteps {
     HttpContext context;
 
     @Autowired
-    JsonVerificationContext verifier;
+    VerificationContext verifier;
 
     @Autowired
     FeatureConfiguration configuration;
@@ -31,6 +31,11 @@ public class HttpSteps {
     public void uri(String url) {
         context.reset();
         context.uri(URI.create(configuration.uri(url)));
+    }
+
+    @Given("^header: '([^\"]*)'='([^\"]*)'$")
+    public void header(String key, String value) {
+        context.requestHeader(key, value);
     }
 
     @Given("^request body:$")
@@ -54,5 +59,10 @@ public class HttpSteps {
     @Then("^status: (\\d+)")
     public void verifyStatus(int status) {
         assertThat(context.status(), is(status));
+    }
+
+    @Then("^response body:$")
+    public void verifyResponseBody(String expected) {
+        assertThat(context.responseBody(), is(expected));
     }
 }

@@ -4,6 +4,8 @@ import com.github.jakimli.panda.domain.http.client.HttpMethod;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
 import java.net.URI;
 
 @Component
@@ -12,9 +14,11 @@ public class HttpContext {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
+    private MultivaluedMap<String, Object> requestHeaders = new MultivaluedHashMap<>();
 
     private String responseBody;
     private int responseStatus;
+
 
     public void uri(URI uri) {
         this.uri = uri;
@@ -60,7 +64,17 @@ public class HttpContext {
         this.uri = null;
         this.method = null;
         this.requestBody = null;
+        this.requestHeaders.clear();
+
         this.responseBody = null;
         this.responseStatus = 0;
+    }
+
+    public void requestHeader(String key, String value) {
+        requestHeaders.add(key, value);
+    }
+
+    public MultivaluedMap<String, Object> requestHeaders() {
+        return requestHeaders;
     }
 }

@@ -122,3 +122,21 @@ BASIC HTTP REQUEST
 * verify: '$.username'='jakim'
 * verify: '$.age'=18
 ```
+
+### Custom Header
+
+```
+Scenario: get with http header
+  * uri: /custom_header
+  * header: 'Accept'='text.plain'
+  * send: GET
+  * status: 200
+```
+
+### verify response as plain text
+```
+* response body:
+"""
+success
+"""
+```

@@ -48,3 +48,13 @@ Feature: Http feature
     * verify: '$.id'='auto-generated'
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
+
+  Scenario: get with http header
+    * uri: /custom_header
+    * header: 'Accept'='text.plain'
+    * send: GET
+    * status: 200
+    * response body:
+    """
+    success
+    """
