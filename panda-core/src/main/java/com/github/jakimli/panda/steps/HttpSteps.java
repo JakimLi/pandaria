@@ -47,7 +47,7 @@ public class HttpSteps {
 
     @Given("^request body:$")
     public void requestBody(String body) {
-        context.requestBody(body);
+        context.requestBody(variables.interpret(body));
     }
 
     @Given("^request body: ([^\"]*)$")
