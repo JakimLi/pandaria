@@ -4,6 +4,7 @@ import com.github.jakimli.panda.domain.Variables;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,6 +15,11 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)}='([^\"]*)'$")
     public void verifyVariableEqualsLiteral(String varName, String expected) {
         assertThat(variables.get(varName), is(expected));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} contains '([^\"]*)'$")
+    public void verifyVariablContainsLiteral(String varName, String expected) {
+        assertThat(String.valueOf(variables.get(varName)), containsString(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")

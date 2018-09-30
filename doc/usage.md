@@ -382,4 +382,7 @@ Scenario: contains
   * status: 200
   * verify: '$.username'='jakim'
   * verify: '$.username' contains: 'kim'
+  
+  * var: 'username'="panda"
+  * verify: ${username} contains 'anda'
 ```
