@@ -65,4 +65,10 @@ public class HttpSteps {
     public void verifyResponseBody(String expected) {
         assertThat(context.responseBody(), is(expected));
     }
+
+    @Then("^response body: ([^\"]*)$")
+    public void verifyResponseBodyAgainstFile(String file) throws IOException {
+        String content = read(configuration.classpathFile(file));
+        assertThat(context.responseBody(), is(content));
+    }
 }

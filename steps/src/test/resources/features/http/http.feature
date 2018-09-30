@@ -58,3 +58,10 @@ Feature: Http feature
     """
     success
     """
+
+  Scenario: verify plain text response to content in file
+    * uri: /custom_header
+    * header: 'Accept'='text.plain'
+    * send: GET
+    * status: 200
+    * response body: responses/success.txt
