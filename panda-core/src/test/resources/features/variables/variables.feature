@@ -13,8 +13,10 @@ Feature: Variables
   Scenario: string
     * var: 'name'='panda'
     * var: 'great'="hello ${name}"
+    * var: 'another'='hello panda'
     * verify: ${great}='hello panda'
     * verify: ${great}="hello ${name}"
+    * verify: ${great}=${another}
 
   Scenario: integer
     * var: 'age'=18
