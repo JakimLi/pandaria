@@ -44,4 +44,11 @@ class HttpMethods {
                         .build("PATCH", entity(context.requestBody(), APPLICATION_JSON_TYPE))
                         .invoke());
     }
+
+    static Method head() {
+        return context -> client
+                .context(context)
+                .request(SyncInvoker::head);
+    }
+
 }

@@ -81,6 +81,13 @@ Feature: Http feature
     * send: DELETE
     * status: 200
 
+  Scenario: simple head
+    * uri: /users
+    * send: HEAD
+    * status: 200
+    * response header: 'test'='first,second,third'
+    * response header: 'Date'='Thur, 2018 12'
+
   Scenario: simple patch
     * uri: /users/20
     * request body:

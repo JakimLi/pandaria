@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import java.net.URI;
+import java.util.List;
 
 @Component
 @Scope("cucumber-glue")
@@ -18,6 +19,7 @@ public class HttpContext {
 
     private String responseBody;
     private int responseStatus;
+    private MultivaluedMap<String, String> responseHeaders = new MultivaluedHashMap<>();
 
 
     public void uri(URI uri) {
@@ -68,6 +70,7 @@ public class HttpContext {
 
         this.responseBody = null;
         this.responseStatus = 0;
+        this.responseHeaders.clear();
     }
 
     public void requestHeader(String key, String value) {
@@ -76,5 +79,13 @@ public class HttpContext {
 
     public MultivaluedMap<String, Object> requestHeaders() {
         return requestHeaders;
+    }
+
+    public void responseHeaders(MultivaluedMap<String, String> responseHeaders) {
+        this.responseHeaders = responseHeaders;
+    }
+
+    public List<String> responseHeader(String key) {
+        return this.responseHeaders.get(key);
     }
 }

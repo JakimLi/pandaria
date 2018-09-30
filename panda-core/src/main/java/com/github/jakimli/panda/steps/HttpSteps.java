@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.List;
 
 import static com.github.jakimli.panda.utils.FileUtil.read;
+import static java.lang.String.join;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class HttpSteps {
@@ -70,5 +73,12 @@ public class HttpSteps {
     public void verifyResponseBodyAgainstFile(String file) throws IOException {
         String content = read(configuration.classpathFile(file));
         assertThat(context.responseBody(), is(content));
+    }
+
+    @Then("^response header: '([^\"]*)'='([^\"]*)'$")
+    public void verifyResponseHeader(String key, String expected) {
+        List<String> values = context.responseHeader(key);
+        assertNotNull(values);
+        assertThat(join(",", values), is(expected));
     }
 }

@@ -173,3 +173,13 @@ Scenario: simple patch
   """
   * send: PATCH
 ```
+
+### HEAD
+```
+Scenario: simple head
+  * uri: /users
+  * send: HEAD
+  * status: 200
+  * response header: 'test'='first,second,third'
+  * response header: 'Date'='Thur, 2018 12'
+```

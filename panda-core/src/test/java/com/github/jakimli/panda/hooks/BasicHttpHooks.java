@@ -68,6 +68,14 @@ public class BasicHttpHooks {
                 ))
                 .response(json(of("username", "lj")));
 
+        server.server()
+                .request(and(
+                        by(uri("/users")),
+                        by(method("HEAD"))
+                )).response(and(
+                header("test", "first,second,third"),
+                header("Date", "Thur, 2018 12")));
+
         server.start();
     }
 }

@@ -33,6 +33,7 @@ class HttpClient {
         addHeaders(target, context.requestHeaders());
         Response response = method.apply(target);
         updateHttpContext(response);
+        response.close();
     }
 
     private void addHeaders(Builder target, MultivaluedMap<String, Object> headers) {
@@ -43,7 +44,8 @@ class HttpClient {
     }
 
     private void updateHttpContext(Response response) {
-        this.context.responseBody(response.readEntity(String.class));
         this.context.status(response.getStatus());
+        this.context.responseHeaders(response.getStringHeaders());
+        this.context.responseBody(response.readEntity(String.class));
     }
 }
