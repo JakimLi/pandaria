@@ -12,6 +12,8 @@ dependencies {
 
             "com.google.guava:guava:${guava}",
 
+            "org.apache.commons:commons-text:${commons_text}",
+
             "org.glassfish.jersey.core:jersey-client:${jersey}",
             "org.glassfish.jersey.core:jersey-common:${jersey}",
             "org.glassfish.jersey.media:jersey-media-json-jackson:${jersey}",

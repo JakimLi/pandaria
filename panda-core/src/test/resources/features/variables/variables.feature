@@ -9,3 +9,8 @@ Feature: Variables
   Scenario: const string
     * var 'name'='panda'
     * verify: ${name}='panda'
+
+  Scenario: string
+    * var 'name'='panda'
+    * var 'great'="hello ${name}"
+    * verify: ${great}='hello panda'

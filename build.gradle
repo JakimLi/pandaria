@@ -23,5 +23,7 @@ subprojects {
         jsonpath = '2.4.0'
         junit = '4.12'
         guava = '19.0'
+
+        commons_text = '1.4'
     }
 }

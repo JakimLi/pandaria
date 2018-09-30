@@ -22,6 +22,10 @@ Table of Contents
     * [HEAD](#head)
     * [OPTIONS](#options)
     * [TRACE](#trace)
+* [Variables](#variables)
+    * [Defintion](#defintion)
+        * [Literal string](#literal-string)
+        * [String](#string)
 
 
 Feature Configuration
@@ -221,4 +225,24 @@ Scenario: simple trace
   * send: TRACE
   * status: 200
   * response header: 'Content-Type'='message/http'
+```
+
+Variables
+---------
+
+### Defintion
+
+#### Literal string
+```
+Scenario: const string
+  * var 'name'='panda'
+  * verify: ${name}='panda'
+```
+
+#### String
+```
+Scenario: string
+  * var 'name'='panda'
+  * var 'great'="hello ${name}"
+  * verify: ${great}='hello panda'
 ```
