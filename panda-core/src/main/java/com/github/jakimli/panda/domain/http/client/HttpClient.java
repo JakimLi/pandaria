@@ -10,11 +10,11 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.function.Function;
 
-class AbstractHttpClient {
+class HttpClient {
 
     private Client client;
 
-    AbstractHttpClient() {
+    HttpClient() {
         client = ClientBuilder.newBuilder().build();
     }
 

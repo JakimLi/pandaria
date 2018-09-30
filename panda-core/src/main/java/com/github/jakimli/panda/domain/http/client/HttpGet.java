@@ -5,7 +5,7 @@ import com.github.jakimli.panda.domain.http.client.HttpMethod.Method;
 
 import javax.ws.rs.client.SyncInvoker;
 
-public class HttpGet extends AbstractHttpClient implements Method {
+public class HttpGet extends HttpClient implements Method {
 
     @Override
     public void send(HttpContext context) {

@@ -5,7 +5,7 @@ import com.github.jakimli.panda.domain.http.client.HttpMethod.Method;
 
 import javax.ws.rs.client.SyncInvoker;
 
-public class HttpDelete extends AbstractHttpClient implements Method {
+public class HttpDelete extends HttpClient implements Method {
     @Override
     public void send(HttpContext context) {
         request(context, SyncInvoker::delete);
