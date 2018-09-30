@@ -27,6 +27,11 @@ Table of Contents
         * [Literal string](#literal-string)
         * [String](#string)
 
+* [Verfiation](#verification)
+    * [Verify http response](#verify-http-response)
+        * [response status](#status)
+        * [response header](#response-header)
+        * [response body](#response-body)
 
 Feature Configuration
 ---------------------
@@ -249,4 +254,44 @@ Scenario: string
   * var 'name'='panda'
   * var 'great'="hello ${name}"
   * verify: ${great}='hello panda'
+```
+
+Verificaton
+-----------
+
+### Verify http response
+
+#### response status
+```
+* uri: /empty_request
+* send: POST
+* status: 201
+```
+
+#### response header
+```
+* uri: /users
+* send: TRACE
+* status: 200
+* response header: 'Content-Type'='message/http'
+```
+
+#### response body
+verify use json string
+```
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+verify as text
+```
+* response body:
+"""
+success
+"""
+```
+
+verify as text in file
+```
+* response body: responses/success.txt
 ```
