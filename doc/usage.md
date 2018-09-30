@@ -1,7 +1,7 @@
 Usage
 =====
 
-Panda just abstract DSL for API testing, all usages just cucumber gherkin steps
+Panda just abstracts DSL for API testing, after all it's still just cucumber steps
 
 This page demonstrates the usage of the DSLs
 
