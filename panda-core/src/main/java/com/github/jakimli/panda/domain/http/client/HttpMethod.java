@@ -5,10 +5,10 @@ import com.github.jakimli.panda.domain.http.HttpContext;
 import java.util.function.Supplier;
 
 public enum HttpMethod {
-    GET(HttpGet::new),
-    POST(HttpPost::new),
-    PUT(HttpPut::new),
-    DELETE(HttpDelete::new);
+    GET(HttpMethods::get),
+    POST(HttpMethods::post),
+    PUT(HttpMethods::put),
+    DELETE(HttpMethods::delete);
 
     private Supplier<Method> client;
 

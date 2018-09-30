@@ -13,28 +13,33 @@ import java.util.function.Function;
 class HttpClient {
 
     private Client client;
+    private HttpContext context;
 
     HttpClient() {
         client = ClientBuilder.newBuilder().build();
     }
 
-    void request(HttpContext context, Function<Builder, Response> method) {
-        Builder target = client.target(context.uri()).request();
-        addHeaders(context, target);
-        Response response = method.apply(target);
-        updateHttpContext(response, context);
+    HttpClient context(HttpContext context) {
+        this.context = context;
+        return this;
     }
 
-    private void addHeaders(HttpContext context, Builder target) {
-        MultivaluedMap<String, Object> headers = context.requestHeaders();
+    void request(Function<Builder, Response> method) {
+        Builder target = client.target(context.uri()).request();
+        addHeaders(target, context.requestHeaders());
+        Response response = method.apply(target);
+        updateHttpContext(response);
+    }
+
+    private void addHeaders(Builder target, MultivaluedMap<String, Object> headers) {
         headers.keySet().forEach(key -> {
             List<Object> values = headers.get(key);
             values.forEach(value -> target.header(key, value));
         });
     }
 
-    private void updateHttpContext(Response response, HttpContext context) {
-        context.responseBody(response.readEntity(String.class));
-        context.status(response.getStatus());
+    private void updateHttpContext(Response response) {
+        this.context.responseBody(response.readEntity(String.class));
+        this.context.status(response.getStatus());
     }
 }
