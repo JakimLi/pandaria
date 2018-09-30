@@ -26,6 +26,7 @@ Table of Contents
     * [Defintion](#defintion)
         * [Literal string](#literal-string)
         * [String](#string)
+        * [Integer](#integer)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
@@ -254,6 +255,13 @@ Scenario: string
   * var 'name'='panda'
   * var 'great'="hello ${name}"
   * verify: ${great}='hello panda'
+```
+
+### Integer
+```
+Scenario: integer
+  * var 'age'=18
+  * verify: ${age}=18
 ```
 
 Verificaton
