@@ -10,13 +10,17 @@ public enum HttpMethod {
     PUT(HttpPut::new),
     DELETE(HttpDelete::new);
 
-    private Supplier<HttpClient> client;
+    private Supplier<Method> client;
 
-    HttpMethod(Supplier<HttpClient> client) {
+    HttpMethod(Supplier<Method> client) {
         this.client = client;
     }
 
     public void send(HttpContext context) {
         client.get().send(context);
+    }
+
+    public interface Method {
+        void send(HttpContext context);
     }
 }
