@@ -4,30 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 import static com.github.jakimli.panda.utils.JsonContext.json;
-import static com.github.jakimli.panda.utils.JsonUtil.jsonToObject;
-import static com.github.jakimli.panda.utils.StringUtil.assertNotEmpty;
 
 @Component
 @Scope("cucumber-glue")
 public class JsonVerificationContext {
 
     @Autowired
-    private VerificationContext context;
+    private VerificationContext toBeVerified;
 
     public void verify(String path, Verification verification) throws Throwable {
-        verification.verify(json(toJson(context.toBeVerified())).path(path));
-    }
-
-    private Object toJson(Object content) throws IOException {
-        if (!(content instanceof String)) {
-            return content;
-        }
-
-        String verifying = (String) content;
-        assertNotEmpty(verifying);
-        return jsonToObject(verifying);
+        verification.verify(json(toBeVerified.toJsonObject()).path(path));
     }
 }

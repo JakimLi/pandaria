@@ -21,6 +21,19 @@ public class BasicHttpHooks {
     @Autowired
     MockServer server;
 
+    @Before("@variables")
+    public void mockForVariableTests() {
+        server.server()
+                .request(by(uri("/not_important")))
+                .response(json(of(
+                        "name", "panda",
+                        "age", 18,
+                        "iq", 80.0
+                )));
+
+        server.start();
+    }
+
     @Before("@http")
     public void mock() {
         server.server()

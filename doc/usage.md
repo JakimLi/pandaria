@@ -27,6 +27,7 @@ Table of Contents
         * [Literal string](#literal-string)
         * [String](#string)
         * [Integer](#integer)
+        * [Extract from response body](#extract from respose body)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
@@ -264,6 +265,26 @@ Scenario: integer
   * var 'age'=18
   * verify: ${age}=18
 ```
+
+#### Extract from response body
+
+It's useful if we can extract values from response body as variables. you can do it using `<-` like below.
+
+`var: 'name'<-'json path'`  will extract value from the http response body json using the json path and assign it to the variable with specified name
+
+```
+Scenario: from json
+  * uri: /not_important
+  * send: GET
+  * status: 200
+  * var: 'name'<-'$.name'
+  * var: 'age'<-'$.age'
+  * var: 'iq'<-'$.iq'
+  * verify: ${name}='panda'
+  * verify: ${age}=18
+  * verify: ${iq}=80.0
+```
+
 
 Verificaton
 -----------
