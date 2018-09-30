@@ -17,7 +17,7 @@ public class VariableVerificationSteps {
         assertThat(variables.get(varName), is(expected));
     }
 
-    @Then("^verify: \\$\\{([^\"]*)} contains '([^\"]*)'$")
+    @Then("^verify: \\$\\{([^\"]*)} contains: '([^\"]*)'$")
     public void verifyVariablContainsLiteral(String varName, String expected) {
         assertThat(String.valueOf(variables.get(varName)), containsString(expected));
     }

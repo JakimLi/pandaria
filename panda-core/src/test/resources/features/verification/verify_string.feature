@@ -15,5 +15,5 @@ Feature: verify string
     * verify: '$.username' contains: 'kim'
 
     * var: 'username'="panda"
-    * verify: ${username} contains 'anda'
+    * verify: ${username} contains: 'anda'
 
