@@ -80,3 +80,13 @@ Feature: Http feature
     * uri: /users/20
     * send: DELETE
     * status: 200
+
+  Scenario: simple patch
+    * uri: /users/20
+    * request body:
+    """
+    {"username": "lj"}
+    """
+    * send: PATCH
+    * status: 200
+    * verify: '$.username'='lj'

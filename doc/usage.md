@@ -162,3 +162,14 @@ Scenario: simple delete
   * send: DELETE
   * status: 200
 ```
+
+### PATCH
+```
+Scenario: simple patch
+  * uri: /users/20
+  * request body:
+  """
+  {"username": "lj"}
+  """
+  * send: PATCH
+```

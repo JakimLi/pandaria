@@ -10,6 +10,7 @@ import static com.github.dreamhead.moco.Moco.eq;
 import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
+import static com.github.dreamhead.moco.Moco.method;
 import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
@@ -59,6 +60,13 @@ public class BasicHttpHooks {
         server.server()
                 .delete(by(uri("/users/20")))
                 .response(status(200));
+
+        server.server()
+                .request(and(
+                        by(uri("/users/20")),
+                        by(method("PATCH"))
+                ))
+                .response(json(of("username", "lj")));
 
         server.start();
     }

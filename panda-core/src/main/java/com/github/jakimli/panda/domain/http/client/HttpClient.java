@@ -10,13 +10,17 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.function.Function;
 
+import static org.glassfish.jersey.client.HttpUrlConnectorProvider.SET_METHOD_WORKAROUND;
+
 class HttpClient {
 
     private Client client;
     private HttpContext context;
 
     HttpClient() {
-        client = ClientBuilder.newBuilder().build();
+        client = ClientBuilder.newBuilder()
+                .property(SET_METHOD_WORKAROUND, true)
+                .build();
     }
 
     HttpClient context(HttpContext context) {
