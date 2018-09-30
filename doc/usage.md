@@ -7,7 +7,7 @@ This page demonstrates the usage of the DSLs
 
 
 Table of Contents
-=================
+-----------------
 
 * [Feature Configurtion](#feature-configuration)
     * [dir](#dir)
