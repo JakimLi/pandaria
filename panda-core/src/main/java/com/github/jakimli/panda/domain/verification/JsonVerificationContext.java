@@ -18,8 +18,7 @@ public class JsonVerificationContext {
     private VerificationContext context;
 
     public void verify(String path, Verification verification) throws Throwable {
-        Object actual = json(toJson(context.toBeVerified())).path(path);
-        verification.verify(actual);
+        verification.verify(json(toJson(context.toBeVerified())).path(path));
     }
 
     private Object toJson(Object content) throws IOException {
