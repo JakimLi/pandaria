@@ -4,14 +4,12 @@ import com.github.jakimli.panda.MockServer;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.dreamhead.moco.HttpMethod.POST;
 import static com.github.dreamhead.moco.Moco.and;
 import static com.github.dreamhead.moco.Moco.by;
 import static com.github.dreamhead.moco.Moco.eq;
 import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
-import static com.github.dreamhead.moco.Moco.method;
 import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
@@ -36,7 +34,6 @@ public class BasicHttpHooks {
         server.server()
                 .post(and(
                         by(uri("/users")),
-                        by(method(POST)),
                         eq(jsonPath("$.username"), "jakim")
                 ))
                 .response(json(of(
