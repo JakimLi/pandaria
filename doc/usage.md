@@ -5,6 +5,23 @@ Panda just abstracts DSL for API testing, after all it's still just cucumber ste
 
 This page demonstrates the usage of the DSLs
 
+
+Table of Contents
+=================
+
+* [Feature Configurtion](#feature-configuration)
+    * [dir](#dir)
+    * [base uri](#base-uri)
+* [Basic HTTP Request](#basic-http-request)
+    * [GET](#get)
+    * [POST](#post)
+    * [POST request body from file](#post-request-body-from-file)
+    * [PUT](#put)
+    * [DELETE](#delete)
+    * [PATCH](#patch)
+    * [HEAD](#head)
+
+
 Feature Configuration
 ---------------------
 You must configure some basics to make the framework work properly.
