@@ -233,7 +233,7 @@ Variables
 ### Defintion
 
 #### Literal string
-If you define variable use single quote, `'${name}'`, variable will not be replaced.
+If you define variable use single quote, `'${name}'`, variable will *NOT* be replaced.
 
 ```
 Scenario: const string
