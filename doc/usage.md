@@ -10,10 +10,10 @@ Feature Configuration
 You must configure some basics to make the framework work properly.
 
 ### dir
-In order to be able to use files locateds relate to current feature file, you must use `dir` to specify
-the directory of the current feature file, suggest to put it in the `Background` section.
+In order to be able to use files locates relate to the feature file, you must use `dir` to specify
+the directory of the current feature file, best practice is put it in the `Background` section.
 
-If we have below directory structure.
+If you have below directory structure.
 
 ```
 resources
@@ -24,7 +24,7 @@ resources
          └── user.json
 ```
 
-We can use the json file as request body as below
+You can use the json file as request body as below
 ```
 Feature: Http feature
   Basic http operations with verifications
@@ -80,7 +80,7 @@ Feature: Http feature
     * verify: '$.age'=18
 ```
 
-You can still use absolute uri with `uri: http://host:port`
+You can use absolute uri with `uri: http://host:port`, best practice is to make it short
 
 
 BASIC HTTP REQUEST
