@@ -22,6 +22,11 @@ public class VariableVerificationSteps {
         assertThat(String.valueOf(variables.get(varName)), containsString(expected));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)} contains: \"([^\"]*)\"$")
+    public void verifyVariablContainsString(String varName, String expected) {
+        assertThat(String.valueOf(variables.get(varName)), containsString(variables.interpret(expected)));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
     public void verifyVariableEqualsString(String varName, String expected) {
         assertThat(variables.get(varName), is(variables.interpret(expected)));

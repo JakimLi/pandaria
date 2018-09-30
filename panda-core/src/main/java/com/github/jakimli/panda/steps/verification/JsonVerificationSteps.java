@@ -1,5 +1,6 @@
 package com.github.jakimli.panda.steps.verification;
 
+import com.github.jakimli.panda.domain.Variables;
 import com.github.jakimli.panda.domain.verification.JsonVerificationContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import static org.junit.Assert.assertThat;
 public class JsonVerificationSteps {
     @Autowired
     JsonVerificationContext verifier;
+
+    @Autowired
+    Variables variables;
 
     @Then("^verify: '([^\"]*)'='([^\"]*)'$")
     public void verify(String path, final String expected) throws Throwable {
@@ -31,5 +35,11 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)' contains: '([^\"]*)'$")
     public void verifyContainsLiteral(String path, String contained) throws Throwable {
         verifier.verify(path, actual -> assertThat(String.valueOf(actual), containsString(contained)));
+    }
+
+    @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
+    public void verifyContainsString(String path, String contained) throws Throwable {
+        verifier.verify(path, actual ->
+                assertThat(String.valueOf(actual), containsString(variables.interpret(contained))));
     }
 }

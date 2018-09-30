@@ -14,6 +14,10 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' contains: 'kim'
 
-    * var: 'username'="panda"
-    * verify: ${username} contains: 'anda'
+    * var: 'username'="jakim"
+    * verify: ${username} contains: 'kim'
+
+    * var: 'contained'='kim'
+    * verify: '$.username' contains: "${contained}"
+    * verify: ${username} contains: "${contained}"
 
