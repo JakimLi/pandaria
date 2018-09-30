@@ -1,4 +1,4 @@
-package com.github.jakimli.panda.steps;
+package com.github.jakimli.panda.steps.verification;
 
 import com.github.jakimli.panda.domain.verification.JsonVerificationContext;
 import cucumber.api.java.en.When;
