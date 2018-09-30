@@ -103,3 +103,9 @@ Feature: Http feature
     * send: OPTIONS
     * status: 200
     * response header: 'Allow'='OPTIONS, GET, HEAD'
+
+  Scenario: simple trace
+    * uri: /users
+    * send: TRACE
+    * status: 200
+    * response header: 'Content-Type'='message/http'

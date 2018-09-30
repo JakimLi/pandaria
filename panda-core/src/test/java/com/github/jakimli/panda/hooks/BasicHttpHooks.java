@@ -85,6 +85,12 @@ public class BasicHttpHooks {
                 .response(
                         header("Allow", "OPTIONS, GET, HEAD"));
 
+        server.server()
+                .request(and(
+                        by(uri("/users")),
+                        by(method("TRACE"))
+                )).response(header("Content-Type", "message/http"));
+
         server.start();
     }
 }

@@ -11,7 +11,8 @@ public enum HttpMethod {
     DELETE(HttpMethods::delete),
     PATCH(HttpMethods::patch),
     HEAD(HttpMethods::head),
-    OPTIONS(HttpMethods::options);
+    OPTIONS(HttpMethods::options),
+    TRACE(HttpMethods::trace);
 
     private Supplier<Method> method;
 

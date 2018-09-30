@@ -56,4 +56,10 @@ class HttpMethods {
                 .context(context)
                 .request(SyncInvoker::options);
     }
+
+    static Method trace() {
+        return context -> client
+                .context(context)
+                .request(SyncInvoker::trace);
+    }
 }

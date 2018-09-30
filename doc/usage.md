@@ -21,6 +21,7 @@ Table of Contents
     * [PATCH](#patch)
     * [HEAD](#head)
     * [OPTIONS](#options)
+    * [TRACE](#trace)
 
 
 Feature Configuration
@@ -210,4 +211,14 @@ Scenario: simple options
   * send: OPTIONS
   * status: 200
   * response header: 'Allow'='OPTIONS, GET, HEAD'
+```
+
+### TRACE
+
+```
+Scenario: simple trace
+  * uri: /users
+  * send: TRACE
+  * status: 200
+  * response header: 'Content-Type'='message/http'
 ```
