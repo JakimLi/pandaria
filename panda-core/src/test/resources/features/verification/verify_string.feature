@@ -7,6 +7,19 @@ Feature: verify string
     * dir: features/verification
     * base uri: http://localhost:10080
 
+  Scenario: equals
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+
+    * var: 'kim'="kim"
+    * var: 'user'='jakim'
+    * verify: ${user}="ja${kim}"
+
+    * verify: '$.username'="jakim"
+    * verify: '$.username'="ja${kim}"
+
   Scenario: contains
     * uri: /users/me
     * send: GET
@@ -20,4 +33,3 @@ Feature: verify string
     * var: 'contained'='kim'
     * verify: '$.username' contains: "${contained}"
     * verify: ${username} contains: "${contained}"
-

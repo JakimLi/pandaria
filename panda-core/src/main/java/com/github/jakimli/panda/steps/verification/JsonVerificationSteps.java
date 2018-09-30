@@ -22,6 +22,18 @@ public class JsonVerificationSteps {
         verifier.verify(path, actual -> assertThat(actual, is(expected)));
     }
 
+    @Then("^verify: '([^\"]*)'=\"([^\"]*)\"$")
+    public void verifyEqualsString(String path, String expected) throws Throwable {
+        final String interpret = variables.interpret(expected);
+        verifier.verify(path, actual -> assertThat(actual, is(interpret)));
+    }
+
+    @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
+    public void verifyContainsString(String path, String contained) throws Throwable {
+        final String interpret = variables.interpret(contained);
+        verifier.verify(path, actual -> assertThat(String.valueOf(actual), containsString(interpret)));
+    }
+
     @Then("^verify: '([^\"]*)'=(\\d+)$")
     public void verify(String path, final int expected) throws Throwable {
         verifier.verify(path, actual -> assertThat(actual, is(expected)));
@@ -35,11 +47,5 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)' contains: '([^\"]*)'$")
     public void verifyContainsLiteral(String path, String contained) throws Throwable {
         verifier.verify(path, actual -> assertThat(String.valueOf(actual), containsString(contained)));
-    }
-
-    @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
-    public void verifyContainsString(String path, String contained) throws Throwable {
-        verifier.verify(path, actual ->
-                assertThat(String.valueOf(actual), containsString(variables.interpret(contained))));
     }
 }
