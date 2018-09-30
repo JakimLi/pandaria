@@ -12,7 +12,7 @@ Table of Contents
 * [Feature Configurtion](#feature-configuration)
     * [dir](#dir)
     * [base uri](#base-uri)
-* [Basic HTTP Request](#basic-http-request)
+* [Test HTTP APIs](#test-http-apis)
     * [GET](#get)
     * [POST](#post)
     * [POST request body from file](#post-request-body-from-file)
@@ -101,7 +101,7 @@ Feature: Http feature
 You can use absolute uri with `uri: http://host:port`, best practice is to make it short
 
 
-BASIC HTTP REQUEST
+Test HTTP APIs
 ------------------
 
 ### GET
