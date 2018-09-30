@@ -20,6 +20,7 @@ Table of Contents
     * [DELETE](#delete)
     * [PATCH](#patch)
     * [HEAD](#head)
+    * [OPTIONS](#options)
 
 
 Feature Configuration
