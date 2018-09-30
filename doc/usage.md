@@ -28,6 +28,8 @@ Table of Contents
         * [String](#string)
         * [Integer](#integer)
         * [Extract from response body](#extract-from-response-body)
+    * [Use Variables](#use-variables)
+        * [In URI](#in-uri)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
@@ -283,6 +285,19 @@ Scenario: from json
   * verify: ${name}='panda'
   * verify: ${age}=18
   * verify: ${iq}=80.0
+```
+
+### Use Variables
+#### In URI
+```
+Scenario: variable being replaced in uri
+  * var: 'path'="not_important"
+  * uri: /${path}
+  * send: GET
+  * status: 200
+  * verify: '$.name'='panda'
+  * verify: '$.age'=18
+  * verify: '$.iq'=80.0
 ```
 
 

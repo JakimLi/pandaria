@@ -1,5 +1,6 @@
 package com.github.jakimli.panda.steps;
 
+import com.github.jakimli.panda.domain.Variables;
 import com.github.jakimli.panda.domain.http.HttpContext;
 import com.github.jakimli.panda.domain.http.client.HttpMethod;
 import com.github.jakimli.panda.domain.verification.VerificationContext;
@@ -30,10 +31,13 @@ public class HttpSteps {
     @Autowired
     FeatureConfiguration configuration;
 
+    @Autowired
+    Variables variables;
+
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
         context.reset();
-        context.uri(URI.create(configuration.uri(url)));
+        context.uri(URI.create(variables.interpret(configuration.uri(url))));
     }
 
     @Given("^header: '([^\"]*)'='([^\"]*)'$")
