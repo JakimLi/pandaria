@@ -233,6 +233,8 @@ Variables
 ### Defintion
 
 #### Literal string
+If you define variable use single quote, `'${name}'`, variable will not be replaced.
+
 ```
 Scenario: const string
   * var 'name'='panda'
@@ -240,6 +242,8 @@ Scenario: const string
 ```
 
 #### String
+If you define variable use double quote, `"${name}"`, variable will be replaced.
+
 ```
 Scenario: string
   * var 'name'='panda'
