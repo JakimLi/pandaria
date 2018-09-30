@@ -30,6 +30,7 @@ Table of Contents
         * [Extract from response body](#extract-from-response-body)
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
+        * [In File](#in-file)
 
 * [Verfiation](#verification)
     * [Verify http response](#verify-http-response)
@@ -298,6 +299,24 @@ Scenario: variable being replaced in uri
   * verify: '$.name'='panda'
   * verify: '$.age'=18
   * verify: '$.iq'=80.0
+```
+
+#### In file
+
+requsts/someone.json
+```json
+{
+  "name": "${name}"
+}
+```
+
+```
+Scenario: variable used in request file
+  * var: 'name'='someone'
+  * uri: /users
+  * request body: requests/someone.json
+  * send: POST
+  * status: 201
 ```
 
 

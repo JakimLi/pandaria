@@ -44,3 +44,10 @@ Feature: Variables
     * verify: '$.age'=18
     * verify: '$.iq'=80.0
 
+  Scenario: variable used in request file
+    * var: 'name'='someone'
+    * uri: /users
+    * request body: requests/someone.json
+    * send: POST
+    * status: 201
+

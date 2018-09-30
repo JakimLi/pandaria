@@ -31,6 +31,12 @@ public class BasicHttpHooks {
                         "iq", 80.0
                 )));
 
+        server.server()
+                .post(and(
+                        by(uri("/users")),
+                        eq(jsonPath("$.name"), "someone")))
+                .response(status(201));
+
         server.start();
     }
 

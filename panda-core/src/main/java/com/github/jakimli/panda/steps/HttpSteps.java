@@ -53,7 +53,7 @@ public class HttpSteps {
     @Given("^request body: ([^\"]*)$")
     public void requestBodyFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
-        context.requestBody(read(fileName));
+        context.requestBody(variables.interpret(read(fileName)));
     }
 
     @When("^send: ([^\"]*)$")
