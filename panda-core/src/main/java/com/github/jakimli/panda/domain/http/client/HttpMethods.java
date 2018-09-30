@@ -50,5 +50,4 @@ class HttpMethods {
                 .context(context)
                 .request(SyncInvoker::head);
     }
-
 }

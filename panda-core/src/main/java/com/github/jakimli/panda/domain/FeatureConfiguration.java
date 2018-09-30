@@ -1,4 +1,4 @@
-package com.github.jakimli.panda.utils;
+package com.github.jakimli.panda.domain;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

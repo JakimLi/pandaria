@@ -1,6 +1,6 @@
 package com.github.jakimli.panda.steps;
 
-import com.github.jakimli.panda.utils.FeatureConfiguration;
+import com.github.jakimli.panda.domain.FeatureConfiguration;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 

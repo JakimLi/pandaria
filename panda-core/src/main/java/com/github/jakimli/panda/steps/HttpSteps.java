@@ -3,7 +3,7 @@ package com.github.jakimli.panda.steps;
 import com.github.jakimli.panda.domain.http.HttpContext;
 import com.github.jakimli.panda.domain.http.client.HttpMethod;
 import com.github.jakimli.panda.domain.verification.VerificationContext;
-import com.github.jakimli.panda.utils.FeatureConfiguration;
+import com.github.jakimli.panda.domain.FeatureConfiguration;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
