@@ -19,3 +19,7 @@ Feature: Variables
   Scenario: integer
     * var 'age'=18
     * verify: ${age}=18
+
+  Scenario: double
+    * var 'age'=18.0
+    * verify: ${age}=18.0

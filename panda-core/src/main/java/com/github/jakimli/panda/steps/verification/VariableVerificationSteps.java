@@ -25,4 +25,9 @@ public class VariableVerificationSteps {
     public void verifyVariableEqualsInteger(String varName, Integer expected) {
         assertThat(variables.get(varName), is(expected));
     }
+
+    @Then("^verify: \\$\\{([^\"]*)}=(\\d+\\.\\d+)$")
+    public void verifyVariableEqualsDouble(String varName, String expected) {
+        assertThat(variables.get(varName), is(Double.parseDouble(expected)));
+    }
 }
