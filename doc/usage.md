@@ -255,6 +255,7 @@ Scenario: string
   * var 'name'='panda'
   * var 'great'="hello ${name}"
   * verify: ${great}='hello panda'
+  * verify: ${great}="hello ${name}"
 ```
 
 ### Integer
