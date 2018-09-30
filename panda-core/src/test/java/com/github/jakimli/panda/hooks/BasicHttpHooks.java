@@ -59,6 +59,10 @@ public class BasicHttpHooks {
                 ))
                 .response(json(of("username", "lj")));
 
+        server.server()
+                .delete(by(uri("/users/20")))
+                .response(status(200));
+
         server.start();
     }
 }

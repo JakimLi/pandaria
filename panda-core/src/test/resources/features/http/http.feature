@@ -75,3 +75,8 @@ Feature: Http feature
     * send: PUT
     * status: 200
     * verify: '$.username'='lj'
+
+  Scenario: simple delete
+    * uri: /users/20
+    * send: DELETE
+    * status: 200

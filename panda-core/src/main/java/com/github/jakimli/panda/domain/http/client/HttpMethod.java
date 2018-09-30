@@ -7,7 +7,8 @@ import java.util.function.Supplier;
 public enum HttpMethod {
     GET(HttpGet::new),
     POST(HttpPost::new),
-    PUT(HttpPut::new);
+    PUT(HttpPut::new),
+    DELETE(HttpDelete::new);
 
     private Supplier<HttpClient> client;
 

@@ -153,3 +153,12 @@ Scenario: simple put
   * status: 200
   * verify: '$.username'='lj'
 ```
+
+### DELETE
+
+```
+Scenario: simple delete
+  * uri: /users/20
+  * send: DELETE
+  * status: 200
+```
