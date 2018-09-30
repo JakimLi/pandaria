@@ -50,7 +50,7 @@ public class HttpSteps {
     }
 
     @When("^send: ([^\"]*)$")
-    public void send(String method) throws IOException {
+    public void send(String method) {
         context.method(HttpMethod.valueOf(method));
         context.send();
         verifier.toBeVerified(context.responseBody());

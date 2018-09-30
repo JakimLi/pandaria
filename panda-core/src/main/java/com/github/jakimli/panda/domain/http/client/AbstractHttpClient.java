@@ -12,7 +12,7 @@ import java.util.function.Function;
 
 class AbstractHttpClient {
 
-    Client client;
+    private Client client;
 
     AbstractHttpClient() {
         client = ClientBuilder.newBuilder().build();

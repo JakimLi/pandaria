@@ -13,7 +13,7 @@ public class VerificationContext {
         this.toBeVerified = toBeVerified;
     }
 
-    public Object toBeVerified() {
+    Object toBeVerified() {
         return toBeVerified;
     }
 }
