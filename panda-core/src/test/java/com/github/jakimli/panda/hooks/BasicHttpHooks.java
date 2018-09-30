@@ -45,7 +45,7 @@ public class BasicHttpHooks {
     public void mock() {
         server.server()
                 .get(by(uri("/users/me")))
-                .response(json(of("username", "jakim", "age", 18)));
+                .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
 
         server.server()
                 .post(by(uri("/empty_request")))

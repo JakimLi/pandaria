@@ -20,6 +20,21 @@ Feature: verify string
     * verify: '$.username'="jakim"
     * verify: '$.username'="ja${kim}"
 
+    * var: 'age'=18
+    * var: 'iq'=80.0
+    * verify: ${user}!='notjakim'
+    * verify: ${user}!="notja${kim}"
+
+    * verify: ${age}!=19
+    * verify: ${iq}!=89.0
+    * verify: ${age}!=${iq}
+
+    * verify: '$.username'!="notjakim"
+    * verify: '$.username'!="notja${kim}"
+
+    * verify: '$.age'!=19
+    * verify: '$.iq'!=89.0
+
   Scenario: contains
     * uri: /users/me
     * send: GET
