@@ -18,4 +18,9 @@ public class VariableDefinitionSteps {
     public void defineStringVariable(String key, String value) {
         variables.assign(key, variables.interpret(value));
     }
+
+    @Given("^var '([^\"]*)'=(\\d+)$")
+    public void defineIntegerVariable(String key, int value) {
+        variables.assign(key, value);
+    }
 }

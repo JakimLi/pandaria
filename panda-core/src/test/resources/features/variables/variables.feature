@@ -14,3 +14,7 @@ Feature: Variables
     * var 'name'='panda'
     * var 'great'="hello ${name}"
     * verify: ${great}='hello panda'
+
+  Scenario: integer
+    * var 'age'=18
+    * verify: ${age}=18
