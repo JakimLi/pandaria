@@ -38,6 +38,8 @@ Table of Contents
         * [response status](#status)
         * [response header](#response-header)
         * [response body](#response-body)
+    * [Verify String](#verify-string)
+        * [Contains](#contains)
 
 Feature Configuration
 ---------------------
@@ -367,4 +369,17 @@ success
 verify as text in file
 ```
 * response body: responses/success.txt
+```
+
+### Verify String
+
+#### Contains
+
+```
+Scenario: contains
+  * uri: /users/me
+  * send: GET
+  * status: 200
+  * verify: '$.username'='jakim'
+  * verify: '$.username' contains: 'kim'
 ```
