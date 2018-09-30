@@ -72,9 +72,18 @@ public class BasicHttpHooks {
                 .request(and(
                         by(uri("/users")),
                         by(method("HEAD"))
-                )).response(and(
-                header("test", "first,second,third"),
-                header("Date", "Thur, 2018 12")));
+                ))
+                .response(
+                        header("test", "first,second,third"),
+                        header("Date", "Thur, 2018 12"));
+
+        server.server()
+                .request(and(
+                        by(uri("/users")),
+                        by(method("OPTIONS"))
+                ))
+                .response(
+                        header("Allow", "OPTIONS, GET, HEAD"));
 
         server.start();
     }

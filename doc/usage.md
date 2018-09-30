@@ -200,3 +200,13 @@ Scenario: simple head
   * response header: 'test'='first,second,third'
   * response header: 'Date'='Thur, 2018 12'
 ```
+
+### OPTIONS
+
+```
+Scenario: simple options
+  * uri: /users
+  * send: OPTIONS
+  * status: 200
+  * response header: 'Allow'='OPTIONS, GET, HEAD'
+```

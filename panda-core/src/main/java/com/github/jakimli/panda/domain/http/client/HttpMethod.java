@@ -10,7 +10,8 @@ public enum HttpMethod {
     PUT(HttpMethods::put),
     DELETE(HttpMethods::delete),
     PATCH(HttpMethods::patch),
-    HEAD(HttpMethods::head);
+    HEAD(HttpMethods::head),
+    OPTIONS(HttpMethods::options);
 
     private Supplier<Method> method;
 

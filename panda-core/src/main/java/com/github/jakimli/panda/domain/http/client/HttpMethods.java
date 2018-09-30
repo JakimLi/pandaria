@@ -50,4 +50,10 @@ class HttpMethods {
                 .context(context)
                 .request(SyncInvoker::head);
     }
+
+    static Method options() {
+        return context -> client
+                .context(context)
+                .request(SyncInvoker::options);
+    }
 }

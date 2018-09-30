@@ -97,3 +97,9 @@ Feature: Http feature
     * send: PATCH
     * status: 200
     * verify: '$.username'='lj'
+
+  Scenario: simple options
+    * uri: /users
+    * send: OPTIONS
+    * status: 200
+    * response header: 'Allow'='OPTIONS, GET, HEAD'
