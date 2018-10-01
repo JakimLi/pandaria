@@ -16,6 +16,10 @@ subprojects {
 
     ext {
         springboot = '2.0.0.RELEASE'
+        spring_jdbc = '5.0.4.RELEASE'
+
+        mysql = '5.1.6'
+        
         cucumber = '4.0.0'
 
         jersey = '2.27'

@@ -5,6 +5,9 @@ dependencies {
 
             "org.springframework.boot:spring-boot-starter-test:${springboot}",
             "org.springframework.boot:spring-boot-starter:${springboot}",
+            "org.springframework.boot:spring-boot-starter-jdbc:${springboot}",
+
+            "mysql:mysql-connector-java:${mysql}",
 
             "com.jayway.jsonpath:json-path:${jsonpath}",
 

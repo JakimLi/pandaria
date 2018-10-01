@@ -14,7 +14,7 @@ public class VerificationContext {
 
     private Object toBeVerified;
 
-    public void toBeVerified(String toBeVerified) {
+    public void toBeVerified(Object toBeVerified) {
         this.toBeVerified = toBeVerified;
     }
 
