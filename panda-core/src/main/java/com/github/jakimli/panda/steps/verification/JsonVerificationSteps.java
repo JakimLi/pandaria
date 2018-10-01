@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static java.lang.Double.parseDouble;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -61,6 +62,11 @@ public class JsonVerificationSteps {
         verifier.verify(path, actual -> assertThat(actual, not(expected)));
     }
 
+    @Then("^verify: '([^\"]*)'>(\\d+)$")
+    public void verifyGreaterThanInteger(String path, final int expected) throws Throwable {
+        verifier.verify(path, actual -> assertThat((int) actual, greaterThan(expected)));
+    }
+
     @Then("^verify: '([^\"]*)'=(\\d+\\.\\d+)$")
     public void verifyEqualsDouble(String path, final String expected) throws Throwable {
         verifier.verify(path, actual -> assertThat(actual, is(parseDouble(expected))));
@@ -69,5 +75,10 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)'!=(\\d+\\.\\d+)$")
     public void verifyNotEqualsDouble(String path, final String expected) throws Throwable {
         verifier.verify(path, actual -> assertThat(actual, not(parseDouble(expected))));
+    }
+
+    @Then("^verify: '([^\"]*)'>(\\d+\\.\\d+)$")
+    public void verifyGreaterThanDouble(String path, final String expected) throws Throwable {
+        verifier.verify(path, actual -> assertThat((double) actual, greaterThan(parseDouble(expected))));
     }
 }

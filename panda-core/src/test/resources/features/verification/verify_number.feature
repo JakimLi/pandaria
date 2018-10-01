@@ -23,3 +23,16 @@ Feature: verify numbers
 
     * verify: '$.age'!=19
     * verify: '$.iq'!=89.0
+
+  Scenario: greater than
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.age'>17
+    * verify: '$.iq'>70.0
+
+    * var: 'age'=18
+    * var: 'iq'=80.0
+
+    * verify: ${age}>17
+    * verify: ${iq}>79.0

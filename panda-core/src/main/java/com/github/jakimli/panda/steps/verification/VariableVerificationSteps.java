@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
@@ -63,6 +64,11 @@ public class VariableVerificationSteps {
         assertThat(variables.get(varName), not(expected));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)}>(\\d+)$")
+    public void verifyVariableGreaterThanInteger(String varName, Integer expected) {
+        assertThat((int) variables.get(varName), greaterThan(expected));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}=(\\d+\\.\\d+)$")
     public void verifyVariableEqualsDouble(String varName, String expected) {
         assertThat(variables.get(varName), is(Double.parseDouble(expected)));
@@ -71,5 +77,10 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)}!=(\\d+\\.\\d+)$")
     public void verifyVariableNotEqualsDouble(String varName, String expected) {
         assertThat(variables.get(varName), not(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}>(\\d+\\.\\d+)$")
+    public void verifyVariableGreaterThanDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), greaterThan(Double.parseDouble(expected)));
     }
 }

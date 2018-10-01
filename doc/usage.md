@@ -420,3 +420,18 @@ Scenario: contains
   * var: 'username'="panda"
   * verify: ${username} contains 'anda'
 ```
+
+### Verify numbers
+
+#### Greater than
+
+```
+* verify: '$.age'>17
+* verify: '$.iq'>70.0
+
+* var: 'age'=18
+* var: 'iq'=80.0
+
+* verify: ${age}>17
+* verify: ${iq}>79.0
+```
