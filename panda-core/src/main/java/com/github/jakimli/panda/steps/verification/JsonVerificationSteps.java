@@ -10,6 +10,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
 import static org.junit.Assert.assertThat;
 
 public class JsonVerificationSteps {
@@ -67,6 +68,11 @@ public class JsonVerificationSteps {
         verifier.verify(path, actual -> assertThat((int) actual, greaterThan(expected)));
     }
 
+    @Then("^verify: '([^\"]*)'<(\\d+)$")
+    public void verifyLessThanInteger(String path, final int expected) throws Throwable {
+        verifier.verify(path, actual -> assertThat((int) actual, lessThan(expected)));
+    }
+
     @Then("^verify: '([^\"]*)'=(\\d+\\.\\d+)$")
     public void verifyEqualsDouble(String path, final String expected) throws Throwable {
         verifier.verify(path, actual -> assertThat(actual, is(parseDouble(expected))));
@@ -80,5 +86,10 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)'>(\\d+\\.\\d+)$")
     public void verifyGreaterThanDouble(String path, final String expected) throws Throwable {
         verifier.verify(path, actual -> assertThat((double) actual, greaterThan(parseDouble(expected))));
+    }
+
+    @Then("^verify: '([^\"]*)'<(\\d+\\.\\d+)$")
+    public void verifyLessThanDouble(String path, final String expected) throws Throwable {
+        verifier.verify(path, actual -> assertThat((double) actual, lessThan(parseDouble(expected))));
     }
 }
