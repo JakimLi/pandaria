@@ -382,6 +382,7 @@ verify as text in file
 
 #### Equals
 `=` for equals, `!=` for not equals
+
 Although you can use string verificaton to non-string types, it will be converted to its string format.
 
 ```
