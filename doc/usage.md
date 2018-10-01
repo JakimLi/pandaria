@@ -42,6 +42,7 @@ Table of Contents
         * [Equals](#equals)
         * [Contains](#contains)
         * [Starts With](#starts-with)
+        * [Ends With](#ends-with)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
@@ -434,9 +435,22 @@ Scenario: contains
 * var: 'username'="jakim"
 * verify: ${username} starts with: 'jak'
 
-* var: 'starter'='jak'
-* verify: '$.username' starts with: "${starter}i"
-* verify: ${username} starts with: "${starter}i"
+* var: 'prefix'='jak'
+* verify: '$.username' starts with: "${prefix}i"
+* verify: ${username} starts with: "${prefix}i"
+```
+
+#### Ends with
+```
+* verify: '$.username'='jakim'
+* verify: '$.username' ends with: 'kim'
+
+* var: 'username'="jakim"
+* verify: ${username} ends with: 'kim'
+
+* var: 'suffix'='kim'
+* verify: '$.username' ends with: "ja${suffix}"
+* verify: ${username} ends with: "ja${suffix}"
 ```
 
 ### Verify numbers

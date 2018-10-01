@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
@@ -46,6 +47,16 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)} starts with: \"([^\"]*)\"$")
     public void verifyVariableStartsWithString(String varName, String prefix) {
         assertThat(String.valueOf(variables.get(varName)), startsWith(variables.interpret(prefix)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} ends with: '([^\"]*)'$")
+    public void verifyVariableEndsWithLiteral(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), endsWith(prefix));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} ends with: \"([^\"]*)\"$")
+    public void verifyVariableEndsWithString(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), endsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")

@@ -51,6 +51,20 @@ Feature: verify string
     * var: 'username'="jakim"
     * verify: ${username} starts with: 'jak'
 
-    * var: 'starter'='jak'
-    * verify: '$.username' starts with: "${starter}i"
-    * verify: ${username} starts with: "${starter}i"
+    * var: 'prefix'='jak'
+    * verify: '$.username' starts with: "${prefix}i"
+    * verify: ${username} starts with: "${prefix}i"
+
+  Scenario: ends with
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.username' ends with: 'kim'
+
+    * var: 'username'="jakim"
+    * verify: ${username} ends with: 'kim'
+
+    * var: 'suffix'='kim'
+    * verify: '$.username' ends with: "ja${suffix}"
+    * verify: ${username} ends with: "ja${suffix}"

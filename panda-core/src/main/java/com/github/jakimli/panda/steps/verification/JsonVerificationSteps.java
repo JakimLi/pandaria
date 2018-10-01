@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 import static java.lang.Double.parseDouble;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.Matchers.containsString;
@@ -69,6 +70,16 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)' starts with: \"([^\"]*)\"$")
     public void verifyStartsWithString(String path, String prefix) throws Throwable {
         assertThat(String.valueOf(json(path)), startsWith(variables.interpret(prefix)));
+    }
+
+    @Then("^verify: '([^\"]*)' ends with: '([^\"]*)'$")
+    public void verifyEndsWithLiteral(String path, String prefix) throws Throwable {
+        assertThat(String.valueOf(json(path)), endsWith(prefix));
+    }
+
+    @Then("^verify: '([^\"]*)' ends with: \"([^\"]*)\"$")
+    public void verifyEndsWithString(String path, String prefix) throws Throwable {
+        assertThat(String.valueOf(json(path)), endsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: '([^\"]*)'=(\\d+)$")
