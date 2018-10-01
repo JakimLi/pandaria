@@ -423,7 +423,7 @@ Scenario: contains
   * verify: '$.username' contains: 'kim'
 
   * var: 'username'="panda"
-  * verify: ${username} contains 'anda'
+  * verify: ${username} contains: 'anda'
 ```
 
 #### Starts with
