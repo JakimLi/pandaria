@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class JsonVerificationSteps {
 
@@ -85,6 +86,11 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)' length: (\\d+)$")
     public void verifyStringLength(String path, int length) throws Throwable {
         assertThat(String.valueOf(json(path)).length(), is(length));
+    }
+
+    @Then("^verify: '([^\"]*)' matches: '([^\"]*)'$")
+    public void verifyMatchesRegex(String path, String regex) throws Throwable {
+        assertTrue(String.valueOf(json(path)).matches(regex));
     }
 
     @Then("^verify: '([^\"]*)'=(\\d+)$")

@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class VariableVerificationSteps {
     @Autowired
@@ -57,6 +58,11 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)} ends with: \"([^\"]*)\"$")
     public void verifyVariableEndsWithString(String varName, String prefix) {
         assertThat(String.valueOf(variables.get(varName)), endsWith(variables.interpret(prefix)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} matches: '([^\"]*)'$")
+    public void verifyVariableMatchesRegex(String varName, String regex) {
+        assertTrue(String.valueOf(variables.get(varName)).matches(regex));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} length: (\\d+)$")

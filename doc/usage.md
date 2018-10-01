@@ -44,6 +44,7 @@ Table of Contents
         * [Starts With](#starts-with)
         * [Ends With](#ends-with)
         * [Length](#length)
+        * [Regex Match](#regex match)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
@@ -465,6 +466,15 @@ Scenario: contains
 
 * var: 'abc'=3
 * verify: ${abc} length: 1
+```
+
+#### Regex match
+```
+* verify: '$.username'='jakim'
+* verify: '$.username' matches: '.*'
+
+* var: 'username'="jakim"
+* verify: ${username} matches: 'j.*im'
 ```
 
 ### Verify numbers

@@ -81,3 +81,13 @@ Feature: verify string
 
     * var: 'abc'=3
     * verify: ${abc} length: 1
+
+  Scenario: regex
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.username' matches: '.*'
+
+    * var: 'username'="jakim"
+    * verify: ${username} matches: 'j.*im'
