@@ -22,6 +22,11 @@ Table of Contents
     * [HEAD](#head)
     * [OPTIONS](#options)
     * [TRACE](#trace)
+
+* [Database Operations](#database-operations)
+    * [Queries](#queries)
+    * [Execute SQL](#execute-sql)
+
 * [Variables](#variables)
     * [Defintion](#defintion)
         * [Literal string](#literal-string)
@@ -246,6 +251,73 @@ Scenario: simple trace
   * send: TRACE
   * status: 200
   * response header: 'Content-Type'='message/http'
+```
+
+Database Operations
+-------------------
+You can directly use sql to operate on database, pandaria use spring jdbc, you need to configure your datasource
+in `application.properties` like below
+
+```
+spring.datasource.url=jdbc:mysql://localhost:3307/pandaria?useSSL=false&allowMultiQueries=true
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+
+### Quries
+You can write sql with select statements to query database and verify the results using the json path.
+
+**The results of select will always be array, keep it in mind when using json path**
+
+```
+Feature: database
+  database related operations
+
+  Background:
+    * dir: features/database
+
+  Scenario: execute sql and query
+    * execute sql:
+    """
+    DROP TABLE IF EXISTS USERS;
+
+    CREATE TABLE USERS(
+        NAME VARCHAR(256) NOT NULL,
+        AGE INTEGER(5) NOT NULL
+    );
+
+    INSERT INTO USERS(NAME, AGE) VALUES('jakim', 18);
+    """
+
+    * query:
+    """
+    SELECT NAME, AGE FROM USERS
+    """
+    * verify: '$[0].name'='jakim'
+    * verify: '$[0].age'=18
+
+  Scenario: sql from file
+    * execute sql: drop_table.sql
+    * execute sql: setup.sql
+    * query: select.sql
+    * verify: '$[0].name'='jakim'
+    * verify: '$[0].age'=18
+```
+
+### Execute SQL
+```
+* execute sql:
+"""
+DROP TABLE IF EXISTS USERS;
+
+CREATE TABLE USERS(
+    NAME VARCHAR(256) NOT NULL,
+    AGE INTEGER(5) NOT NULL
+);
+
+* execute sql: drop_table.sql
+* execute sql: setup.sql
 ```
 
 Variables
