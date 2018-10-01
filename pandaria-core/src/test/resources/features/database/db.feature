@@ -3,9 +3,9 @@ Feature: database
   database related operations
 
   Background:
-    * dir: features/variables
+    * dir: features/database
 
-  Scenario: query
+  Scenario: execute sql and query
     * execute sql:
     """
     DROP TABLE IF EXISTS USERS;
@@ -22,5 +22,12 @@ Feature: database
     """
     SELECT NAME, AGE FROM USERS
     """
+    * verify: '$[0].name'='jakim'
+    * verify: '$[0].age'=18
+
+  Scenario: sql from file
+    * execute sql: drop_table.sql
+    * execute sql: setup.sql
+    * query: select.sql
     * verify: '$[0].name'='jakim'
     * verify: '$[0].age'=18
