@@ -1,0 +1,25 @@
+@verify_string
+@http
+Feature: verify numbers
+  verify numbers
+
+  Background:
+    * dir: features/verification
+    * base uri: http://localhost:10080
+
+  Scenario: integer equals
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.age'=18
+    * verify: '$.iq'=80.0
+
+    * var: 'age'=18
+    * var: 'iq'=80.0
+
+    * verify: ${age}!=19
+    * verify: ${iq}!=89.0
+    * verify: ${age}!=${iq}
+
+    * verify: '$.age'!=19
+    * verify: '$.iq'!=89.0
