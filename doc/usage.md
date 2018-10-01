@@ -43,6 +43,7 @@ Table of Contents
         * [response status](#status)
         * [response header](#response-header)
         * [response body](#response-body)
+    * [Verify database tables](#verify-database-tables)
     * [Verify String](#verify-string)
         * [Equals](#equals)
         * [Contains](#contains)
@@ -265,7 +266,7 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
-### Quries
+### Queries
 You can write sql with select statements to query database and verify the results using the json path.
 
 **The results of select will always be array, keep it in mind when using json path**
@@ -450,6 +451,35 @@ verify as text in file
 ```
 * response body: responses/success.txt
 ```
+
+### Verify database tables
+You can verify database tables by writing sql with select statements, and then verify the result.
+
+Map the table to json array.
+
+| name | age |
+|------|-----|
+| jakim | 18 |
+| panda | 28 |
+
+is json
+
+```
+[
+    { "name": "jakim", "age": 18 },
+    { "name": "panda", "age": 28 }
+]
+```
+**The query result will always be json array even if only one row in the result**
+
+Then just using the same as you verify json http response body
+
+```
+* query: select.sql
+* verify: '$[0].name'='jakim'
+* verify: '$[0].age'=18
+```
+
 
 ### Verify String
 Although you can use string verificaton to non-string types, it will be converted to its string format.
