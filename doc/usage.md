@@ -43,6 +43,7 @@ Table of Contents
         * [Contains](#contains)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
+        * [Less than](#less-than)
 
 Feature Configuration
 ---------------------
