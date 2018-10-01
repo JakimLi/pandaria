@@ -68,3 +68,16 @@ Feature: verify string
     * var: 'suffix'='kim'
     * verify: '$.username' ends with: "ja${suffix}"
     * verify: ${username} ends with: "ja${suffix}"
+
+  Scenario: length
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.username' length: 5
+
+    * var: 'username'="jakim"
+    * verify: ${username} length: 5
+
+    * var: 'abc'=3
+    * verify: ${abc} length: 1

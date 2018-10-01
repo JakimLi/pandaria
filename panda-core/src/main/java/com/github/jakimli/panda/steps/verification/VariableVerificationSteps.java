@@ -59,6 +59,11 @@ public class VariableVerificationSteps {
         assertThat(String.valueOf(variables.get(varName)), endsWith(variables.interpret(prefix)));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)} length: (\\d+)$")
+    public void verifyVariableStringLength(String varName, int length) {
+        assertThat(String.valueOf(variables.get(varName)).length(), is(length));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")
     public void verifyVariableEqualsVariable(String varName, String anotherVar) {
         assertThat(variables.get(varName), is(variables.get(anotherVar)));

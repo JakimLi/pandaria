@@ -82,6 +82,11 @@ public class JsonVerificationSteps {
         assertThat(String.valueOf(json(path)), endsWith(variables.interpret(prefix)));
     }
 
+    @Then("^verify: '([^\"]*)' length: (\\d+)$")
+    public void verifyStringLength(String path, int length) throws Throwable {
+        assertThat(String.valueOf(json(path)).length(), is(length));
+    }
+
     @Then("^verify: '([^\"]*)'=(\\d+)$")
     public void verifyEqualsInteger(String path, final int expected) throws Throwable {
         assertThat(json(path), is(expected));

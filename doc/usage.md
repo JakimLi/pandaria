@@ -43,6 +43,7 @@ Table of Contents
         * [Contains](#contains)
         * [Starts With](#starts-with)
         * [Ends With](#ends-with)
+        * [Length](#length)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
@@ -381,6 +382,7 @@ verify as text in file
 
 #### Equals
 `=` for equals, `!=` for not equals
+Although you can use string verificaton to non-string types, it will be converted to its string format.
 
 ```
 Scenario: equals
@@ -451,6 +453,18 @@ Scenario: contains
 * var: 'suffix'='kim'
 * verify: '$.username' ends with: "ja${suffix}"
 * verify: ${username} ends with: "ja${suffix}"
+```
+
+#### Length
+```
+* verify: '$.username'='jakim'
+* verify: '$.username' length: 5
+
+* var: 'username'="jakim"
+* verify: ${username} length: 5
+
+* var: 'abc'=3
+* verify: ${abc} length: 1
 ```
 
 ### Verify numbers
