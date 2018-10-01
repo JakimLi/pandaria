@@ -1,4 +1,4 @@
-rootProject.name = 'panda'
+rootProject.name = 'pandaria'
 
-include 'panda-core'
+include 'pandaria-core'
 include 'doc'

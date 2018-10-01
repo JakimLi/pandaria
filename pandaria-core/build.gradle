@@ -1,0 +1,50 @@
+dependencies {
+    compile(
+            "io.cucumber:cucumber-java:${cucumber}",
+            "io.cucumber:cucumber-spring:${cucumber}",
+
+            "org.springframework.boot:spring-boot-starter-test:${springboot}",
+            "org.springframework.boot:spring-boot-starter:${springboot}",
+
+            "com.jayway.jsonpath:json-path:${jsonpath}",
+
+            "junit:junit:${junit}",
+
+            "com.google.guava:guava:${guava}",
+
+            "org.apache.commons:commons-text:${commons_text}",
+
+            "org.glassfish.jersey.core:jersey-client:${jersey}",
+            "org.glassfish.jersey.core:jersey-common:${jersey}",
+            "org.glassfish.jersey.media:jersey-media-json-jackson:${jersey}",
+            "org.glassfish.jersey.media:jersey-media-multipart:${jersey}",
+            "org.glassfish.jersey.inject:jersey-hk2:${jersey}"
+    )
+
+    testCompile(
+            "io.cucumber:cucumber-junit:${cucumber}",
+
+            "com.github.dreamhead:moco-core:${moco}",
+            "com.github.dreamhead:moco-runner:${moco}",
+            "com.github.dreamhead:moco-junit:${moco}"
+    )
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.github.jakimli.pandaria', 'src/test/resources']
+        }
+    }
+}
+
+build.dependsOn tasks.cucumber

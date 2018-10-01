@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
 allprojects {
-    group = 'com.github.jakimli.panda'
+    group = 'com.github.jakimli.pandaria'
     version = '0.1.0'
 }
 
