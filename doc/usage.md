@@ -455,14 +455,14 @@ verify as text in file
 ### Verify database tables
 You can verify database tables by writing sql with select statements, and then verify the result.
 
-Map the table to json array.
+For table
 
 | name | age |
 |------|-----|
 | jakim | 18 |
 | panda | 28 |
 
-is json
+in json array
 
 ```
 [
