@@ -41,6 +41,8 @@ Table of Contents
     * [Verify String](#verify-string)
         * [Equals](#equals)
         * [Contains](#contains)
+    * [Verify numbers](#verify-numbers)
+        * [Greater than](#greater-than)
 
 Feature Configuration
 ---------------------
