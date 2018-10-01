@@ -44,7 +44,7 @@ Table of Contents
         * [Starts With](#starts-with)
         * [Ends With](#ends-with)
         * [Length](#length)
-        * [Regex Match](#regex match)
+        * [Regex Match](#regex-match)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
