@@ -379,11 +379,10 @@ verify as text in file
 ```
 
 ### Verify String
+Although you can use string verificaton to non-string types, it will be converted to its string format.
 
 #### Equals
 `=` for equals, `!=` for not equals
-
-Although you can use string verificaton to non-string types, it will be converted to its string format.
 
 ```
 Scenario: equals
