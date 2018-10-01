@@ -10,7 +10,7 @@ Pandaria is a DSL written based on cucumber to simplify the HTTP API testing. Us
 Example
 -------
 
-You can call you api and verify the response
+You can call your api and verify the response
 ```
 * uri: http://localhost:10080/users/me
 * send: GET
