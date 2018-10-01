@@ -1,7 +1,7 @@
 Usage
 =====
 
-Panda just abstracts DSL for API testing, after all it's still just cucumber steps
+Pandaria just abstracts DSL for API testing, after all it's still just cucumber steps
 
 This page demonstrates the usage of the DSLs
 

@@ -1,11 +1,11 @@
-Panda
+Pandaria
 =====
 Light weight API test framework based on cucumber
 
 Introduction
 ------------
 
-Panda is a DSL written based on cucumber to simplify the HTTP API testing. Using panda you don't need to learn programming
+Pandaria is a DSL written based on cucumber to simplify the HTTP API testing. Using pandaria you don't need to learn programming
 
 Example
 -------
