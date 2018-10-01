@@ -30,12 +30,17 @@ Feature: verify numbers
     * status: 200
     * verify: '$.age'>17
     * verify: '$.iq'>70.0
+    * verify: '$.age'>=18
+    * verify: '$.iq'>=80.0
 
     * var: 'age'=18
     * var: 'iq'=80.0
 
     * verify: ${age}>17
     * verify: ${iq}>79.0
+
+    * verify: ${age}>=17
+    * verify: ${iq}>=80.0
 
   Scenario: less than
     * uri: /users/me

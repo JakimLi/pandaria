@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
@@ -70,6 +71,11 @@ public class VariableVerificationSteps {
         assertThat((int) variables.get(varName), greaterThan(expected));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)}>=(\\d+)$")
+    public void verifyVariableGreaterThanOrEqualToInteger(String varName, Integer expected) {
+        assertThat((int) variables.get(varName), greaterThanOrEqualTo(expected));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}<(\\d+)$")
     public void verifyVariableLessThanInteger(String varName, Integer expected) {
         assertThat((int) variables.get(varName), lessThan(expected));
@@ -88,6 +94,11 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)}>(\\d+\\.\\d+)$")
     public void verifyVariableGreaterThanDouble(String varName, String expected) {
         assertThat((double) variables.get(varName), greaterThan(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}>=(\\d+\\.\\d+)$")
+    public void verifyVariableGreaterThanOrEqualToDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), greaterThanOrEqualTo(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<(\\d+\\.\\d+)$")
