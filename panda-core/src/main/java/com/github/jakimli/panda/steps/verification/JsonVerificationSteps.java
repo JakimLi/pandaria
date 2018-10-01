@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static java.lang.Double.parseDouble;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -58,6 +59,16 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
     public void verifyContainsString(String path, String contained) throws Throwable {
         assertThat(String.valueOf(json(path)), containsString(variables.interpret(contained)));
+    }
+
+    @Then("^verify: '([^\"]*)' starts with: '([^\"]*)'$")
+    public void verifyStartsWithLiteral(String path, String prefix) throws Throwable {
+        assertThat(String.valueOf(json(path)), startsWith(prefix));
+    }
+
+    @Then("^verify: '([^\"]*)' starts with: \"([^\"]*)\"$")
+    public void verifyStartsWithString(String path, String prefix) throws Throwable {
+        assertThat(String.valueOf(json(path)), startsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: '([^\"]*)'=(\\d+)$")

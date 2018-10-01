@@ -41,6 +41,7 @@ Table of Contents
     * [Verify String](#verify-string)
         * [Equals](#equals)
         * [Contains](#contains)
+        * [Starts With](#starts-with)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
@@ -422,6 +423,20 @@ Scenario: contains
 
   * var: 'username'="panda"
   * verify: ${username} contains 'anda'
+```
+
+#### Starts with
+
+```
+* verify: '$.username'='jakim'
+* verify: '$.username' starts with: 'jak'
+
+* var: 'username'="jakim"
+* verify: ${username} starts with: 'jak'
+
+* var: 'starter'='jak'
+* verify: '$.username' starts with: "${starter}i"
+* verify: ${username} starts with: "${starter}i"
 ```
 
 ### Verify numbers

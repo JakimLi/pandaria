@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
 
 public class VariableVerificationSteps {
@@ -22,19 +23,29 @@ public class VariableVerificationSteps {
         assertThat(variables.get(varName), is(expected));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
+    public void verifyVariableEqualsString(String varName, String expected) {
+        assertThat(variables.get(varName), is(variables.interpret(expected)));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)} contains: '([^\"]*)'$")
-    public void verifyVariablContainsLiteral(String varName, String expected) {
+    public void verifyVariableContainsLiteral(String varName, String expected) {
         assertThat(String.valueOf(variables.get(varName)), containsString(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains: \"([^\"]*)\"$")
-    public void verifyVariablContainsString(String varName, String expected) {
+    public void verifyVariableContainsString(String varName, String expected) {
         assertThat(String.valueOf(variables.get(varName)), containsString(variables.interpret(expected)));
     }
 
-    @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
-    public void verifyVariableEqualsString(String varName, String expected) {
-        assertThat(variables.get(varName), is(variables.interpret(expected)));
+    @Then("^verify: \\$\\{([^\"]*)} starts with: '([^\"]*)'$")
+    public void verifyVariableStartsWithLiteral(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), startsWith(prefix));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} starts with: \"([^\"]*)\"$")
+    public void verifyVariableStartsWithString(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), startsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")

@@ -40,3 +40,17 @@ Feature: verify string
     * var: 'contained'='kim'
     * verify: '$.username' contains: "${contained}"
     * verify: ${username} contains: "${contained}"
+
+  Scenario: starts with
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.username' starts with: 'jak'
+
+    * var: 'username'="jakim"
+    * verify: ${username} starts with: 'jak'
+
+    * var: 'starter'='jak'
+    * verify: '$.username' starts with: "${starter}i"
+    * verify: ${username} starts with: "${starter}i"
