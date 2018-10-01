@@ -9,6 +9,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
@@ -81,6 +82,11 @@ public class VariableVerificationSteps {
         assertThat((int) variables.get(varName), lessThan(expected));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)}<=(\\d+)$")
+    public void verifyVariableLessThanOrEqualToInteger(String varName, Integer expected) {
+        assertThat((int) variables.get(varName), lessThanOrEqualTo(expected));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}=(\\d+\\.\\d+)$")
     public void verifyVariableEqualsDouble(String varName, String expected) {
         assertThat(variables.get(varName), is(Double.parseDouble(expected)));
@@ -104,5 +110,10 @@ public class VariableVerificationSteps {
     @Then("^verify: \\$\\{([^\"]*)}<(\\d+\\.\\d+)$")
     public void verifyVariableLessThanDouble(String varName, String expected) {
         assertThat((double) variables.get(varName), lessThan(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}<=(\\d+\\.\\d+)$")
+    public void verifyVariableLessThanOrEqualToDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), lessThanOrEqualTo(Double.parseDouble(expected)));
     }
 }

@@ -431,12 +431,16 @@ Scenario: contains
 ```
 * verify: '$.age'>17
 * verify: '$.iq'>70.0
+* verify: '$.age'>=18
+* verify: '$.iq'>=80.0
 
 * var: 'age'=18
 * var: 'iq'=80.0
 
 * verify: ${age}>17
 * verify: ${iq}>79.0
+* verify: ${age}>=17
+* verify: ${iq}>=80.0
 ```
 
 ### Less Than
@@ -444,10 +448,14 @@ Scenario: contains
 ```
 * verify: '$.age'<19
 * verify: '$.iq'<90.0
+* verify: '$.age'<=18
+* verify: '$.iq'<=80.0
 
 * var: 'age'=18
 * var: 'iq'=80.0
 
 * verify: ${age}<19
 * verify: ${iq}<99.0
+* verify: ${age}<=18
+* verify: ${iq}<=80.0
 ```

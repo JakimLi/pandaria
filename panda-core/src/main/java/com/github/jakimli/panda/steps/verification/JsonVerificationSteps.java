@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 public class JsonVerificationSteps {
@@ -84,6 +85,11 @@ public class JsonVerificationSteps {
         assertThat((int) json(path), lessThan(expected));
     }
 
+    @Then("^verify: '([^\"]*)'<=(\\d+)$")
+    public void verifyLessThanOrEqualToInteger(String path, final int expected) throws Throwable {
+        assertThat((int) json(path), lessThanOrEqualTo(expected));
+    }
+
     @Then("^verify: '([^\"]*)'=(\\d+\\.\\d+)$")
     public void verifyEqualsDouble(String path, final String expected) throws Throwable {
         assertThat(json(path), is(parseDouble(expected)));
@@ -107,5 +113,10 @@ public class JsonVerificationSteps {
     @Then("^verify: '([^\"]*)'<(\\d+\\.\\d+)$")
     public void verifyLessThanDouble(String path, final String expected) throws Throwable {
         assertThat((double) json(path), lessThan(parseDouble(expected)));
+    }
+
+    @Then("^verify: '([^\"]*)'<=(\\d+\\.\\d+)$")
+    public void verifyLessThanOrEqualToDouble(String path, final String expected) throws Throwable {
+        assertThat((double) json(path), lessThanOrEqualTo(parseDouble(expected)));
     }
 }
