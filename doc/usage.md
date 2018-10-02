@@ -71,7 +71,7 @@ resources
     └── http
          ├── http.feature
          └── requests
-         └── user.json
+            └── user.json
 ```
 
 You can use the json file as request body as below
