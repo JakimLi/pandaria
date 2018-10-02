@@ -59,7 +59,7 @@ Table of Contents
         * [Less than](#less-than)
 
 * [Wait](#wait)
-    *[Simple Wait](#simple-wait)
+    * [Simple Wait](#simple-wait)
 
 Feature Configuration
 ---------------------
