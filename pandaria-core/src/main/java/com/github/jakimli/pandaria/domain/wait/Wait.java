@@ -21,8 +21,8 @@ public class Wait {
     private Waitable waitable;
 
     public void configure(int millis, int maxRetry) {
-        if (maxRetry < 1) {
-            fail("Invalid retry times, must greater than 0");
+        if (maxRetry < 0) {
+            fail("Invalid retry times: " + maxRetry);
         }
         this.on = true;
         this.millis = millis;
