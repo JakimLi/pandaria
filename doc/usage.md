@@ -728,3 +728,21 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].name'="jakim"
 * verify: '$[0].age'=18
 ```
+
+**Although between wait and the first verificaiton, there can be multiple actions(http request or database queries), **
+**But only the last action will be take as retry.**
+**For example:**
+```
+* wait: 1000ms times: 3
+* uri: /sequence
+* send: GET
+# no verifiction for this http request
+
+* query:
+"""
+SELECT NAME, AGE FROM USERS;
+"""
+* verify: '$[0].name'="jakim"
+* verify: '$[0].age'=18
+```
+**Only the database query will be repeated if the verification failed, NOT the http request.**
