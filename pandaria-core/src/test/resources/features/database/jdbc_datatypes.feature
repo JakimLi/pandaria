@@ -37,3 +37,9 @@ Feature: jdbc data types
     """
     * verify: '$[0].date'=datetime: '2008-10-10' pattern: 'yyyy-MM-dd'
     * verify: '$[0].date'=datetime: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'
+
+    * query:
+    """
+    select `smallint` from all_data_types;
+    """
+    * verify: '$[0].smallint'=30
