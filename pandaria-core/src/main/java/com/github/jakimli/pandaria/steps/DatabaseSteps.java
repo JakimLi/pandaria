@@ -2,10 +2,11 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
-import com.github.jakimli.pandaria.domain.database.DatabaseContext;
+import com.github.jakimli.pandaria.domain.database.DatabaseQueryContext;
 import com.github.jakimli.pandaria.domain.verification.VerificationContext;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ import static com.github.jakimli.pandaria.utils.FileUtil.read;
 public class DatabaseSteps {
 
     @Autowired
-    DatabaseContext databaseContext;
+    DatabaseQueryContext databaseQueryContext;
 
     @Autowired
     VerificationContext verifier;
@@ -25,27 +26,32 @@ public class DatabaseSteps {
     @Autowired
     FeatureConfiguration configuration;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     @When("^query:$")
     public void query(String sql) {
-        databaseContext.query(variables.interpret(sql));
-        verifier.toBeVerified(databaseContext.results());
+        databaseQueryContext.query(variables.interpret(sql));
+        databaseQueryContext.send();
+        verifier.toBeVerified(databaseQueryContext.results());
     }
 
     @When("^query: ([^\"]*)$")
     public void queryFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
-        databaseContext.query(variables.interpret(read(file)));
-        verifier.toBeVerified(databaseContext.results());
+        databaseQueryContext.query(variables.interpret(read(file)));
+        databaseQueryContext.send();
+        verifier.toBeVerified(databaseQueryContext.results());
     }
 
     @When("^execute sql:$")
     public void executeSql(String sql) {
-        databaseContext.execute(variables.interpret(sql));
+        jdbcTemplate.execute(variables.interpret(sql));
     }
 
     @When("^execute sql: ([^\"]*)$")
     public void executeSqlFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
-        databaseContext.execute(variables.interpret(read(file)));
+        jdbcTemplate.execute(variables.interpret(read(file)));
     }
 }
