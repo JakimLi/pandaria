@@ -30,3 +30,10 @@ Feature: jdbc data types
     select `text` from all_data_types;
     """
     * verify: '$[0].text'='text'
+
+    * query:
+    """
+    select `date` from all_data_types;
+    """
+    * verify: '$[0].date'=date: '2008-10-10' pattern: 'yyyy-MM-dd'
+    * verify: '$[0].date'=date: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'

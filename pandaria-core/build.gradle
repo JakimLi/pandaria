@@ -16,6 +16,8 @@ dependencies {
 
             "com.google.guava:guava:${guava}",
 
+            "joda-time:joda-time:${joda_time}",
+
             "org.apache.commons:commons-text:${commons_text}",
 
             "org.glassfish.jersey.core:jersey-client:${jersey}",
