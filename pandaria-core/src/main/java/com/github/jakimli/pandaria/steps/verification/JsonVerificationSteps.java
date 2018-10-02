@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.Variables;
-import com.github.jakimli.pandaria.domain.verification.VerificationContext;
+import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.utils.JsonContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;

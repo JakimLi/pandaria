@@ -4,7 +4,7 @@ import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
-import com.github.jakimli.pandaria.domain.verification.VerificationContext;
+import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

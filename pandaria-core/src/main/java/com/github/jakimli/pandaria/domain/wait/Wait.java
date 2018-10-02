@@ -1,6 +1,6 @@
 package com.github.jakimli.pandaria.domain.wait;
 
-import com.github.jakimli.pandaria.domain.verification.VerificationContext;
+import com.github.jakimli.pandaria.domain.VerificationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.github.jakimli.pandaria.domain.verification;
+package com.github.jakimli.pandaria.domain;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

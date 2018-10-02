@@ -2,8 +2,8 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
-import com.github.jakimli.pandaria.domain.database.DatabaseQueryContext;
-import com.github.jakimli.pandaria.domain.verification.VerificationContext;
+import com.github.jakimli.pandaria.domain.DatabaseQueryContext;
+import com.github.jakimli.pandaria.domain.VerificationContext;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
