@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.domain.http.client;
 
 import com.github.jakimli.pandaria.domain.http.HttpContext;
+import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -9,8 +10,11 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.function.Function;
+import java.util.logging.Level;
 
+import static java.util.logging.Logger.getLogger;
 import static org.glassfish.jersey.client.HttpUrlConnectorProvider.SET_METHOD_WORKAROUND;
+import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 
 class HttpClient {
 
@@ -20,7 +24,12 @@ class HttpClient {
     HttpClient() {
         client = ClientBuilder.newBuilder()
                 .property(SET_METHOD_WORKAROUND, true)
+                .register(logAny())
                 .build();
+    }
+
+    private Object logAny() {
+        return new LoggingFeature(getLogger("HTTP"), Level.INFO, PAYLOAD_ANY, null);
     }
 
     HttpClient context(HttpContext context) {
