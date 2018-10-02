@@ -19,7 +19,7 @@ You can call your api and verify the response
 * verify: '$.age'=18
 ```
 
-And You can query database and verify the results
+And you can query database and verify the results
 
 ```
 * query:
