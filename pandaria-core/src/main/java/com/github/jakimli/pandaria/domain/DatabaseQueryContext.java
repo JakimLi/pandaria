@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Component
 @Scope("cucumber-glue")
-public class DatabaseQueryContext implements Waitable {
+public class DatabaseQueryContext implements Waitable<List<Map<String, Object>>> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -37,7 +37,7 @@ public class DatabaseQueryContext implements Waitable {
     }
 
     @Override
-    public Object result() {
+    public List<Map<String, Object>> result() {
         return results;
     }
 }

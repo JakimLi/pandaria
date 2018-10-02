@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.domain.wait;
 
-public interface Waitable {
+public interface Waitable<T> {
     void retry();
 
-    Object result();
+    T result();
 }

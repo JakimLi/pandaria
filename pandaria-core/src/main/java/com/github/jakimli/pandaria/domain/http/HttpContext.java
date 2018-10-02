@@ -14,7 +14,7 @@ import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component
 @Scope("cucumber-glue")
-public class HttpContext implements Waitable {
+public class HttpContext implements Waitable<String> {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
@@ -104,7 +104,7 @@ public class HttpContext implements Waitable {
     }
 
     @Override
-    public Object result() {
+    public String result() {
         return this.responseBody;
     }
 }
