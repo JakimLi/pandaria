@@ -701,7 +701,7 @@ Scenario: wait until
   4
   """
 
-  * wait: 1000ms times: 3
+  * wait: 1s times: 3
   * uri: /sequence
   * send: GET
   * response body:

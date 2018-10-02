@@ -21,6 +21,11 @@ public class WaitSteps {
         wait.configure(millis, maxRetry);
     }
 
+    @Given("^wait: (\\d+)s times: (\\d+)$")
+    public void waitSecondsUntil(int seconds, int maxRetry) {
+        wait.configure(1000 * seconds, maxRetry);
+    }
+
     @Given("^wait: (\\d+)s$")
     public void waitSeconds(int seconds) throws InterruptedException {
         sleep(1000 * seconds);
