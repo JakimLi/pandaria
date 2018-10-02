@@ -11,6 +11,7 @@ import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
 import static com.github.dreamhead.moco.Moco.method;
+import static com.github.dreamhead.moco.Moco.query;
 import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
@@ -46,6 +47,14 @@ public class BasicHttpHooks {
         server.server()
                 .get(by(uri("/users/me")))
                 .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
+
+        server.server()
+                .get(and(
+                        by(uri("/users")),
+                        eq(query("name"), "jakim"),
+                        eq(query("age"), "18")
+                ))
+                .response(json(of("name", "jakim", "age", 18, "iq", 80.0)));
 
         server.server()
                 .post(by(uri("/empty_request")))
