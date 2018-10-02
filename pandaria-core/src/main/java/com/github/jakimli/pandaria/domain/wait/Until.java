@@ -24,10 +24,10 @@ public class Until {
         if (!wait.on()) {
             return verify(joinPoint);
         }
-        return retry(joinPoint);
+        return waiting(joinPoint);
     }
 
-    private Object retry(ProceedingJoinPoint joinPoint) throws Throwable {
+    private Object waiting(ProceedingJoinPoint joinPoint) throws Throwable {
         int count = 0;
         while (count < wait.maxRetry()) {
             try {
