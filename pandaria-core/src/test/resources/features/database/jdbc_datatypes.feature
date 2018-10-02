@@ -43,3 +43,20 @@ Feature: jdbc data types
     select `smallint` from all_data_types;
     """
     * verify: '$[0].smallint'=30
+
+    * query:
+    """
+    select `mediumint`, `int` from all_data_types;
+    """
+    * verify: '$[0].mediumint'=3000000
+    * verify: '$[0].int'=3
+
+    * query:
+    """
+    select `bigint` from all_data_types;
+    """
+    * verify: '$[0].bigint'=long: 3000000000
+    * verify: '$[0].bigint'>long: 2000000000
+    * verify: '$[0].bigint'>=long: 3000000000
+    * verify: '$[0].bigint'<long: 4000000000
+    * verify: '$[0].bigint'<=long: 3000000000
