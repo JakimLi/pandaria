@@ -13,15 +13,18 @@ Table of Contents
     * [dir](#dir)
     * [base uri](#base-uri)
 * [Test HTTP APIs](#test-http-apis)
-    * [GET](#get)
-    * [POST](#post)
-    * [POST request body from file](#post-request-body-from-file)
-    * [PUT](#put)
-    * [DELETE](#delete)
-    * [PATCH](#patch)
-    * [HEAD](#head)
-    * [OPTIONS](#options)
-    * [TRACE](#trace)
+    * [Methods](#methods)
+        * [GET](#get)
+        * [POST](#post)
+        * [POST request body from file](#post-request-body-from-file)
+        * [PUT](#put)
+        * [DELETE](#delete)
+        * [PATCH](#patch)
+        * [HEAD](#head)
+        * [OPTIONS](#options)
+        * [TRACE](#trace)
+     * [Query Parameter](#query-parameter)
+     * [Request header](#request-header)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -136,7 +139,9 @@ You can use absolute uri with `uri: http://host:port`, best practice is to make 
 Test HTTP APIs
 ------------------
 
-### GET
+### Methods
+
+#### GET
 
 ```gherkin
 * uri: http://localhost:10080/users/me
@@ -146,7 +151,7 @@ Test HTTP APIs
 * verify: '$.age'=18
 ```
 
-### POST
+#### POST
 
 ```gherkin
 * uri: http://localhost:10080/users
@@ -161,7 +166,7 @@ Test HTTP APIs
 * verify: '$.age'=18
 ```
 
-### POST request body from file
+#### POST request body from file
 
 ```
 * uri: http://localhost:10080/users
@@ -173,7 +178,7 @@ Test HTTP APIs
 * verify: '$.age'=18
 ```
 
-### Custom Header
+#### Custom Header
 
 ```
 Scenario: get with http header
@@ -183,7 +188,7 @@ Scenario: get with http header
   * status: 200
 ```
 
-### verify response as plain text
+#### verify response as plain text
 ```
 * response body:
 """
@@ -191,7 +196,7 @@ success
 """
 ```
 
-### PUT
+#### PUT
 ```
 Scenario: simple put
   * uri: /users/me
@@ -204,7 +209,7 @@ Scenario: simple put
   * verify: '$.username'='lj'
 ```
 
-### DELETE
+#### DELETE
 
 ```
 Scenario: simple delete
@@ -213,7 +218,7 @@ Scenario: simple delete
   * status: 200
 ```
 
-### PATCH
+#### PATCH
 ```
 Scenario: simple patch
   * uri: /users/20
@@ -224,7 +229,7 @@ Scenario: simple patch
   * send: PATCH
 ```
 
-### HEAD
+#### HEAD
 ```
 Scenario: simple head
   * uri: /users
@@ -234,7 +239,7 @@ Scenario: simple head
   * response header: 'Date'='Thur, 2018 12'
 ```
 
-### OPTIONS
+#### OPTIONS
 
 ```
 Scenario: simple options
@@ -244,7 +249,7 @@ Scenario: simple options
   * response header: 'Allow'='OPTIONS, GET, HEAD'
 ```
 
-### TRACE
+#### TRACE
 
 ```
 Scenario: simple trace
@@ -252,6 +257,27 @@ Scenario: simple trace
   * send: TRACE
   * status: 200
   * response header: 'Content-Type'='message/http'
+```
+
+### Query Parameter
+```
+* uri: /users?name=jakim&age=18
+
+* uri: /users
+* query parameter: 'name'="${name}"
+* query parameter: 'age'='18'
+
+
+* uri: /users?name=jakim
+* query parameter: 'age'='18'
+```
+
+### Request Header
+```
+* uri: /custom_header
+* header: 'Accept'='text.plain'
+* send: GET
+* status: 200
 ```
 
 Database Operations
