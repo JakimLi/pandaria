@@ -433,7 +433,7 @@ Verificaton
 ```
 
 #### response body
-verify use json string
+verify use json path
 ```
 * verify: '$.username'='jakim'
 * verify: '$.age'=18
