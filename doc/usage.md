@@ -58,6 +58,9 @@ Table of Contents
         * [Greater than](#greater-than)
         * [Less than](#less-than)
 
+* [Wait](#wait)
+    *[Simple Wait](#simple-wait)
+
 Feature Configuration
 ---------------------
 You must configure some basics to make the framework work properly.
@@ -647,4 +650,16 @@ Scenario: contains
 * verify: ${iq}<99.0
 * verify: ${age}<=18
 * verify: ${iq}<=80.0
+```
+
+### Wait
+Wait is useful for automation testing and sometimes is necessary.
+
+#### Simple wait
+Only support milliseconds and seconds, we don't recomment to wait for very long time.
+
+```
+Scenario: wait
+  * wait: 1000ms
+  * wait: 1s
 ```
