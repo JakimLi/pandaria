@@ -1,11 +1,12 @@
 Pandaria
 =====
-Light weight API test framework based on cucumber
+Light weight API test framework based on cucumber JVM
 
 Introduction
 ------------
 
-Pandaria is a DSL written based on cucumber to simplify the HTTP API testing. Using pandaria you don't need to learn programming
+Pandaria is a DSL written based on cucumber JVM to simplify the HTTP API testing, everything with cucumber still works.
+Using pandaria you don't need to learn programming
 
 Example
 -------
