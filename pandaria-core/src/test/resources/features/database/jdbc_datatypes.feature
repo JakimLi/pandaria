@@ -13,7 +13,7 @@ Feature: jdbc data types
     """
     select `varchar` from all_data_types;
     """
-    * verify: '$[0].varchar'='test'
+    * verify: '$[0].varchar'='varchar'
 
     * query:
     """
@@ -24,3 +24,9 @@ Feature: jdbc data types
     * verify: '$[0].tinyint'<4
     * verify: '$[0].tinyint'>=3
     * verify: '$[0].tinyint'<=3
+
+    * query:
+    """
+    select `text` from all_data_types;
+    """
+    * verify: '$[0].text'='text'
