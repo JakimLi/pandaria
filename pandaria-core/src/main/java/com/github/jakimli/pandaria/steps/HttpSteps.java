@@ -45,6 +45,16 @@ public class HttpSteps {
         context.requestHeader(key, value);
     }
 
+    @Given("^query parameter: '([^\"]*)'='([^\"]*)'$")
+    public void queryParameterFromLiteral(String name, String value) {
+        context.queryParameter(name, value);
+    }
+
+    @Given("^query parameter: '([^\"]*)'=\"([^\"]*)\"$")
+    public void queryParameterFromString(String name, String value) {
+        context.queryParameter(name, variables.interpret(value));
+    }
+
     @Given("^request body:$")
     public void requestBody(String body) {
         context.requestBody(variables.interpret(body));

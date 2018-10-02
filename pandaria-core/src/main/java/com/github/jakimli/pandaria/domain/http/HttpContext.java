@@ -9,6 +9,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import java.net.URI;
 import java.util.List;
 
+import static javax.ws.rs.core.UriBuilder.fromUri;
+
 @Component
 @Scope("cucumber-glue")
 public class HttpContext {
@@ -87,5 +89,11 @@ public class HttpContext {
 
     public List<String> responseHeader(String key) {
         return this.responseHeaders.get(key);
+    }
+
+    public void queryParameter(String name, String value) {
+        this.uri = fromUri(this.uri)
+                .queryParam(name, value)
+                .build();
     }
 }
