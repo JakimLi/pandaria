@@ -22,3 +22,10 @@ Feature: http query parameter
     * verify: 'name'="jakim"
     * verify: 'age'=18
     * verify: 'iq'=80.0
+
+    * uri: /users?name=jakim
+    * query parameter: 'age'='18'
+    * send: GET
+    * verify: 'name'="jakim"
+    * verify: 'age'=18
+    * verify: 'iq'=80.0
