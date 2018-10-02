@@ -54,4 +54,8 @@ public class Wait {
     void off() {
         this.on = false;
     }
+
+    int millis() {
+        return this.millis;
+    }
 }
