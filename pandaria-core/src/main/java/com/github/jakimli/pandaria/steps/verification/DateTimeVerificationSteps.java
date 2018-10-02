@@ -21,7 +21,7 @@ public class DateTimeVerificationSteps {
         return JsonContext.json(toBeVerified.toJsonObject()).path(path);
     }
 
-    @Then("^verify: '([^\"]*)'=date: '([^\"]*)' pattern: '([^\"]*)'$")
+    @Then("^verify: '([^\"]*)'=datetime: '([^\"]*)' pattern: '([^\"]*)'$")
     public void verifyDateWithPattern(String path, String date, String pattern) throws IOException {
         assertThat(new DateTime(json(path)), is(forPattern(pattern).parseDateTime(date)));
     }

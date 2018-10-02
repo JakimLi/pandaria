@@ -35,5 +35,5 @@ Feature: jdbc data types
     """
     select `date` from all_data_types;
     """
-    * verify: '$[0].date'=date: '2008-10-10' pattern: 'yyyy-MM-dd'
-    * verify: '$[0].date'=date: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'
+    * verify: '$[0].date'=datetime: '2008-10-10' pattern: 'yyyy-MM-dd'
+    * verify: '$[0].date'=datetime: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'
