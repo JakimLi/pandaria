@@ -716,3 +716,15 @@ Scenario: wait until
   6
   """
 ```
+
+##### wait until database query results expected
+
+```
+* wait: 1000ms times: 3
+* query:
+"""
+SELECT NAME, AGE FROM USERS;
+"""
+* verify: '$[0].name'="jakim"
+* verify: '$[0].age'=18
+```
