@@ -4,6 +4,7 @@ import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.DatabaseQueryContext;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,11 +30,15 @@ public class DatabaseSteps {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    Wait wait;
+
     @When("^query:$")
     public void query(String sql) {
         databaseQueryContext.query(variables.interpret(sql));
         databaseQueryContext.send();
         verifier.toBeVerified(databaseQueryContext.results());
+        wait.waitable(databaseQueryContext);
     }
 
     @When("^query: ([^\"]*)$")

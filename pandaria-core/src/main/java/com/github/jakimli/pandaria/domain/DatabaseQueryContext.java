@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.domain;
 
+import com.github.jakimli.pandaria.domain.wait.Waitable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 @Component
 @Scope("cucumber-glue")
-public class DatabaseQueryContext {
+public class DatabaseQueryContext implements Waitable {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -28,5 +29,15 @@ public class DatabaseQueryContext {
 
     public void send() {
         results = jdbcTemplate.queryForList(query);
+    }
+
+    @Override
+    public void retry() {
+        send();
+    }
+
+    @Override
+    public Object result() {
+        return results;
     }
 }
