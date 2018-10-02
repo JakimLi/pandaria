@@ -271,6 +271,13 @@ Scenario: simple trace
 * uri: /users?name=jakim
 * query parameter: 'age'='18'
 ```
+** If your query parameter has special charaters which need to be encoded, please use `query parameter`**
+
+```
+* uri: /users
+* query parameter: 'name'='jakim li'
+* send: GET
+```
 
 ### Request Header
 ```
