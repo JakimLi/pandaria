@@ -58,4 +58,8 @@ public class Wait {
     int millis() {
         return this.millis;
     }
+
+    Waitable waitable() {
+        return this.waitable;
+    }
 }

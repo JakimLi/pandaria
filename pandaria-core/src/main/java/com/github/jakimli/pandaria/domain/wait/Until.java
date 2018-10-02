@@ -48,7 +48,7 @@ public class Until {
                 LOGGER.info("sleep: {}ms", wait.millis());
                 wait.sleep();
 
-                LOGGER.info("retrying: {}/{}", count, wait.maxRetry());
+                LOGGER.info("retrying: {}/{}, {}", count, wait.maxRetry(), wait.waitable().getClass());
                 wait.retry();
             }
         }
