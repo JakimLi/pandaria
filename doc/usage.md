@@ -729,7 +729,7 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].age'=18
 ```
 
-**Although between wait and the first verificaiton, there can be multiple actions(http request or database queries), **
+**Although between wait and the first verificaiton, there can be multiple actions(http request or database queries),**
 **But only the last action will be take as retry.**
 **For example:**
 ```
