@@ -13,6 +13,7 @@ import static com.github.dreamhead.moco.Moco.jsonPath;
 import static com.github.dreamhead.moco.Moco.method;
 import static com.github.dreamhead.moco.Moco.or;
 import static com.github.dreamhead.moco.Moco.query;
+import static com.github.dreamhead.moco.Moco.seq;
 import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
@@ -23,10 +24,19 @@ public class BasicHttpHooks {
     @Autowired
     MockServer server;
 
+    @Before("@wait_until")
+    public void sequence() {
+        server.server()
+                .get(by(uri("/sequence")))
+                .response(seq("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+
+        server.start();
+    }
+
     @Before("@variables")
     public void mockForVariableTests() {
         server.server()
-                .request(by(uri("/not_important")))
+                .get(by(uri("/not_important")))
                 .response(json(of(
                         "name", "panda",
                         "age", 18,

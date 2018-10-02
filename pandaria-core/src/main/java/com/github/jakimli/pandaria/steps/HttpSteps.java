@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.Variables;
+import com.github.jakimli.pandaria.domain.wait.Wait;
 import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
 import com.github.jakimli.pandaria.domain.verification.VerificationContext;
@@ -33,6 +34,9 @@ public class HttpSteps {
 
     @Autowired
     Variables variables;
+
+    @Autowired
+    Wait wait;
 
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
@@ -71,6 +75,7 @@ public class HttpSteps {
         context.method(HttpMethod.valueOf(method));
         context.send();
         verifier.toBeVerified(context.responseBody());
+        wait.waitable(context);
     }
 
     @Then("^status: (\\d+)")

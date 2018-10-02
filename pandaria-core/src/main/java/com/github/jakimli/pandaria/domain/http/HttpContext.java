@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.domain.http;
 
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
+import com.github.jakimli.pandaria.domain.wait.Waitable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component
 @Scope("cucumber-glue")
-public class HttpContext {
+public class HttpContext implements Waitable {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
@@ -95,5 +96,15 @@ public class HttpContext {
         this.uri = fromUri(this.uri)
                 .queryParam(name, value)
                 .build();
+    }
+
+    @Override
+    public void retry() {
+        send();
+    }
+
+    @Override
+    public Object result() {
+        return this.responseBody;
     }
 }

@@ -60,6 +60,7 @@ Table of Contents
 
 * [Wait](#wait)
     * [Simple Wait](#simple-wait)
+    * [Wait Until](#wait-until)
 
 Feature Configuration
 ---------------------
@@ -662,4 +663,56 @@ Only support milliseconds and seconds, we don't recomment to wait for very long 
 Scenario: wait
   * wait: 1000ms
   * wait: 1s
+```
+
+#### Wait until
+Waiting is a time consuming step, sometimes make the tests slow, but it's necessary.
+
+`wait 1000ms times 3` specifies the framework to wait 3 times, each time wait 1000ms
+
+Run this step **DOSE NOT** put the thread in sleep immediately. if the first coming verification failed, then it
+actually put the thread in sleep for `1000ms`, and then retry once, and this process will repeat `3` times.
+
+##### wait until API respond expected response
+
+`GET /sequence` returns plain text in sequence
+
+```
+server.server()
+        .get(by(uri("/sequence")))
+        .response(seq("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
+```
+
+Wait until:
+```
+Scenario: wait until
+  * wait: 1000ms times: 3
+  * uri: /sequence
+  * send: GET
+  * response body:
+  """
+  3
+  """
+
+  * uri: /sequence
+  * send: GET
+  * response body:
+  """
+  4
+  """
+
+  * wait: 1000ms times: 3
+  * uri: /sequence
+  * send: GET
+  * response body:
+  """
+  5
+  """
+
+  * uri: /sequence
+  * send: GET
+  * response body:
+  """
+  6
+  """
 ```
