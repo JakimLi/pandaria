@@ -1,4 +1,4 @@
-@variables
+@database
 Feature: database
   database related operations
 
