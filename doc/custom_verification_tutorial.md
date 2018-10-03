@@ -10,7 +10,7 @@ But in order to get the data that you want to verify against, we need to underst
 Verification Context
 --------------------
 
-Currently there are two types of data than needs to be verified, first the http response, second the result that queried
+Currently there are two types of data that needs to be verified, first the http response, second the result that queried
 from database. Pandaria puts these data into `VerificationContext`. So just get the bean of `VerificationContext`.
 
 Example
