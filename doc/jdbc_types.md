@@ -29,7 +29,7 @@ JDBC Types -> Java Object Types Mapping
 |Time|java.sql.Time|
 |Timestamp|java.sql.Timestamp|
 
-For types not in above tables not supported by pandaria
+For types not in this table not supported by pandaria
 
 
 Verificaion for different types
