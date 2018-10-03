@@ -47,7 +47,7 @@ Table of Contents
         * [response header](#response-header)
         * [response body](#response-body)
     * [Verify database tables](#verify-database-tables)
-        * [Different database types](jdbc_types.md)
+        * [Different database types](jdbc_types.md#verificaion-for-different-types)
     * [Verify String](#verify-string)
         * [Equals](#equals)
         * [Contains](#contains)
