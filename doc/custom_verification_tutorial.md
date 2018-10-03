@@ -5,7 +5,7 @@ It's impossible for pandaria to provide all the verificaitons, you can always wr
 
 Pandaria keywords just cucumber steps, so extends pandaria is just write your own cucumber steps.
 
-But in order to get the data than you want to verify against, we need to understand how pandaria stores them.
+But in order to get the data that you want to verify against, we need to understand how pandaria stores them.
 
 Verification Context
 --------------------
