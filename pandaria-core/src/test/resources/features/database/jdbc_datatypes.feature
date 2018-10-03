@@ -59,4 +59,13 @@ Feature: jdbc data types
     * verify: '$[0].bigint'>long: 2000000000
     * verify: '$[0].bigint'>=long: 3000000000
     * verify: '$[0].bigint'<long: 4000000000
-    * verify: '$[0].bigint'<=long: 3000000000
+
+    * query:
+    """
+    select `float` from all_data_types;
+    """
+    * verify: '$[0].float'=float: 10.2
+    * verify: '$[0].float'>float: 10.1
+    * verify: '$[0].float'>=float: 10.2
+    * verify: '$[0].float'<float: 10.3
+    * verify: '$[0].float'<=float: 10.2
