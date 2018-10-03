@@ -2,11 +2,8 @@ package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
-import com.github.jakimli.pandaria.utils.JsonContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.IOException;
 
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
@@ -23,38 +20,34 @@ public class IntegerVerificationSteps {
     @Autowired
     VerificationContext toBeVerified;
 
-    private Object json(String path) throws IOException {
-        return JsonContext.json(toBeVerified.toJsonObject()).path(path);
-    }
-
     @Then("^verify: '([^\"]*)'=(\\d+)$")
     public void verifyEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(json(path), is(expected));
+        assertThat(toBeVerified.json(path), is(expected));
     }
 
     @Then("^verify: '([^\"]*)'!=(\\d+)$")
     public void verifyNotEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(json(path), not(expected));
+        assertThat(toBeVerified.json(path), not(expected));
     }
 
     @Then("^verify: '([^\"]*)'>(\\d+)$")
     public void verifyGreaterThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), greaterThan(expected));
+        assertThat((int) toBeVerified.json(path), greaterThan(expected));
     }
 
     @Then("^verify: '([^\"]*)'>=(\\d+)$")
     public void verifyGreaterThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), greaterThanOrEqualTo(expected));
+        assertThat((int) toBeVerified.json(path), greaterThanOrEqualTo(expected));
     }
 
     @Then("^verify: '([^\"]*)'<(\\d+)$")
     public void verifyLessThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), lessThan(expected));
+        assertThat((int) toBeVerified.json(path), lessThan(expected));
     }
 
     @Then("^verify: '([^\"]*)'<=(\\d+)$")
     public void verifyLessThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), lessThanOrEqualTo(expected));
+        assertThat((int) toBeVerified.json(path), lessThanOrEqualTo(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=(\\d+)$")

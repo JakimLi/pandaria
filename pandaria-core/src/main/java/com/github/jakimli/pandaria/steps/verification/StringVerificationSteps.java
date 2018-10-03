@@ -2,11 +2,8 @@ package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
-import com.github.jakimli.pandaria.utils.JsonContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.not;
@@ -24,68 +21,64 @@ public class StringVerificationSteps {
     @Autowired
     Variables variables;
 
-    private Object json(String path) throws IOException {
-        return JsonContext.json(toBeVerified.toJsonObject()).path(path);
-    }
-
     @Then("^verify: '([^\"]*)'='([^\"]*)'$")
     public void verifyEqualsLiteral(String path, final String expected) throws Throwable {
-        assertThat(json(path), is(expected));
+        assertThat(toBeVerified.json(path), is(expected));
     }
 
     @Then("^verify: '([^\"]*)'!='([^\"]*)'$")
     public void verifyNotEqualsLiteral(String path, final String expected) throws Throwable {
-        assertThat(json(path), not(expected));
+        assertThat(toBeVerified.json(path), not(expected));
     }
 
     @Then("^verify: '([^\"]*)'=\"([^\"]*)\"$")
     public void verifyEqualsString(String path, String expected) throws Throwable {
-        assertThat(json(path), is(variables.interpret(expected)));
+        assertThat(toBeVerified.json(path), is(variables.interpret(expected)));
     }
 
     @Then("^verify: '([^\"]*)'!=\"([^\"]*)\"$")
     public void verifyNotEqualsString(String path, String expected) throws Throwable {
-        assertThat(json(path), not(variables.interpret(expected)));
+        assertThat(toBeVerified.json(path), not(variables.interpret(expected)));
     }
 
     @Then("^verify: '([^\"]*)' contains: '([^\"]*)'$")
     public void verifyContainsLiteral(String path, String contained) throws Throwable {
-        assertThat(String.valueOf(json(path)), containsString(contained));
+        assertThat(String.valueOf(toBeVerified.json(path)), containsString(contained));
     }
 
     @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
     public void verifyContainsString(String path, String contained) throws Throwable {
-        assertThat(String.valueOf(json(path)), containsString(variables.interpret(contained)));
+        assertThat(String.valueOf(toBeVerified.json(path)), containsString(variables.interpret(contained)));
     }
 
     @Then("^verify: '([^\"]*)' starts with: '([^\"]*)'$")
     public void verifyStartsWithLiteral(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(json(path)), startsWith(prefix));
+        assertThat(String.valueOf(toBeVerified.json(path)), startsWith(prefix));
     }
 
     @Then("^verify: '([^\"]*)' starts with: \"([^\"]*)\"$")
     public void verifyStartsWithString(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(json(path)), startsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(toBeVerified.json(path)), startsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: '([^\"]*)' ends with: '([^\"]*)'$")
     public void verifyEndsWithLiteral(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(json(path)), endsWith(prefix));
+        assertThat(String.valueOf(toBeVerified.json(path)), endsWith(prefix));
     }
 
     @Then("^verify: '([^\"]*)' ends with: \"([^\"]*)\"$")
     public void verifyEndsWithString(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(json(path)), endsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(toBeVerified.json(path)), endsWith(variables.interpret(prefix)));
     }
 
     @Then("^verify: '([^\"]*)' length: (\\d+)$")
     public void verifyStringLength(String path, int length) throws Throwable {
-        assertThat(String.valueOf(json(path)).length(), is(length));
+        assertThat(String.valueOf(toBeVerified.json(path)).length(), is(length));
     }
 
     @Then("^verify: '([^\"]*)' matches: '([^\"]*)'$")
     public void verifyMatchesRegex(String path, String regex) throws Throwable {
-        assertTrue(String.valueOf(json(path)).matches(regex));
+        assertTrue(String.valueOf(toBeVerified.json(path)).matches(regex));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}='([^\"]*)'$")

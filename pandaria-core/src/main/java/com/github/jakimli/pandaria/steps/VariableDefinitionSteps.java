@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
-import static com.github.jakimli.pandaria.utils.JsonContext.json;
-
 public class VariableDefinitionSteps {
 
     @Autowired
@@ -39,6 +37,6 @@ public class VariableDefinitionSteps {
 
     @Given("^var: '([^\"]*)'<-'([^\"]*)'$")
     public void defineVariableExtractByJsonPath(String key, String path) throws IOException {
-        variables.assign(key, json(toBeVerified.toJsonObject()).path(path));
+        variables.assign(key, toBeVerified.json(path));
     }
 }

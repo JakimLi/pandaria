@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.domain;
 
+import com.github.jakimli.pandaria.utils.JsonContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,11 @@ public class VerificationContext {
         this.toBeVerified = toBeVerified;
     }
 
-    public Object toJsonObject() throws IOException {
+    public Object json(String path) throws IOException {
+        return JsonContext.json(toJsonObject()).path(path);
+    }
+
+    private Object toJsonObject() throws IOException {
         if (!(toBeVerified instanceof String)) {
             return toBeVerified;
         }

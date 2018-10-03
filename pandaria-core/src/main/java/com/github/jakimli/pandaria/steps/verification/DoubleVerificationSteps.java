@@ -2,11 +2,8 @@ package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
-import com.github.jakimli.pandaria.utils.JsonContext;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.IOException;
 
 import static java.lang.Double.parseDouble;
 import static org.hamcrest.CoreMatchers.is;
@@ -25,38 +22,34 @@ public class DoubleVerificationSteps {
     @Autowired
     VerificationContext toBeVerified;
 
-    private Object json(String path) throws IOException {
-        return JsonContext.json(toBeVerified.toJsonObject()).path(path);
-    }
-
     @Then("^verify: '([^\"]*)'=double: (\\d+\\.\\d+)$")
     public void verifyEqualsDouble(String path, String expected) throws Throwable {
-        assertThat(json(path), is(parseDouble(expected)));
+        assertThat(toBeVerified.json(path), is(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'!=double: (\\d+\\.\\d+)$")
     public void verifyNotEqualsDouble(String path, String expected) throws Throwable {
-        assertThat(json(path), not(parseDouble(expected)));
+        assertThat(toBeVerified.json(path), not(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'>double: (\\d+\\.\\d+)$")
     public void verifyGreaterThanDouble(String path, String expected) throws Throwable {
-        assertThat((Double) json(path), greaterThan(parseDouble(expected)));
+        assertThat((Double) toBeVerified.json(path), greaterThan(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'>=double: (\\d+\\.\\d+)$")
     public void verifyGreaterThanOrEqualToDouble(String path, String expected) throws Throwable {
-        assertThat((Double) json(path), greaterThanOrEqualTo(parseDouble(expected)));
+        assertThat((Double) toBeVerified.json(path), greaterThanOrEqualTo(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'<double: (\\d+\\.\\d+)$")
     public void verifyLessThanDouble(String path, String expected) throws Throwable {
-        assertThat((Double) json(path), lessThan(parseDouble(expected)));
+        assertThat((Double) toBeVerified.json(path), lessThan(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'<=double: (\\d+\\.\\d+)$")
     public void verifyLessThanOrEqualToDouble(String path, String expected) throws Throwable {
-        assertThat((Double) json(path), lessThanOrEqualTo(parseDouble(expected)));
+        assertThat((Double) toBeVerified.json(path), lessThanOrEqualTo(parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=double: (\\d+\\.\\d+)$")
