@@ -11,7 +11,7 @@ Feature: http query parameter
     * send: GET
     * verify: 'name'="jakim"
     * verify: 'age'=18
-    * verify: 'iq'=80.0
+    * verify: 'iq'=double: 80.0
 
   Scenario: add extra query parameter
     * var: 'name'='jakim'
@@ -21,19 +21,19 @@ Feature: http query parameter
     * send: GET
     * verify: 'name'="jakim"
     * verify: 'age'=18
-    * verify: 'iq'=80.0
+    * verify: 'iq'=double: 80.0
 
     * uri: /users?name=jakim
     * query parameter: 'age'='18'
     * send: GET
     * verify: 'name'="jakim"
     * verify: 'age'=18
-    * verify: 'iq'=80.0
+    * verify: 'iq'=double: 80.0
 
     * uri: /users
     * query parameter: 'name'='jakim li'
     * send: GET
     * verify: 'name'="jakim"
     * verify: 'age'=18
-    * verify: 'iq'=80.0
-    * verify: 'iq'=80.0
+    * verify: 'iq'=double: 80.0
+    * verify: 'iq'=double: 80.0

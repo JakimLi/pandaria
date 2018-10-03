@@ -12,7 +12,7 @@ Feature: verify numbers
     * send: GET
     * status: 200
     * verify: '$.age'=18
-    * verify: '$.iq'=80.0
+    * verify: '$.iq'=double: 80.0
 
     * var: 'age'=18
     * var: 'iq'=80.0
@@ -22,16 +22,16 @@ Feature: verify numbers
     * verify: ${age}!=${iq}
 
     * verify: '$.age'!=19
-    * verify: '$.iq'!=89.0
+    * verify: '$.iq'!=double: 89.0
 
   Scenario: greater than
     * uri: /users/me
     * send: GET
     * status: 200
     * verify: '$.age'>17
-    * verify: '$.iq'>70.0
+    * verify: '$.iq'>double: 70.0
     * verify: '$.age'>=18
-    * verify: '$.iq'>=80.0
+    * verify: '$.iq'>=double: 80.0
 
     * var: 'age'=18
     * var: 'iq'=80.0
@@ -47,9 +47,9 @@ Feature: verify numbers
     * send: GET
     * status: 200
     * verify: '$.age'<19
-    * verify: '$.iq'<90.0
+    * verify: '$.iq'<double: 90.0
     * verify: '$.age'<=18
-    * verify: '$.iq'<=80.0
+    * verify: '$.iq'<=double: 80.0
 
     * var: 'age'=18
     * var: 'iq'=80.0

@@ -44,7 +44,7 @@ Feature: Variables
     * status: 200
     * verify: '$.name'='panda'
     * verify: '$.age'=18
-    * verify: '$.iq'=80.0
+    * verify: '$.iq'=double: 80.0
 
   Scenario: variable used in request file
     * var: 'name'='someone'

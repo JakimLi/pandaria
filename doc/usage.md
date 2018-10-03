@@ -420,7 +420,7 @@ Scenario: variable being replaced in uri
   * status: 200
   * verify: '$.name'='panda'
   * verify: '$.age'=18
-  * verify: '$.iq'=80.0
+  * verify: '$.iq'=double: 80.0
 ```
 
 #### In file
@@ -623,9 +623,9 @@ Scenario: contains
 
 ```
 * verify: '$.age'>17
-* verify: '$.iq'>70.0
+* verify: '$.iq'>double: 70.0
 * verify: '$.age'>=18
-* verify: '$.iq'>=80.0
+* verify: '$.iq'>=double: 80.0
 
 * var: 'age'=18
 * var: 'iq'=80.0
@@ -640,9 +640,9 @@ Scenario: contains
 
 ```
 * verify: '$.age'<19
-* verify: '$.iq'<90.0
+* verify: '$.iq'<double: 90.0
 * verify: '$.age'<=18
-* verify: '$.iq'<=80.0
+* verify: '$.iq'<=double: 80.0
 
 * var: 'age'=18
 * var: 'iq'=80.0
