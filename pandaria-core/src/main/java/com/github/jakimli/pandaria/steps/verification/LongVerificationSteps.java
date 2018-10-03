@@ -53,32 +53,32 @@ public class LongVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=long: ([^\"]*)$")
-    public void verifyVariableEqualsLong(String name, String expected) throws Throwable {
+    public void verifyVariableEqualsLong(String name, String expected) {
         assertThat(variables.get(name), is(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=long: ([^\"]*)$")
-    public void verifyVariableNotEqualsLong(String name, String expected) throws Throwable {
+    public void verifyVariableNotEqualsLong(String name, String expected) {
         assertThat(variables.get(name), not(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>long: ([^\"]*)$")
-    public void verifyVariableGreaterThanLong(String name, String expected) throws Throwable {
+    public void verifyVariableGreaterThanLong(String name, String expected) {
         assertThat((Long) variables.get(name), greaterThan(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=long: ([^\"]*)$")
-    public void verifyVariableGreaterThanOrEqualToLong(String name, String expected) throws Throwable {
+    public void verifyVariableGreaterThanOrEqualToLong(String name, String expected) {
         assertThat((Long) variables.get(name), greaterThanOrEqualTo(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<long: ([^\"]*)$")
-    public void verifyVariableLessThanLong(String name, String expected) throws Throwable {
+    public void verifyVariableLessThanLong(String name, String expected) {
         assertThat((Long) variables.get(name), lessThan(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=long: ([^\"]*)$")
-    public void verifyVariableLessThanOrEqualToLong(String name, String expected) throws Throwable {
+    public void verifyVariableLessThanOrEqualToLong(String name, String expected) {
         assertThat((Long) variables.get(name), lessThanOrEqualTo(parseLong(expected)));
     }
 }

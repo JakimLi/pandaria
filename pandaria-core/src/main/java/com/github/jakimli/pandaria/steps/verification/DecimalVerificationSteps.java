@@ -50,32 +50,32 @@ public class DecimalVerificationSteps {
     }
     
     @Then("^verify: \\$\\{([^\"]*)}=decimal: ([^\"]*)$")
-    public void verifyVariableEqualsDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableEqualsDecimal(String name, String expected) {
         assertEquals(0, ((BigDecimal) variables.get(name)).compareTo(new BigDecimal(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=decimal: ([^\"]*)$")
-    public void verifyVariableNotEqualsDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableNotEqualsDecimal(String name, String expected) {
         assertNotEquals(0, ((BigDecimal) variables.get(name)).compareTo(new BigDecimal(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>decimal: ([^\"]*)$")
-    public void verifyVariableGreaterThanDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableGreaterThanDecimal(String name, String expected) {
         assertEquals(1, ((BigDecimal) variables.get(name)).compareTo(new BigDecimal(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=decimal: ([^\"]*)$")
-    public void verifyVariableGreaterThanOrEqualToDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableGreaterThanOrEqualToDecimal(String name, String expected) {
         assertTrue(((BigDecimal) this.variables.get(name)).compareTo(new BigDecimal(expected)) >= 0);
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<decimal: ([^\"]*)$")
-    public void verifyVariableLessThanDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableLessThanDecimal(String name, String expected) {
         assertEquals(-1, ((BigDecimal) variables.get(name)).compareTo(new BigDecimal(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=decimal: ([^\"]*)$")
-    public void verifyVariableLessThanOrEqualToDecimal(String name, String expected) throws Throwable {
+    public void verifyVariableLessThanOrEqualToDecimal(String name, String expected) {
         assertTrue(((BigDecimal) this.variables.get(name)).compareTo(new BigDecimal(expected)) <= 0);
     }
 }
