@@ -18,7 +18,7 @@ Feature: verify numbers
     * var: 'iq'=80.0
 
     * verify: ${age}!=19
-    * verify: ${iq}!=89.0
+    * verify: ${iq}!=double: 89.0
     * verify: ${age}!=${iq}
 
     * verify: '$.age'!=19
@@ -37,10 +37,10 @@ Feature: verify numbers
     * var: 'iq'=80.0
 
     * verify: ${age}>17
-    * verify: ${iq}>79.0
+    * verify: ${iq}>double: 79.0
 
     * verify: ${age}>=17
-    * verify: ${iq}>=80.0
+    * verify: ${iq}>=double: 80.0
 
   Scenario: less than
     * uri: /users/me
@@ -55,7 +55,7 @@ Feature: verify numbers
     * var: 'iq'=80.0
 
     * verify: ${age}<19
-    * verify: ${iq}<99.0
+    * verify: ${iq}<double: 99.0
 
     * verify: ${age}<=18
-    * verify: ${iq}<=80.0
+    * verify: ${iq}<=double: 80.0

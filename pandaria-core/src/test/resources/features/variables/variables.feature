@@ -24,7 +24,7 @@ Feature: Variables
 
   Scenario: double
     * var: 'age'=18.0
-    * verify: ${age}=18.0
+    * verify: ${age}=double: 18.0
 
   Scenario: from json
     * uri: /not_important
@@ -35,7 +35,7 @@ Feature: Variables
     * var: 'iq'<-'$.iq'
     * verify: ${name}='panda'
     * verify: ${age}=18
-    * verify: ${iq}=80.0
+    * verify: ${iq}=double: 80.0
 
   Scenario: variable being replaced in uri
     * var: 'path'="not_important"

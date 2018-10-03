@@ -407,7 +407,7 @@ Scenario: from json
   * var: 'iq'<-'$.iq'
   * verify: ${name}='panda'
   * verify: ${age}=18
-  * verify: ${iq}=80.0
+  * verify: ${iq}=double: 80.0
 ```
 
 ### Use Variables
@@ -545,14 +545,14 @@ Scenario: equals
   * verify: ${user}!="notja${kim}"
 
   * verify: ${age}!=19
-  * verify: ${iq}!=89.0
+  * verify: ${iq}!=double: 89.0
   * verify: ${age}!=${iq}
 
   * verify: '$.username'!="notjakim"
   * verify: '$.username'!="notja${kim}"
 
   * verify: '$.age'!=19
-  * verify: '$.iq'!=89.0
+  * verify: '$.iq'!=double: 89.0
 ```
 
 #### Contains
@@ -631,9 +631,9 @@ Scenario: contains
 * var: 'iq'=80.0
 
 * verify: ${age}>17
-* verify: ${iq}>79.0
+* verify: ${iq}>double: 79.0
 * verify: ${age}>=17
-* verify: ${iq}>=80.0
+* verify: ${iq}>=double: 80.0
 ```
 
 ### Less Than
@@ -648,9 +648,9 @@ Scenario: contains
 * var: 'iq'=80.0
 
 * verify: ${age}<19
-* verify: ${iq}<99.0
+* verify: ${iq}<double: 99.0
 * verify: ${age}<=18
-* verify: ${iq}<=80.0
+* verify: ${iq}<=double: 80.0
 ```
 
 ### Wait

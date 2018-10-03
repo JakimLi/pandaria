@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.steps.verification;
 
+import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.utils.JsonContext;
 import cucumber.api.java.en.Then;
@@ -17,6 +18,9 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 public class DoubleVerificationSteps {
+
+    @Autowired
+    Variables variables;
 
     @Autowired
     VerificationContext toBeVerified;
@@ -53,5 +57,35 @@ public class DoubleVerificationSteps {
     @Then("^verify: '([^\"]*)'<=double: (\\d+\\.\\d+)$")
     public void verifyLessThanOrEqualToDouble(String path, String expected) throws Throwable {
         assertThat((Double) json(path), lessThanOrEqualTo(parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}=double: (\\d+\\.\\d+)$")
+    public void verifyVariableEqualsDouble(String varName, String expected) {
+        assertThat(variables.get(varName), is(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=double: (\\d+\\.\\d+)$")
+    public void verifyVariableNotEqualsDouble(String varName, String expected) {
+        assertThat(variables.get(varName), not(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}>double: (\\d+\\.\\d+)$")
+    public void verifyVariableGreaterThanDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), greaterThan(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}>=double: (\\d+\\.\\d+)$")
+    public void verifyVariableGreaterThanOrEqualToDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), greaterThanOrEqualTo(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}<double: (\\d+\\.\\d+)$")
+    public void verifyVariableLessThanDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), lessThan(Double.parseDouble(expected)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}<=double: (\\d+\\.\\d+)$")
+    public void verifyVariableLessThanOrEqualToDouble(String varName, String expected) {
+        assertThat((double) variables.get(varName), lessThanOrEqualTo(Double.parseDouble(expected)));
     }
 }

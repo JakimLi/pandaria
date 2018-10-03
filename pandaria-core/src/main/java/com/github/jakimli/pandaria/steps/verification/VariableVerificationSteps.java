@@ -119,34 +119,4 @@ public class VariableVerificationSteps {
     public void verifyVariableLessThanOrEqualToInteger(String varName, Integer expected) {
         assertThat((int) variables.get(varName), lessThanOrEqualTo(expected));
     }
-
-    @Then("^verify: \\$\\{([^\"]*)}=(\\d+\\.\\d+)$")
-    public void verifyVariableEqualsDouble(String varName, String expected) {
-        assertThat(variables.get(varName), is(Double.parseDouble(expected)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}!=(\\d+\\.\\d+)$")
-    public void verifyVariableNotEqualsDouble(String varName, String expected) {
-        assertThat(variables.get(varName), not(Double.parseDouble(expected)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}>(\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), greaterThan(Double.parseDouble(expected)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}>=(\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanOrEqualToDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), greaterThanOrEqualTo(Double.parseDouble(expected)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}<(\\d+\\.\\d+)$")
-    public void verifyVariableLessThanDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), lessThan(Double.parseDouble(expected)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}<=(\\d+\\.\\d+)$")
-    public void verifyVariableLessThanOrEqualToDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), lessThanOrEqualTo(Double.parseDouble(expected)));
-    }
 }
