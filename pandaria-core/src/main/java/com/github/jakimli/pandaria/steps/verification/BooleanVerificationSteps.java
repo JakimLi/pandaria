@@ -24,7 +24,7 @@ public class BooleanVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=(true|false)$")
-    public void verifyVariableEqualsBoolean(String name, String expected) throws IOException {
+    public void verifyVariableEqualsBoolean(String name, String expected) {
         assertThat(variables.get(name), is(Boolean.valueOf(expected)));
     }
 }
