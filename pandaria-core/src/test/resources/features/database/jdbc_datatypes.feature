@@ -75,3 +75,13 @@ Feature: jdbc data types
     * verify: '$[0].double'>=double: 10.201802
     * verify: '$[0].double'<double: 10.301802
     * verify: '$[0].double'<=double: 10.201802
+
+    * query:
+    """
+    select `decimal` from all_data_types;
+    """
+    * verify: '$[0].decimal'=decimal: 400000.0
+    * verify: '$[0].decimal'>decimal: 300000.0
+    * verify: '$[0].decimal'>=decimal: 400000.0
+    * verify: '$[0].decimal'<decimal: 500000.0
+    * verify: '$[0].decimal'<=decimal: 500000.0

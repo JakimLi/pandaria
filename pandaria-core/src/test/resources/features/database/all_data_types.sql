@@ -33,8 +33,10 @@ CREATE TABLE `all_data_types` (
 
 INSERT INTO all_data_types(
 `varchar`, `tinyint`, `text`, `date`, `smallint`,
-`mediumint`, `int`, `bigint`, `float`, `double`
+`mediumint`, `int`, `bigint`, `float`, `double`,
+`decimal`
 ) values(
 'varchar', 3, 'text', '2008-10-10', 30,
-3000000, 3, 3000000000, 10.2, 10.201802
+3000000, 3, 3000000000, 10.2, 10.201802,
+400000
 );
