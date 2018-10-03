@@ -111,7 +111,7 @@ Includes `java.sql.Date`, `java.sql.Time` and `java.sql.Timestamp`
 * verify: '$[0].time'=datetime: '10:30:10' pattern: 'hh:mm:ss'
 ```
 
-Patterns should follow [java standard](https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html)
+Patterns should follow [this](https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html)
 
 
 Example
