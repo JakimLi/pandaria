@@ -34,9 +34,9 @@ CREATE TABLE `all_data_types` (
 INSERT INTO all_data_types(
 `varchar`, `tinyint`, `text`, `date`, `smallint`,
 `mediumint`, `int`, `bigint`, `float`, `double`,
-`decimal`, `datetime`, `timestamp`, `time`
+`decimal`, `datetime`, `timestamp`, `time`, `bool`
 ) values(
 'varchar', 3, 'text', '2008-10-10', 30,
 3000000, 3, 3000000000, 10.2, 10.201802,
-400000, '2008-08-08 10:30:30', '2008-01-01 00:00:01', '10:30:10'
+400000, '2008-08-08 10:30:30', '2008-01-01 00:00:01', '10:30:10', true
 );

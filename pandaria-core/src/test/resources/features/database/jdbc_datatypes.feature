@@ -88,3 +88,9 @@ Feature: jdbc data types
     * verify: '$[0].decimal'>=decimal: 400000.0
     * verify: '$[0].decimal'<decimal: 500000.0
     * verify: '$[0].decimal'<=decimal: 500000.0
+
+    * query:
+    """
+    select `bool` from all_data_types;
+    """
+    * verify: '$[0].bool'=true
