@@ -58,6 +58,10 @@ Table of Contents
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
+        * [Different database types](jdbc_types.md)
+    * [Verify datetime](#verify-datetime)
+        * [Equals](#datetime-equals)
+        * [Before](#before)
 
 * [Wait](#wait)
     * [Simple Wait](#simple-wait)
@@ -654,10 +658,41 @@ Scenario: contains
 * verify: ${iq}<=double: 80.0
 ```
 
-### Wait
+### Verify Datetime
+
+#### datetime equals
+```
+Scenario: equals
+  * query:
+  """
+  select `date`, `datetime`, `timestamp`, `time` from all_data_types;
+  """
+  * verify: '$[0].date'=datetime: '2008-10-10' pattern: 'yyyy-MM-dd'
+  * verify: '$[0].date'=datetime: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'
+  * verify: '$[0].datetime'=datetime: '2008-08-08 10:30:30' pattern: 'yyyy-MM-dd hh:mm:ss'
+  * verify: '$[0].timestamp'=datetime: '2008-01-01 00:00:01' pattern: 'yyyy-MM-dd HH:mm:ss'
+  * verify: '$[0].time'=datetime: '10:30:10' pattern: 'hh:mm:ss'
+```
+
+#### before
+```
+Scenario: before
+  * query:
+  """
+  select `date`, `datetime`, `timestamp`, `time` from all_data_types;
+  """
+  * verify: '$[0].date' before: datetime: '2008-10-11' pattern: 'yyyy-MM-dd'
+  * verify: '$[0].date' before: datetime: '11/10/2008+0800' pattern: 'dd/MM/yyyyZ'
+  * verify: '$[0].datetime' before: datetime: '2008-08-08 10:30:31' pattern: 'yyyy-MM-dd hh:mm:ss'
+  * verify: '$[0].timestamp' before: datetime: '2008-01-01 00:00:02' pattern: 'yyyy-MM-dd HH:mm:ss'
+  * verify: '$[0].time' before: datetime: '10:30:11' pattern: 'hh:mm:ss'
+```
+
+Wait
+----
 Wait is useful for automation testing and sometimes is necessary.
 
-#### Simple wait
+### Simple wait
 Only support milliseconds and seconds, we don't recomment to wait for very long time.
 
 ```
@@ -666,7 +701,7 @@ Scenario: wait
   * wait: 1s
 ```
 
-#### Wait until
+### Wait until
 Waiting is a time consuming step, sometimes make the tests slow, but it's necessary.
 
 `wait 1000ms times 3` specifies the framework to wait 3 times, each time wait 1000ms
@@ -674,7 +709,7 @@ Waiting is a time consuming step, sometimes make the tests slow, but it's necess
 Run this step **DOSE NOT** put the thread in sleep immediately. if the first coming verification failed, then it
 actually put the thread in sleep for `1000ms`, and then retry once, and this process will repeat `3` times.
 
-##### wait until API respond expected response
+#### wait until API respond expected response
 
 `GET /sequence` returns plain text in sequence
 
@@ -718,7 +753,7 @@ Scenario: wait until
   """
 ```
 
-##### wait until database query results expected
+#### wait until database query results expected
 
 ```
 * wait: 1000ms times: 3

@@ -11,6 +11,7 @@ import java.io.IOException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.joda.time.format.DateTimeFormat.forPattern;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class DateTimeVerificationSteps {
 
@@ -25,8 +26,18 @@ public class DateTimeVerificationSteps {
         assertThat(new DateTime(actual.json(path)), is(forPattern(pattern).parseDateTime(date)));
     }
 
+    @Then("^verify: '([^\"]*)' before: datetime: '([^\"]*)' pattern: '([^\"]*)'$")
+    public void verifyBeforeDateWithPattern(String path, String date, String pattern) throws IOException {
+        assertTrue(new DateTime(this.actual.json(path)).isBefore(forPattern(pattern).parseDateTime(date)));
+    }
+
     @Then("^verify: \\$\\{([^\"]*)}=datetime: '([^\"]*)' pattern: '([^\"]*)'$")
     public void verifyVariableDateWithPattern(String name, String date, String pattern) throws IOException {
         assertThat(new DateTime(variables.get(name)), is(forPattern(pattern).parseDateTime(date)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} before: datetime: '([^\"]*)' pattern: '([^\"]*)'$")
+    public void verifyVariableBeforeDateWithPattern(String name, String date, String pattern) throws IOException {
+        assertTrue(new DateTime(variables.get(name)).isBefore(forPattern(pattern).parseDateTime(date)));
     }
 }
