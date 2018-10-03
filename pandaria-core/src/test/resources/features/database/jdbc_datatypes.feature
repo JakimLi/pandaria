@@ -62,10 +62,16 @@ Feature: jdbc data types
 
     * query:
     """
-    select `float` from all_data_types;
+    select `float`, `double` from all_data_types;
     """
     * verify: '$[0].float'=float: 10.2
     * verify: '$[0].float'>float: 10.1
     * verify: '$[0].float'>=float: 10.2
     * verify: '$[0].float'<float: 10.3
     * verify: '$[0].float'<=float: 10.2
+
+    * verify: '$[0].double'=double: 10.201802
+    * verify: '$[0].double'>double: 10.101802
+    * verify: '$[0].double'>=double: 10.201802
+    * verify: '$[0].double'<double: 10.301802
+    * verify: '$[0].double'<=double: 10.201802
