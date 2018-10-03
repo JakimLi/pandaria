@@ -29,9 +29,20 @@ JDBC Types -> Java Object Types Mapping
 |Time|java.sql.Time|
 |Timestamp|java.sql.Timestamp|
 
+For types not in above tables not supported by pandaria
+
 
 Verificaion for different types
 -------------------------------
+
+* [String](#string)
+* [BigDecimal](#bigdecimal)
+* [Boolean](#boolean)
+* [Integer](#integer)
+* [Long](#long)
+* [Float](#float)
+* [Double](#double)
+* [Datetime](#datetime)
 
 ### String
 
@@ -100,6 +111,9 @@ Includes `java.sql.Date`, `java.sql.Time` and `java.sql.Timestamp`
 * verify: '$[0].time'=datetime: '10:30:10' pattern: 'hh:mm:ss'
 ```
 
+
+Example
+-------
 
 ```
 @database
