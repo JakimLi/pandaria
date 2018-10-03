@@ -20,36 +20,36 @@ public class DoubleVerificationSteps {
     Variables variables;
 
     @Autowired
-    VerificationContext toBeVerified;
+    VerificationContext actual;
 
     @Then("^verify: '([^\"]*)'=double: (\\d+\\.\\d+)$")
     public void verifyEqualsDouble(String path, String expected) throws Throwable {
-        assertThat(toBeVerified.json(path), is(parseDouble(expected)));
+        assertThat(actual.json(path), is(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'!=double: (\\d+\\.\\d+)$")
     public void verifyNotEqualsDouble(String path, String expected) throws Throwable {
-        assertThat(toBeVerified.json(path), not(parseDouble(expected)));
+        assertThat(actual.json(path), not(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'>double: (\\d+\\.\\d+)$")
     public void verifyGreaterThanDouble(String path, String expected) throws Throwable {
-        assertThat((Double) toBeVerified.json(path), greaterThan(parseDouble(expected)));
+        assertThat((Double) actual.json(path), greaterThan(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'>=double: (\\d+\\.\\d+)$")
     public void verifyGreaterThanOrEqualToDouble(String path, String expected) throws Throwable {
-        assertThat((Double) toBeVerified.json(path), greaterThanOrEqualTo(parseDouble(expected)));
+        assertThat((Double) actual.json(path), greaterThanOrEqualTo(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'<double: (\\d+\\.\\d+)$")
     public void verifyLessThanDouble(String path, String expected) throws Throwable {
-        assertThat((Double) toBeVerified.json(path), lessThan(parseDouble(expected)));
+        assertThat((Double) actual.json(path), lessThan(parseDouble(expected)));
     }
 
     @Then("^verify: '([^\"]*)'<=double: (\\d+\\.\\d+)$")
     public void verifyLessThanOrEqualToDouble(String path, String expected) throws Throwable {
-        assertThat((Double) toBeVerified.json(path), lessThanOrEqualTo(parseDouble(expected)));
+        assertThat((Double) actual.json(path), lessThanOrEqualTo(parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=double: (\\d+\\.\\d+)$")

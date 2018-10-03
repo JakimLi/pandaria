@@ -14,10 +14,10 @@ import static org.junit.Assert.assertThat;
 public class DateTimeVerificationSteps {
 
     @Autowired
-    VerificationContext toBeVerified;
+    VerificationContext actual;
 
     @Then("^verify: '([^\"]*)'=datetime: '([^\"]*)' pattern: '([^\"]*)'$")
     public void verifyDateWithPattern(String path, String date, String pattern) throws IOException {
-        assertThat(new DateTime(toBeVerified.json(path)), is(forPattern(pattern).parseDateTime(date)));
+        assertThat(new DateTime(actual.json(path)), is(forPattern(pattern).parseDateTime(date)));
     }
 }

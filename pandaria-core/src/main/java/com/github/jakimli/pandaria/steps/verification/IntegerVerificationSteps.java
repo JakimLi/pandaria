@@ -18,36 +18,36 @@ public class IntegerVerificationSteps {
     Variables variables;
 
     @Autowired
-    VerificationContext toBeVerified;
+    VerificationContext actual;
 
     @Then("^verify: '([^\"]*)'=(\\d+)$")
     public void verifyEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(toBeVerified.json(path), is(expected));
+        assertThat(actual.json(path), is(expected));
     }
 
     @Then("^verify: '([^\"]*)'!=(\\d+)$")
     public void verifyNotEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(toBeVerified.json(path), not(expected));
+        assertThat(actual.json(path), not(expected));
     }
 
     @Then("^verify: '([^\"]*)'>(\\d+)$")
     public void verifyGreaterThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) toBeVerified.json(path), greaterThan(expected));
+        assertThat((int) actual.json(path), greaterThan(expected));
     }
 
     @Then("^verify: '([^\"]*)'>=(\\d+)$")
     public void verifyGreaterThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) toBeVerified.json(path), greaterThanOrEqualTo(expected));
+        assertThat((int) actual.json(path), greaterThanOrEqualTo(expected));
     }
 
     @Then("^verify: '([^\"]*)'<(\\d+)$")
     public void verifyLessThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) toBeVerified.json(path), lessThan(expected));
+        assertThat((int) actual.json(path), lessThan(expected));
     }
 
     @Then("^verify: '([^\"]*)'<=(\\d+)$")
     public void verifyLessThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) toBeVerified.json(path), lessThanOrEqualTo(expected));
+        assertThat((int) actual.json(path), lessThanOrEqualTo(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=(\\d+)$")
