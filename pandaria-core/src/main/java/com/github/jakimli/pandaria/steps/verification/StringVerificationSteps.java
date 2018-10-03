@@ -12,15 +12,11 @@ import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.lessThan;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class JsonVerificationSteps {
+public class StringVerificationSteps {
 
     @Autowired
     VerificationContext toBeVerified;
@@ -92,33 +88,73 @@ public class JsonVerificationSteps {
         assertTrue(String.valueOf(json(path)).matches(regex));
     }
 
-    @Then("^verify: '([^\"]*)'=(\\d+)$")
-    public void verifyEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(json(path), is(expected));
+    @Then("^verify: \\$\\{([^\"]*)}='([^\"]*)'$")
+    public void verifyVariableEqualsLiteral(String varName, String expected) {
+        assertThat(variables.get(varName), is(expected));
     }
 
-    @Then("^verify: '([^\"]*)'!=(\\d+)$")
-    public void verifyNotEqualsInteger(String path, final int expected) throws Throwable {
-        assertThat(json(path), not(expected));
+    @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
+    public void verifyVariableEqualsString(String varName, String expected) {
+        assertThat(variables.get(varName), is(variables.interpret(expected)));
     }
 
-    @Then("^verify: '([^\"]*)'>(\\d+)$")
-    public void verifyGreaterThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), greaterThan(expected));
+    @Then("^verify: \\$\\{([^\"]*)} contains: '([^\"]*)'$")
+    public void verifyVariableContainsLiteral(String varName, String expected) {
+        assertThat(String.valueOf(variables.get(varName)), containsString(expected));
     }
 
-    @Then("^verify: '([^\"]*)'>=(\\d+)$")
-    public void verifyGreaterThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), greaterThanOrEqualTo(expected));
+    @Then("^verify: \\$\\{([^\"]*)} contains: \"([^\"]*)\"$")
+    public void verifyVariableContainsString(String varName, String expected) {
+        assertThat(String.valueOf(variables.get(varName)), containsString(variables.interpret(expected)));
     }
 
-    @Then("^verify: '([^\"]*)'<(\\d+)$")
-    public void verifyLessThanInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), lessThan(expected));
+    @Then("^verify: \\$\\{([^\"]*)} starts with: '([^\"]*)'$")
+    public void verifyVariableStartsWithLiteral(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), startsWith(prefix));
     }
 
-    @Then("^verify: '([^\"]*)'<=(\\d+)$")
-    public void verifyLessThanOrEqualToInteger(String path, final int expected) throws Throwable {
-        assertThat((int) json(path), lessThanOrEqualTo(expected));
+    @Then("^verify: \\$\\{([^\"]*)} starts with: \"([^\"]*)\"$")
+    public void verifyVariableStartsWithString(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), startsWith(variables.interpret(prefix)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} ends with: '([^\"]*)'$")
+    public void verifyVariableEndsWithLiteral(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), endsWith(prefix));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} ends with: \"([^\"]*)\"$")
+    public void verifyVariableEndsWithString(String varName, String prefix) {
+        assertThat(String.valueOf(variables.get(varName)), endsWith(variables.interpret(prefix)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} matches: '([^\"]*)'$")
+    public void verifyVariableMatchesRegex(String varName, String regex) {
+        assertTrue(String.valueOf(variables.get(varName)).matches(regex));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} length: (\\d+)$")
+    public void verifyVariableStringLength(String varName, int length) {
+        assertThat(String.valueOf(variables.get(varName)).length(), is(length));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")
+    public void verifyVariableEqualsVariable(String varName, String anotherVar) {
+        assertThat(variables.get(varName), is(variables.get(anotherVar)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=\\$\\{([^\"]*)}$")
+    public void verifyVariableNotEqualsVariable(String varName, String anotherVar) {
+        assertThat(variables.get(varName), not(variables.get(anotherVar)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!='([^\"]*)'$")
+    public void verifyVariableNotEqualsLiteral(String varName, String expected) {
+        assertThat(variables.get(varName), not(expected));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=\"([^\"]*)\"$")
+    public void verifyVariableNotEqualsString(String varName, String expected) {
+        assertThat(variables.get(varName), not(variables.interpret(expected)));
     }
 }
