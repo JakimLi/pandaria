@@ -33,10 +33,11 @@ Feature: jdbc data types
 
     * query:
     """
-    select `date`, `time` from all_data_types;
+    select `date`, `datetime`, `time` from all_data_types;
     """
     * verify: '$[0].date'=datetime: '2008-10-10' pattern: 'yyyy-MM-dd'
     * verify: '$[0].date'=datetime: '10/10/2008+0800' pattern: 'dd/MM/yyyyZ'
+    * verify: '$[0].datetime'=datetime: '2008-08-08 10:30:30' pattern: 'yyyy-MM-dd hh:mm:ss'
     * verify: '$[0].time'=datetime: '10:30:10' pattern: 'hh:mm:ss'
 
     * query:
