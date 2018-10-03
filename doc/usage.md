@@ -58,7 +58,7 @@ Table of Contents
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
-        * [Different database types](jdbc_types.md)
+        * [Different database types](jdbc_types.md#verificaion-for-different-types)
     * [Verify datetime](#verify-datetime)
         * [Equals](#datetime-equals)
         * [Before](#before)
