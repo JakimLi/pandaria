@@ -16,7 +16,6 @@ Table of Contents
     * [Methods](#methods)
         * [GET](#get)
         * [POST](#post)
-        * [POST request body from file](#post-request-body-from-file)
         * [PUT](#put)
         * [DELETE](#delete)
         * [PATCH](#patch)
@@ -25,6 +24,7 @@ Table of Contents
         * [TRACE](#trace)
      * [Query Parameter](#query-parameter)
      * [Request header](#request-header)
+     * [Request body](#request-body)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -177,17 +177,6 @@ Test HTTP APIs
 * verify: '$.age'=18
 ```
 
-#### POST request body from file
-
-```
-* uri: http://localhost:10080/users
-* request body: requests/user.json
-* send: POST
-* status: 200
-* verify: '$.id'='auto-generated'
-* verify: '$.username'='jakim'
-* verify: '$.age'=18
-```
 
 #### Custom Header
 
@@ -297,6 +286,44 @@ Scenario: simple trace
 * header: 'Accept'='text.plain'
 * send: GET
 * status: 200
+```
+
+### Request Body
+
+The request body can either come from a file or you write it directly as docstring in feature file.
+
+#### From file
+```
+* uri: http://localhost:10080/users
+* request body: requests/user.json
+* send: POST
+* status: 200
+* verify: '$.id'='auto-generated'
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+#### As docstring
+```
+Scenario: simple put
+  * uri: /users/me
+  * request body:
+  """
+  {"username": "lj"}
+  """
+  * send: PUT
+  * status: 200
+  * verify: '$.username'='lj'
+```
+
+The convention is the string inline is filename and docstring is for direct request body
+
+```
+* request body: path_to_file
+* request body:
+"""
+request body from docstring
+"""
 ```
 
 Database Operations
@@ -496,6 +523,9 @@ verify as text in file
 ```
 * response body: responses/success.txt
 ```
+
+Same with the request body, the convention is string right after `* response body:` is the path to file. the text
+in docstring in next line is dirctly the response body.
 
 ### Verify database tables
 You can verify database tables by writing sql with select statements, and then verify the result.
