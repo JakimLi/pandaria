@@ -316,7 +316,7 @@ Scenario: simple put
   * verify: '$.username'='lj'
 ```
 
-The convention is the string inline is filename and docstring is for direct request body
+The convention is the string right after `* request body: ` is path to the file, docstring is directly the request body
 
 ```
 * request body: path_to_file
