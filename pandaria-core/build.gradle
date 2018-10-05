@@ -9,7 +9,6 @@ dependencies {
 
             "org.springframework.boot:spring-boot-starter-test:${springboot}",
             "org.springframework.boot:spring-boot-starter:${springboot}",
-            "org.springframework.boot:spring-boot-starter-jdbc:${springboot}",
             "org.springframework.boot:spring-boot-starter-aop:${springboot}",
 
             "mysql:mysql-connector-java:${mysql}",
