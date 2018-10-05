@@ -45,7 +45,7 @@ Latest Release
 --------------
 * 0.1.0
 
-See [Release Notes](release_notes.md)
+See [Release Notes](doc/release_notes.md)
 
 
 Get Started
