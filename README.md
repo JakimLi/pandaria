@@ -100,6 +100,21 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
+If you're using JUnit, you might want to add below:
+```
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(plugin = "pretty",
+        features = "classpath:features/",
+        glue = {"com.github.jakimli.pandaria"})
+public class RunCucumberTest {
+}
+```
+**Make sure `com.github.jakimli.pandari` is in the list of cucumber glue.**
+
 Then you can start to write your first automation test.
 ```
 Feature: hello world
