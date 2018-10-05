@@ -55,7 +55,6 @@ Table of Contents
         * [Ends With](#ends-with)
         * [Length](#length)
         * [Regex Match](#regex-match)
-        * [Null checking](#null-checking)
     * [Verify numbers](#verify-numbers)
         * [Greater than](#greater-than)
         * [Less than](#less-than)
@@ -654,22 +653,6 @@ Scenario: contains
 * var: 'username'="jakim"
 * verify: ${username} matches: 'j.*im'
 ```
-
-#### Null checking
-* uri: /users/me
-* send: GET
-* status: 200
-* verify: '$.username'='jakim'
-* verify: '$.username' is not null
-
-* var: 'username'="jakim"
-* verify: ${username} is not null
-* verify: ${hello} is null
-
-* uri: /getnull
-* send: GET
-* status: 200
-* verify: '$.notexist' is null
 
 ### Verify numbers
 
