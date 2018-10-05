@@ -70,5 +70,5 @@ Verfiation
 
 Wait
 ----
-* [Simple Wait](#simple-wait)
-* [Wait Until](#wait-until)
+* Simple Wait
+* Wait Until
