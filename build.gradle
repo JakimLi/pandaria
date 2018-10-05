@@ -1,13 +1,8 @@
 apply plugin: 'java'
 
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-
 
 allprojects {
     group = 'com.github.jakimli.pandaria'
-    archivesBaseName = "pandaria-core"
     version = '0.1.0-SNAPSHOT'
 }
 
@@ -19,6 +14,9 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'signing'
+
 
     ext {
         springboot = '2.0.0.RELEASE'
@@ -36,67 +34,68 @@ subprojects {
 
         commons_text = '1.4'
     }
-}
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
+    task javadocJar(type: Jar) {
+        classifier = 'javadoc'
+        from javadoc
+    }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
 
-artifacts {
-    archives javadocJar, sourcesJar
-}
+    artifacts {
+        archives javadocJar, sourcesJar
+    }
 
-signing {
-    sign configurations.archives
-}
+    signing {
+        sign configurations.archives
+    }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
-            }
-
-            pom.project {
-                name 'pandaria-core'
-                packaging 'jar'
-                // optionally artifactId can be defined here
-                description 'A lightweight API test framework'
-                url 'http://www.example.com/example-application'
-
-                scm {
-                    connection 'https://github.com/JakimLi/pandaria.git'
-                    developerConnection 'https://github.com/JakimLi/pandaria.git'
-                    url 'https://github.com/JakimLi/pandaria'
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
                 }
 
-                licenses {
-                    license {
-                        name 'MIT License'
-                        url 'https://github.com/JakimLi/pandaria/blob/master/LICENSE'
+                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.project {
+                    name 'pandaria-core'
+                    packaging 'jar'
+                    // optionally artifactId can be defined here
+                    description 'A lightweight API test framework'
+                    url 'http://www.example.com/example-application'
+
+                    scm {
+                        connection 'https://github.com/JakimLi/pandaria.git'
+                        developerConnection 'https://github.com/JakimLi/pandaria.git'
+                        url 'https://github.com/JakimLi/pandaria'
                     }
-                }
 
-                developers {
-                    developer {
-                        id 'jakimli'
-                        name 'Jakim Li'
-                        email 'ljking7002@gmail.com'
+                    licenses {
+                        license {
+                            name 'MIT License'
+                            url 'https://github.com/JakimLi/pandaria/blob/master/LICENSE'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'jakimli'
+                            name 'Jakim Li'
+                            email 'ljking7002@gmail.com'
+                        }
                     }
                 }
             }
         }
     }
 }
+

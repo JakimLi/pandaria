@@ -1,3 +1,7 @@
+ext {
+    archivesBaseName = "pandaria-core"
+}
+
 dependencies {
     compile(
             "io.cucumber:cucumber-java:${cucumber}",
