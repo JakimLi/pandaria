@@ -91,3 +91,19 @@ Feature: verify string
 
     * var: 'username'="jakim"
     * verify: ${username} matches: 'j.*im'
+
+  Scenario: null check
+    * uri: /users/me
+    * send: GET
+    * status: 200
+    * verify: '$.username'='jakim'
+    * verify: '$.username' is not null
+
+    * var: 'username'="jakim"
+    * verify: ${username} is not null
+    * verify: ${hello} is null
+
+    * uri: /getnull
+    * send: GET
+    * status: 200
+    * verify: '$.notexist' is null

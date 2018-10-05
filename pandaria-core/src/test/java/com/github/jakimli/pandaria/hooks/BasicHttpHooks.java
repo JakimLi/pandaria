@@ -60,6 +60,10 @@ public class BasicHttpHooks {
                 .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
 
         server.server()
+                .get(by(uri("/getnull")))
+                .response(text("{\"notexist\":null}"));
+
+        server.server()
                 .get(or(
                         and(
                                 by(uri("/users")),
