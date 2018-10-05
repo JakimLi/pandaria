@@ -1,3 +1,7 @@
+<a href="https://github.com/jakimli/pandaria">
+  <img src="doc/pandaria.png?raw=true" width="100px">
+</a>
+
 Pandaria
 =====
 Lightweight API test framework based on cucumber JVM
