@@ -1,10 +1,10 @@
 version: '3'
 services:
-  smarter-mysql:
+  pandaria-mysql:
     image: mysql:5.7
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     ports:
-    - "3307:3306"
+    - "3306:3306"
     environment:
       MYSQL_DATABASE: pandaria
       MYSQL_ROOT_PASSWORD: password
