@@ -67,7 +67,7 @@ subprojects {
                 }
 
                 pom.project {
-                    name 'pandaria-core'
+                    name project.name
                     packaging 'jar'
                     // optionally artifactId can be defined here
                     description 'A lightweight API test framework'
@@ -75,7 +75,7 @@ subprojects {
 
                     scm {
                         connection 'https://github.com/JakimLi/pandaria.git'
-                        developerConnection 'https://github.com/JakimLi/pandaria.git'
+                        developerConnection 'git@github.com:JakimLi/pandaria.git'
                         url 'https://github.com/JakimLi/pandaria'
                     }
 
