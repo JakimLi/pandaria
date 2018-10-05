@@ -7,7 +7,7 @@ jdk:
 install: true
 
 script:
-  "./gradlew clean cucumber -x signArchives"
+  "./gradlew clean build -x signArchives"
 
 before_install:
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
