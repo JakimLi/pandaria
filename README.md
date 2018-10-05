@@ -44,6 +44,7 @@ More [Usage](doc/usage.md)
 Latest Release
 --------------
 * 0.1.0
+
 See [Release Notes](release_notes.md)
 
 
