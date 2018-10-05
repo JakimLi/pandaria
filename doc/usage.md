@@ -35,7 +35,7 @@ Table of Contents
         * [Literal string](#literal-string)
         * [String](#string)
         * [Integer](#integer)
-        * [Extract from response body](#extract-from-response-body)
+        * [Extract from response body or results](#extract-from-response-body-or-results)
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
         * [In File](#in-file)
@@ -425,7 +425,7 @@ Scenario: integer
   * verify: ${age}=18
 ```
 
-#### Extract from response body
+#### Extract from response body or results
 
 It's useful if we can extract values from response body as variables. you can do it using `<-` like below.
 
@@ -442,6 +442,12 @@ Scenario: from json
   * verify: ${name}='panda'
   * verify: ${age}=18
   * verify: ${iq}=double: 80.0
+```
+
+You can also extract from database query results
+```
+* query: select.sql
+* var: 'age'<-'$[0].age'
 ```
 
 ### Use Variables
