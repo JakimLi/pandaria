@@ -40,3 +40,59 @@ Or like this:
 ```
 
 More [Usage](doc/usage.md)
+
+Get Started
+-----------
+
+If you don't need to verify database, just remove the `pandaria-db` from dependency declarations.
+
+### Gradle
+```groovy
+dependencies {
+    testCompile(
+            "io.cucumber:cucumber-junit:4.0.0",
+            'com.github.jakimli.pandaria:pandaria-core:0.1.0',
+            'com.github.jakimli.pandaria:pandaria-db:0.1.0'
+    )
+}
+```
+
+### Maven
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-core</artifactId>
+    <version>0.1.0</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-db</artifactId>
+    <version>0.1.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+If you need to verify database, remember to add driver for your database, and add you datasource connection in
+`application.properties`
+
+application.properties
+```
+spring.datasource.url=jdbc:mysql://localhost:3307/pandaria?useSSL=false&allowMultiQueries=true
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+
+Then you can start to write your first automation test.
+```
+Feature: hello world
+  This is a the first feature for pandaria
+
+  Scenario: hello world
+    * uri: https://github.com
+    * send: GET
+    * status: 200
+```
