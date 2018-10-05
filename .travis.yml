@@ -5,6 +5,8 @@ language: java
 jdk:
 - oraclejdk8
 
+install: true
+
 script:
   "./gradlew clean cucumber"
 
