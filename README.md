@@ -1,6 +1,6 @@
 Pandaria
 =====
-Light weight API test framework based on cucumber JVM
+Lightweight API test framework based on cucumber JVM
 
 Introduction
 ------------
