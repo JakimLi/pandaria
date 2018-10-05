@@ -5,10 +5,8 @@ language: java
 jdk:
 - oraclejdk8
 
-install: true
-
 script:
-  "./gradlew clean build"
+  "./gradlew clean cucumber"
 
 before_install:
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
