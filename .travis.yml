@@ -10,7 +10,6 @@ script:
 
 before_install:
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-- sudo mysql_upgrade -u root -ppassword
 - sudo service mysql restart
 - mysql -e 'CREATE DATABASE pandaria;'
 
