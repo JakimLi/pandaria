@@ -5,6 +5,7 @@ ext {
 dependencies {
     compile(
             project(":pandaria-core"),
+            "mysql:mysql-connector-java:${mysql}",
             "org.springframework.boot:spring-boot-starter-jdbc:${springboot}",
     )
 

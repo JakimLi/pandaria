@@ -11,8 +11,6 @@ dependencies {
             "org.springframework.boot:spring-boot-starter:${springboot}",
             "org.springframework.boot:spring-boot-starter-aop:${springboot}",
 
-            "mysql:mysql-connector-java:${mysql}",
-
             "com.jayway.jsonpath:json-path:${jsonpath}",
 
             "junit:junit:${junit}",
