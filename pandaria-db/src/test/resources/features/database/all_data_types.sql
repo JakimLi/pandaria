@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS all_data_types;
 
+SET TIME_ZONE = '+8:00';
+
 CREATE TABLE `all_data_types` (
     `varchar` VARCHAR( 20 )  ,
     `tinyint` TINYINT  ,
