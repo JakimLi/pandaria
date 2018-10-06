@@ -490,7 +490,7 @@ Scenario: variable used in request file
 ```
 
 
-Verificaton
+Verification
 -----------
 
 ### Verify http response
