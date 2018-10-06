@@ -41,7 +41,7 @@ Table of Contents
         * [In File](#in-file)
         * [In Text](#in-text)
 
-* [Verfiation](#verification)
+* [Verification](#verification)
     * [Verify http response](#verify-http-response)
         * [response status](#status)
         * [response header](#response-header)
