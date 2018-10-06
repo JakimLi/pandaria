@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.domain.http;
 
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
 import com.github.jakimli.pandaria.domain.wait.Waitable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,8 @@ public class HttpContext implements Waitable<String> {
     private int responseStatus;
     private MultivaluedMap<String, String> responseHeaders = new MultivaluedHashMap<>();
 
+    @Value("${http.ssl.verify:false}")
+    private boolean httpSslVerify;
 
     public void uri(URI uri) {
         this.uri = uri;
@@ -106,5 +109,9 @@ public class HttpContext implements Waitable<String> {
     @Override
     public String result() {
         return this.responseBody;
+    }
+
+    public boolean isHttpSslVerify() {
+        return httpSslVerify;
     }
 }

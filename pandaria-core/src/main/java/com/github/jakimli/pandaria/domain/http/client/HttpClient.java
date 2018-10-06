@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.logging.Level;
 
+import static com.github.jakimli.pandaria.domain.http.client.EmptySSLContext.emptyContext;
 import static java.util.logging.Logger.getLogger;
+import static org.glassfish.jersey.SslConfigurator.getDefaultContext;
 import static org.glassfish.jersey.client.HttpUrlConnectorProvider.SET_METHOD_WORKAROUND;
 import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 
@@ -21,20 +23,26 @@ class HttpClient {
     private Client client;
     private HttpContext context;
 
-    HttpClient() {
-        client = ClientBuilder.newBuilder()
+    static HttpClient in(HttpContext context) {
+        return new HttpClient(context);
+    }
+
+    private HttpClient(HttpContext context) {
+        ClientBuilder builder = ClientBuilder.newBuilder()
                 .property(SET_METHOD_WORKAROUND, true)
                 .register(logAny())
-                .build();
+                .sslContext(context.isHttpSslVerify() ? getDefaultContext() : emptyContext());
+
+        if (!context.isHttpSslVerify()) {
+            builder.hostnameVerifier((s1, s2) -> true);
+        }
+
+        this.client = builder.build();
+        this.context = context;
     }
 
     private Object logAny() {
         return new LoggingFeature(getLogger("HTTP"), Level.INFO, PAYLOAD_ANY, null);
-    }
-
-    HttpClient context(HttpContext context) {
-        this.context = context;
-        return this;
     }
 
     void request(Function<Builder, Response> method) {
