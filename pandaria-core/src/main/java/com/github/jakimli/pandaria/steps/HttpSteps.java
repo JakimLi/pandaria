@@ -70,6 +70,16 @@ public class HttpSteps {
         context.requestBody(variables.interpret(read(fileName)));
     }
 
+    @Given("^cookie: '([^\"]*)'='([^\"]*)'$")
+    public void cookieFromLiteral(String key, String value) {
+        context.cookie(key, value);
+    }
+
+    @Given("^cookie: '([^\"]*)'=\"([^\"]*)\"$")
+    public void cookieFromString(String key, String value) {
+        context.cookie(key, variables.interpret(value));
+    }
+
     @When("^send: ([^\"]*)$")
     public void send(String method) {
         context.method(HttpMethod.valueOf(method.toUpperCase()));

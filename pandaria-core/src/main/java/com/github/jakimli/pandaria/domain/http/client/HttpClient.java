@@ -7,6 +7,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -31,9 +32,14 @@ class HttpClient {
     void request(Function<Builder, Response> method) {
         Builder target = client.target(context.uri()).request();
         addHeaders(target, context.requestHeaders());
+        addCookies(target, context.cookies());
         Response response = method.apply(target);
         updateHttpContext(response);
         response.close();
+    }
+
+    private void addCookies(Builder target, List<Cookie> cookies) {
+        cookies.forEach(target::cookie);
     }
 
     private HttpClient(HttpContext context) {

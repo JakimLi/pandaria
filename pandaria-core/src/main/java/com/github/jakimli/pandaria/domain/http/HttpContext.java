@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.NewCookie;
 import java.net.URI;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component
@@ -19,6 +22,7 @@ public class HttpContext implements Waitable<String> {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
+    private List<Cookie> cookies = newArrayList();
     private MultivaluedMap<String, Object> requestHeaders = new MultivaluedHashMap<>();
 
     private String responseBody;
@@ -27,6 +31,7 @@ public class HttpContext implements Waitable<String> {
 
     @Value("${http.ssl.verify:false}")
     private boolean httpSslVerify;
+
 
     public void uri(URI uri) {
         this.uri = uri;
@@ -113,5 +118,13 @@ public class HttpContext implements Waitable<String> {
 
     public boolean isHttpSslVerify() {
         return httpSslVerify;
+    }
+
+    public void cookie(String key, String value) {
+        this.cookies.add(new NewCookie(key, value));
+    }
+
+    public List<Cookie> cookies() {
+        return this.cookies;
     }
 }

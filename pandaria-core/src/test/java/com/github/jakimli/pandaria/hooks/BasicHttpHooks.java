@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.dreamhead.moco.Moco.and;
 import static com.github.dreamhead.moco.Moco.by;
+import static com.github.dreamhead.moco.Moco.cookie;
 import static com.github.dreamhead.moco.Moco.eq;
 import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
@@ -56,6 +57,13 @@ public class BasicHttpHooks {
 
     @Before("@http")
     public void mock() {
+
+        server.server()
+                .get(and(
+                        by(uri("/cookie")),
+                        eq(cookie("key"), "value")))
+                .response(text("cookie added"));
+
         server.server()
                 .get(by(uri("/users/list")))
                 .response(json(
