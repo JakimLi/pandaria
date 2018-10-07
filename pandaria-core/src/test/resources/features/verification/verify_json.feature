@@ -67,3 +67,31 @@ Feature: verify json
       }
     ]
     """
+
+  Scenario: contains json, extra fields allowed
+    * uri: /users/list
+    * send: get
+    * verify: '$' contains json:
+    """
+    [
+      {
+        "name": "jakim"
+      },
+      {
+        "name": "smart", friends: ["sue"]
+      }
+    ]
+    """
+    
+    * var: 'response'<-'$'
+    * verify: '$' contains json:
+    """
+    [
+      {
+        "name": "jakim"
+      },
+      {
+        "name": "smart", friends: ["sue"]
+      }
+    ]
+    """
