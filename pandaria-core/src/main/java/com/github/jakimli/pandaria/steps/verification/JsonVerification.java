@@ -35,6 +35,16 @@ public class JsonVerification {
         assertThat(actual.json(path), jsonEquals(fileContent(fileName)).when(IGNORING_ARRAY_ORDER));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)} same json:$")
+    public void variableSameJson(String name, String json) throws IOException {
+        assertThat(variables.get(name), jsonEquals(variables.interpret(json)).when(IGNORING_ARRAY_ORDER));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)} same json: ([^\"]*)$")
+    public void variableSameJsonFromFile(String name, String fileName) throws IOException {
+        assertThat(variables.get(name), jsonEquals(fileContent(fileName)).when(IGNORING_ARRAY_ORDER));
+    }
+
     private String fileContent(String fileName) throws IOException {
         return variables.interpret(read(configuration.classpathFile(fileName)));
     }

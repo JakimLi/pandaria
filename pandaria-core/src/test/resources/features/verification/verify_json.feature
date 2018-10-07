@@ -42,3 +42,23 @@ Feature: verify json
       }
     ]
     """
+
+    * var: 'response'<-'$'
+    * verify: ${response} same json:
+    """
+    [
+      {
+        "name": "jakim",
+        "friends": [
+          "james", "jack"
+        ]
+      },
+      {
+        "name": "smart",
+        "friends": ["sue", "lucy"]
+      },
+      {
+        "name": "haha"
+      }
+    ]
+    """
