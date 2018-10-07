@@ -6,6 +6,7 @@ import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class VariableDefinitionSteps {
 
@@ -38,5 +39,10 @@ public class VariableDefinitionSteps {
     @Given("^var: '([^\"]*)'<-'([^\"]*)'$")
     public void defineVariableExtractByJsonPath(String key, String path) throws IOException {
         variables.assign(key, toBeVerified.json(path));
+    }
+
+    @Given("^var: '([^\"]*)'=random uuid")
+    public void defineRandomUUIDVariable(String name) {
+        variables.assign(name, UUID.randomUUID());
     }
 }
