@@ -33,6 +33,8 @@ subprojects {
         joda_time = '2.10'
 
         commons_text = '1.4'
+
+        json_unit = '2.0.0.RC4'
     }
 
     task javadocJar(type: Jar) {

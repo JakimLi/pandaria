@@ -13,6 +13,9 @@ dependencies {
 
             "com.jayway.jsonpath:json-path:${jsonpath}",
 
+            "net.javacrumbs.json-unit:json-unit-fluent:${json_unit}",
+            "net.javacrumbs.json-unit:json-unit:${json_unit}",
+
             "junit:junit:${junit}",
 
             "com.google.guava:guava:${guava}",
