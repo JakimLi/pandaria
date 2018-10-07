@@ -43,6 +43,11 @@ Feature: verify json
     ]
     """
 
+    * verify: '$[0].friends' same json:
+    """
+    ["jack", "james"]
+    """
+
     * var: 'response'<-'$'
     * verify: ${response} same json:
     """
