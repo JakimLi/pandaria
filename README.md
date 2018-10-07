@@ -46,6 +46,26 @@ Or like this:
 * verify: '$[0].age'=18
 ```
 
+And you can wait until the verification passed:
+```
+* wait: 1000ms times: 3
+* uri: /sequence
+* send: GET
+* response body:
+"""
+3
+"""
+```
+Above code send GET to `/sequence` and expect response body equals 3, if not it will sleep 1000ms and then retry,
+until it succeded passing or exceeds max 3 times and fail. same with database query.
+
+```
+* wait: 1000ms times: 3
+* query: select.sql
+* verify: '$[0].name'='jakim'
+* verify: '$[0].age'=18
+```
+
 More [Usage](doc/usage.md)
 
 Latest Release
