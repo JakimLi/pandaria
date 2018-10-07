@@ -16,7 +16,7 @@ import static net.javacrumbs.jsonunit.core.Option.IGNORING_EXTRA_FIELDS;
 import static org.junit.Assert.assertThat;
 
 
-public class JsonVerification {
+public class JsonVerificationSteps {
 
     @Autowired
     VerificationContext actual;
