@@ -17,7 +17,7 @@ public class JsonUtil {
 
     public static List<Map<String, Object>> jsonToList(String content) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(content, new TypeReference<Map<String, Object>>() {
+        return objectMapper.readValue(content, new TypeReference<List<Map<String, Object>>>() {
         });
     }
 

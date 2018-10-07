@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
 import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
+import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
 import static org.junit.Assert.assertThat;
 
 
@@ -26,12 +27,12 @@ public class JsonVerification {
 
     @Then("^verify: '([^\"]*)' same json:$")
     public void sameJson(String path, String json) throws IOException {
-        assertThat(actual.json(path), jsonEquals(variables.interpret(json)));
+        assertThat(actual.json(path), jsonEquals(variables.interpret(json)).when(IGNORING_ARRAY_ORDER));
     }
 
     @Then("^verify: '([^\"]*)' same json: ([^\"]*)$")
     public void sameJsonFromFile(String path, String fileName) throws IOException {
-        assertThat(actual.json(path), jsonEquals(fileContent(fileName)));
+        assertThat(actual.json(path), jsonEquals(fileContent(fileName)).when(IGNORING_ARRAY_ORDER));
     }
 
     private String fileContent(String fileName) throws IOException {

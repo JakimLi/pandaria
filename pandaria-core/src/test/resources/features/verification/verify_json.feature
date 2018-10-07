@@ -1,7 +1,7 @@
 @verify_string
 @http
-Feature: verify string
-  verify strings
+Feature: verify json
+  verify json
 
   Background:
     * dir: features/verification
@@ -19,3 +19,26 @@ Feature: verify string
     }
     """
     * verify: '$' same json: responses/jakim.json
+
+
+  Scenario: same json: with array different order
+    * uri: /users/list
+    * send: get
+    * verify: '$' same json:
+    """
+    [
+      {
+        "name": "jakim",
+        "friends": [
+          "james", "jack"
+        ]
+      },
+      {
+        "name": "smart",
+        "friends": ["sue", "lucy"]
+      },
+      {
+        "name": "haha"
+      }
+    ]
+    """

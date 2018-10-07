@@ -18,6 +18,7 @@ import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
 import static com.google.common.collect.ImmutableMap.of;
+import static org.assertj.core.util.Lists.newArrayList;
 
 public class BasicHttpHooks {
 
@@ -55,6 +56,15 @@ public class BasicHttpHooks {
 
     @Before("@http")
     public void mock() {
+        server.server()
+                .get(by(uri("/users/list")))
+                .response(json(
+                        newArrayList(
+                                of("name", "jakim", "friends", newArrayList("jack", "james")),
+                                of("name", "haha"),
+                                of("name", "smart", "friends", newArrayList("lucy", "sue"))
+                        )));
+
         server.server()
                 .get(by(uri("/users/me")))
                 .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
