@@ -923,3 +923,5 @@ Scenario: generate random number
   * var: 'uuid'=random uuid
   * verify: ${uuid} length: 36
 ```
+
+Example uuid: `123e4567-e89b-12d3-a456-556642440000`
