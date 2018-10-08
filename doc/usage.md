@@ -287,6 +287,7 @@ Scenario: simple trace
 * send: GET
 * status: 200
 ```
+**The default request header is application/json, you can override it by setting a `Content-Type` header**
 
 ### Request Body
 
