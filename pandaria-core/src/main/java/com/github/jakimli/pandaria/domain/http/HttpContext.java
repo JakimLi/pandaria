@@ -32,7 +32,6 @@ public class HttpContext implements Waitable<String> {
     @Value("${http.ssl.verify:false}")
     private boolean httpSslVerify;
 
-
     public void uri(URI uri) {
         this.uri = uri;
     }
@@ -78,6 +77,7 @@ public class HttpContext implements Waitable<String> {
         this.method = null;
         this.requestBody = null;
         this.requestHeaders.clear();
+        this.cookies.clear();
 
         this.responseBody = null;
         this.responseStatus = 0;
