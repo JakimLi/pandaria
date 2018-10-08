@@ -65,6 +65,7 @@ Table of Contents
         * [Equals](#datetime-equals)
         * [Before](#before)
         * [After](#after)
+    * [Verify null](#verify-null)
     * [Verify variable](#verify-variable)
     * [Write your own](#write-your-own)
 
@@ -800,6 +801,25 @@ Scenario: after
   * verify: '$[0].datetime' after: datetime: '2008-08-08 10:30:29' pattern: 'yyyy-MM-dd hh:mm:ss'
   * verify: '$[0].timestamp' after: datetime: '2008-01-01 00:00:00' pattern: 'yyyy-MM-dd HH:mm:ss'
   * verify: '$[0].time' after: datetime: '10:30:09' pattern: 'hh:mm:ss'
+```
+
+### Verify null
+```gherkin
+Scenario: null check
+  * uri: /users/me
+  * send: GET
+  * status: 200
+  * verify: '$.username'='jakim'
+  * verify: '$.username' is not null
+
+  * var: 'username'="jakim"
+  * verify: ${username} is not null
+  * verify: ${hello} is null
+
+  * uri: /getnull
+  * send: GET
+  * status: 200
+  * verify: '$.notexist' is null
 ```
 
 ### Verify variable
