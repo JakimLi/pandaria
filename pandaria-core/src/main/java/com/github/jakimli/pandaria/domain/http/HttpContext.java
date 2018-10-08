@@ -79,10 +79,8 @@ public class HttpContext implements Waitable<String> {
     }
 
     public Entity<?> requestBody() {
-        if (hasAttachment()) {
-            return entity(attachments, attachments.getMediaType());
-        }
-        return entity(requestBody, APPLICATION_JSON_TYPE);
+        return hasAttachment() ? entity(attachments, attachments.getMediaType())
+                : entity(requestBody, APPLICATION_JSON_TYPE);
     }
 
     public void reset() {
