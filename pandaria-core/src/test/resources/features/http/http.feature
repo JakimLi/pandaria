@@ -13,6 +13,20 @@ Feature: Http feature
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
 
+  Scenario: post with non-json
+    * uri: /not_json
+    * request body:
+    """
+    text
+    """
+    * header: 'Content-Type'='text/plain'
+    * header: 'a'='b'
+    * send: POST
+    * response body:
+    """
+    response
+    """
+
   Scenario: simple post with jsn
     * uri: /users
     * request body:

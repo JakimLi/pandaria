@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Cookie;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
@@ -18,15 +19,19 @@ import java.net.URI;
 import java.util.List;
 
 import static com.github.jakimli.pandaria.utils.FileUtil.file;
+import static com.github.jakimli.pandaria.utils.StringUtil.joinByComma;
 import static com.google.common.collect.Lists.newArrayList;
 import static javax.ws.rs.client.Entity.entity;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM_TYPE;
+import static javax.ws.rs.core.MediaType.valueOf;
 import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component
 @Scope("cucumber-glue")
 public class HttpContext implements Waitable<String> {
+    private static final String CONTENT_TYPE = "content-type";
+
     private URI uri;
     private HttpMethod method;
     private String requestBody;
@@ -79,8 +84,15 @@ public class HttpContext implements Waitable<String> {
     }
 
     public Entity<?> requestBody() {
-        return hasAttachment() ? entity(attachments, attachments.getMediaType())
-                : entity(requestBody, APPLICATION_JSON_TYPE);
+        return hasAttachment() ? entity(attachments, attachments.getMediaType()) : entity(requestBody, contentType());
+    }
+
+    private MediaType contentType() {
+        return requestHeaders.entrySet().stream()
+                .filter(entry -> CONTENT_TYPE.equalsIgnoreCase(entry.getKey()))
+                .findFirst()
+                .map(entry -> valueOf(joinByComma(entry.getValue())))
+                .orElse(APPLICATION_JSON_TYPE);
     }
 
     public void reset() {

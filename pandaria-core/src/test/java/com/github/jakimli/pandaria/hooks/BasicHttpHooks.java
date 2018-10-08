@@ -70,6 +70,14 @@ public class BasicHttpHooks {
 
     @Before("@http")
     public void mock() {
+        server.server()
+                .post(and(
+                        by(uri("/not_json")),
+                        by("text"),
+                        eq(header("Content-Type"), "text/plain")
+
+                ))
+                .response(text("response"));
 
         server.server()
                 .get(and(
