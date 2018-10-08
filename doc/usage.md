@@ -284,6 +284,7 @@ Scenario: simple trace
 ```gherkin
 * uri: /custom_header
 * header: 'Accept'='text.plain'
+* header: 'Content-Type'='text/plain'
 * send: GET
 * status: 200
 ```
