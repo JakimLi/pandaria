@@ -821,8 +821,8 @@ Scenario: after
 
 #### same json
 * Allow different order in array
-* NOT allow extra items in array
-* NOT allow extra or missing object
+* **NOT** allow extra items in array
+* **NOT** allow extra or missing object
 
 ```
 * uri: /users/me
@@ -842,7 +842,7 @@ Scenario: after
 * Allow different order in array
 * Allow extra item(s) in array
 * Allow extra object(s)
-* NOT allow missing fields
+* **NOT** allow missing fields
 
 ```gherkin
 Scenario: contains json, extra fields allowed
