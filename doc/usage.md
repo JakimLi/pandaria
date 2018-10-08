@@ -89,7 +89,7 @@ resources
 ```
 
 You can use the json file as request body as below
-```
+```gherkin
 Feature: Http feature
   Basic http operations with verifications
 
@@ -110,7 +110,7 @@ Feature: Http feature
 
 #### relative
 
-```
+```gherkin
 Background:
 * dir: features/http
 
@@ -120,7 +120,7 @@ Scenario: simple post with jsn
 ```
 
 #### absolute, add `classpath:` as prefix
-```
+```gherkin
 * request body: classpath:user.json
 ```
 
@@ -128,7 +128,7 @@ Scenario: simple post with jsn
 In order to shorten the uri and reduce the duplication, you can configure a `base uri` and then use relative uri when
 sending requests.
 
-```
+```gherkin
 Feature: Http feature
   Basic http operations with verifications
 
@@ -180,7 +180,7 @@ Test HTTP APIs
 
 #### Custom Header
 
-```
+```gherkin
 Scenario: get with http header
   * uri: /custom_header
   * header: 'Accept'='text.plain'
@@ -189,7 +189,7 @@ Scenario: get with http header
 ```
 
 #### verify response as plain text
-```
+```gherkin
 * response body:
 """
 success
@@ -197,7 +197,7 @@ success
 ```
 
 #### PUT
-```
+```gherkin
 Scenario: simple put
   * uri: /users/me
   * request body:
@@ -211,7 +211,7 @@ Scenario: simple put
 
 #### DELETE
 
-```
+```gherkin
 Scenario: simple delete
   * uri: /users/20
   * send: DELETE
@@ -219,7 +219,7 @@ Scenario: simple delete
 ```
 
 #### PATCH
-```
+```gherkin
 Scenario: simple patch
   * uri: /users/20
   * request body:
@@ -230,7 +230,7 @@ Scenario: simple patch
 ```
 
 #### HEAD
-```
+```gherkin
 Scenario: simple head
   * uri: /users
   * send: HEAD
@@ -241,7 +241,7 @@ Scenario: simple head
 
 #### OPTIONS
 
-```
+```gherkin
 Scenario: simple options
   * uri: /users
   * send: OPTIONS
@@ -251,7 +251,7 @@ Scenario: simple options
 
 #### TRACE
 
-```
+```gherkin
 Scenario: simple trace
   * uri: /users
   * send: TRACE
@@ -260,7 +260,7 @@ Scenario: simple trace
 ```
 
 ### Query Parameter
-```
+```gherkin
 * uri: /users?name=jakim&age=18
 
 * uri: /users
@@ -274,14 +274,14 @@ Scenario: simple trace
 
 **If your query parameter has special charaters which need to be encoded, please use `query parameter`**
 
-```
+```gherkin
 * uri: /users
 * query parameter: 'name'='jakim li'
 * send: GET
 ```
 
 ### Request Header
-```
+```gherkin
 * uri: /custom_header
 * header: 'Accept'='text.plain'
 * send: GET
@@ -293,7 +293,7 @@ Scenario: simple trace
 The request body can either come from a file or you write it directly as docstring in feature file.
 
 #### From file
-```
+```gherkin
 * uri: http://localhost:10080/users
 * request body: requests/user.json
 * send: POST
@@ -304,7 +304,7 @@ The request body can either come from a file or you write it directly as docstri
 ```
 
 #### As docstring
-```
+```gherkin
 Scenario: simple put
   * uri: /users/me
   * request body:
@@ -318,7 +318,7 @@ Scenario: simple put
 
 The convention is the string right after `* request body: ` is path to the file, docstring is directly the request body
 
-```
+```gherkin
 * request body: path_to_file
 * request body:
 """
@@ -343,7 +343,7 @@ You can write sql with select statements to query database and verify the result
 
 **The results of select will always be array, keep it in mind when using json path**
 
-```
+```gherkin
 Feature: database
   database related operations
 
@@ -379,7 +379,7 @@ Feature: database
 ```
 
 ### Execute SQL
-```
+```gherkin
 * execute sql:
 """
 DROP TABLE IF EXISTS USERS;
@@ -401,7 +401,7 @@ Variables
 #### Literal string
 If you define variable use single quote, `'${name}'`, variable will **NOT** be replaced.
 
-```
+```gherkin
 Scenario: const string
   * var 'name'='panda'
   * verify: ${name}='panda'
@@ -410,7 +410,7 @@ Scenario: const string
 #### String
 If you define variable use double quote, `"${name}"`, variable will be replaced.
 
-```
+```gherkin
 Scenario: string
   * var 'name'='panda'
   * var 'great'="hello ${name}"
@@ -419,7 +419,7 @@ Scenario: string
 ```
 
 ### Integer
-```
+```gherkin
 Scenario: integer
   * var 'age'=18
   * verify: ${age}=18
@@ -431,7 +431,7 @@ It's useful if we can extract values from response body as variables. you can do
 
 `var: 'name'<-'json path'`  will extract value from the http response body json using the json path and assign it to the variable with specified name
 
-```
+```gherkin
 Scenario: from json
   * uri: /not_important
   * send: GET
@@ -445,14 +445,14 @@ Scenario: from json
 ```
 
 You can also extract from database query results
-```
+```gherkin
 * query: select.sql
 * var: 'age'<-'$[0].age'
 ```
 
 ### Use Variables
 #### In URI
-```
+```gherkin
 Scenario: variable being replaced in uri
   * var: 'path'="not_important"
   * uri: /${path}
@@ -482,7 +482,7 @@ Scenario: variable used in request file
 ```
 
 #### In text
-```
+```gherkin
 * response body:
 """
 {"user":"${username}"}
@@ -496,14 +496,14 @@ Verification
 ### Verify http response
 
 #### response status
-```
+```gherkin
 * uri: /empty_request
 * send: POST
 * status: 201
 ```
 
 #### response header
-```
+```gherkin
 * uri: /users
 * send: TRACE
 * status: 200
@@ -512,13 +512,13 @@ Verification
 
 #### response body
 verify use json path
-```
+```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.age'=18
 ```
 
 verify as text
-```
+```gherkin
 * response body:
 """
 success
@@ -526,7 +526,7 @@ success
 ```
 
 verify as text in file
-```
+```gherkin
 * response body: responses/success.txt
 ```
 
@@ -545,7 +545,7 @@ For table
 
 in json array
 
-```
+```json
 [
     { "name": "jakim", "age": 18 },
     { "name": "panda", "age": 28 }
@@ -555,7 +555,7 @@ in json array
 
 Then just using the same as you verify json http response body
 
-```
+```gherkin
 * query: select.sql
 * verify: '$[0].name'='jakim'
 * verify: '$[0].age'=18
@@ -568,7 +568,7 @@ Although you can use string verificaton to non-string types, it will be converte
 #### Equals
 `=` for equals, `!=` for not equals
 
-```
+```gherkin
 Scenario: equals
   * uri: /users/me
   * send: GET
@@ -600,7 +600,7 @@ Scenario: equals
 
 #### Contains
 
-```
+```gherkin
 Scenario: contains
   * uri: /users/me
   * send: GET
@@ -614,7 +614,7 @@ Scenario: contains
 
 #### Starts with
 
-```
+```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' starts with: 'jak'
 
@@ -627,7 +627,7 @@ Scenario: contains
 ```
 
 #### Ends with
-```
+```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' ends with: 'kim'
 
@@ -640,7 +640,7 @@ Scenario: contains
 ```
 
 #### Length
-```
+```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' length: 5
 
@@ -652,7 +652,7 @@ Scenario: contains
 ```
 
 #### Regex match
-```
+```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' matches: '.*'
 
@@ -664,7 +664,7 @@ Scenario: contains
 
 #### Greater than
 
-```
+```gherkin
 * verify: '$.age'>17
 * verify: '$.iq'>double: 70.0
 * verify: '$.age'>=18
@@ -681,7 +681,7 @@ Scenario: contains
 
 ### Less Than
 
-```
+```gherkin
 * verify: '$.age'<19
 * verify: '$.iq'<double: 90.0
 * verify: '$.age'<=18
@@ -699,7 +699,7 @@ Scenario: contains
 ### Verify Datetime
 
 #### datetime equals
-```
+```gherkin
 Scenario: equals
   * query:
   """
@@ -713,7 +713,7 @@ Scenario: equals
 ```
 
 #### before
-```
+```gherkin
 Scenario: before
   * query:
   """
@@ -727,7 +727,7 @@ Scenario: before
 ```
 
 #### After
-```
+```gherkin
 Scenario: after
   * query:
   """
@@ -752,7 +752,7 @@ Wait is useful for automation testing and sometimes is necessary.
 ### Simple wait
 Only support milliseconds and seconds, we don't recomment to wait for very long time.
 
-```
+```gherkin
 Scenario: wait
   * wait: 1000ms
   * wait: 1s
@@ -770,14 +770,14 @@ actually put the thread in sleep for `1000ms`, and then retry once, and this pro
 
 `GET /sequence` returns plain text in sequence
 
-```
+```java
 server.server()
         .get(by(uri("/sequence")))
         .response(seq("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 ```
 
 Wait until:
-```
+```gherkin
 Scenario: wait until
   * wait: 1000ms times: 3
   * uri: /sequence
@@ -812,7 +812,7 @@ Scenario: wait until
 
 #### wait until database query results expected
 
-```
+```gherkin
 * wait: 1000ms times: 3
 * query:
 """
@@ -825,7 +825,7 @@ SELECT NAME, AGE FROM USERS;
 **Although between wait and the first verificaiton, there can be multiple actions(http request or database queries),**
 **But only the last action will be take as retry.**
 **For example:**
-```
+```gherkin
 * wait: 1000ms times: 3
 * uri: /sequence
 * send: GET
