@@ -72,6 +72,8 @@ Table of Contents
     * [Simple Wait](#simple-wait)
     * [Wait Until](#wait-until)
 
+* [Utilities](#utilities)
+
 Feature Configuration
 ---------------------
 You must configure some basics to make the framework work properly.
@@ -909,3 +911,15 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].age'=18
 ```
 **Only the database query will be repeated if the verification failed, NOT the http request.**
+
+Utilities
+---------
+
+You use utitlities by assign them as variable and use it.
+
+### Random UUID
+```gherkin
+Scenario: generate random number
+  * var: 'uuid'=random uuid
+  * verify: ${uuid} length: 36
+```
