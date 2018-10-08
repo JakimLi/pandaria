@@ -2,18 +2,26 @@ package com.github.jakimli.pandaria.domain.http;
 
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
 import com.github.jakimli.pandaria.domain.wait.Waitable;
+import org.glassfish.jersey.media.multipart.MultiPart;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
+import java.io.File;
 import java.net.URI;
 import java.util.List;
 
+import static com.github.jakimli.pandaria.utils.FileUtil.file;
 import static com.google.common.collect.Lists.newArrayList;
+import static javax.ws.rs.client.Entity.entity;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
+import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM_TYPE;
 import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component
@@ -22,6 +30,8 @@ public class HttpContext implements Waitable<String> {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
+    private MultiPart attachments = new MultiPart();
+
     private List<Cookie> cookies = newArrayList();
     private MultivaluedMap<String, Object> requestHeaders = new MultivaluedHashMap<>();
 
@@ -68,8 +78,11 @@ public class HttpContext implements Waitable<String> {
         this.requestBody = requestBody;
     }
 
-    public String requestBody() {
-        return requestBody;
+    public Entity<?> requestBody() {
+        if (hasAttachment()) {
+            return entity(attachments, attachments.getMediaType());
+        }
+        return entity(requestBody, APPLICATION_JSON_TYPE);
     }
 
     public void reset() {
@@ -78,6 +91,7 @@ public class HttpContext implements Waitable<String> {
         this.requestBody = null;
         this.requestHeaders.clear();
         this.cookies.clear();
+        this.attachments.cleanup();
 
         this.responseBody = null;
         this.responseStatus = 0;
@@ -126,5 +140,14 @@ public class HttpContext implements Waitable<String> {
 
     public List<Cookie> cookies() {
         return this.cookies;
+    }
+
+    public void attachment(String attachment) {
+        File file = file(attachment);
+        this.attachments.bodyPart(new FileDataBodyPart(file.getName(), file, APPLICATION_OCTET_STREAM_TYPE));
+    }
+
+    private boolean hasAttachment() {
+        return !attachments.getBodyParts().isEmpty();
     }
 }

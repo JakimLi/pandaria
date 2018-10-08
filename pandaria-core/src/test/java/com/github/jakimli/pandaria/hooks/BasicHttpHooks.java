@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.dreamhead.moco.Moco.and;
 import static com.github.dreamhead.moco.Moco.by;
+import static com.github.dreamhead.moco.Moco.contain;
 import static com.github.dreamhead.moco.Moco.cookie;
 import static com.github.dreamhead.moco.Moco.eq;
 import static com.github.dreamhead.moco.Moco.header;
@@ -25,6 +26,18 @@ public class BasicHttpHooks {
 
     @Autowired
     MockServer server;
+
+    @Before("@file_upload")
+    public void fileUpload() {
+        server.server()
+                .post(and(
+                        by(uri("/files")),
+                        contain(header("Content-Type"), "multipart/mixed")
+                ))
+                .response(text("uploaded"));
+
+        server.start();
+    }
 
     @Before("@wait_until")
     public void sequence() {

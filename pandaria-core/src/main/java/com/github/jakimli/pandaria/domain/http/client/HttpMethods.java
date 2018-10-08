@@ -5,8 +5,6 @@ import com.github.jakimli.pandaria.domain.http.client.HttpMethod.Method;
 import javax.ws.rs.client.SyncInvoker;
 
 import static com.github.jakimli.pandaria.domain.http.client.HttpClient.in;
-import static javax.ws.rs.client.Entity.entity;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 
 class HttpMethods {
 
@@ -15,13 +13,11 @@ class HttpMethods {
     }
 
     static Method post() {
-        return context -> in(context).request(target -> target
-                .post(entity(context.requestBody(), APPLICATION_JSON_TYPE)));
+        return context -> in(context).request(target -> target.post(context.requestBody()));
     }
 
     static Method put() {
-        return context -> in(context).request(target -> target
-                .put(entity(context.requestBody(), APPLICATION_JSON_TYPE)));
+        return context -> in(context).request(target -> target.put(context.requestBody()));
     }
 
     static Method delete() {
@@ -30,7 +26,7 @@ class HttpMethods {
 
     static Method patch() {
         return context -> in(context).request(target -> target
-                .build("PATCH", entity(context.requestBody(), APPLICATION_JSON_TYPE))
+                .build("PATCH", context.requestBody())
                 .invoke());
     }
 

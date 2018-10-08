@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.domain.http.client;
 
 import com.github.jakimli.pandaria.domain.http.HttpContext;
 import org.glassfish.jersey.logging.LoggingFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.ws.rs.client.Client;
@@ -45,6 +46,7 @@ class HttpClient {
     private HttpClient(HttpContext context) {
         ClientBuilder builder = ClientBuilder.newBuilder()
                 .property(SET_METHOD_WORKAROUND, true)
+                .register(MultiPartFeature.class)
                 .register(logAny())
                 .sslContext(context.isHttpSslVerify() ? getDefaultContext() : emptyContext());
 

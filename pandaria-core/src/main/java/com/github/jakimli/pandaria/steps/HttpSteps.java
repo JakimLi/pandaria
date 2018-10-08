@@ -49,6 +49,11 @@ public class HttpSteps {
         context.requestHeader(key, value);
     }
 
+    @Given("^attachment: ([^\"]*)")
+    public void attachment(String file) {
+        context.attachment(configuration.classpathFile(file));
+    }
+
     @Given("^query parameter: '([^\"]*)'='([^\"]*)'$")
     public void queryParameterFromLiteral(String name, String value) {
         context.queryParameter(name, value);
