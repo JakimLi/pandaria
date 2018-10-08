@@ -131,16 +131,6 @@ public class StringVerificationSteps {
         assertThat(String.valueOf(variables.get(varName)).length(), is(length));
     }
 
-    @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")
-    public void verifyVariableEqualsVariable(String varName, String anotherVar) {
-        assertThat(variables.get(varName), is(variables.get(anotherVar)));
-    }
-
-    @Then("^verify: \\$\\{([^\"]*)}!=\\$\\{([^\"]*)}$")
-    public void verifyVariableNotEqualsVariable(String varName, String anotherVar) {
-        assertThat(variables.get(varName), not(variables.get(anotherVar)));
-    }
-
     @Then("^verify: \\$\\{([^\"]*)}!='([^\"]*)'$")
     public void verifyVariableNotEqualsLiteral(String varName, String expected) {
         assertThat(variables.get(varName), not(expected));

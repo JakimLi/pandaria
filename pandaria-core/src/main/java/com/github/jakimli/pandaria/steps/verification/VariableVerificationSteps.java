@@ -28,4 +28,14 @@ public class VariableVerificationSteps {
     public void verifyNotEqualsVariable(String path, String variable) throws IOException {
         assertThat(actual.json(path), not(variables.get(variable)));
     }
+
+    @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")
+    public void verifyVariableEqualsVariable(String varName, String anotherVar) {
+        assertThat(variables.get(varName), is(variables.get(anotherVar)));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=\\$\\{([^\"]*)}$")
+    public void verifyVariableNotEqualsVariable(String varName, String anotherVar) {
+        assertThat(variables.get(varName), not(variables.get(anotherVar)));
+    }
 }

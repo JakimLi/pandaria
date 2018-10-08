@@ -28,6 +28,9 @@ Feature: verify string
 
     * verify: '$.username'=${user}
     * verify: '$.username'!=${kim}
+    
+    * verify: ${user}=${user}
+    * verify: ${user}!=${kim}
 
 
   Scenario: contains
