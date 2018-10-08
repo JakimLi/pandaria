@@ -70,7 +70,7 @@ More [Usage](doc/usage.md)
 
 Latest Release
 --------------
-* 0.1.0
+* 0.1.1
 
 See [Release Notes](doc/release_notes.md)
 
@@ -85,8 +85,8 @@ If you don't need to verify database, just remove the `pandaria-db` from depende
 dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:4.0.0",
-            'com.github.jakimli.pandaria:pandaria-core:0.1.0',
-            'com.github.jakimli.pandaria:pandaria-db:0.1.0'
+            'com.github.jakimli.pandaria:pandaria-core:0.1.1',
+            'com.github.jakimli.pandaria:pandaria-db:0.1.1'
     )
 }
 ```
@@ -97,13 +97,13 @@ dependencies {
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-core</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-db</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
