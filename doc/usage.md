@@ -64,6 +64,7 @@ Table of Contents
         * [Equals](#datetime-equals)
         * [Before](#before)
         * [After](#after)
+    * [Verify variable](#verify-variable)
     * [Write your own](#write-your-own)
 
 * [Wait](#wait)
@@ -766,6 +767,16 @@ Scenario: after
   * verify: '$[0].datetime' after: datetime: '2008-08-08 10:30:29' pattern: 'yyyy-MM-dd hh:mm:ss'
   * verify: '$[0].timestamp' after: datetime: '2008-01-01 00:00:00' pattern: 'yyyy-MM-dd HH:mm:ss'
   * verify: '$[0].time' after: datetime: '10:30:09' pattern: 'hh:mm:ss'
+```
+
+### Verify variable
+You can verify is response/result/variable equals/not-equals to a variable.
+```gherkin
+* verify: '$.username'=${user}
+* verify: '$.username'!=${kim}
+
+* verify: ${user}=${user}
+* verify: ${user}!=${kim}
 ```
 
 ### Write your own
