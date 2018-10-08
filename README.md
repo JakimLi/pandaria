@@ -29,7 +29,7 @@ You can call your api and verify the response
 
 And you can query database and verify the results
 
-```
+```gherkin
 * query:
 """
 SELECT NAME, AGE FROM USERS
@@ -40,14 +40,14 @@ SELECT NAME, AGE FROM USERS
 
 Or like this:
 
-```
+```gherkin
 * query: select.sql
 * verify: '$[0].name'='jakim'
 * verify: '$[0].age'=18
 ```
 
 And you can wait until the verification passed:
-```
+```gherkin
 * wait: 1000ms times: 3
 * uri: /sequence
 * send: GET
@@ -59,7 +59,7 @@ And you can wait until the verification passed:
 Above code send GET to `/sequence` and expect response body equals 3, if not it will sleep 1000ms and then retry,
 until it succeded passing or exceeds max 3 times and fail. same with database query.
 
-```
+```gherkin
 * wait: 1000ms times: 3
 * query: select.sql
 * verify: '$[0].name'='jakim'
@@ -121,7 +121,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
 If you're using JUnit, you might want to add below:
-```
+```java
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
@@ -136,7 +136,7 @@ public class RunCucumberTest {
 **Make sure `com.github.jakimli.pandari` is in the list of cucumber glue.**
 
 Then you can start to write your first automation test.
-```
+```gherkin
 Feature: hello world
   This is a the first feature for pandaria
 
