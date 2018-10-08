@@ -1,4 +1,27 @@
-Release
+Release 0.1.1 (2018-10-8) Latest
+================================
+HTTP(S)
+-------
+* Custom content-type
+* Cookie
+* Ignore SSL host verification
+* SSL configuration
+* Upload file
+
+Verification
+------------
+* Verify null
+* Verify variable
+* Verify JSON
+    * same json
+    * contains json
+
+Utitlies
+--------
+* Random UUID
+
+
+Release 0.1.0 (2018-10-5)
 ========
 
 HTTP
