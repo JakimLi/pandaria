@@ -12,7 +12,7 @@ Table of Contents
 * [Feature Configurtion](#feature-configuration)
     * [dir](#dir)
     * [base uri](#base-uri)
-* [Test HTTP APIs](#test-http-apis)
+* [Test HTTP(s) APIs](#test-http-apis)
     * [Methods](#methods)
         * [GET](#get)
         * [POST](#post)
@@ -27,6 +27,7 @@ Table of Contents
      * [Cookie](#cookie)
      * [Request body](#request-body)
      * [Upload file](#upload-file)
+     * [HTTPS](#https)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -388,6 +389,18 @@ Feature: file upload
 **If you have attachment, request body(if have) will be ignored**
 
 Multiple attachments are allowed.
+
+### HTTPS
+In most test environment, self-signed certificates are used for HTTPS, pandaria *DOES NOT* do host verification by
+default. But you can enable it by put below configuration in your `application.properties`
+```
+http.ssl.verify=true
+```
+If you enable the host verification, you **MUST** specify the certificates information based on standardized system
+properties for SSL configuration.
+
+[JSSE](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html)
+
 
 Database Operations
 -------------------
