@@ -26,6 +26,9 @@ Feature: verify string
     * verify: '$.username'!="notjakim"
     * verify: '$.username'!="notja${kim}"
 
+    * verify: '$.username'=${user}
+    * verify: '$.username'!=${kim}
+
 
   Scenario: contains
     * uri: /users/me
