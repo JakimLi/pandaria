@@ -25,6 +25,7 @@ Table of Contents
      * [Query Parameter](#query-parameter)
      * [Request header](#request-header)
      * [Request body](#request-body)
+     * [Upload file](#upload-file)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -327,6 +328,31 @@ The convention is the string right after `* request body: ` is path to the file,
 request body from docstring
 """
 ```
+
+### Upload file
+You can upload file as attachment
+```gherkin
+@file_upload
+Feature: file upload
+  be able to upload file
+
+  Background:
+    * dir: features/http
+    * base uri: http://localhost:10080
+
+  Scenario: upload file
+    * uri: /files
+    * attachment: attachments/abc.txt
+    * send: POST
+    * status: 200
+    * response body:
+    """
+    uploaded
+    """
+```
+**If you have attachment, request body(if have) will be ignored**
+
+Multiple attachments are allowed.
 
 Database Operations
 -------------------
