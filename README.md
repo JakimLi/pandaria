@@ -19,7 +19,7 @@ Example
 -------
 
 You can call your api and verify the response
-```
+```gherkin
 * uri: http://localhost:10080/users/me
 * send: GET
 * status: 200
