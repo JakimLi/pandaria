@@ -66,6 +66,7 @@ Table of Contents
         * [Equals](#datetime-equals)
         * [Before](#before)
         * [After](#after)
+    * [Verify JSON](#verify-json)
     * [Verify null](#verify-null)
     * [Verify variable](#verify-variable)
     * [Write your own](#write-your-own)
@@ -815,6 +816,64 @@ Scenario: after
   * verify: '$[0].timestamp' after: datetime: '2008-01-01 00:00:00' pattern: 'yyyy-MM-dd HH:mm:ss'
   * verify: '$[0].time' after: datetime: '10:30:09' pattern: 'hh:mm:ss'
 ```
+
+### Verify JSON
+
+#### same json
+* Allow different order in array
+* NOT allow extra items in array
+* NOT allow extra or missing object
+
+```
+* uri: /users/me
+* send: get
+* verify: '$' same json:
+"""gherkin
+{
+  "iq": 80.0,
+  "username": "jakim",
+  "age": 18
+}
+"""
+* verify: '$' same json: responses/jakim.json
+```
+
+#### contains json
+* Allow different order in array
+* Allow extra item(s) in array
+* Allow extra object(s)
+* NOT allow missing fields
+
+```gherkin
+Scenario: contains json, extra fields allowed
+  * uri: /users/list
+  * send: get
+  * verify: '$' contains json:
+  """
+  [
+    {
+      "name": "jakim"
+    },
+    {
+      "name": "smart", friends: ["sue"]
+    }
+  ]
+  """
+
+  * var: 'response'<-'$'
+  * verify: '$' contains json:
+  """
+  [
+    {
+      "name": "jakim"
+    },
+    {
+      "name": "smart", friends: ["sue"]
+    }
+  ]
+  """
+```
+
 
 ### Verify null
 ```gherkin
