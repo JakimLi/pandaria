@@ -24,6 +24,7 @@ Table of Contents
         * [TRACE](#trace)
      * [Query Parameter](#query-parameter)
      * [Request header](#request-header)
+     * [Cookie](#cookie)
      * [Request body](#request-body)
      * [Upload file](#upload-file)
 
@@ -291,6 +292,36 @@ Scenario: simple trace
 * status: 200
 ```
 **The default request header is application/json, you can override it by setting a `Content-Type` header**
+
+### Cookie
+You can add cookie(s) to request
+```gherkin
+@http
+Feature: Http feature
+  Basic http operations with verifications
+
+  Background:
+    * dir: features/http
+    * base uri: http://localhost:10080
+
+  Scenario: add cookie
+    * uri: /cookie
+    * cookie: 'key'='value'
+    * send: get
+    * response body:
+    """
+    cookie added
+    """
+
+    * uri: /cookie
+    * var: 'val'="value"
+    * cookie: 'key'="${val}"
+    * send: get
+    * response body:
+    """
+    cookie added
+    """
+```
 
 ### Request Body
 
