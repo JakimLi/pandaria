@@ -12,7 +12,7 @@ Table of Contents
 * [Feature Configurtion](#feature-configuration)
     * [dir](#dir)
     * [base uri](#base-uri)
-* [Test HTTP(s) APIs](#test-http-apis)
+* [Test HTTP(S) APIs](#test-https-apis)
     * [Methods](#methods)
         * [GET](#get)
         * [POST](#post)
