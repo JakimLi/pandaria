@@ -155,7 +155,7 @@ Feature: Http feature
 You can use absolute uri with `uri: http://host:port`, best practice is to make it short
 
 
-Test HTTP APIs
+Test HTTP(S) APIs
 ------------------
 
 ### Methods
