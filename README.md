@@ -4,7 +4,7 @@
 
 Pandaria
 ========
-Lightweight API test framework based on cucumber JVM
+Lightweight API testing tool based on cucumber JVM
 
 [![Build Status](https://travis-ci.org/JakimLi/pandaria.svg?branch=master)](https://travis-ci.org/JakimLi/pandaria)
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.jakimli.pandaria/pandaria-core.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.jakimli.pandaria%22%20AND%20a:%22pandaria-core%22)
