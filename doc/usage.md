@@ -828,7 +828,7 @@ Scenario: after
 * uri: /users/me
 * send: get
 * verify: '$' same json:
-"""gherkin
+"""
 {
   "iq": 80.0,
   "username": "jakim",
