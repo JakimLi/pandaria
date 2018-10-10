@@ -47,6 +47,7 @@ public class DatabaseSteps {
         databaseQueryContext.query(variables.interpret(read(file)));
         databaseQueryContext.send();
         verifier.toBeVerified(databaseQueryContext.results());
+        wait.waitable(databaseQueryContext);
     }
 
     @When("^execute sql:$")
