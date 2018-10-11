@@ -9,6 +9,10 @@ allprojects {
 allprojects {
     repositories {
         mavenCentral()
+
+        maven {
+            url 'https://jitpack.io'
+        }
     }
 }
 
@@ -33,6 +37,8 @@ subprojects {
         joda_time = '2.10'
 
         commons_text = '1.4'
+
+        json_schema_validator = '1.9.2'
 
         json_unit = '2.0.0.RC4'
     }
