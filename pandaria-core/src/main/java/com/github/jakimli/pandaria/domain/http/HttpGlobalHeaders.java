@@ -9,10 +9,11 @@ import java.util.Map;
 @Component
 @Scope("cucumber-glue")
 @ConfigurationProperties(prefix = "http")
-public class GlobalHeaders {
+public class HttpGlobalHeaders {
 
     private Map<String, String> headers;
 
+    //required for spring
     public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }

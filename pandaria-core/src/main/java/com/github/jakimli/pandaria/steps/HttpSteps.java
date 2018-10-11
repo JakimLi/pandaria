@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.Variables;
-import com.github.jakimli.pandaria.domain.http.GlobalHeaders;
+import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
@@ -40,7 +40,7 @@ public class HttpSteps {
     Wait wait;
 
     @Autowired
-    GlobalHeaders headers;
+    HttpGlobalHeaders headers;
 
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
