@@ -6,12 +6,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+import static com.google.common.collect.Maps.newHashMap;
+
 @Component
 @Scope("cucumber-glue")
 @ConfigurationProperties(prefix = "http")
 public class HttpGlobalHeaders {
 
-    private Map<String, String> headers;
+    private Map<String, String> headers = newHashMap();
 
     //required for spring
     public void setHeaders(Map<String, String> headers) {
