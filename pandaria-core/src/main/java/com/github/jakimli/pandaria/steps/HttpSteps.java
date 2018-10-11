@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.Variables;
+import com.github.jakimli.pandaria.domain.http.GlobalHeaders;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
@@ -37,6 +38,9 @@ public class HttpSteps {
 
     @Autowired
     Wait wait;
+
+    @Autowired
+    GlobalHeaders headers;
 
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
@@ -87,6 +91,7 @@ public class HttpSteps {
 
     @When("^send: ([^\"]*)$")
     public void send(String method) {
+        context.requestHeader(headers.getHeaders());
         context.method(HttpMethod.valueOf(method.toUpperCase()));
         context.send();
         verifier.toBeVerified(context.responseBody());

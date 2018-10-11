@@ -27,6 +27,19 @@ public class BasicHttpHooks {
     @Autowired
     MockServer server;
 
+    @Before("@http_global_headers")
+    public void globalHttpHeaders() {
+        server.server()
+                .get(and(
+                        by(uri("/global_header")),
+                        eq(header("Authorization"), "Bear Token"),
+                        eq(header("global"), "globalHeader")
+                ))
+                .response(text("global header added"));
+
+        server.start();
+    }
+
     @Before("@file_upload")
     public void fileUpload() {
         server.server()

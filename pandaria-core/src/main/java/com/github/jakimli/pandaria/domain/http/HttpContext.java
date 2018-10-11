@@ -17,6 +17,7 @@ import javax.ws.rs.core.NewCookie;
 import java.io.File;
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 import static com.github.jakimli.pandaria.utils.FileUtil.file;
 import static com.github.jakimli.pandaria.utils.StringUtil.joinByComma;
@@ -159,5 +160,9 @@ public class HttpContext implements Waitable<String> {
 
     private boolean hasAttachment() {
         return !attachments.getBodyParts().isEmpty();
+    }
+
+    public void requestHeader(Map<String, String> headers) {
+        headers.forEach(this::requestHeader);
     }
 }
