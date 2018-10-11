@@ -8,6 +8,7 @@ Feature: Be able to set global headers
 
   Scenario: global header
     * uri: /global_header
+    * header: 'will_be_overrided'='overrided'
     * send: GET
     * status: 200
     * response body:

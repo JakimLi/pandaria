@@ -33,7 +33,8 @@ public class BasicHttpHooks {
                 .get(and(
                         by(uri("/global_header")),
                         eq(header("Authorization"), "Bear Token"),
-                        eq(header("global"), "globalHeader")
+                        eq(header("global"), "globalHeader"),
+                        eq(header("will_be_overrided"), "overrided")
                 ))
                 .response(text("global header added"));
 
