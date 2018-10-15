@@ -1,4 +1,16 @@
-Release 0.1.1 (2018-10-8) Latest
+Release 0.1.2 (2018-10-15) Latest
+=================================
+HTTP(S)
+-------
+* Global request headers
+
+Wait
+* wait and retry multiple actions
+
+Verification
+* verify json schema
+
+Release 0.1.1 (2018-10-8)
 ================================
 HTTP(S)
 -------
