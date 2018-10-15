@@ -298,6 +298,22 @@ Scenario: simple trace
 ```
 **The default request header is application/json, you can override it by setting a `Content-Type` header**
 
+#### global header
+It's useful to have a http header that can be applied to every http request, for testing account authentication.
+global header can be used in this way. Put below in your `application.properties`:
+
+application.properties
+```
+http.headers.Authorization=Bear Token
+http.headers.global=globalHeader
+
+http.headers.will_be_overrided=not_overrided
+```
+
+Every http request will automatically apply these headers.
+
+Global headers can be overrided use `header` keyword.
+
 ### Cookie
 You can add cookie(s) to request
 ```gherkin
