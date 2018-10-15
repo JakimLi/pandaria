@@ -24,7 +24,7 @@ dependencies {
 
             "org.apache.commons:commons-text:${commons_text}",
 
-            "com.github.everit-org.json-schema:org.everit.json.schema:${json_schema_validator}",
+            "com.github.erosb:everit-json-schema:${json_schema_validator}",
 
             "org.glassfish.jersey.core:jersey-client:${jersey}",
             "org.glassfish.jersey.core:jersey-common:${jersey}",
