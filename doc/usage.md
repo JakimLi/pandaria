@@ -1003,7 +1003,7 @@ SELECT NAME, AGE FROM USERS;
 ```
 
 **Although between wait and the first verificaiton, there can be multiple actions(http request or database queries),**
-**But only the last action will be take as retry.**
+**all actions between will be take as retry, but only the last action can be verified.**
 **For example:**
 ```gherkin
 * wait: 1000ms times: 3
