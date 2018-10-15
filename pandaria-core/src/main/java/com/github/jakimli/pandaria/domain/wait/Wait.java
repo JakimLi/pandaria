@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Optional;
+
+import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -18,7 +22,7 @@ public class Wait {
     private int maxRetry;
     private boolean on;
 
-    private Waitable waitable;
+    private List<Waitable> waitables = newArrayList();
 
     public void configure(int millis, int maxRetry) {
         if (maxRetry < 0) {
@@ -30,7 +34,7 @@ public class Wait {
     }
 
     public void waitable(Waitable waitable) {
-        this.waitable = waitable;
+        this.waitables.add(waitable);
     }
 
     boolean on() {
@@ -38,9 +42,13 @@ public class Wait {
     }
 
     void retry() {
-        assertNotNull(waitable);
-        this.waitable.retry();
-        verifier.toBeVerified(this.waitable.result());
+        assertNotNull(waitables);
+        this.waitables.forEach(Waitable::retry);
+        last().ifPresent(waitable -> verifier.toBeVerified(waitable.result()));
+    }
+
+    private Optional<Waitable> last() {
+        return Optional.ofNullable(this.waitables.get(this.waitables.size() - 1));
     }
 
     int maxRetry() {
@@ -53,13 +61,10 @@ public class Wait {
 
     void off() {
         this.on = false;
+        this.waitables = newArrayList();
     }
 
     int millis() {
         return this.millis;
-    }
-
-    Waitable waitable() {
-        return this.waitable;
     }
 }

@@ -36,3 +36,16 @@ Feature: wait until
     """
     6
     """
+
+  Scenario: wait and retry multiple operations
+    * wait: 1000ms times: 1
+
+    * uri: /sequence
+    * send: GET
+
+    * uri: /sequence
+    * send: GET
+    * response body:
+    """
+    4
+    """
