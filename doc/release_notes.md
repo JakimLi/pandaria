@@ -5,9 +5,11 @@ HTTP(S)
 * Global request headers
 
 Wait
+----
 * wait and retry multiple actions
 
 Verification
+------------
 * verify json schema
 
 Release 0.1.1 (2018-10-8)
