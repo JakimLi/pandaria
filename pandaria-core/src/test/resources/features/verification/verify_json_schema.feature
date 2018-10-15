@@ -35,3 +35,20 @@ Feature: verify json schema
       }
     }
     """
+
+  Scenario: verify json schema from variable
+    * uri: /products/1
+    * send: get
+    * var: 'response'<-'$'
+    * verify: ${response} conform to:
+    """
+    {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/product.schema.json",
+    "title": "Product",
+    "description": "A product in the catalog",
+    "type": "object"
+    }
+    """
+
+    * verify: ${response} conform to: schema/product.schema.json

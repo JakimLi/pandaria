@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
+import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import cucumber.api.java.en.Given;
 import org.everit.json.schema.Schema;
@@ -22,6 +23,9 @@ public class JsonSchemaVerificationSteps {
     @Autowired
     FeatureConfiguration configuration;
 
+    @Autowired
+    Variables variables;
+
     @Given("^verify: '([^\"]*)' conform to:")
     public void verifyJsonConformSchema(String path, String schemaJson) throws IOException {
         validateJsonSchema(actual.json(path), schemaJson);
@@ -30,6 +34,16 @@ public class JsonSchemaVerificationSteps {
     @Given("^verify: '([^\"]*)' conform to: ([^\"]*)")
     public void verifyJsonConformSchemaFile(String path, String file) throws IOException {
         validateJsonSchema(actual.json(path), read(configuration.classpathFile(file)));
+    }
+
+    @Given("^verify: \\$\\{([^\"]*)} conform to:")
+    public void verifyJsonInVariableConformSchema(String name, String schemaJson) throws IOException {
+        validateJsonSchema(variables.get(name), schemaJson);
+    }
+
+    @Given("^verify: \\$\\{([^\"]*)} conform to: ([^\"]*)")
+    public void verifyJsonInVariableConformSchemaFile(String name, String file) throws IOException {
+        validateJsonSchema(variables.get(name), read(configuration.classpathFile(file)));
     }
 
     private void validateJsonSchema(Object actual, String schemaJson) throws IOException {
