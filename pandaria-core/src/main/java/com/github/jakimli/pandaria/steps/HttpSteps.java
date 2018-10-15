@@ -91,7 +91,7 @@ public class HttpSteps {
 
     @When("^send: ([^\"]*)$")
     public void send(String method) {
-        context.addRequestHeadersIfNotExists(headers.getHeaders());
+        context.addGlobalRequestHeaders(headers.getHeaders());
         context.method(HttpMethod.valueOf(method.toUpperCase()));
         context.send();
         verifier.toBeVerified(context.responseBody());

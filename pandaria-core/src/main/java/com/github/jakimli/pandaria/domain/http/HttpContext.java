@@ -162,7 +162,7 @@ public class HttpContext implements Waitable<String> {
         return !attachments.getBodyParts().isEmpty();
     }
 
-    public void addRequestHeadersIfNotExists(Map<String, String> headers) {
+    public void addGlobalRequestHeaders(Map<String, String> headers) {
         headers.entrySet().stream()
                 .filter(entry -> !requestHeaders.containsKey(entry.getKey()))
                 .forEach(entry -> requestHeader(entry.getKey(), entry.getValue()));
