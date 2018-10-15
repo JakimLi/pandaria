@@ -1,9 +1,9 @@
 Verification different JDBC Types
 =================================
 
-Different database provider has different data types, pandaria support types that supported by Java JDBC.
+Different database provider has different data types, pandaria supports types that supported by Java JDBC.
 
-Please refer to you database provider to know the mapping between your databasee type to JDBC Types.
+Please refer to your database provider to know the mapping between your databasee type to JDBC Types.
 
 Pandaria follow below JDBC Types -> Java Object Types Mapping
 
