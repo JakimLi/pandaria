@@ -67,6 +67,7 @@ Table of Contents
         * [Before](#before)
         * [After](#after)
     * [Verify JSON](#verify-json)
+    * [Verify JSON schema](#verify-json-schema)
     * [Verify null](#verify-null)
     * [Verify variable](#verify-variable)
     * [Write your own](#write-your-own)
@@ -298,7 +299,7 @@ Scenario: simple trace
 ```
 **The default request header is application/json, you can override it by setting a `Content-Type` header**
 
-#### global header
+#### global request header
 It's useful to have a http header that can be applied to every http request, for testing account authentication.
 global header can be used in this way. Put below in your `application.properties`:
 
@@ -888,6 +889,50 @@ Scenario: contains json, extra fields allowed
     }
   ]
   """
+```
+
+### Verify JSON Schema
+[JSON schema](https://json-schema.org/) is useful to describe the API, and it's useful especially for contract testing. you can verify json
+document(instance) conforms to a given json schema or not.
+
+```gherkin
+@verify_json_schema
+Feature: verify json schema
+  verify if json valid for json schema
+
+  Background:
+    * dir: features/verification
+    * base uri: http://localhost:10080
+
+  Scenario: verify json schema
+    * uri: /products/1
+    * send: get
+    * verify: '$' conform to:
+    """
+    {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/product.schema.json",
+    "title": "Product",
+    "description": "A product in the catalog",
+    "type": "object"
+    }
+    """
+
+    * verify: '$' conform to: schema/product.schema.json
+
+    * verify: '$.tags' conform to:
+    """
+    {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "$id": "http://example.com/product.tags.schema.json",
+      "title": "product tags",
+      "description": "Product tags",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+    """
 ```
 
 

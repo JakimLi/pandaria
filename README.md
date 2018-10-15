@@ -66,6 +66,24 @@ until it succeded passing or exceeds max 3 times and fail. same with database qu
 * verify: '$[0].age'=18
 ```
 
+You can also verify JSON schema:
+```gherkin
+* uri: /products/1
+* send: get
+* verify: '$' conform to:
+"""
+{
+"$schema": "http://json-schema.org/draft-07/schema#",
+"$id": "http://example.com/product.schema.json",
+"title": "Product",
+"description": "A product in the catalog",
+"type": "object"
+}
+"""
+
+* verify: '$' conform to: schema/product.schema.json
+```
+
 More [Usage](doc/usage.md)
 
 Latest Release
