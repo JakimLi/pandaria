@@ -88,7 +88,7 @@ More [Usage](doc/usage.md)
 
 Latest Release
 --------------
-* 0.1.1
+* 0.1.2
 
 See [Release Notes](doc/release_notes.md)
 
