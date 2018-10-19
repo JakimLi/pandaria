@@ -127,8 +127,8 @@ dependencies {
 </dependencies>
 ```
 
-If you need to verify database, remember to add specific jdbc driver for your database, and add you datasource connection in
-`application.properties`
+If you need to verify database, remember to add specific jdbc driver for your database to `build.gradle` or `pom.xml`,
+and add you datasource connection in `application.properties`
 
 application.properties
 ```
