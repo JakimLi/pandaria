@@ -33,6 +33,12 @@ Table of Contents
     * [Queries](#queries)
     * [Execute SQL](#execute-sql)
 
+* [MongoDB Operations](#mongodb-operations)
+    * [Insert](#insert)
+    * [Clear](#clear)
+    * [Find All](#find-all)
+    * [Find](#find)
+
 * [Variables](#variables)
     * [Defintion](#defintion)
         * [Literal string](#literal-string)
@@ -486,6 +492,75 @@ CREATE TABLE USERS(
 * execute sql: drop_table.sql
 * execute sql: setup.sql
 ```
+
+MongoDB Operations
+------------------
+
+### Insert
+Insert one document into a collection
+
+```gherkin
+* collection: 'users' insert:
+"""
+{"user": "jakim"}
+"""
+```
+or put document in file
+
+```gherkin
+* collection: 'users' insert: document/alice.json
+```
+
+### Clear
+
+Delete all documents in collection
+
+```gherkin
+* collection: 'users' clear
+```
+
+### Find All
+Find all documents from collection, you can verify like verify in database, **it's always an JSON array**.
+
+```gherkin
+* collection: 'users' find all
+* verify: '$[0].user'="alice"
+```
+
+### Find
+Instead of find all documents, you can filter the results.
+
+```gherkin
+* collection: 'users' clear
+
+* collection: 'users' insert:
+"""
+{"user": "jakim", "age": 18}
+"""
+
+* collection: 'users' insert:
+"""
+{"user": "alice", "age": 16}
+"""
+
+* collection: 'users' find:
+"""
+{"age": {$gt: 17}}
+"""
+
+* verify: '$[0].user'="jakim"
+
+* collection: 'users' find:
+"""
+{"age": {$lt: 17}}
+"""
+
+* verify: '$[0].user'="alice"
+
+* collection: 'users' find: filter/greater_than_17.json
+* verify: '$[0].user'="jakim"
+```
+
 
 Variables
 ---------
