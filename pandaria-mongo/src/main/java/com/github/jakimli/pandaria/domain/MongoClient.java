@@ -15,7 +15,7 @@ public class MongoClient {
 
     public MongoClient(
             @Value("${mongo.db.name}") String name,
-            @Value("${mongo.connection.string}") String connection) {
+            @Value("${mongo.db.connection}") String connection) {
         database = create(connection).getDatabase(name);
     }
 
