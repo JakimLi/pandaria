@@ -45,7 +45,7 @@ Or like this:
 * verify: '$[0].name'='jakim'
 * verify: '$[0].age'=18
 ```
-[Mongo DB Also supported](doc/usage.md#mongodb-operations)
+[Mongo DB also supported](doc/usage.md#mongodb-operations)
 
 And you can wait until the verification passed:
 ```gherkin
