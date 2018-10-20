@@ -10,3 +10,6 @@ Feature: simple mongo insert
     """
     {"user": "jakim"}
     """
+
+    * collection: 'users' find all
+    * verify: '$[0].user'="jakim"

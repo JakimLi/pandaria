@@ -1,12 +1,15 @@
 package com.github.jakimli.pandaria.domain;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static com.mongodb.client.MongoClients.create;
+import static org.bson.Document.parse;
 
 @Component
 public class MongoClient {
@@ -20,13 +23,22 @@ public class MongoClient {
     }
 
     public void insert(String collection, String document) {
-        MongoCollection<Document> collect = database.getCollection(collection);
+        collection(collection).insertOne(parse(document));
+    }
 
-        if (collect == null) {
-            database.createCollection(collection);
-            collect = database.getCollection(collection);
+    public BasicDBList findAll(String collection) {
+        return toList(collection(collection).find().iterator());
+    }
+
+    private MongoCollection<Document> collection(String collection) {
+        return database.getCollection(collection);
+    }
+
+    private BasicDBList toList(MongoCursor<Document> iterator) {
+        BasicDBList list = new BasicDBList();
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
         }
-
-        collect.insertOne(Document.parse(document));
+        return list;
     }
 }
