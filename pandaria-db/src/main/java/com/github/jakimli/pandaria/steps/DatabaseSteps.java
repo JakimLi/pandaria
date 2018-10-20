@@ -1,13 +1,13 @@
 package com.github.jakimli.pandaria.steps;
 
+import com.github.jakimli.pandaria.domain.DatabaseExecuteContext;
+import com.github.jakimli.pandaria.domain.DatabaseQueryContext;
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
-import com.github.jakimli.pandaria.domain.DatabaseQueryContext;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public class DatabaseSteps {
     FeatureConfiguration configuration;
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    DatabaseExecuteContext databaseExecuteContext;
 
     @Autowired
     Wait wait;
@@ -52,12 +52,14 @@ public class DatabaseSteps {
 
     @When("^execute sql:$")
     public void executeSql(String sql) {
-        jdbcTemplate.execute(variables.interpret(sql));
+        databaseExecuteContext.statement(variables.interpret(sql));
+        wait.waitable(databaseExecuteContext);
     }
 
     @When("^execute sql: ([^\"]*)$")
     public void executeSqlFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
-        jdbcTemplate.execute(variables.interpret(read(file)));
+        databaseExecuteContext.statement(variables.interpret(read(file)));
+        wait.waitable(databaseExecuteContext);
     }
 }
