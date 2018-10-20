@@ -2,4 +2,5 @@ rootProject.name = 'pandaria'
 
 include 'pandaria-core'
 include 'pandaria-db'
+include 'pandaria-mongo'
 include 'doc'

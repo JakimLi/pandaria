@@ -37,6 +37,8 @@ subprojects {
         json_schema_validator = '1.9.2'
 
         json_unit = '2.0.0.RC4'
+
+        mongo = '3.8.2'
     }
 
     task javadocJar(type: Jar) {

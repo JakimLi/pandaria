@@ -12,11 +12,15 @@ before_install:
 - sudo service mysql restart
 - mysql -e 'CREATE DATABASE pandaria;' -u root -ppassword
 
+before_script:
+- mongo mydb_test --eval 'db.createUser({user:"root",pwd:"password",roles:["readWrite"]});'
+
 script:
   "./gradlew clean build -x signArchives"
 
 services:
 - mysql
+- mongodb
 
 addons:
   apt:
