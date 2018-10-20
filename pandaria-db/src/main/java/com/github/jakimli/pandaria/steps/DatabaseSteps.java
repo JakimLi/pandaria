@@ -53,6 +53,7 @@ public class DatabaseSteps {
     @When("^execute sql:$")
     public void executeSql(String sql) {
         databaseExecuteContext.statement(variables.interpret(sql));
+        databaseExecuteContext.execute();
         wait.waitable(databaseExecuteContext);
     }
 
@@ -60,6 +61,7 @@ public class DatabaseSteps {
     public void executeSqlFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
         databaseExecuteContext.statement(variables.interpret(read(file)));
+        databaseExecuteContext.execute();
         wait.waitable(databaseExecuteContext);
     }
 }

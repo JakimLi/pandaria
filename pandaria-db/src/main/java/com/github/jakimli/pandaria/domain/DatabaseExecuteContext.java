@@ -17,6 +17,10 @@ public class DatabaseExecuteContext extends Repeatable {
 
     @Override
     public void retry() {
+        execute();
+    }
+
+    public void execute() {
         jdbcTemplate.execute(statement);
     }
 
