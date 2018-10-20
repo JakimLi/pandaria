@@ -59,7 +59,15 @@ public class MongoSteps {
     @When("^collection: '([^\"]*)' find:$")
     public void find(String collection, String filter) {
         mongoQuery.collection(collection);
-        mongoQuery.filter(filter);
+        mongoQuery.filter(variables.interpret(filter));
+        verifier.toBeVerified(mongoQuery.find());
+        wait.waitable(mongoQuery);
+    }
+
+    @When("^collection: '([^\"]*)' find: ([^\"]*)$")
+    public void findFilterFromFile(String collection, String file) throws IOException {
+        mongoQuery.collection(collection);
+        mongoQuery.filter(variables.interpret(read(configuration.classpathFile(file))));
         verifier.toBeVerified(mongoQuery.find());
         wait.waitable(mongoQuery);
     }

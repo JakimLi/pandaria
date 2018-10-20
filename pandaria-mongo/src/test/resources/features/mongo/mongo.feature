@@ -46,3 +46,6 @@ Feature: mongo related features
     """
 
     * verify: '$[0].user'="alice"
+
+    * collection: 'users' find: filter/greater_than_17.json
+    * verify: '$[0].user'="jakim"
