@@ -2,8 +2,10 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.MongoClient;
+import com.github.jakimli.pandaria.domain.MongoQueryContext;
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +27,12 @@ public class MongoSteps {
     @Autowired
     FeatureConfiguration configuration;
 
+    @Autowired
+    MongoQueryContext mongoQuery;
+
+    @Autowired
+    Wait wait;
+
     @When("^collection: '([^\"]*)' insert:$")
     public void insert(String collection, String document) {
         mongo.insert(collection, variables.interpret(document));
@@ -42,6 +50,8 @@ public class MongoSteps {
 
     @When("^collection: '([^\"]*)' find all$")
     public void findAll(String collection) {
-        verifier.toBeVerified(mongo.findAll(collection));
+        mongoQuery.collection(collection);
+        verifier.toBeVerified(mongoQuery.findAll());
+        wait.waitable(mongoQuery);
     }
 }

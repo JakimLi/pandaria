@@ -30,7 +30,7 @@ public class MongoClient {
         collection(collection).deleteMany(new Document());
     }
 
-    public BasicDBList findAll(String collection) {
+    BasicDBList findAll(String collection) {
         return toList(collection(collection).find().iterator());
     }
 
