@@ -44,7 +44,7 @@ public class MongoSteps {
     }
 
     @When("^collection: '([^\"]*)' clear$")
-    public void clearCollection(String collection) throws IOException {
+    public void clearCollection(String collection) {
         mongo.deleteAll(collection);
     }
 
