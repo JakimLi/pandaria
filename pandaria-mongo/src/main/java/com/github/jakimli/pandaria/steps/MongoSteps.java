@@ -51,14 +51,16 @@ public class MongoSteps {
     @When("^collection: '([^\"]*)' find all$")
     public void findAll(String collection) {
         mongoQuery.collection(collection);
-        verifier.toBeVerified(mongoQuery.findAll());
+        mongoQuery.filter(null);
+        verifier.toBeVerified(mongoQuery.find());
         wait.waitable(mongoQuery);
     }
 
     @When("^collection: '([^\"]*)' find:$")
     public void find(String collection, String filter) {
         mongoQuery.collection(collection);
-        verifier.toBeVerified(mongoQuery.find(filter));
+        mongoQuery.filter(filter);
+        verifier.toBeVerified(mongoQuery.find());
         wait.waitable(mongoQuery);
     }
 }

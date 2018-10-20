@@ -16,19 +16,15 @@ public class MongoQueryContext implements Waitable<BasicDBList> {
     MongoClient mongo;
 
     private BasicDBList result;
+    private String filter;
 
     public void collection(String collection) {
         this.collection = collection;
     }
 
-    public BasicDBList findAll() {
-        result = mongo.findAll(collection);
-        return result;
-    }
-
     @Override
     public void retry() {
-        findAll();
+        find();
     }
 
     @Override
@@ -36,8 +32,18 @@ public class MongoQueryContext implements Waitable<BasicDBList> {
         return this.result;
     }
 
-    public BasicDBList find(String filter) {
-        result = mongo.find(collection, filter);
+    public BasicDBList find() {
+
+        if (filter != null) {
+            result = mongo.find(collection, filter);
+        } else {
+            result = mongo.findAll(collection);
+        }
+
         return result;
+    }
+
+    public void filter(String filter) {
+        this.filter = filter;
     }
 }
