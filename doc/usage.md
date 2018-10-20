@@ -495,8 +495,11 @@ CREATE TABLE USERS(
 
 MongoDB Operations
 ------------------
+@since 0.2.0
 
 ### Insert
+@since 0.2.0
+
 Insert one document into a collection
 
 ```gherkin
@@ -512,6 +515,7 @@ or put document in file
 ```
 
 ### Clear
+@since 0.2.0
 
 Delete all documents in collection
 
@@ -520,6 +524,8 @@ Delete all documents in collection
 ```
 
 ### Find All
+@since 0.2.0
+
 Find all documents from collection, you can verify like verify in database, **it's always an JSON array**.
 
 ```gherkin
@@ -528,6 +534,8 @@ Find all documents from collection, you can verify like verify in database, **it
 ```
 
 ### Find
+@since 0.2.0
+
 Instead of find all documents, you can filter the results.
 
 ```gherkin
