@@ -14,6 +14,7 @@ public class MongoQueryContext implements Waitable<BasicDBList> {
 
     @Autowired
     MongoClient mongo;
+
     private BasicDBList result;
 
     public void collection(String collection) {
@@ -33,5 +34,10 @@ public class MongoQueryContext implements Waitable<BasicDBList> {
     @Override
     public BasicDBList result() {
         return this.result;
+    }
+
+    public BasicDBList find(String filter) {
+        result = mongo.find(collection, filter);
+        return result;
     }
 }

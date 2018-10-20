@@ -1,6 +1,7 @@
 package com.github.jakimli.pandaria.domain;
 
 import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -32,6 +33,10 @@ public class MongoClient {
 
     BasicDBList findAll(String collection) {
         return toList(collection(collection).find().iterator());
+    }
+
+    BasicDBList find(String collection, String filter) {
+        return toList(collection(collection).find(BasicDBObject.parse(filter)).iterator());
     }
 
     private MongoCollection<Document> collection(String collection) {
