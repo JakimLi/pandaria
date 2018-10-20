@@ -1,4 +1,19 @@
-Release 0.1.2 (2018-10-15) Latest
+Release 0.2.0 (2018-10-21) Latest
+=================================
+Mongo DB
+--------
+* Insert
+* Clear
+* Find all
+* Find
+
+Issue fixed
+----
+* Execute sql not repeatable
+* Variable cannot verify josn schema
+
+
+Release 0.1.2 (2018-10-15)
 =================================
 HTTP(S)
 -------

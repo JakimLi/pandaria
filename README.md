@@ -89,7 +89,7 @@ More [Usage](doc/usage.md)
 
 Latest Release
 --------------
-* 0.1.2
+* 0.2.0
 
 See [Release Notes](doc/release_notes.md)
 
@@ -97,15 +97,16 @@ See [Release Notes](doc/release_notes.md)
 Get Started
 -----------
 
-If you don't need to verify database, just remove the `pandaria-db` from dependency declarations.
+If you don't need to verify database and mongo, just remove the `pandaria-db` and `pandaria-mongo` from dependency declarations.
 
 ### Gradle
 ```groovy
 dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:4.0.0",
-            'com.github.jakimli.pandaria:pandaria-core:0.1.2',
-            'com.github.jakimli.pandaria:pandaria-db:0.1.2'
+            'com.github.jakimli.pandaria:pandaria-core:0.2.0',
+            'com.github.jakimli.pandaria:pandaria-db:0.2.0',
+            'com.github.jakimli.pandaria:pandaria-mongo:0.2.0'
     )
 }
 ```
@@ -116,13 +117,19 @@ dependencies {
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-core</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-db</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-mongo</artifactId>
+    <version>0.2.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -137,6 +144,12 @@ spring.datasource.url=jdbc:mysql://localhost:3307/pandaria?useSSL=false&allowMul
 spring.datasource.username=root
 spring.datasource.password=password
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+
+If you need to interact with mongo db, also add:
+```
+mongo.db.name=test
+mongo.db.connection=mongodb://root:password@localhost:27017
 ```
 
 If you're using JUnit, you might want to add below:
