@@ -97,7 +97,7 @@ See [Release Notes](doc/release_notes.md)
 Get Started
 -----------
 
-If you don't need to verify database and mongo, just remove the `pandaria-db` and `pandaria-mongo` from dependency declarations.
+If you don't need to verify database or mongo, just remove the `pandaria-db` or `pandaria-mongo` from dependency declarations.
 
 ### Gradle
 ```groovy
