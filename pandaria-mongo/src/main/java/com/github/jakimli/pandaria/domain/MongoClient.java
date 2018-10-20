@@ -26,6 +26,10 @@ public class MongoClient {
         collection(collection).insertOne(parse(document));
     }
 
+    public void deleteAll(String collection) {
+        collection(collection).deleteMany(new Document());
+    }
+
     public BasicDBList findAll(String collection) {
         return toList(collection(collection).find().iterator());
     }
