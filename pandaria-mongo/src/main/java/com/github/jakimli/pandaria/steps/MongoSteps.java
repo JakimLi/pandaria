@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.MongoClient;
+import com.github.jakimli.pandaria.domain.MongoExecutionContext;
 import com.github.jakimli.pandaria.domain.MongoQueryContext;
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
@@ -33,19 +34,29 @@ public class MongoSteps {
     @Autowired
     Wait wait;
 
+    @Autowired
+    MongoExecutionContext mongoExecution;
+
     @When("^collection: '([^\"]*)' insert:$")
     public void insert(String collection, String document) {
-        mongo.insert(collection, variables.interpret(document));
+        mongoExecution.collection(collection);
+        mongoExecution.execution(collect -> mongo.insert(collect, variables.interpret(document)));
+        mongoExecution.execute();
     }
 
     @When("^collection: '([^\"]*)' insert: ([^\"]*)$")
     public void insertFromFile(String collection, String file) throws IOException {
-        mongo.insert(collection, variables.interpret(read(configuration.classpathFile(file))));
+        String document = read(configuration.classpathFile(file));
+        mongoExecution.collection(collection);
+        mongoExecution.execution(collect -> mongo.insert(collect, variables.interpret(document)));
+        mongoExecution.execute();
     }
 
     @When("^collection: '([^\"]*)' clear$")
     public void clearCollection(String collection) {
-        mongo.deleteAll(collection);
+        mongoExecution.collection(collection);
+        mongoExecution.execution(collect -> mongo.deleteAll(collect));
+        mongoExecution.execute();
     }
 
     @When("^collection: '([^\"]*)' find all$")
