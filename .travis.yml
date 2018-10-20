@@ -13,7 +13,7 @@ before_install:
 - mysql -e 'CREATE DATABASE pandaria;' -u root -ppassword
 
 before_script:
-- mongo test --eval 'db.createUser({user:"root",pwd:"password",roles:["readWrite"]});'
+- mongo admin --eval 'db.createUser({user:"root",pwd:"password",roles:["root"]});'
 
 script:
   "./gradlew clean build -x signArchives"
