@@ -2,9 +2,11 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.utils.ScriptUtil;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.script.ScriptException;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -39,6 +41,11 @@ public class VariableDefinitionSteps {
     @Given("^var: '([^\"]*)'<-'([^\"]*)'$")
     public void defineVariableExtractByJsonPath(String key, String path) throws IOException {
         variables.assign(key, toBeVerified.json(path));
+    }
+
+    @Given("^var: '([^\"]*)'=code:$")
+    public void defineVariableFromCodeBlock(String key, String code) throws ScriptException {
+        variables.assign(key, ScriptUtil.eval(variables.interpret(code)));
     }
 
     @Given("^var: '([^\"]*)'=random uuid")
