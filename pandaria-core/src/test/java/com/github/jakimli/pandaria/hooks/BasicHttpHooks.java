@@ -154,7 +154,7 @@ public class BasicHttpHooks {
                 .response(text("success"));
 
         server.server()
-                .put(and(
+                .put(or(
                         by(uri("/users/me")),
                         eq(jsonPath("$.username"), "lj")
                 ))

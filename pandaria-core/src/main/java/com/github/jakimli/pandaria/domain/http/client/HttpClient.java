@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import static com.github.jakimli.pandaria.domain.http.client.EmptySSLContext.emptyContext;
 import static java.util.logging.Logger.getLogger;
 import static org.glassfish.jersey.SslConfigurator.getDefaultContext;
+import static org.glassfish.jersey.client.ClientProperties.SUPPRESS_HTTP_COMPLIANCE_VALIDATION;
 import static org.glassfish.jersey.client.HttpUrlConnectorProvider.SET_METHOD_WORKAROUND;
 import static org.glassfish.jersey.logging.LoggingFeature.Verbosity.PAYLOAD_ANY;
 
@@ -46,6 +47,7 @@ class HttpClient {
     private HttpClient(HttpContext context) {
         ClientBuilder builder = ClientBuilder.newBuilder()
                 .property(SET_METHOD_WORKAROUND, true)
+                .property(SUPPRESS_HTTP_COMPLIANCE_VALIDATION, true)
                 .register(MultiPartFeature.class)
                 .register(logAny())
                 .sslContext(context.isHttpSslVerify() ? getDefaultContext() : emptyContext());

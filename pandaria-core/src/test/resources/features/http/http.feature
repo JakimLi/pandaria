@@ -90,6 +90,11 @@ Feature: Http feature
     * status: 200
     * verify: '$.username'='lj'
 
+  Scenario: put without request body
+    * uri: /users/me
+    * send: put
+    * status: 200
+
   Scenario: simple delete
     * uri: /users/20
     * send: DELETE
