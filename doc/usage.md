@@ -51,6 +51,7 @@ Table of Contents
         * [In File](#in-file)
         * [In Text](#in-text)
         * [In Code Evaluation](#in-code-evaluation)
+    * [Escape](#escape)
 
 * [Verification](#verification)
     * [Verify http response](#verify-http-response)
@@ -701,6 +702,15 @@ ${three} + 3
 """
 ```
 
+### Escape
+You can escape the variables by place an extra `$`
+```gherkin
+* var: 'six'=code:
+"""
+$${three} + 3
+"""
+```
+This gives error because `${three}` is not understand by javascript engine.
 
 Verification
 -----------
@@ -1091,6 +1101,11 @@ verify the evaluation result is true.
 
 You can write the code snippet in one line, in block as doc string, or in separate file.
 
+**Things to note**
+* If you have multiple lines in the code snippet, only the result of the last line will be used as the result.
+* If you need to write complex code in the snippet, consider to put them in java with cucumber steps first.
+* [Nashorn](https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html) is used for script evaluation.
+
 #### verify response and variable equals the result of the evaluation
 @since 0.2.1
 
@@ -1121,6 +1136,8 @@ ${iq} - 10
 
 #### verify the evaluation to be true
 @since 0.2.1
+
+**Be notice the double equals `==` are used for comparison instead of single equal `=` that were used in pandaria.**
 
 ```gherkin
 * verify code: ${name} == ${iq} / 3
