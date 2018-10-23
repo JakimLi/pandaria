@@ -45,10 +45,12 @@ Table of Contents
         * [String](#string)
         * [Integer](#integer)
         * [Extract from response body or results](#extract-from-response-body-or-results)
+        * [Result of code evaluation](#result-of-code-evaluation)
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
         * [In File](#in-file)
         * [In Text](#in-text)
+        * [In Code Evaluation](#in-code-evaluation)
 
 * [Verification](#verification)
     * [Verify http response](#verify-http-response)
@@ -76,6 +78,7 @@ Table of Contents
     * [Verify JSON schema](#verify-json-schema)
     * [Verify null](#verify-null)
     * [Verify variable](#verify-variable)
+    * [Verify code evaluation](#verify-code-evaluation)
     * [Write your own](#write-your-own)
 
 * [Wait](#wait)
@@ -627,6 +630,26 @@ You can also extract from database query results
 * var: 'age'<-'$[0].age'
 ```
 
+#### Result of code evaluation
+@since 0.2.1
+You can evaluate javascript code and assign the result as a variable.
+```gherkin
+* var: 'three'=3
+
+* var: 'six'=code:
+"""
+${three} + 3
+"""
+
+* verify: ${six}=6
+
+* var: 'zero'=code: ${three} - 3
+* verify: ${zero}=0
+
+* var: 'ten'=code file: six_add_four.js
+* verify: ${ten}=10
+```
+
 ### Use Variables
 #### In URI
 ```gherkin
@@ -663,6 +686,17 @@ Scenario: variable used in request file
 * response body:
 """
 {"user":"${username}"}
+"""
+```
+
+#### In code evaluation
+@since 0.2.1
+
+```gherkin
+* var: 'three'=3
+* var: 'six'=code:
+"""
+${three} + 3
 """
 ```
 
@@ -1046,6 +1080,52 @@ You can verify is response/result/variable equals/not-equals to a variable.
 
 * verify: ${user}=${user}
 * verify: ${user}!=${kim}
+```
+
+### Verify code evaluation
+@since 0.2.1
+
+You can write javascript code snippet for verification, there are two forms, verify against the evaluation result or
+verify the evaluation result is true.
+
+You can write the code snippet in one line, in block as doc string, or in separate file.
+
+#### verify response and variable equals the result of the evaluation
+@since 0.2.1
+```gherkin
+* var: 'age'=16
+* var: 'iq'=90.0
+
+* uri: http://localhost:10080/not_important
+* send: get
+* verify: '$.age'=code: ${age} + 2
+* verify: '$.iq'=code: ${iq} - 10
+
+* verify: '$.age'!=code: ${age} + 3
+* verify: '$.iq'!=code: ${iq} - 11
+
+* verify: '$.age'=code:
+"""
+${age} + 2
+"""
+* verify: '$.iq'=code:
+"""
+${iq} - 10
+"""
+
+* verify: '$.age'=code file: 18.js
+* verify: '$.iq'!=code file: 18.js
+```
+
+#### verify the evaluation to be true
+@since 0.2.1
+```gherkin
+* verify code: ${name} == ${iq} / 3
+* verify code:
+"""
+${name} != ${iq} % 3
+"""
+* verify code file: verification.js
 ```
 
 ### Write your own
