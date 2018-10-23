@@ -632,6 +632,7 @@ You can also extract from database query results
 
 #### Result of code evaluation
 @since 0.2.1
+
 You can evaluate javascript code and assign the result as a variable.
 ```gherkin
 * var: 'three'=3
@@ -1092,6 +1093,7 @@ You can write the code snippet in one line, in block as doc string, or in separa
 
 #### verify response and variable equals the result of the evaluation
 @since 0.2.1
+
 ```gherkin
 * var: 'age'=16
 * var: 'iq'=90.0
@@ -1119,6 +1121,7 @@ ${iq} - 10
 
 #### verify the evaluation to be true
 @since 0.2.1
+
 ```gherkin
 * verify code: ${name} == ${iq} / 3
 * verify code:
