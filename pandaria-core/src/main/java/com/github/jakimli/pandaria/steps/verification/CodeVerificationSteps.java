@@ -102,5 +102,4 @@ public class CodeVerificationSteps {
     public void verifyCodeInFileTrue(String file) throws ScriptException, IOException {
         assertThat(eval(variables.interpret(read(configuration.classpathFile(file)))), is(true));
     }
-
 }
