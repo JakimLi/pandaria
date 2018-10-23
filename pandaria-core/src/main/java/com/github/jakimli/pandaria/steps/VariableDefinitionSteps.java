@@ -1,7 +1,9 @@
 package com.github.jakimli.pandaria.steps;
 
+import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.utils.FileUtil;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +11,7 @@ import javax.script.ScriptException;
 import java.io.IOException;
 import java.util.UUID;
 
+import static com.github.jakimli.pandaria.utils.FileUtil.read;
 import static com.github.jakimli.pandaria.utils.ScriptUtil.eval;
 
 public class VariableDefinitionSteps {
@@ -18,6 +21,9 @@ public class VariableDefinitionSteps {
 
     @Autowired
     VerificationContext toBeVerified;
+
+    @Autowired
+    private FeatureConfiguration configuration;
 
     @Given("^var: '([^\"]*)'='([^\"]*)'$")
     public void defineLiteralStringVariable(String key, String value) {
@@ -49,10 +55,16 @@ public class VariableDefinitionSteps {
         variables.assign(key, eval(variables.interpret(code)));
     }
 
-    @Given("^var: '([^\"]*)'=code: `(.*)`$")
+    @Given("^var: '([^\"]*)'=code: (.*)$")
     public void defineVariableFromCodeInLine(String key, String code) throws ScriptException {
         variables.assign(key, eval(variables.interpret(code)));
     }
+
+    @Given("^var: '([^\"]*)'=code file: (.*)$")
+    public void defineVariableFromFile(String key, String file) throws ScriptException, IOException {
+        variables.assign(key, eval(variables.interpret(read(configuration.classpathFile(file)))));
+    }
+
 
     @Given("^var: '([^\"]*)'=random uuid")
     public void defineRandomUUIDVariable(String name) {
