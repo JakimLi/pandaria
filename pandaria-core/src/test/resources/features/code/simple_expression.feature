@@ -34,3 +34,15 @@ Feature: simple expression
 
     * verify: '$.age'!=code: ${age} + 3
     * verify: '$.iq'!=code: ${iq} - 11
+
+    * verify: '$.age'=code:
+    """
+    ${age} + 2
+    """
+    * verify: '$.iq'=code:
+    """
+    ${iq} - 10
+    """
+
+    * verify: '$.age'=code file: 18.js
+    * verify: '$.iq'!=code file: 18.js

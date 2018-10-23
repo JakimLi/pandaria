@@ -55,12 +55,12 @@ public class VariableDefinitionSteps {
         variables.assign(key, eval(variables.interpret(code)));
     }
 
-    @Given("^var: '([^\"]*)'=code: (.*)$")
+    @Given("^var: '([^\"]*)'=code: ([^\"]*)$")
     public void defineVariableFromCodeInLine(String key, String code) throws ScriptException {
         variables.assign(key, eval(variables.interpret(code)));
     }
 
-    @Given("^var: '([^\"]*)'=code file: (.*)$")
+    @Given("^var: '([^\"]*)'=code file: ([^\"]*)$")
     public void defineVariableFromFile(String key, String file) throws ScriptException, IOException {
         variables.assign(key, eval(variables.interpret(read(configuration.classpathFile(file)))));
     }
