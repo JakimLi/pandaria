@@ -62,7 +62,7 @@ public class BasicHttpHooks {
         server.start();
     }
 
-    @Before("@variables")
+    @Before("@variables or @code")
     public void mockForVariableTests() {
         server.server()
                 .get(by(uri("/not_important")))

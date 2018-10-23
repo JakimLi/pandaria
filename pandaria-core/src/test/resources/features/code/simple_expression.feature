@@ -1,3 +1,4 @@
+@code
 Feature: simple expression
   Use code to write simple calculation
 
@@ -20,3 +21,16 @@ Feature: simple expression
 
     * var: 'ten'=code file: six_add_four.js
     * verify: ${ten}=10
+
+  Scenario: verify with code
+
+    * var: 'age'=16
+    * var: 'iq'=90.0
+
+    * uri: http://localhost:10080/not_important
+    * send: get
+    * verify: '$.age'=code: ${age} + 2
+    * verify: '$.iq'=code: ${iq} - 10
+
+    * verify: '$.age'!=code: ${age} + 3
+    * verify: '$.iq'!=code: ${iq} - 11
