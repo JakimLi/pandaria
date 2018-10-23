@@ -6,6 +6,11 @@ Feature: Variables
     * dir: features/variables
     * base uri: http://localhost:10080
 
+  Scenario: initial value from configuration file
+    * verify: ${environment}="test"
+    * var: 'environment'="production"
+    * verify: ${environment}="production"
+
   Scenario: const string
     * var: 'name'='panda'
     * verify: ${name}='panda'
