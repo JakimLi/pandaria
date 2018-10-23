@@ -1155,7 +1155,7 @@ ${iq} - 10
 #### verify the evaluation to be true
 @since 0.2.1
 
-**Be notice the double equals `==` are used for comparison instead of single equal `=` that were used in pandaria.**
+**Be notice the double equals `==` are used for comparison in javascript instead of single equal `=` which was used in pandaria.**
 
 ```gherkin
 * verify code: ${name} == ${iq} / 3
