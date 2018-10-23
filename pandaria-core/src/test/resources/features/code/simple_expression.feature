@@ -46,3 +46,14 @@ Feature: simple expression
 
     * verify: '$.age'=code file: 18.js
     * verify: '$.iq'!=code file: 18.js
+
+  Scenario: verify variable against code
+    * var: 'age'=16
+    * var: 'iq'=129.0
+
+    * var: 'eighty'=80
+    * var: 'name'=code: ${iq} / 3
+
+    * verify: ${eighty}=code: ${age} * 5
+    * verify: ${name}=code: ${iq} / 3
+    * verify: ${name}=double: 43.0

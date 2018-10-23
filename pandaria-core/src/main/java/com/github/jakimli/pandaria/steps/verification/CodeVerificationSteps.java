@@ -56,4 +56,34 @@ public class CodeVerificationSteps {
     public void verifyNotEqualsInFile(String path, String file) throws IOException, ScriptException {
         assertThat(actual.json(path), not(eval(variables.interpret(read(configuration.classpathFile(file))))));
     }
+    
+    @Then("^verify: \\$\\{([^\"]*)}=code: (.*)$")
+    public void verifyVariableEqualsCodeInLine(String path, String code) throws IOException, ScriptException {
+        assertThat(variables.get(path), is(eval(variables.interpret(code))));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=code: (.*)$")
+    public void verifyVariableNotEqualsCodeInLine(String path, String code) throws IOException, ScriptException {
+        assertThat(variables.get(path), not(eval(variables.interpret(code))));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}=code:$")
+    public void verifyVariableEqualsCodeBlock(String path, String code) throws IOException, ScriptException {
+        assertThat(variables.get(path), is(eval(variables.interpret(code))));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=code:$")
+    public void verifyVariableNotEqualsCodeBlock(String path, String code) throws IOException, ScriptException {
+        assertThat(variables.get(path), not(eval(variables.interpret(code))));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}=code file: ([^\"]*)$")
+    public void verifyVariableEqualsCodeInFile(String path, String file) throws IOException, ScriptException {
+        assertThat(variables.get(path), is(eval(variables.interpret(read(configuration.classpathFile(file))))));
+    }
+
+    @Then("^verify: \\$\\{([^\"]*)}!=code file: ([^\"]*)$")
+    public void verifyVariableNotEqualsInFile(String path, String file) throws IOException, ScriptException {
+        assertThat(variables.get(path), not(eval(variables.interpret(read(configuration.classpathFile(file))))));
+    }
 }
