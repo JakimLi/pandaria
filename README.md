@@ -170,7 +170,7 @@ public class RunCucumberTest {
 Then you can start to write your first automation test.
 ```gherkin
 Feature: hello world
-  This is a the first feature for pandaria
+  This is the first feature for pandaria
 
   Scenario: hello world
     * uri: https://github.com
