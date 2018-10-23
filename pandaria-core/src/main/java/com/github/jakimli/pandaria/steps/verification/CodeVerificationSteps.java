@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.script.ScriptException;
 import java.io.IOException;
 
-import static com.github.jakimli.pandaria.utils.FileUtil.file;
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
 import static com.github.jakimli.pandaria.utils.ScriptUtil.eval;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class CodeVerificationSteps {
 
