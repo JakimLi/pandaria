@@ -40,7 +40,7 @@ Table of Contents
     * [Find](#find)
 
 * [Variables](#variables)
-    * [Defintion](#defintion)
+    * [Definition](#defintion)
         * [Literal string](#literal-string)
         * [String](#string)
         * [Integer](#integer)
