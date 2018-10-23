@@ -40,7 +40,8 @@ Table of Contents
     * [Find](#find)
 
 * [Variables](#variables)
-    * [Definition](#defintion)
+    * [Initialization](#initializaton)
+    * [Definition](#definition)
         * [Literal string](#literal-string)
         * [String](#string)
         * [Integer](#integer)
@@ -577,7 +578,24 @@ Instead of find all documents, you can filter the results.
 Variables
 ---------
 
-### Defintion
+### Initialization
+@since 0.2.1
+
+You can put initial value in `application.properties`.
+
+application.properties
+```
+variables.environment=test
+```
+
+```gherkin
+Scenario: initial value from configuration file
+  * verify: ${environment}="test"
+  * var: 'environment'="production"
+  * verify: ${environment}="production"
+```
+
+### Definition
 
 #### Literal string
 If you define variable use single quote, `'${name}'`, variable will **NOT** be replaced.
