@@ -15,6 +15,7 @@ import static com.github.jakimli.pandaria.utils.ScriptUtil.eval;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class CodeVerificationSteps {
 
@@ -56,7 +57,7 @@ public class CodeVerificationSteps {
     public void verifyNotEqualsInFile(String path, String file) throws IOException, ScriptException {
         assertThat(actual.json(path), not(eval(variables.interpret(read(configuration.classpathFile(file))))));
     }
-    
+
     @Then("^verify: \\$\\{([^\"]*)}=code: (.*)$")
     public void verifyVariableEqualsCodeInLine(String path, String code) throws IOException, ScriptException {
         assertThat(variables.get(path), is(eval(variables.interpret(code))));
@@ -86,4 +87,20 @@ public class CodeVerificationSteps {
     public void verifyVariableNotEqualsInFile(String path, String file) throws IOException, ScriptException {
         assertThat(variables.get(path), not(eval(variables.interpret(read(configuration.classpathFile(file))))));
     }
+
+    @Then("^verify code: (.*)")
+    public void verifyCodeInLineTrue(String code) throws ScriptException {
+        assertThat(eval(variables.interpret(code)), is(true));
+    }
+
+    @Then("^verify code:")
+    public void verifyCodeBlockTrue(String code) throws ScriptException {
+        assertThat(eval(variables.interpret(code)), is(true));
+    }
+
+    @Then("^verify code file: ([^\"]*)")
+    public void verifyCodeInFileTrue(String file) throws ScriptException, IOException {
+        assertThat(eval(variables.interpret(read(configuration.classpathFile(file)))), is(true));
+    }
+
 }

@@ -57,3 +57,10 @@ Feature: simple expression
     * verify: ${eighty}=code: ${age} * 5
     * verify: ${name}=code: ${iq} / 3
     * verify: ${name}=double: 43.0
+
+    * verify code: ${name} == ${iq} / 3
+    * verify code:
+    """
+    ${name} != ${iq} % 3
+    """
+    * verify code file: verification.js
