@@ -11,3 +11,6 @@ Feature: simple expression
     """
 
     * verify: ${five}=6
+
+    * var: 'zero'=code: ${three} - 3
+    * verify: ${zero}=0
