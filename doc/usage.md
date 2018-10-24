@@ -1125,7 +1125,7 @@ You can write the code snippet in one line, in block as doc string, or in separa
 * If you need to write complex code in the snippet, consider to put them in java with cucumber steps first.
 * [Nashorn](https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html) is used for script evaluation.
 * If your jdk version under java 8u40, you might encounter issue about 0 was returned as 0.0, you can either upgrade your jdk version
-or you need to do use it as double.
+or you need to use it as double.
 
 #### verify response and variable equals the result of the evaluation
 @since 0.2.1
