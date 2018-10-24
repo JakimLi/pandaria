@@ -493,6 +493,7 @@ CREATE TABLE USERS(
     NAME VARCHAR(256) NOT NULL,
     AGE INTEGER(5) NOT NULL
 );
+"""
 
 * execute sql: drop_table.sql
 * execute sql: setup.sql
