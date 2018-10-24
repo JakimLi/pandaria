@@ -618,7 +618,7 @@ Scenario: string
   * verify: ${great}="hello ${name}"
 ```
 
-### Integer
+#### Integer
 ```gherkin
 Scenario: integer
   * var 'age'=18
