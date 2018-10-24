@@ -1,4 +1,21 @@
-Release 0.2.0 (2018-10-21) Latest
+Relase 0.2.1 (2018-10-24) Latest
+================================
+Variables
+---------
+* Initialize from properties file
+* Definition by evaluate javascript code
+* Usage in javascript code evaluation
+
+Verfications
+------------
+* Verify javascript code
+
+Others
+-----------
+* Suppress http compliance validation
+
+
+Release 0.2.0 (2018-10-21)
 =================================
 Mongo DB
 --------
