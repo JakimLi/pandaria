@@ -1267,7 +1267,7 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].name'="jakim"
 * verify: '$[0].age'=18
 ```
-**Only the database query will be repeated if the verification failed, NOT the http request.**
+**Both the database query and the http request will be repeated, but verification can only be applied to the database query**
 
 Utilities
 ---------
