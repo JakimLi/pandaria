@@ -30,7 +30,9 @@ dependencies {
             "org.glassfish.jersey.core:jersey-common:${jersey}",
             "org.glassfish.jersey.media:jersey-media-json-jackson:${jersey}",
             "org.glassfish.jersey.media:jersey-media-multipart:${jersey}",
-            "org.glassfish.jersey.inject:jersey-hk2:${jersey}"
+            "org.glassfish.jersey.inject:jersey-hk2:${jersey}",
+
+            "com.github.javafaker:javafaker:${faker}"
     )
 
     testCompile(

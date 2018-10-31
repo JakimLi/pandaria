@@ -39,6 +39,8 @@ subprojects {
         json_unit = '2.0.0.RC4'
 
         mongo = '3.8.2'
+
+        faker = '0.16'
     }
 
     task javadocJar(type: Jar) {

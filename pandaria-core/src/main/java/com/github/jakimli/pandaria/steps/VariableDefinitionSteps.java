@@ -3,6 +3,7 @@ package com.github.jakimli.pandaria.steps;
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.javafaker.Faker;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -68,5 +69,10 @@ public class VariableDefinitionSteps {
     @Given("^var: '([^\"]*)'=random uuid")
     public void defineRandomUUIDVariable(String name) {
         variables.assign(name, UUID.randomUUID());
+    }
+
+    @Given("^var: '([^\"]*)'=faker: ([^\"]*)$")
+    public void faker(String name, String expression) {
+        variables.assign(name, new Faker().expression(expression));
     }
 }
