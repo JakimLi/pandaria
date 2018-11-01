@@ -9,13 +9,16 @@ import static com.github.dreamhead.moco.Moco.by;
 import static com.github.dreamhead.moco.Moco.contain;
 import static com.github.dreamhead.moco.Moco.cookie;
 import static com.github.dreamhead.moco.Moco.eq;
+import static com.github.dreamhead.moco.Moco.exist;
 import static com.github.dreamhead.moco.Moco.header;
 import static com.github.dreamhead.moco.Moco.json;
 import static com.github.dreamhead.moco.Moco.jsonPath;
 import static com.github.dreamhead.moco.Moco.method;
+import static com.github.dreamhead.moco.Moco.not;
 import static com.github.dreamhead.moco.Moco.or;
 import static com.github.dreamhead.moco.Moco.query;
 import static com.github.dreamhead.moco.Moco.seq;
+import static com.github.dreamhead.moco.Moco.startsWith;
 import static com.github.dreamhead.moco.Moco.status;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
@@ -26,6 +29,21 @@ public class BasicHttpHooks {
 
     @Autowired
     MockServer server;
+
+    @Before("@faker")
+    public void faker() {
+        server.server()
+                .post(and(
+                        by(uri("/faker/users")),
+                        exist(jsonPath("$.name")),
+                        not(startsWith(jsonPath("$.name"), "#{")),
+                        exist(jsonPath("$.city")),
+                        not(startsWith(jsonPath("$.city"), "#{"))
+                ))
+                .response("success");
+
+        server.start();
+    }
 
     @Before("@http_global_headers")
     public void globalHttpHeaders() {
