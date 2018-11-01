@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.domain;
 
+import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -27,8 +28,8 @@ public class FeatureConfiguration {
         this.fakerLocale = fakerLocale;
     }
 
-    public Locale fakerLocale() {
-        return fakerLocale;
+    public Faker faker() {
+        return new Faker(fakerLocale);
     }
 
     public String classpathFile(String file) {

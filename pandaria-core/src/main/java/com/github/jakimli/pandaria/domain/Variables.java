@@ -35,6 +35,6 @@ public class Variables {
     }
 
     public String interpret(String value) {
-        return eval(configuration.fakerLocale(), replace(value, variables));
+        return eval(configuration.faker(), replace(value, variables));
     }
 }
