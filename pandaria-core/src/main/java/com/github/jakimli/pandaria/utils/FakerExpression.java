@@ -10,6 +10,10 @@ public class FakerExpression {
 
     public static String eval(String content) {
         Matcher matcher = Pattern.compile(EXPRESSION).matcher(content);
+        return replace(matcher);
+    }
+
+    private static String replace(Matcher matcher) {
         StringBuffer buffer = new StringBuffer();
         while (matcher.find()) {
             matcher.appendReplacement(buffer, new Faker().expression(matcher.group(1)));

@@ -1,9 +1,10 @@
 @faker
-Feature: faker usage in variable
-  Assign fake data to a variable, so that it can be used for test, or directly put it in requests/sql
+Feature: faker usage in http request and response
+  Assign fake data to a variable, so that it can be used for test, or directly put it in requests
 
   Background:
     * base uri: http://localhost:10080
+    * dir: features/faker
 
   # http://dius.github.io/java-faker/apidocs/index.html
   Scenario: assign it to variable
@@ -13,12 +14,21 @@ Feature: faker usage in variable
     * var: 'full_name'=faker: #{name.full_name}
     * verify code: "${full_name}".length > 0
 
-  Scenario: use it in request body as doc string
+  Scenario: faker in request body as doc string
     * uri: /faker/users
     * request body:
     """
     {"name": "#{Name.fullName}", "city": "#{Address.city}"}
     """
+    * send: POST
+    * response body:
+    """
+    success
+    """
+
+  Scenario: faker in request body as file
+    * uri: /faker/users
+    * request body: requests/user.json
     * send: POST
     * response body:
     """
