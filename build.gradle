@@ -79,7 +79,7 @@ subprojects {
                     packaging 'jar'
                     // optionally artifactId can be defined here
                     description 'A lightweight API test framework'
-                    url 'http://www.example.com/example-application'
+                    url 'https://github.com/JakimLi/pandaria'
 
                     scm {
                         connection 'https://github.com/JakimLi/pandaria.git'
