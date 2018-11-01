@@ -34,3 +34,8 @@ Feature: faker usage in http request and response
     """
     success
     """
+
+  Scenario: faker locale
+    * faker locale: zh-CN
+    * var: 'name'=faker: #{name.full_name}
+    * verify: ${name} matches: '\p{sc=Han}*'

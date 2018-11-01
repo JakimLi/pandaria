@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,9 @@ import static org.apache.commons.text.StringSubstitutor.replace;
 @Scope("cucumber-glue")
 @ConfigurationProperties()
 public class Variables {
+
+    @Autowired
+    FeatureConfiguration configuration;
 
     private Map<String, Object> variables = newHashMap();
 
@@ -31,6 +35,6 @@ public class Variables {
     }
 
     public String interpret(String value) {
-        return eval(replace(value, variables));
+        return eval(configuration.fakerLocale(), replace(value, variables));
     }
 }

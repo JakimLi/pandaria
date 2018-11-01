@@ -73,6 +73,6 @@ public class VariableDefinitionSteps {
 
     @Given("^var: '([^\"]*)'=faker: ([^\"]*)$")
     public void faker(String name, String expression) {
-        variables.assign(name, new Faker().expression(expression));
+        variables.assign(name, new Faker(configuration.fakerLocale()).expression(expression));
     }
 }
