@@ -737,7 +737,7 @@ This gives error because `${three}` is not understand by javascript engine.
 Its useful to have random real-looking fake data for testing, Pandaria has integerated with [java-faker](https://github.com/DiUS/java-faker)
 for fake data generation.
 
-#### define it as variable
+#### Define it as variable
 You can generate fake data and assign it to a variable
 
 ```gherkin
