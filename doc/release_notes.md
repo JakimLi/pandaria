@@ -2,7 +2,7 @@ Relase 0.2.2  (2018-11-2) Latest
 ================================
 Feature Configuration
 ---------------------
-* faker locale
+* Faker locale
 
 Variables
 ---------
