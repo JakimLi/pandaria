@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+import static com.github.jakimli.pandaria.utils.FakerExpression.evaluate;
 import static com.google.common.collect.Maps.newHashMap;
 import static org.apache.commons.text.StringSubstitutor.replace;
 
@@ -34,6 +35,6 @@ public class Variables {
     }
 
     public String interpret(String value) {
-        return configuration.faker().expression(replace(value, variables));
+        return evaluate(configuration.faker(), replace(value, variables));
     }
 }
