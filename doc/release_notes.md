@@ -1,4 +1,14 @@
-Relase 0.2.1 (2018-10-24) Latest
+Relase 0.2.2  (2018-11-2) Latest
+================================
+Feature Configuration
+---------------------
+* faker locale
+
+Variables
+---------
+* Use Faker to generate fake data
+
+Relase 0.2.1 (2018-10-24)
 ================================
 Variables
 ---------
