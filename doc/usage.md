@@ -738,7 +738,7 @@ Its useful to have random real-looking fake data for testing, Pandaria has integ
 for fake data generation.
 
 #### Define it as variable
-You can generate fake data and assign it to a variable
+You can generate fake data and assign it to a variable, `#{expression}` is used.
 
 ```gherkin
 * var: 'name'=faker: #{Name.firstName}
