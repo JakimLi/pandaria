@@ -12,7 +12,7 @@ Feature: faker usage in SQL
     * execute sql:
     """
     INSERT INTO USERS(NAME, AGE)
-    VALUES('#{name.full_name}', #{number.number_between '1','100'});
+    VALUES("#{name.full_name}", #{number.number_between '1','100'});
     """
     * query:
     """
