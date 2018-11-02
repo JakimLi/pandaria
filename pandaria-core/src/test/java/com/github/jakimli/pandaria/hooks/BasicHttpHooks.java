@@ -42,6 +42,16 @@ public class BasicHttpHooks {
                 ))
                 .response("success");
 
+        server.server()
+                .post(and(
+                        by(uri("/faker/users/escape")),
+                        exist(jsonPath("$.name")),
+                        not(startsWith(jsonPath("$.name"), "#{")),
+                        exist(jsonPath("$.city")),
+                        eq(jsonPath("$.city"), "#{Address.city}")
+                ))
+                .response("success");
+
         server.start();
     }
 

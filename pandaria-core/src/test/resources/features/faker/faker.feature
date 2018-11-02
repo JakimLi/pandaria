@@ -39,3 +39,15 @@ Feature: faker usage in http request and response
     * faker locale: zh-CN
     * var: 'name'=faker: #{name.full_name}
     * verify: ${name} matches: '\p{sc=Han}*'
+
+  Scenario: escape with ##{}
+    * uri: /faker/users/escape
+    * request body:
+    """
+    {"name": "#{Name.fullName}", "city": "##{Address.city}"}
+    """
+    * send: POST
+    * response body:
+    """
+    success
+    """
