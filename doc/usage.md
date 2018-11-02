@@ -53,6 +53,7 @@ Table of Contents
         * [In Text](#in-text)
         * [In Code Evaluation](#in-code-evaluation)
     * [Escape](#escape)
+    * [Special variable with Faker](#special-variable-with-faker)
 
 * [Verification](#verification)
     * [Verify http response](#verify-http-response)
@@ -730,6 +731,73 @@ $${three} + 3
 """
 ```
 This gives error because `${three}` is not understand by javascript engine.
+
+### Special variable with Faker
+
+Its useful to have random real-looking fake data for testing, Pandaria has integerated with [java-faker](https://github.com/DiUS/java-faker)
+for fake data generation.
+
+#### define it as variable
+You can generate fake data and assign it to a variable
+
+```gherkin
+* var: 'name'=faker: #{Name.firstName}
+* verify code: "${name}".length > 0
+
+* var: 'full_name'=faker: #{Name.fullName}
+* verify code: "${full_name}".length > 0
+```
+
+#### Use it immediately
+Or you can directly use it in request body, or sql, mongo json, works in file as well.
+```gherkin
+* uri: /faker/users
+* request body:
+"""
+{"name": "#{Name.fullName}", "city": "#{Address.city}"}
+"""
+* send: POST
+* response body:
+"""
+success
+"""
+```
+
+#### Locale
+You can switch locale, default is `en`.
+```gherkin
+* faker locale: zh-CN
+* var: 'name'=faker: #{name.full_name}
+* verify: ${name} matches: '\p{sc=Han}*'
+```
+
+`* verify: ${name} matches: '\p{sc=Han}*'` ensure `${name}` all chinese characters.
+
+#### Change Default locale
+Default locale can be set in `application.properties` with `faker.locale`
+```
+faker.locale=zh-CN
+```
+
+#### Escape
+You can escape it:
+```gherkin
+* uri: /faker/users/escape
+* request body:
+"""
+{"name": "#{Name.fullName}", "city": "##{Address.city}"}
+"""
+* send: POST
+* response body:
+"""
+success
+"""
+```
+In above example, name will be set to a fake name, but city will be set to `#{Address.ctiy}`
+
+**You are not allowed to escape when define varaible use faker with fake data, `var: 'name'=faker: ##{Name.fullName}`**
+**will not work, use `var: 'name'='#{Name.fullName}'` instead.**
+
 
 Verification
 -----------
