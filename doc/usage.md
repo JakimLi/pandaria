@@ -774,7 +774,7 @@ success
 You can switch locale, default is `en`.
 ```gherkin
 * faker locale: zh-CN
-* var: 'name'=faker: #{name.full_name}
+* var: 'name'=faker: #{name.fullName}
 * verify: ${name} matches: '\p{sc=Han}*'
 ```
 
