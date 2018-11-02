@@ -733,11 +733,14 @@ $${three} + 3
 This gives error because `${three}` is not understand by javascript engine.
 
 ### Special variable with Faker
+@since 0.2.2
 
 Its useful to have random real-looking fake data for testing, Pandaria has integerated with [java-faker](https://github.com/DiUS/java-faker)
 for fake data generation.
 
 #### Define it as variable
+@since 0.2.2
+
 You can generate fake data and assign it to a variable, `#{expression}` is used.
 
 ```gherkin
@@ -749,6 +752,8 @@ You can generate fake data and assign it to a variable, `#{expression}` is used.
 ```
 
 #### Use it immediately
+@since 0.2.2
+
 Or you can directly use it in request body, or sql, mongo json, works in file as well.
 ```gherkin
 * uri: /faker/users
@@ -764,6 +769,8 @@ success
 ```
 
 #### Locale
+@since 0.2.2
+
 You can switch locale, default is `en`.
 ```gherkin
 * faker locale: zh-CN
@@ -774,12 +781,16 @@ You can switch locale, default is `en`.
 `* verify: ${name} matches: '\p{sc=Han}*'` ensure `${name}` all chinese characters.
 
 #### Change Default locale
+@since 0.2.2
+
 Default locale can be set in `application.properties` with `faker.locale`
 ```
 faker.locale=zh-CN
 ```
 
 #### Escape
+@since 0.2.2
+
 You can escape it:
 ```gherkin
 * uri: /faker/users/escape
