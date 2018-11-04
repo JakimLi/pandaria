@@ -3,7 +3,7 @@ apply plugin: 'java'
 
 allprojects {
     group = 'com.github.jakimli.pandaria'
-    version = '0.2.2'
+    version = '0.2.3'
 }
 
 allprojects {
