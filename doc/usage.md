@@ -12,6 +12,7 @@ Table of Contents
 * [Feature Configurtion](#feature-configuration)
     * [dir](#dir)
     * [base uri](#base-uri)
+    * [faker locale](#faker-locale)
 * [Test HTTP(S) APIs](#test-https-apis)
     * [Methods](#methods)
         * [GET](#get)
@@ -167,6 +168,17 @@ Feature: Http feature
 ```
 
 You can use absolute uri with `uri: http://host:port`, best practice is to make it short
+
+### faker locale
+Java faker is used in pandaria to generate fake testing data, by default the locale is "en", you can set the default locale
+in application.properties, you can override the locale use `faker locale` like below.
+
+```gherkin
+Scenario: faker locale
+  * faker locale: zh-CN
+  * var: 'name'=faker: #{name.full_name}
+  * verify: ${name} matches: '\p{sc=Han}*'
+```
 
 
 Test HTTP(S) APIs
