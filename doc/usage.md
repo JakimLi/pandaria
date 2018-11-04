@@ -54,6 +54,7 @@ Table of Contents
         * [In Code Evaluation](#in-code-evaluation)
     * [Escape](#escape)
     * [Special variable with Faker](#special-variable-with-faker)
+    * [Special variable with last response](#special-variable-with-last-response)
 
 * [Verification](#verification)
     * [Verify http response](#verify-http-response)
@@ -808,6 +809,59 @@ In above example, name will be set to a fake name, but city will be set to `#{Ad
 
 **You are not allowed to escape when define varaible use faker with fake data, `var: 'name'=faker: ##{Name.fullName}`**
 **will not work, use `var: 'name'='#{Name.fullName}'` instead.**
+
+
+### Special variable with last response
+@since 0.2.3
+
+It's useful that you can use part of or whole http response as next request body. you can use `@{<json path>}` in your
+next request body, Pandaria will replace it for you. Works in file as well.
+
+Whole response for next request
+
+```gherkin
+* uri: /users/me
+* send: get
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+* verify: '$.iq'=double: 80.0
+
+* uri: /users
+* request body:
+"""
+@{$}
+"""
+* send: POST
+* status: 200
+* verify: '$.id'='auto-generated'
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+Part of the response for next request
+
+```gherkin
+* uri: /users/me
+* send: get
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+* verify: '$.iq'=double: 80.0
+
+* uri: /users
+* request body:
+"""
+{ "username": @{$.username}}
+"""
+* send: POST
+* status: 200
+* verify: '$.id'='auto-generated'
+* verify: '$.username'='jakim'
+* verify: '$.age'=18
+```
+
+**Please be careful about the double quotes, because Pandaria assumes the value of json path expression is also a JSON,**
+**so it will automatically handle double quotes, with variables in `${}` or faker expresson `#{}`, you will need to handle**
+**double quotes yourself**
 
 
 Verification
