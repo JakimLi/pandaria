@@ -1,15 +1,24 @@
-package com.github.jakimli.pandaria.utils;
+package com.github.jakimli.pandaria.domain.variable;
 
+import com.github.jakimli.pandaria.domain.variable.Variables.Expression;
 import com.github.javafaker.Faker;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FakerExpression {
+class FakerExpression implements Expression {
+
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("(#?#\\{[a-z0-9A-Z_.]+\\s?(?:'([^']+)')?(?:,'([^']+)')*})");
 
-    public static String evaluate(Faker faker, String expression) {
-        Matcher matcher = EXPRESSION_PATTERN.matcher(expression);
+    private Faker faker;
+
+    FakerExpression(Faker faker) {
+        this.faker = faker;
+    }
+
+    @Override
+    public String evaluate(String raw) {
+        Matcher matcher = EXPRESSION_PATTERN.matcher(raw);
 
         StringBuffer buffer = new StringBuffer();
         while (matcher.find()) {
@@ -18,7 +27,7 @@ public class FakerExpression {
                 matcher.appendReplacement(buffer, group.substring(1));
                 continue;
             }
-            matcher.appendReplacement(buffer, faker.expression(group));
+            matcher.appendReplacement(buffer, this.faker.expression(group));
         }
         matcher.appendTail(buffer);
         return buffer.toString();

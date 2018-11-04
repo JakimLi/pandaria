@@ -1,6 +1,6 @@
 package com.github.jakimli.pandaria.steps;
 
-import com.github.jakimli.pandaria.domain.Variables;
+import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import com.github.jakimli.pandaria.domain.http.HttpContext;

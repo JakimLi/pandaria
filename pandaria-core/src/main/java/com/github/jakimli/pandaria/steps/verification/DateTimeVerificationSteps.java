@@ -1,6 +1,6 @@
 package com.github.jakimli.pandaria.steps.verification;
 
-import com.github.jakimli.pandaria.domain.Variables;
+import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import cucumber.api.java.en.Then;
 import org.joda.time.DateTime;
