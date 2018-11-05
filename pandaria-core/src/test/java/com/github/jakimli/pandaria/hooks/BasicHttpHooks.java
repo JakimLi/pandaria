@@ -20,6 +20,7 @@ import static com.github.dreamhead.moco.Moco.query;
 import static com.github.dreamhead.moco.Moco.seq;
 import static com.github.dreamhead.moco.Moco.startsWith;
 import static com.github.dreamhead.moco.Moco.status;
+import static com.github.dreamhead.moco.Moco.template;
 import static com.github.dreamhead.moco.Moco.text;
 import static com.github.dreamhead.moco.Moco.uri;
 import static com.google.common.collect.ImmutableMap.of;
@@ -29,6 +30,17 @@ public class BasicHttpHooks {
 
     @Autowired
     MockServer server;
+
+    @Before("@outline")
+    public void outline() {
+        server.server()
+                .post(and(
+                        by(uri("/users"))
+                ))
+                .response(template("${req.content}"));
+
+        server.start();
+    }
 
     @Before("@faker")
     public void faker() {
