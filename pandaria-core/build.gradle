@@ -7,6 +7,10 @@ dependencies {
             "io.cucumber:cucumber-java:${cucumber}",
             "io.cucumber:cucumber-spring:${cucumber}",
 
+            // cucumber-spring has @txn hooks, which requires db related jars, cucumber-spring is required for
+            // pandaria-core, so add db dependency here otherwise it will give NoClassDefError on TransactionDefinition.
+            "org.springframework:spring-jdbc:${spring_jdbc}",
+
             "org.springframework.boot:spring-boot-starter-test:${springboot}",
             "org.springframework.boot:spring-boot-starter:${springboot}",
             "org.springframework.boot:spring-boot-starter-aop:${springboot}",
@@ -56,7 +60,7 @@ task cucumber() {
         javaexec {
             main = "cucumber.api.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'com.github.jakimli.pandaria', 'src/test/resources']
+            args = ['--plugin', 'pretty', '--glue', 'com.github.jakimli.pandaria', '--glue', 'cucumber.api.spring', 'src/test/resources']
         }
     }
 }
