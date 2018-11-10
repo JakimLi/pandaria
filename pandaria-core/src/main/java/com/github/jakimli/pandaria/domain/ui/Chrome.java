@@ -18,7 +18,7 @@ public class Chrome implements Driver.Supplier {
     @Value("${chrome.driver}")
     private String driver;
 
-    @Value("${chrome.location")
+    @Value("${chrome.location}")
     private String location;
 
     @Override

@@ -1,0 +1,10 @@
+[
+  {
+    "request": {
+      "uri": "/index.html"
+    },
+    "response": {
+      "file": "local/index.html"
+    }
+  }
+]
