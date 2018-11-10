@@ -4,7 +4,13 @@ jdk:
 - oraclejdk8
 - openjdk8
 
-install: true
+install:
+  - wget -N http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip -P ~/
+  - unzip ~/chromedriver_linux64.zip -d ~/
+  - rm ~/chromedriver_linux64.zip
+  - sudo mv -f ~/chromedriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 
 before_install:
 - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('password') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
@@ -29,14 +35,6 @@ services:
 sudo: required
 addons:
   chrome: stable
-  install:
-    - wget -N http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip -P ~/
-    - unzip ~/chromedriver_linux64.zip -d ~/
-    - rm ~/chromedriver_linux64.zip
-    - sudo mv -f ~/chromedriver /usr/local/share/
-    - sudo chmod +x /usr/local/share/chromedriver
-    - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-
   apt:
     sources:
     - mysql-5.7-trusty
