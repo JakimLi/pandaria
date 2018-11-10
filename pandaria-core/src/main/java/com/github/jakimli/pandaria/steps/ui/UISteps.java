@@ -10,9 +10,9 @@ public class UISteps {
     public void openBrowserAndGo(String uri) {
         ChromeOptions options = new ChromeOptions();
 
-        System.setProperty("webdriver.chrome.driver", "/Work/pandaria/pandaria-core/src/test/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Work/chromedriver");
 
-        options.setHeadless(true);
+        options.setHeadless(false);
 
         WebDriver driver = new ChromeDriver(options);
 
