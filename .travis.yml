@@ -16,8 +16,10 @@ before_script:
 - mongo admin --eval 'db.createUser({user:"root",pwd:"password",roles:["root"]});'
 
 script:
+  - whereis google-chrome-stable
+  - whereis chromedriver
   - "./local/start.sh"
-  - "./gradlew clean build -x signArchives"
+  - "CHROME_DRIVER=/usr/local/share/chromedriver ./gradlew clean build -x signArchives"
   - "./local/stop.sh"
 
 services:
@@ -28,12 +30,12 @@ sudo: required
 addons:
   chrome: stable
   install:
-  - wget -N http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip -P ~/
-  - unzip ~/chromedriver_linux64.zip -d ~/
-  - rm ~/chromedriver_linux64.zip
-  - sudo mv -f ~/chromedriver /usr/local/share/
-  - sudo chmod +x /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+    - wget -N http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip -P ~/
+    - unzip ~/chromedriver_linux64.zip -d ~/
+    - rm ~/chromedriver_linux64.zip
+    - sudo mv -f ~/chromedriver /usr/local/share/
+    - sudo chmod +x /usr/local/share/chromedriver
+    - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
 
   apt:
     sources:
