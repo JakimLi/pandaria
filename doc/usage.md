@@ -92,6 +92,8 @@ Table of Contents
 
 * [Utilities](#utilities)
 
+* [Data Driven](#data-driven)
+
 Feature Configuration
 ---------------------
 You must configure some basics to make the framework work properly.
@@ -1427,3 +1429,64 @@ Scenario: generate random number
 ```
 
 Example uuid: `123e4567-e89b-12d3-a456-556642440000`
+
+
+Data Driven
+-----------
+You can use cucumber senario outline for data driven scenarios
+
+```gherkin
+
+@outline
+Feature: data driven
+  data driven should work with scenario outline
+
+  Background:
+    * dir: features/outline
+    * base uri: http://localhost:10080
+
+  Scenario Outline:
+    * uri: /users
+    * request body:
+    """
+    { "username": "<username>" }
+    """
+    * send: POST
+    * status: 200
+    * verify: '$.username'='<username>'
+
+    Examples:
+      | username |
+      | jakim    |
+      | alice    |
+      | bob      |
+      | steve    |
+```
+
+Use variable, so you can use data in Examples section in file.
+
+```gherkin
+
+  Scenario Outline:
+    * var: 'username'='<username>'
+
+    * uri: /users
+    * request body: requests/user.json
+    * send: POST
+    * status: 200
+    * verify: '$.username'='<username>'
+
+    Examples:
+      | username |
+      | jakim    |
+      | alice    |
+      | bob      |
+      | steve    |
+```
+
+requests/user.json
+```json
+{
+  "username": "${username}"
+}
+```
