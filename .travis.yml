@@ -26,7 +26,6 @@ script:
   - whereis chromedriver
   - "./local/start.sh"
   - "CHROME_DRIVER=/usr/local/share/chromedriver ./gradlew clean build -x signArchives"
-  - "./local/stop.sh"
 
 services:
 - mysql
