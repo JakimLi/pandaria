@@ -14,7 +14,7 @@ import static org.apache.commons.text.StringSubstitutor.replace;
 
 @Component
 @Scope("cucumber-glue")
-@ConfigurationProperties()
+@ConfigurationProperties
 public class Variables {
 
     @Autowired
