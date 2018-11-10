@@ -42,6 +42,8 @@ subprojects {
         mongo = '3.8.2'
 
         faker = '0.16'
+
+        selenium = '3.141.5'
     }
 
     task javadocJar(type: Jar) {
