@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = "pretty",
         features = "classpath:features/",
-        glue = {"com.github.jakimli.pandaria"})
+        glue = {"com.github.jakimli.pandaria"},
+        tags = "not @ignore")
 public class RunCucumberTest {
 }

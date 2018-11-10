@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class UISteps {
+
+    private WebDriver driver;
+
     @When("^open: ([^\"]*)$")
     public void openBrowserAndGo(String uri) {
         ChromeOptions options = new ChromeOptions();
@@ -14,8 +17,13 @@ public class UISteps {
 
         options.setHeadless(false);
 
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
 
         driver.get(uri);
+    }
+
+    @When("^close$")
+    public void close() {
+       driver.close();
     }
 }
