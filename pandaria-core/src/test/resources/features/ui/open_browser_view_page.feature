@@ -6,5 +6,5 @@ Feature: open browser
 
   Scenario: open browser and go to a page
     * open: /index.html
-    * verify: '#base' text: 'index.html'
+    * verify: '#current' text: 'index.html'
     * close
