@@ -1463,7 +1463,7 @@ Feature: data driven
       | steve    |
 ```
 
-Use variable, so you can use data in Examples section in file.
+Use variable, so you can reference data in Examples section in external file.
 
 ```gherkin
 
