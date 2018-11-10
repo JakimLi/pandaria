@@ -1430,6 +1430,8 @@ Scenario: generate random number
 
 Example uuid: `123e4567-e89b-12d3-a456-556642440000`
 
+You can generate almost all kinds of random testing data by using [faker expression](#special-variable-with-faker)
+
 
 Data Driven
 -----------
