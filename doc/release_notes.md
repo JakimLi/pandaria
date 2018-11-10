@@ -1,4 +1,15 @@
-Relase 0.2.3  (2018-11-4) Latest
+Release 0.2.4 (2018-11-10) Latest
+=================================
+Issue fixed
+-----------
+* Fix intellij run configuration complains transactiondefinition classnodeferror
+
+Other
+-----
+* Add banner
+
+
+Relase 0.2.3  (2018-11-4)
 ================================
 Variables
 ---------
