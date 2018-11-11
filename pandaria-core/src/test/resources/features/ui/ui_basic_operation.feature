@@ -7,4 +7,6 @@ Feature: open browser
   Scenario: open browser and go to a page
     * open: /index.html
     * verify: '#current' text: 'index.html'
+    * click: '#users'
+    * verify: '#current' text: 'users.html'
     * close

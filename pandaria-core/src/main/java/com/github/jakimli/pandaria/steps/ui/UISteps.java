@@ -7,6 +7,8 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.github.jakimli.pandaria.utils.SelectorUtil.by;
+
 public class UISteps {
 
     @Autowired
@@ -26,6 +28,11 @@ public class UISteps {
     @When("^close$")
     public void close() {
         driver().close();
+    }
+
+    @When("^click: '([^\"]*)'$")
+    public void click(String selector) {
+        driver().findElement(by(selector)).click();
     }
 
     private WebDriver driver() {
