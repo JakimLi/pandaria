@@ -35,6 +35,21 @@ public class UISteps {
         driver().findElement(by(selector)).click();
     }
 
+    @When("^navigate back$")
+    public void navigateBack() {
+        driver().navigate().back();
+    }
+
+    @When("^navigate forward$")
+    public void navigateForward() {
+        driver().navigate().forward();
+    }
+
+    @When("^navigate refresh$")
+    public void refresh() {
+        driver().navigate().refresh();
+    }
+
     private WebDriver driver() {
         return driver.get();
     }

@@ -1,12 +1,23 @@
-Feature: open browser
-  open a headless browser and then go to a page
+Feature: ui operations
+  basic ui operations, like navigation, clicking
 
   Background:
     * base uri: http://localhost:12306/local
 
-  Scenario: open browser and go to a page
+  Scenario: navigate and refresh
     * open: /index.html
     * verify: '#current' text: 'index.html'
+
     * click: '#users'
     * verify: '#current' text: 'users.html'
+
+    * navigate back
+    * verify: '#current' text: 'index.html'
+
+    * navigate forward
+    * verify: '#current' text: 'users.html'
+
+    * navigate refresh
+    * verify: '#current' text: 'users.html'
+
     * close
