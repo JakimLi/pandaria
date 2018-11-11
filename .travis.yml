@@ -22,10 +22,9 @@ before_script:
 - mongo admin --eval 'db.createUser({user:"root",pwd:"password",roles:["root"]});'
 
 script:
-  - whereis google-chrome-stable
-  - whereis chromedriver
   - "./local/start.sh"
   - "CHROME_DRIVER=/usr/local/share/chromedriver ./gradlew clean build -x signArchives"
+  - "./local/stop.sh"
 
 services:
 - mysql
