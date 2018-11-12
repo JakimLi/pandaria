@@ -35,17 +35,17 @@ public class UISteps {
         driver().findElement(by(selector)).click();
     }
 
-    @When("^navigate back$")
+    @When("^go back$")
     public void navigateBack() {
         driver().navigate().back();
     }
 
-    @When("^navigate forward$")
+    @When("^go forward$")
     public void navigateForward() {
         driver().navigate().forward();
     }
 
-    @When("^navigate refresh$")
+    @When("^refresh$")
     public void refresh() {
         driver().navigate().refresh();
     }

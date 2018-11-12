@@ -11,13 +11,13 @@ Feature: ui operations
     * click: '#users'
     * verify: '#current' text: 'users.html'
 
-    * navigate back
+    * go back
     * verify: '#current' text: 'index.html'
 
-    * navigate forward
+    * go forward
     * verify: '#current' text: 'users.html'
 
-    * navigate refresh
+    * refresh
     * verify: '#current' text: 'users.html'
 
     * close
