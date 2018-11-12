@@ -324,7 +324,7 @@ Scenario: simple trace
 * send: GET
 * status: 200
 ```
-**The default request header is application/json, you can override it by setting a `Content-Type` header**
+**The default content type is application/json, you can override it by setting a `Content-Type` header**
 
 #### global request header
 It's useful to have a http header that can be applied to every http request, for testing account authentication.
