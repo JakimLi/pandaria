@@ -5,9 +5,9 @@ import cucumber.api.java.en.Then;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.jakimli.pandaria.utils.SelectorUtil.by;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.openqa.selenium.By.cssSelector;
 
 public class TextVerificationSteps {
 
@@ -15,8 +15,8 @@ public class TextVerificationSteps {
     Driver driver;
 
     @Then("verify: '([^\"]*)' text: '([^\"]*)'")
-    public void verifyTextById(String id, String text) {
-        WebElement element = driver.get().findElement(by(id));
+    public void verifyTextById(String cssSelector, String text) {
+        WebElement element = driver.get().findElement(cssSelector(cssSelector));
         assertThat(element.getText(), is(text));
     }
 }

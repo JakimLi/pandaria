@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.jakimli.pandaria.utils.SelectorUtil.by;
+import static org.openqa.selenium.By.cssSelector;
 
 public class UISteps {
 
@@ -32,7 +32,7 @@ public class UISteps {
 
     @When("^click: '([^\"]*)'$")
     public void click(String selector) {
-        driver().findElement(by(selector)).click();
+        driver().findElement(cssSelector(selector)).click();
     }
 
     @When("^go back$")
