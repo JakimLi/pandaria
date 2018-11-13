@@ -5,7 +5,12 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = "pretty",
+@CucumberOptions(plugin = {
+        "pretty",
+        "junit:build/cucumber-reports/cucumber.xml",
+        "json:build/cucumber-reports/cucumber.json",
+        "html:build/cucumber-reports",
+},
         features = "classpath:features/",
         glue = {"com.github.jakimli.pandaria"},
         tags = "not @ignore")
