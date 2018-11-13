@@ -7,8 +7,6 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.openqa.selenium.By.cssSelector;
-
 public class UISteps {
 
     @Autowired
@@ -32,7 +30,7 @@ public class UISteps {
 
     @When("^click: ([^\"]*)$")
     public void click(String selector) {
-        driver().findElement(cssSelector(selector)).click();
+        driver.element(selector).click();
     }
 
     @When("^go back$")
@@ -52,18 +50,18 @@ public class UISteps {
 
     @When("^input: ([^\"]*) text: '(.*)'$")
     public void input(String selector, String text) {
-        driver().findElement(cssSelector(selector)).sendKeys(text);
+        driver.element(selector).sendKeys(text);
     }
 
 
     @When("^input: ([^\"]*) clear$")
     public void clear(String selector) {
-        driver().findElement(cssSelector(selector)).clear();
+        driver.element(selector).clear();
     }
 
     @When("^submit: ([^\"]*)$")
     public void submitForm(String selector) {
-       driver().findElement(cssSelector(selector)).submit();
+        driver.element(selector).submit();
     }
 
     private WebDriver driver() {

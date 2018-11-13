@@ -1,6 +1,8 @@
 package com.github.jakimli.pandaria.domain.ui;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,7 @@ public class Driver {
 
     @Autowired
     Chrome chrome;
+
     private WebDriver driver;
 
     public WebDriver get() {
@@ -29,6 +32,10 @@ public class Driver {
                 .get();
 
         return driver;
+    }
+
+    public WebElement element(String selector) {
+        return driver.findElement(By.cssSelector(selector));
     }
 
     interface Supplier {

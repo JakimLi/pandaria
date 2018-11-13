@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.openqa.selenium.By.cssSelector;
 
 public class UIVerificationSteps {
 
@@ -16,13 +15,13 @@ public class UIVerificationSteps {
 
     @Then("verify: ([^\"]*) text: '([^\"]*)'")
     public void verifyText(String cssSelector, String text) {
-        WebElement element = driver.get().findElement(cssSelector(cssSelector));
+        WebElement element = driver.element(cssSelector);
         assertThat(element.getText(), is(text));
     }
 
     @Then("verify: ([^\"]*) attribute: '([^\"]*)' equals: '([^\"]*)'")
     public void verifyAttribute(String cssSelector, String attribute, String value) {
-        WebElement element = driver.get().findElement(cssSelector(cssSelector));
+        WebElement element = driver.element(cssSelector);
         assertThat(element.getAttribute(attribute), is(value));
     }
 
