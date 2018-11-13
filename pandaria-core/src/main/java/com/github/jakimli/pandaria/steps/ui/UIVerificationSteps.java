@@ -9,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.openqa.selenium.By.cssSelector;
 
-public class TextVerificationSteps {
+public class UIVerificationSteps {
 
     @Autowired
     Driver driver;
@@ -24,5 +24,10 @@ public class TextVerificationSteps {
     public void verifyAttribute(String cssSelector, String attribute, String value) {
         WebElement element = driver.get().findElement(cssSelector(cssSelector));
         assertThat(element.getAttribute(attribute), is(value));
+    }
+
+    @Then("verify uri: '([^\"]*)'$")
+    public void verifyCurrentURI(String uri) {
+        assertThat(driver.get().getCurrentUrl(), is(uri));
     }
 }

@@ -55,6 +55,17 @@ public class UISteps {
         driver().findElement(cssSelector(selector)).sendKeys(text);
     }
 
+
+    @When("^input: ([^\"]*) clear$")
+    public void clear(String selector) {
+        driver().findElement(cssSelector(selector)).clear();
+    }
+
+    @When("^submit: ([^\"]*)$")
+    public void submitForm(String selector) {
+       driver().findElement(cssSelector(selector)).submit();
+    }
+
     private WebDriver driver() {
         return driver.get();
     }
