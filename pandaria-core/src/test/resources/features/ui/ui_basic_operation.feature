@@ -50,7 +50,7 @@ Feature: ui operations
     * input: input[name='psw-repeat'] text: 'password'
 
     * submit: input[name='email']
-    
+
     * verify uri: 'http://localhost:12306/local/pages/action_page.php?email=lj%40gmail.com&psw=password&psw-repeat=password'
 
 
@@ -65,3 +65,11 @@ Feature: ui operations
 
     * click: .registerbtn
     * verify uri: 'http://localhost:12306/local/pages/action_page.php?email=lj%40gmail.com&psw=password&psw-repeat=password'
+
+  Scenario: select dropdown
+    * open: pages/select.html
+    * verify: select selected value: 'audi'
+
+    * select: select value: 'volvo'
+    * verify: select selected value: 'volvo'
+

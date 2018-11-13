@@ -1,6 +1,5 @@
 package com.github.jakimli.pandaria.domain.ui;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static org.openqa.selenium.By.cssSelector;
 
 @Component
 @Scope("cucumber-glue")
@@ -35,7 +35,7 @@ public class Driver {
     }
 
     public WebElement element(String selector) {
-        return driver.findElement(By.cssSelector(selector));
+        return driver.findElement(cssSelector(selector));
     }
 
     interface Supplier {
