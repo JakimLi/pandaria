@@ -159,13 +159,22 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = "pretty",
+@CucumberOptions(plugin = {
+        "pretty",
+        "junit:build/cucumber-reports/cucumber.xml",
+        "json:build/cucumber-reports/cucumber.json",
+        "html:build/cucumber-reports",
+},
         features = "classpath:features/",
-        glue = {"com.github.jakimli.pandaria"})
+        glue = {"com.github.jakimli.pandaria"},
+        tags = "not @ignore")
 public class RunCucumberTest {
 }
 ```
 **Make sure `com.github.jakimli.pandari` is in the list of cucumber glue.**
+
+Above code also configures reports for junit, json and html. also it excludes all features that marks as @ignore from execution.
+You can ajust this according to your requirement.
 
 Then you can start to write your first automation test.
 ```gherkin
