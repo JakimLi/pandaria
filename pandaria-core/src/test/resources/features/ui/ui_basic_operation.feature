@@ -73,3 +73,10 @@ Feature: ui operations
     * select: select value: 'volvo'
     * verify: select selected value: 'volvo'
 
+    * verify: select has items:
+      | value | innerText  |
+      | volvo | Volvo |
+      | saab  | Saab  |
+      | vw    | VW    |
+      | audi  | Audi  |
+
