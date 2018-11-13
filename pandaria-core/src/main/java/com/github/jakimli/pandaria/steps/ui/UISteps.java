@@ -30,7 +30,7 @@ public class UISteps {
         driver().close();
     }
 
-    @When("^click: '([^\"]*)'$")
+    @When("^click: ([^\"]*)$")
     public void click(String selector) {
         driver().findElement(cssSelector(selector)).click();
     }
@@ -48,6 +48,11 @@ public class UISteps {
     @When("^refresh$")
     public void refresh() {
         driver().navigate().refresh();
+    }
+
+    @When("^input: ([^\"]*) text: '(.*)'$")
+    public void input(String selector, String text) {
+        driver().findElement(cssSelector(selector)).sendKeys(text);
     }
 
     private WebDriver driver() {

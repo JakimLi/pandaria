@@ -14,9 +14,15 @@ public class TextVerificationSteps {
     @Autowired
     Driver driver;
 
-    @Then("verify: '([^\"]*)' text: '([^\"]*)'")
-    public void verifyTextById(String cssSelector, String text) {
+    @Then("verify: ([^\"]*) text: '([^\"]*)'")
+    public void verifyText(String cssSelector, String text) {
         WebElement element = driver.get().findElement(cssSelector(cssSelector));
         assertThat(element.getText(), is(text));
+    }
+
+    @Then("verify: ([^\"]*) attribute: '([^\"]*)' equals: '([^\"]*)'")
+    public void verifyAttribute(String cssSelector, String attribute, String value) {
+        WebElement element = driver.get().findElement(cssSelector(cssSelector));
+        assertThat(element.getAttribute(attribute), is(value));
     }
 }

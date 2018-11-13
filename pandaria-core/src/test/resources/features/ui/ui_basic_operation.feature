@@ -6,18 +6,27 @@ Feature: ui operations
 
   Scenario: navigate and refresh
     * open: /index.html
-    * verify: '#current' text: 'index.html'
+    * verify: #current text: 'index.html'
 
-    * click: '#users'
-    * verify: '#current' text: 'users.html'
+    * click: #users
+    * verify: #current text: 'users.html'
 
     * go back
-    * verify: '#current' text: 'index.html'
+    * verify: #current text: 'index.html'
 
     * go forward
-    * verify: '#current' text: 'users.html'
+    * verify: #current text: 'users.html'
 
     * refresh
-    * verify: '#current' text: 'users.html'
+    * verify: #current text: 'users.html'
+
+    * close
+
+  Scenario: fill in text input
+    * open: pages/register.html
+    * verify: input[name='email'] attribute: 'value' equals: ''
+
+    * input: input[name='email'] text: 'lj@gmail.com'
+    * verify: input[name='email'] attribute: 'value' equals: 'lj@gmail.com'
 
     * close
