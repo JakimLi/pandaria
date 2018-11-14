@@ -68,12 +68,12 @@ Feature: ui operations
 
   Scenario: select dropdown
     * open: pages/select.html
-    * verify: select selected value: 'audi'
+    * verify: #vehicles selected value: 'audi'
 
-    * select: select value: 'volvo'
-    * verify: select selected value: 'volvo'
+    * select: #vehicles  value: 'volvo'
+    * verify: #vehicles selected value: 'volvo'
 
-    * verify: select has items:
+    * verify: #vehicles has items:
       | value | innerText  |
       | volvo | Volvo |
       | saab  | Saab  |
