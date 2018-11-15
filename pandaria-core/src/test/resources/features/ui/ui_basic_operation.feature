@@ -73,7 +73,7 @@ Feature: ui operations
     * select: #vehicles  value: 'volvo'
     * verify: #vehicles selected value: 'volvo'
 
-    * verify: #vehicles has items:
+    * verify: #vehicles contains items:
       | value | innerText  |
       | volvo | Volvo |
       | saab  | Saab  |

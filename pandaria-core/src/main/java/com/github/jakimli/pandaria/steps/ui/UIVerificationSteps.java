@@ -40,7 +40,7 @@ public class UIVerificationSteps {
         assertThat(selected.getAttribute("value"), is(optionValue));
     }
 
-    @Then("verify: ([^\"]*) has items:")
+    @Then("verify: ([^\"]*) contains items:")
     public void dropdown(String selector, DataTable table) {
         Select select = new Select(driver.element(selector));
         table.asMaps().forEach(map -> map.forEach((key, value) -> has(select, key, value)));
