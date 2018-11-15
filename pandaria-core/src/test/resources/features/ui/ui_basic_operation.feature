@@ -74,9 +74,14 @@ Feature: ui operations
     * verify: #vehicles selected value: 'volvo'
 
     * verify: #vehicles contains items:
-      | value | innerText  |
-      | volvo | Volvo |
-      | saab  | Saab  |
-      | vw    | VW    |
-      | audi  | Audi  |
+      | value | innerText |
+      | volvo | Volvo     |
+      | saab  | Saab      |
+      | vw    | VW        |
 
+    * verify: #vehicles has items:
+      | value | innerText |
+      | volvo | Volvo     |
+      | saab  | Saab      |
+      | vw    | VW        |
+      | audi  | Audi      |

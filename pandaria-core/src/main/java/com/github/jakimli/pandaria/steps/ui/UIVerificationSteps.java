@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -41,8 +42,20 @@ public class UIVerificationSteps {
     }
 
     @Then("verify: ([^\"]*) contains items:")
-    public void dropdown(String selector, DataTable table) {
+    public void selectContainsItems(String selector, DataTable table) {
         Select select = new Select(driver.element(selector));
+        contains(table, select);
+    }
+
+    @Then("verify: ([^\"]*) has items:")
+    public void selectHasItems(String selector, DataTable table) {
+        Select select = new Select(driver.element(selector));
+
+        assertEquals(table.height() - 1, select.getOptions().size());
+        contains(table, select);
+    }
+
+    private void contains(DataTable table, Select select) {
         table.asMaps().forEach(map -> map.forEach((key, value) -> has(select, key, value)));
     }
 
