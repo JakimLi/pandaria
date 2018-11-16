@@ -171,7 +171,7 @@ import org.junit.runner.RunWith;
 public class RunCucumberTest {
 }
 ```
-**Make sure `com.github.jakimli.pandari` is in the list of cucumber glue.**
+**Make sure `com.github.jakimli.pandaria` is in the list of cucumber glue.**
 
 Above code also configures reports for junit, json and html. also it excludes all features that marks as @ignore from execution.
 You can ajust this according to your requirement.
