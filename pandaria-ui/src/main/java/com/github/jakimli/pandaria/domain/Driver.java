@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.domain;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -36,6 +37,10 @@ public class Driver {
 
     public WebElement element(String selector) {
         return driver.findElement(cssSelector(selector));
+    }
+
+    public Select select(String selector) {
+        return new Select(element(selector));
     }
 
     interface Supplier {

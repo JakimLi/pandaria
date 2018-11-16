@@ -36,20 +36,18 @@ public class UIVerificationSteps {
 
     @Then("verify: ([^\"]*) selected value: '([^\"]*)'$")
     public void selected(String selector, String optionValue) {
-        Select select = new Select(driver.element(selector));
-        WebElement selected = select.getFirstSelectedOption();
+        WebElement selected = driver.select(selector).getFirstSelectedOption();
         assertThat(selected.getAttribute("value"), is(optionValue));
     }
 
     @Then("verify: ([^\"]*) contains items:")
     public void selectContainsItems(String selector, DataTable table) {
-        Select select = new Select(driver.element(selector));
-        contains(table, select);
+        contains(table, driver.select(selector));
     }
 
     @Then("verify: ([^\"]*) has items:")
     public void selectHasItems(String selector, DataTable table) {
-        Select select = new Select(driver.element(selector));
+        Select select = driver.select(selector);
 
         assertEquals(table.height() - 1, select.getOptions().size());
         contains(table, select);

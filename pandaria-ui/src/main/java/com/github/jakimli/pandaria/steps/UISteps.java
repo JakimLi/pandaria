@@ -1,11 +1,10 @@
 package com.github.jakimli.pandaria.steps;
 
-import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.Driver;
+import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UISteps {
@@ -67,8 +66,7 @@ public class UISteps {
 
     @When("^select: ([^\"]*) value: '([^\"]*)'$")
     public void select(String selector, String optionValue) {
-        Select select = new Select(driver.element(selector));
-        select.selectByValue(optionValue);
+        driver.select(selector).selectByValue(optionValue);
     }
 
     private WebDriver driver() {
