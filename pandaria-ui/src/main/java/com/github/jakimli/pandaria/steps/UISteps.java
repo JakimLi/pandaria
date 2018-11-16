@@ -1,7 +1,7 @@
-package com.github.jakimli.pandaria.steps.ui;
+package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.ui.Driver;
+import com.github.jakimli.pandaria.domain.Driver;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;

@@ -1,6 +1,6 @@
-package com.github.jakimli.pandaria.steps.ui;
+package com.github.jakimli.pandaria.steps;
 
-import com.github.jakimli.pandaria.domain.ui.Driver;
+import com.github.jakimli.pandaria.domain.Driver;
 import cucumber.api.java.en.Then;
 import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.WebElement;

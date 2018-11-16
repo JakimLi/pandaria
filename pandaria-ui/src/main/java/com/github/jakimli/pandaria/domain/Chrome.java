@@ -1,4 +1,4 @@
-package com.github.jakimli.pandaria.domain.ui;
+package com.github.jakimli.pandaria.domain;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;

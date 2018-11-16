@@ -1,0 +1,39 @@
+ext {
+    archivesBaseName = "pandaria-domain"
+}
+
+dependencies {
+    compile(
+            project(":pandaria-core"),
+
+            "org.seleniumhq.selenium:selenium-java:${selenium}"
+    )
+
+    testCompile(
+            "io.cucumber:cucumber-junit:${cucumber}",
+
+            "com.github.dreamhead:moco-core:${moco}",
+            "com.github.dreamhead:moco-runner:${moco}",
+            "com.github.dreamhead:moco-junit:${moco}"
+    )
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testRuntime
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'com.github.jakimli.pandaria', '--glue', 'cucumber.api.spring',
+                    '--tags', 'not @ignore', 'src/test/resources']
+        }
+    }
+}
+
+build.dependsOn tasks.cucumber
