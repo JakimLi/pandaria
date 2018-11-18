@@ -17,13 +17,13 @@ public class UIVerificationSteps {
     @Autowired
     Driver driver;
 
-    @Then("verify: ([^\"]*) text: '([^\"]*)'$")
+    @Then("verify: '([^\"]*)' text: '([^\"]*)'$")
     public void verifyText(String cssSelector, String text) {
         WebElement element = driver.element(cssSelector);
         assertThat(element.getText(), is(text));
     }
 
-    @Then("verify: ([^\"]*) attribute: '([^\"]*)' equals: '([^\"]*)'$")
+    @Then("verify: '([^\"]*)' attribute: '([^\"]*)' equals: '([^\"]*)'$")
     public void verifyAttribute(String cssSelector, String attribute, String value) {
         WebElement element = driver.element(cssSelector);
         assertThat(element.getAttribute(attribute), is(value));
@@ -34,18 +34,18 @@ public class UIVerificationSteps {
         assertThat(driver.get().getCurrentUrl(), is(uri));
     }
 
-    @Then("verify: ([^\"]*) selected value: '([^\"]*)'$")
+    @Then("verify: '([^\"]*)' selected value: '([^\"]*)'$")
     public void selected(String selector, String optionValue) {
         WebElement selected = driver.select(selector).getFirstSelectedOption();
         assertThat(selected.getAttribute("value"), is(optionValue));
     }
 
-    @Then("verify: ([^\"]*) contains items:")
+    @Then("verify: '([^\"]*)' contains items:")
     public void selectContainsItems(String selector, DataTable table) {
         contains(table, driver.select(selector));
     }
 
-    @Then("verify: ([^\"]*) has items:")
+    @Then("verify: '([^\"]*)' has items:")
     public void selectHasItems(String selector, DataTable table) {
         Select select = driver.select(selector);
 

@@ -28,7 +28,7 @@ public class UISteps {
         driver().close();
     }
 
-    @When("^click: ([^\"]*)$")
+    @When("^click: '([^\"]*)'$")
     public void click(String selector) {
         driver.element(selector).click();
     }
@@ -48,28 +48,28 @@ public class UISteps {
         driver().navigate().refresh();
     }
 
-    @When("^input: ([^\"]*) text: '(.*)'$")
+    @When("^input: '([^\"]*)' text: '(.*)'$")
     public void input(String selector, String text) {
         driver.element(selector).sendKeys(text);
     }
 
 
-    @When("^input: ([^\"]*) clear$")
+    @When("^input: '([^\"]*)' clear$")
     public void clear(String selector) {
         driver.element(selector).clear();
     }
 
-    @When("^submit: ([^\"]*)$")
+    @When("^submit: '([^\"]*)'$")
     public void submitForm(String selector) {
         driver.element(selector).submit();
     }
 
-    @When("^select: ([^\"]*) value: '([^\"]*)'$")
+    @When("^select: '([^\"]*)' value: '([^\"]*)'$")
     public void selectByValue(String selector, String optionValue) {
         driver.select(selector).selectByValue(optionValue);
     }
 
-    @When("^select: ([^\"]*) index: (\\d+)$")
+    @When("^select: '([^\"]*)' index: (\\d+)$")
     public void selectByIndex(String selector, Integer index) {
         driver.select(selector).selectByIndex(index);
     }
