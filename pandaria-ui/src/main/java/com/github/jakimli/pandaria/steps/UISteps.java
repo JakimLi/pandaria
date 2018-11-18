@@ -65,8 +65,13 @@ public class UISteps {
     }
 
     @When("^select: ([^\"]*) value: '([^\"]*)'$")
-    public void select(String selector, String optionValue) {
+    public void selectByValue(String selector, String optionValue) {
         driver.select(selector).selectByValue(optionValue);
+    }
+
+    @When("^select: ([^\"]*) index: (\\d+)$")
+    public void selectByIndex(String selector, Integer index) {
+        driver.select(selector).selectByIndex(index);
     }
 
     private WebDriver driver() {

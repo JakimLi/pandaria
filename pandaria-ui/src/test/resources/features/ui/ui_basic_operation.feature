@@ -70,8 +70,11 @@ Feature: ui operations
     * open: pages/select.html
     * verify: #vehicles selected value: 'audi'
 
-    * select: #vehicles  value: 'volvo'
+    * select: #vehicles value: 'volvo'
     * verify: #vehicles selected value: 'volvo'
+
+    * select: #vehicles index: 3
+    * verify: #vehicles selected value: 'audi'
 
     * verify: #vehicles contains items:
       | value | innerText |
