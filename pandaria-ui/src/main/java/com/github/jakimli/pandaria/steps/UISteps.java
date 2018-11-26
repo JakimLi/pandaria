@@ -53,7 +53,6 @@ public class UISteps {
         driver.element(selector).sendKeys(text);
     }
 
-
     @When("^input: '([^\"]*)' clear$")
     public void clear(String selector) {
         driver.element(selector).clear();
