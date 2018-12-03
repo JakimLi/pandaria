@@ -619,7 +619,7 @@ If you define variable use single quote, `'${name}'`, variable will **NOT** be r
 
 ```gherkin
 Scenario: const string
-  * var 'name'='panda'
+  * var: 'name'='panda'
   * verify: ${name}='panda'
 ```
 
@@ -628,8 +628,8 @@ If you define variable use double quote, `"${name}"`, variable will be replaced.
 
 ```gherkin
 Scenario: string
-  * var 'name'='panda'
-  * var 'great'="hello ${name}"
+  * var: 'name'='panda'
+  * var: 'great'="hello ${name}"
   * verify: ${great}='hello panda'
   * verify: ${great}="hello ${name}"
 ```
@@ -637,7 +637,7 @@ Scenario: string
 #### Integer
 ```gherkin
 Scenario: integer
-  * var 'age'=18
+  * var: 'age'=18
   * verify: ${age}=18
 ```
 
