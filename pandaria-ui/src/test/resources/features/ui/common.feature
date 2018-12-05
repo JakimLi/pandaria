@@ -10,3 +10,9 @@ Feature: common feature
     * verify: 'input[name='shown']' display
     * verify: 'input[name='hidden']' hidden
     * verify: 'input[name='invisible']' hidden
+
+  Scenario: verify html element enabled or disabled
+    * open: pages/common.html
+
+    * verify: 'input[name='enabled']' enabled
+    * verify: 'input[name='disabled']' disabled

@@ -35,4 +35,10 @@ public class CommonVerificationSteps {
         WebElement element = driver.element(cssSelector);
         assertThat(element.isDisplayed(), is(display.equals("display")));
     }
+
+    @Then("^verify: '([^\"]*)' (enabled|disabled)$")
+    public void verifyEnabled(String cssSelector, String enabled) {
+        WebElement element = driver.element(cssSelector);
+        assertThat(element.isEnabled(), is(enabled.equals("enabled")));
+    }
 }
