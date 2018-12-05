@@ -7,7 +7,7 @@ Pandaria
 
 简介
 ---
-Pandaria是基于Cucumber JVM的尝试简化HTTP API自动化出测试的DSL。Pandaria与Cucumber完全兼容。使用Pandaria不要求编码能力。
+Pandaria是基于Cucumber JVM, 尝试简化HTTP API自动化测试的DSL。Pandaria与Cucumber完全兼容。使用Pandaria不要求编码能力。
 
 
 例子
