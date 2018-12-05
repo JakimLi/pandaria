@@ -38,3 +38,14 @@ Feature: html form
 
     * click: '.registerbtn'
     * verify uri: 'http://localhost:12306/local/pages/action_page.php?email=lj%40gmail.com&psw=password&psw-repeat=password'
+
+  Scenario: input form with data table
+    * open: pages/register.html
+
+    * form: '#register'
+      | input[name="email"]      | lj@gmail.com |
+      | input[name="psw"]        | password     |
+      | input[name="psw-repeat"] | password     |
+    * submit: 'form'
+
+    * verify uri: 'http://localhost:12306/local/pages/action_page.php?email=lj%40gmail.com&psw=password&psw-repeat=password'
