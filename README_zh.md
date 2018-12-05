@@ -1,5 +1,5 @@
 <a href="https://github.com/jakimli/pandaria">
-  <img src="pandaria.png?raw=true" width="100px">
+  <img src="doc/pandaria.png?raw=true" width="100px">
 </a>
 
 Pandaria

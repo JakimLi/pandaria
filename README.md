@@ -15,7 +15,7 @@ Introduction
 Pandaria is a DSL written based on cucumber JVM to simplify the HTTP API testing, everything with cucumber still works.
 Using pandaria you don't need to learn programming
 
-[中文介绍](doc/README_zh.md)
+[中文介绍](README_zh.md)
 
 Example
 -------
