@@ -9,3 +9,4 @@ Feature: common feature
 
     * verify: 'input[name='shown']' display
     * verify: 'input[name='hidden']' hidden
+    * verify: 'input[name='invisible']' hidden
