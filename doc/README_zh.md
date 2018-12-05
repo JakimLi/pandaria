@@ -81,4 +81,95 @@ SELECT NAME, AGE FROM USERS
 * verify: '$' conform to: schema/product.schema.json
 ```
 
+[更多用法](doc/usage.md)
 
+快速开始
+-------
+
+如果你不需要验证数据库或者mongodb, 删除`pandaria-db`或`pandaria-mongo`
+
+### Gradle
+```groovy
+dependencies {
+    testCompile(
+            "io.cucumber:cucumber-junit:4.0.0",
+            'com.github.jakimli.pandaria:pandaria-core:0.2.4',
+            'com.github.jakimli.pandaria:pandaria-db:0.2.4',
+            'com.github.jakimli.pandaria:pandaria-mongo:0.2.4'
+    )
+}
+```
+
+### Maven
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-core</artifactId>
+    <version>0.2.4</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-db</artifactId>
+    <version>0.2.4</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.github.jakimli.pandaria</groupId>
+    <artifactId>pandaria-mongo</artifactId>
+    <version>0.2.4</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+如果你需要验证数据库，则必须在`build.gradle`或者`pom.xml`中添加数据库驱动依赖，并在`application.properties`中添加数据库连接信息
+
+application.properties
+```
+spring.datasource.url=jdbc:mysql://localhost:3307/pandaria?useSSL=false&allowMultiQueries=true
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+
+如果你需要与Mongo db交互, 添加如下连接配置
+```
+mongo.db.name=test
+mongo.db.connection=mongodb://root:password@localhost:27017
+```
+
+如果你使用的JUnit, 添加如下的Java类
+```java
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(plugin = {
+        "pretty",
+        "junit:build/cucumber-reports/cucumber.xml",
+        "json:build/cucumber-reports/cucumber.json",
+        "html:build/cucumber-reports",
+},
+        features = "classpath:features/",
+        glue = {"com.github.jakimli.pandaria"},
+        tags = "not @ignore")
+public class RunCucumberTest {
+}
+```
+**确保cucumber glue包含`com.github.jakimli.pandaria`**
+
+上述代码配置了json, xml和html格式的报告. 同时忽略有标记了@ignore的场景.
+
+现在就可以写第一个场景了
+```gherkin
+Feature: hello world
+  This is the first feature for pandaria
+
+  Scenario: hello world
+    * uri: https://github.com
+    * send: GET
+    * status: 200
+```
