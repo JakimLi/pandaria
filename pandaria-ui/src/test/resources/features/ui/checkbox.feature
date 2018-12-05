@@ -4,7 +4,7 @@ Feature: html checkbox
   Background:
     * base uri: http://localhost:12306/local
 
-  Scenario: select dropdown
+  Scenario: check/uncheck html checkbox
     * open: pages/checkbox.html
     * verify: 'input[name='volvo']' unchecked
     * verify: 'input[name='saab']' unchecked

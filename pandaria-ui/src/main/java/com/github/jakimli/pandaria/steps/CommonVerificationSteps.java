@@ -8,25 +8,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class WebElementVerificationSteps {
+public class CommonVerificationSteps {
 
     @Autowired
     Driver driver;
 
-    @Then("verify: '([^\"]*)' text: '([^\"]*)'$")
+    @Then("^verify: '([^\"]*)' text: '([^\"]*)'$")
     public void verifyText(String cssSelector, String text) {
         WebElement element = driver.element(cssSelector);
         assertThat(element.getText(), is(text));
     }
 
-    @Then("verify: '([^\"]*)' attribute: '([^\"]*)' equals: '([^\"]*)'$")
+    @Then("^verify: '([^\"]*)' attribute: '([^\"]*)' equals: '([^\"]*)'$")
     public void verifyAttribute(String cssSelector, String attribute, String value) {
         WebElement element = driver.element(cssSelector);
         assertThat(element.getAttribute(attribute), is(value));
     }
 
-    @Then("verify uri: '([^\"]*)'$")
+    @Then("^verify uri: '([^\"]*)'$")
     public void verifyCurrentURI(String uri) {
         assertThat(driver.get().getCurrentUrl(), is(uri));
+    }
+
+    @Then("^verify: '([^\"]*)' (display|hidden)$")
+    public void verifyDisplay(String cssSelector, String display) {
+        WebElement element = driver.element(cssSelector);
+        assertThat(element.isDisplayed(), is(display.equals("display")));
     }
 }
