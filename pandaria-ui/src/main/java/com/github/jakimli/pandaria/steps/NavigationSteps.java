@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UISteps {
+public class NavigationSteps {
 
     @Autowired
     Driver driver;
@@ -46,21 +46,6 @@ public class UISteps {
     @When("^refresh$")
     public void refresh() {
         driver().navigate().refresh();
-    }
-
-    @When("^input: '([^\"]*)' text: '(.*)'$")
-    public void input(String selector, String text) {
-        driver.element(selector).sendKeys(text);
-    }
-
-    @When("^input: '([^\"]*)' clear$")
-    public void clear(String selector) {
-        driver.element(selector).clear();
-    }
-
-    @When("^submit: '([^\"]*)'$")
-    public void submitForm(String selector) {
-        driver.element(selector).submit();
     }
 
     private WebDriver driver() {
