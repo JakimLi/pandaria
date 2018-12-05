@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class UIVerificationSteps {
+public class WebElementVerificationSteps {
 
     @Autowired
     Driver driver;
