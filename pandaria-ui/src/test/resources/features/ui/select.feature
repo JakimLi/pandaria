@@ -14,6 +14,10 @@ Feature: html select
     * select: '#vehicles' index: 3
     * verify: '#vehicles' selected value: 'audi'
 
+    * select: '#vehicles' text: 'Audi'
+    * verify: '#vehicles' selected value: 'audi'
+    * verify: '#vehicles' selected text: 'Audi'
+
     * verify: '#vehicles' contains items:
       | value | innerText |
       | volvo | Volvo     |

@@ -63,16 +63,6 @@ public class UISteps {
         driver.element(selector).submit();
     }
 
-    @When("^select: '([^\"]*)' value: '([^\"]*)'$")
-    public void selectByValue(String selector, String optionValue) {
-        driver.select(selector).selectByValue(optionValue);
-    }
-
-    @When("^select: '([^\"]*)' index: (\\d+)$")
-    public void selectByIndex(String selector, Integer index) {
-        driver.select(selector).selectByIndex(index);
-    }
-
     private WebDriver driver() {
         return driver.get();
     }
