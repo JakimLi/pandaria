@@ -30,3 +30,10 @@ Feature: html select
       | saab  | Saab      |
       | vw    | VW        |
       | audi  | Audi      |
+
+    * verify: '#vehicles' has items:
+      | value | innerText | selected |
+      | volvo | Volvo     | false    |
+      | saab  | Saab      | false    |
+      | vw    | VW        | false    |
+      | audi  | Audi      | true     |

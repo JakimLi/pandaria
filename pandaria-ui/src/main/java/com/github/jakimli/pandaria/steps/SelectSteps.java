@@ -63,6 +63,11 @@ public class SelectSteps {
     }
 
     private void has(Select select, String key, String value) {
-        assertTrue(select.getOptions().stream().anyMatch(option -> option.getAttribute(key).equals(value)));
+        assertTrue(select.getOptions().stream().anyMatch(option -> {
+            if (key.equals("selected")) {
+                return option.isSelected() == value.equals("true");
+            }
+            return option.getAttribute(key).equals(value);
+        }));
     }
 }
