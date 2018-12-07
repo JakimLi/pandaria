@@ -1,6 +1,6 @@
 Feature: html select
   operations about html select and options
-  
+
   Background:
     * base uri: http://localhost:12306/local
 
@@ -32,8 +32,8 @@ Feature: html select
       | audi  | Audi      |
 
     * verify: '#vehicles' has items:
-      | value | innerText | selected |
-      | volvo | Volvo     | false    |
-      | saab  | Saab      | false    |
-      | vw    | VW        | false    |
-      | audi  | Audi      | true     |
+      | value | innerText | selected | enabled |
+      | volvo | Volvo     | false    | true    |
+      | saab  | Saab      | false    | true    |
+      | vw    | VW        | false    | true    |
+      | audi  | Audi      | true     | true    |

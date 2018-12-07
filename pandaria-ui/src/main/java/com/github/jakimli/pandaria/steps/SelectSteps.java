@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.steps;
 
+import com.github.jakimli.pandaria.domain.AttributeExtractor;
 import com.github.jakimli.pandaria.domain.Driver;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -63,11 +64,6 @@ public class SelectSteps {
     }
 
     private void has(Select select, String key, String value) {
-        assertTrue(select.getOptions().stream().anyMatch(option -> {
-            if (key.equals("selected")) {
-                return option.isSelected() == value.equals("true");
-            }
-            return option.getAttribute(key).equals(value);
-        }));
+        assertTrue(select.getOptions().stream().anyMatch(option -> new AttributeExtractor(option).attribute(key).equals(value)));
     }
 }
