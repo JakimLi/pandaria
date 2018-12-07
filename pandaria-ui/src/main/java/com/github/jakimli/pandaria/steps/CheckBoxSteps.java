@@ -14,7 +14,6 @@ public class CheckBoxSteps {
     @Autowired
     Driver driver;
 
-
     @When("^check: '(.*)'$")
     public void check(String locator) {
         WebElement element = driver.element(locator);
