@@ -16,8 +16,8 @@ public class AttributeExtractor {
     public AttributeExtractor(WebElement element) {
         this.element = element;
         this.extractors = of(
-                "selected", ele -> String.valueOf(ele.isSelected()),
-                "enabled", ele -> String.valueOf(ele.isEnabled())
+                "selected", e -> String.valueOf(e.isSelected()),
+                "enabled", e -> String.valueOf(e.isEnabled())
         );
     }
 
