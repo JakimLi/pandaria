@@ -16,23 +16,3 @@ dependencies {
             "com.github.dreamhead:moco-junit:${moco}"
     )
 }
-
-configurations {
-    cucumberRuntime {
-        extendsFrom testRuntime
-    }
-}
-
-task cucumber() {
-    dependsOn assemble, compileTestJava
-    doLast {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'com.github.jakimli.pandaria', '--glue', 'cucumber.api.spring',
-                    '--tags', 'not @ignore', 'src/test/resources']
-        }
-    }
-}
-
-build.dependsOn tasks.cucumber

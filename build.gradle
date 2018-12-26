@@ -46,6 +46,10 @@ subprojects {
         selenium = '3.141.5'
     }
 
+    test {
+        testLogging.showStandardStreams = true
+    }
+
     task javadocJar(type: Jar) {
         classifier = 'javadoc'
         from javadoc
