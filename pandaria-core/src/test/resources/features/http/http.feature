@@ -34,7 +34,7 @@ Feature: Http feature
     {"username": "jakim", "age": 18}
     """
     * send: POST
-    * status: 200
+    * status: 201
     * verify: '$.id'='auto-generated'
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
