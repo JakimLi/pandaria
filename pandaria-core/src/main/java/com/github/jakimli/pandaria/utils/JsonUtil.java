@@ -35,4 +35,19 @@ public class JsonUtil {
     public static Object toJSONObjectOrArray(String content) {
         return content.trim().startsWith("[") ? new JSONArray(content) : new JSONObject(content);
     }
+
+    public static int size(Object json) {
+        if (json instanceof String) {
+            return ((String) json).length();
+        } else if (json instanceof List) {
+            return ((List) json).size();
+        } else if (json instanceof Map) {
+            return ((Map) json).size();
+        } else if (json instanceof JSONArray) {
+            return ((JSONArray) json).length();
+        } else if (json instanceof JSONObject) {
+            return ((JSONObject) json).length();
+        }
+        throw new RuntimeException("unable to get size");
+    }
 }
