@@ -178,7 +178,7 @@ in application.properties, you can override the locale use `faker locale` like b
 ```gherkin
 Scenario: faker locale
   * faker locale: zh-CN
-  * var: 'name'=faker: #{name.full_name}
+  * var: name=faker: #{name.full_name}
   * verify: ${name} matches: '\p{sc=Han}*'
 ```
 
@@ -363,7 +363,7 @@ Feature: Http feature
     """
 
     * uri: /cookie
-    * var: 'val'="value"
+    * var: val="value"
     * cookie: 'key'="${val}"
     * send: get
     * response body:
@@ -608,7 +608,7 @@ variables.environment=test
 ```gherkin
 Scenario: initial value from configuration file
   * verify: ${environment}="test"
-  * var: 'environment'="production"
+  * var: environment="production"
   * verify: ${environment}="production"
 ```
 
@@ -619,7 +619,7 @@ If you define variable use single quote, `'${name}'`, variable will **NOT** be r
 
 ```gherkin
 Scenario: const string
-  * var: 'name'='panda'
+  * var: name='panda'
   * verify: ${name}='panda'
 ```
 
@@ -628,8 +628,8 @@ If you define variable use double quote, `"${name}"`, variable will be replaced.
 
 ```gherkin
 Scenario: string
-  * var: 'name'='panda'
-  * var: 'great'="hello ${name}"
+  * var: name='panda'
+  * var: great="hello ${name}"
   * verify: ${great}='hello panda'
   * verify: ${great}="hello ${name}"
 ```
@@ -637,7 +637,7 @@ Scenario: string
 #### Integer
 ```gherkin
 Scenario: integer
-  * var: 'age'=18
+  * var: age=18
   * verify: ${age}=18
 ```
 
@@ -645,16 +645,16 @@ Scenario: integer
 
 It's useful if we can extract values from response body as variables. you can do it using `<-` like below.
 
-`var: 'name'<-'json path'`  will extract value from the http response body json using the json path and assign it to the variable with specified name
+`var: name<-'json path'`  will extract value from the http response body json using the json path and assign it to the variable with specified name
 
 ```gherkin
 Scenario: from json
   * uri: /not_important
   * send: GET
   * status: 200
-  * var: 'name'<-'$.name'
-  * var: 'age'<-'$.age'
-  * var: 'iq'<-'$.iq'
+  * var: name<-'$.name'
+  * var: age<-'$.age'
+  * var: iq<-'$.iq'
   * verify: ${name}='panda'
   * verify: ${age}=18
   * verify: ${iq}=double: 80.0
@@ -663,7 +663,7 @@ Scenario: from json
 You can also extract from database query results
 ```gherkin
 * query: select.sql
-* var: 'age'<-'$[0].age'
+* var: age<-'$[0].age'
 ```
 
 #### Result of code evaluation
@@ -671,27 +671,29 @@ You can also extract from database query results
 
 You can evaluate javascript code and assign the result as a variable.
 ```gherkin
-* var: 'three'=3
+* var: three=3
 
-* var: 'six'=code:
+* var: six=code:
 """
 ${three} + 3
 """
 
 * verify: ${six}=6
 
-* var: 'zero'=code: ${three} - 3
+* var: zero=code: ${three} - 3
 * verify: ${zero}=0
 
-* var: 'ten'=code file: six_add_four.js
+* var: ten=code file: six_add_four.js
 * verify: ${ten}=10
 ```
+
+*COMPATIBILITY WARNING: if your version <= 0.2.4, you need to define variable with single quote around the name. like `var: 'three'=3*
 
 ### Use Variables
 #### In URI
 ```gherkin
 Scenario: variable being replaced in uri
-  * var: 'path'="not_important"
+  * var: path="not_important"
   * uri: /${path}
   * send: GET
   * status: 200
@@ -711,7 +713,7 @@ requsts/someone.json
 
 ```
 Scenario: variable used in request file
-  * var: 'name'='someone'
+  * var: name='someone'
   * uri: /users
   * request body: requests/someone.json
   * send: POST
@@ -730,8 +732,8 @@ Scenario: variable used in request file
 @since 0.2.1
 
 ```gherkin
-* var: 'three'=3
-* var: 'six'=code:
+* var: three=3
+* var: six=code:
 """
 ${three} + 3
 """
@@ -740,7 +742,7 @@ ${three} + 3
 ### Escape
 You can escape the variables by place an extra `$`
 ```gherkin
-* var: 'six'=code:
+* var: six=code:
 """
 $${three} + 3
 """
@@ -759,10 +761,10 @@ for fake data generation.
 You can generate fake data and assign it to a variable, `#{expression}` is used.
 
 ```gherkin
-* var: 'name'=faker: #{Name.firstName}
+* var: name=faker: #{Name.firstName}
 * verify code: "${name}".length > 0
 
-* var: 'full_name'=faker: #{Name.fullName}
+* var: full_name=faker: #{Name.fullName}
 * verify code: "${full_name}".length > 0
 ```
 
@@ -789,7 +791,7 @@ success
 You can switch locale, default is `en`.
 ```gherkin
 * faker locale: zh-CN
-* var: 'name'=faker: #{Name.fullName}
+* var: name=faker: #{Name.fullName}
 * verify: ${name} matches: '\p{sc=Han}*'
 ```
 
@@ -821,8 +823,8 @@ success
 ```
 In above example, name will be set to a fake name, but city will be set to `#{Address.ctiy}`
 
-**You are not allowed to escape when define varaible use faker with fake data, `var: 'name'=faker: ##{Name.fullName}`**
-**will not work, use `var: 'name'='#{Name.fullName}'` instead.**
+**You are not allowed to escape when define varaible use faker with fake data, `var: name=faker: ##{Name.fullName}`**
+**will not work, use `var: name='#{Name.fullName}'` instead.**
 
 
 ### Special variable with last response
@@ -963,15 +965,15 @@ Scenario: equals
   * status: 200
   * verify: '$.username'='jakim'
 
-  * var: 'kim'="kim"
-  * var: 'user'='jakim'
+  * var: kim="kim"
+  * var: user='jakim'
   * verify: ${user}="ja${kim}"
 
   * verify: '$.username'="jakim"
   * verify: '$.username'="ja${kim}"
 
-  * var: 'age'=18
-  * var: 'iq'=80.0
+  * var: age=18
+  * var: iq=80.0
   * verify: ${user}!='notjakim'
   * verify: ${user}!="notja${kim}"
 
@@ -996,7 +998,7 @@ Scenario: contains
   * verify: '$.username'='jakim'
   * verify: '$.username' contains: 'kim'
 
-  * var: 'username'="panda"
+  * var: username="panda"
   * verify: ${username} contains: 'anda'
 ```
 
@@ -1006,10 +1008,10 @@ Scenario: contains
 * verify: '$.username'='jakim'
 * verify: '$.username' starts with: 'jak'
 
-* var: 'username'="jakim"
+* var: username="jakim"
 * verify: ${username} starts with: 'jak'
 
-* var: 'prefix'='jak'
+* var: prefix='jak'
 * verify: '$.username' starts with: "${prefix}i"
 * verify: ${username} starts with: "${prefix}i"
 ```
@@ -1019,10 +1021,10 @@ Scenario: contains
 * verify: '$.username'='jakim'
 * verify: '$.username' ends with: 'kim'
 
-* var: 'username'="jakim"
+* var: username="jakim"
 * verify: ${username} ends with: 'kim'
 
-* var: 'suffix'='kim'
+* var: suffix='kim'
 * verify: '$.username' ends with: "ja${suffix}"
 * verify: ${username} ends with: "ja${suffix}"
 ```
@@ -1032,10 +1034,10 @@ Scenario: contains
 * verify: '$.username'='jakim'
 * verify: '$.username' length: 5
 
-* var: 'username'="jakim"
+* var: username="jakim"
 * verify: ${username} length: 5
 
-* var: 'abc'=3
+* var: abc=3
 * verify: ${abc} length: 1
 ```
 
@@ -1044,7 +1046,7 @@ Scenario: contains
 * verify: '$.username'='jakim'
 * verify: '$.username' matches: '.*'
 
-* var: 'username'="jakim"
+* var: username="jakim"
 * verify: ${username} matches: 'j.*im'
 ```
 
@@ -1058,8 +1060,8 @@ Scenario: contains
 * verify: '$.age'>=18
 * verify: '$.iq'>=double: 80.0
 
-* var: 'age'=18
-* var: 'iq'=80.0
+* var: age=18
+* var: iq=80.0
 
 * verify: ${age}>17
 * verify: ${iq}>double: 79.0
@@ -1075,8 +1077,8 @@ Scenario: contains
 * verify: '$.age'<=18
 * verify: '$.iq'<=double: 80.0
 
-* var: 'age'=18
-* var: 'iq'=80.0
+* var: age=18
+* var: iq=80.0
 
 * verify: ${age}<19
 * verify: ${iq}<double: 99.0
@@ -1171,7 +1173,7 @@ Scenario: contains json, extra fields allowed
   ]
   """
 
-  * var: 'response'<-'$'
+  * var: response<-'$'
   * verify: '$' contains json:
   """
   [
@@ -1239,7 +1241,7 @@ Scenario: null check
   * verify: '$.username'='jakim'
   * verify: '$.username' is not null
 
-  * var: 'username'="jakim"
+  * var: username="jakim"
   * verify: ${username} is not null
   * verify: ${hello} is null
 
@@ -1278,8 +1280,8 @@ or you need to use it as double.
 @since 0.2.1
 
 ```gherkin
-* var: 'age'=16
-* var: 'iq'=90.0
+* var: age=16
+* var: iq=90.0
 
 * uri: http://localhost:10080/not_important
 * send: get
@@ -1424,7 +1426,7 @@ You use utitlities by assign them as variable and use it.
 ### Random UUID
 ```gherkin
 Scenario: generate random number
-  * var: 'uuid'=random uuid
+  * var: uuid=random uuid
   * verify: ${uuid} length: 36
 ```
 
@@ -1470,7 +1472,7 @@ Use variable, so you can reference data in Examples section in external file.
 ```gherkin
 
   Scenario Outline:
-    * var: 'username'='<username>'
+    * var: username='<username>'
 
     * uri: /users
     * request body: requests/user.json

@@ -78,6 +78,11 @@ public class JsonVerificationSteps {
                 .when(IGNORING_ARRAY_ORDER, IGNORING_EXTRA_ARRAY_ITEMS, IGNORING_EXTRA_FIELDS));
     }
 
+    @Then("^verify: \\$\\{([^\"]*)} has size: (\\d+)$")
+    public void variableHasSize(String name, Integer size) {
+        assertThat(size(variables.get(name)), is(size));
+    }
+
     private String fileContent(String fileName) throws IOException {
         return variables.interpret(read(configuration.classpathFile(fileName)));
     }

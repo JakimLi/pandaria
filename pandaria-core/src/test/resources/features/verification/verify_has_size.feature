@@ -47,3 +47,10 @@ Feature: verify json
     * verify: '$.username' has size: 5
     * verify: '$.username' length: 5
 
+    * var: response<-'$'
+    * verify: ${response} has size: 3
+
+    * var: username<-'$.username'
+    * verify: ${username} has size: 5
+    * verify: ${username} length: 5
+
