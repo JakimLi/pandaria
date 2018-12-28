@@ -687,7 +687,8 @@ ${three} + 3
 * verify: ${ten}=10
 ```
 
-*COMPATIBILITY WARNING: if your version <= 0.2.4, you need to define variable with single quote around the name. like `var: 'three'=3*
+**COMPATIBILITY WARNING**:
+If your version <= 0.2.4, you need to define variable with single quote around the name. like `var: 'three'=3*
 
 ### Use Variables
 #### In URI
