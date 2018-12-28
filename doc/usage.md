@@ -689,7 +689,7 @@ ${three} + 3
 
 **COMPATIBILITY WARNING**:
 
-If your version <= 0.2.4, you need to define variable with single quote around the name. such as `var: 'three'=3`*
+If your version <= 0.2.4, you need to define variable with single quote around the name. such as `var: 'three'=3`
 
 ### Use Variables
 #### In URI
