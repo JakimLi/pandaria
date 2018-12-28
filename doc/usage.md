@@ -614,6 +614,11 @@ Scenario: initial value from configuration file
 
 ### Definition
 
+**COMPATIBILITY WARNING**:
+
+If your version <= 0.2.4, you need to define variable with single quote around the name. such as `var: 'three'=3`
+
+
 #### Literal string
 If you define variable use single quote, `'${name}'`, variable will **NOT** be replaced.
 
@@ -686,10 +691,6 @@ ${three} + 3
 * var: ten=code file: six_add_four.js
 * verify: ${ten}=10
 ```
-
-**COMPATIBILITY WARNING**:
-
-If your version <= 0.2.4, you need to define variable with single quote around the name. such as `var: 'three'=3`
 
 ### Use Variables
 #### In URI
