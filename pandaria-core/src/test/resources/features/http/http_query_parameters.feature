@@ -14,7 +14,7 @@ Feature: http query parameter
     * verify: 'iq'=double: 80.0
 
   Scenario: add extra query parameter
-    * var: 'name'='jakim'
+    * var: name='jakim'
     * uri: /users
     * query parameter: 'name'="${name}"
     * query parameter: 'age'='18'

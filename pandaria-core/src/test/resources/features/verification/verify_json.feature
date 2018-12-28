@@ -48,7 +48,7 @@ Feature: verify json
     ["jack", "james"]
     """
 
-    * var: 'response'<-'$'
+    * var: response<-'$'
     * verify: ${response} same json:
     """
     [
@@ -83,7 +83,7 @@ Feature: verify json
     ]
     """
     
-    * var: 'response'<-'$'
+    * var: response<-'$'
     * verify: '$' contains json:
     """
     [

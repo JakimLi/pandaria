@@ -24,53 +24,53 @@ public class VariableDefinitionSteps {
     @Autowired
     private FeatureConfiguration configuration;
 
-    @Given("^var: '([^\"]*)'='([^\"]*)'$")
+    @Given("^var: ([^\"]*)='([^\"]*)'$")
     public void defineLiteralStringVariable(String key, String value) {
         variables.assign(key, value);
     }
 
-    @Given("^var: '([^\"]*)'=\"([^\"]*)\"$")
+    @Given("^var: ([^\"]*)=\"([^\"]*)\"$")
     public void defineStringVariable(String key, String value) {
         variables.assign(key, variables.interpret(value));
     }
 
-    @Given("^var: '([^\"]*)'=(\\d+)$")
+    @Given("^var: ([^\"]*)=(\\d+)$")
     public void defineIntegerVariable(String key, int value) {
         variables.assign(key, value);
     }
 
-    @Given("^var: '([^\"]*)'=(\\d+\\.\\d+)$")
+    @Given("^var: ([^\"]*)=(\\d+\\.\\d+)$")
     public void defineDoubleVariable(String key, String value) {
         variables.assign(key, Double.parseDouble(value));
     }
 
-    @Given("^var: '([^\"]*)'<-'([^\"]*)'$")
+    @Given("^var: ([^\"]*)<-'([^\"]*)'$")
     public void defineVariableExtractByJsonPath(String key, String path) throws IOException {
         variables.assign(key, toBeVerified.json(path));
     }
 
-    @Given("^var: '([^\"]*)'=code:$")
+    @Given("^var: ([^\"]*)=code:$")
     public void defineVariableFromCodeBlock(String key, String code) throws ScriptException {
         variables.assign(key, eval(variables.interpret(code)));
     }
 
-    @Given("^var: '([^\"]*)'=code: ([^\"]*)$")
+    @Given("^var: ([^\"]*)=code: ([^\"]*)$")
     public void defineVariableFromCodeInLine(String key, String code) throws ScriptException {
         variables.assign(key, eval(variables.interpret(code)));
     }
 
-    @Given("^var: '([^\"]*)'=code file: ([^\"]*)$")
+    @Given("^var: ([^\"]*)=code file: ([^\"]*)$")
     public void defineVariableFromFile(String key, String file) throws ScriptException, IOException {
         variables.assign(key, eval(variables.interpret(read(configuration.classpathFile(file)))));
     }
 
 
-    @Given("^var: '([^\"]*)'=random uuid")
+    @Given("^var: ([^\"]*)=random uuid")
     public void defineRandomUUIDVariable(String name) {
         variables.assign(name, UUID.randomUUID());
     }
 
-    @Given("^var: '([^\"]*)'=faker: ([^\"]*)$")
+    @Given("^var: ([^\"]*)=faker: ([^\"]*)$")
     public void faker(String name, String expression) {
         variables.assign(name, configuration.faker().expression(expression));
     }

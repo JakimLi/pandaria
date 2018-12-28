@@ -25,7 +25,7 @@ Feature: data driven
 
 
   Scenario Outline:
-    * var: 'username'='<username>'
+    * var: username='<username>'
 
     * uri: /users
     * request body: requests/user.json

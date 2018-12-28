@@ -8,10 +8,10 @@ Feature: faker usage in http request and response
 
   # http://dius.github.io/java-faker/apidocs/index.html
   Scenario: assign it to variable
-    * var: 'name'=faker: #{name.first_name}
+    * var: name=faker: #{name.first_name}
     * verify code: "${name}".length > 0
 
-    * var: 'full_name'=faker: #{name.full_name}
+    * var: full_name=faker: #{name.full_name}
     * verify code: "${full_name}".length > 0
 
   Scenario: faker in request body as doc string
@@ -37,7 +37,7 @@ Feature: faker usage in http request and response
 
   Scenario: faker locale
     * faker locale: zh-CN
-    * var: 'name'=faker: #{name.full_name}
+    * var: name=faker: #{name.full_name}
     * verify: ${name} matches: '\p{sc=Han}*'
 
   Scenario: escape with ##{}

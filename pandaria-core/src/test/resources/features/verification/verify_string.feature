@@ -13,8 +13,8 @@ Feature: verify string
     * status: 200
     * verify: '$.username'='jakim'
 
-    * var: 'kim'="kim"
-    * var: 'user'='jakim'
+    * var: kim="kim"
+    * var: user='jakim'
     * verify: ${user}="ja${kim}"
 
     * verify: '$.username'="jakim"
@@ -40,10 +40,10 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' contains: 'kim'
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} contains: 'kim'
 
-    * var: 'contained'='kim'
+    * var: contained='kim'
     * verify: '$.username' contains: "${contained}"
     * verify: ${username} contains: "${contained}"
 
@@ -54,10 +54,10 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' starts with: 'jak'
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} starts with: 'jak'
 
-    * var: 'prefix'='jak'
+    * var: prefix='jak'
     * verify: '$.username' starts with: "${prefix}i"
     * verify: ${username} starts with: "${prefix}i"
 
@@ -68,10 +68,10 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' ends with: 'kim'
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} ends with: 'kim'
 
-    * var: 'suffix'='kim'
+    * var: suffix='kim'
     * verify: '$.username' ends with: "ja${suffix}"
     * verify: ${username} ends with: "ja${suffix}"
 
@@ -82,10 +82,10 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' length: 5
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} length: 5
 
-    * var: 'abc'=3
+    * var: abc=3
     * verify: ${abc} length: 1
 
   Scenario: regex
@@ -95,7 +95,7 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' matches: '.*'
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} matches: 'j.*im'
 
   Scenario: null check
@@ -105,7 +105,7 @@ Feature: verify string
     * verify: '$.username'='jakim'
     * verify: '$.username' is not null
 
-    * var: 'username'="jakim"
+    * var: username="jakim"
     * verify: ${username} is not null
     * verify: ${hello} is null
 

@@ -16,7 +16,7 @@ Feature: Http feature
     """
     
     * uri: /cookie
-    * var: 'val'="value"
+    * var: val="value"
     * cookie: 'key'="${val}"
     * send: get
     * response body:

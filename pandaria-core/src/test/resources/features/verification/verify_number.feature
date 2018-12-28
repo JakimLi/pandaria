@@ -14,8 +14,8 @@ Feature: verify numbers
     * verify: '$.age'=18
     * verify: '$.iq'=double: 80.0
 
-    * var: 'age'=18
-    * var: 'iq'=80.0
+    * var: age=18
+    * var: iq=80.0
 
     * verify: ${age}!=19
     * verify: ${iq}!=double: 89.0
@@ -33,8 +33,8 @@ Feature: verify numbers
     * verify: '$.age'>=18
     * verify: '$.iq'>=double: 80.0
 
-    * var: 'age'=18
-    * var: 'iq'=80.0
+    * var: age=18
+    * var: iq=80.0
 
     * verify: ${age}>17
     * verify: ${iq}>double: 79.0
@@ -51,8 +51,8 @@ Feature: verify numbers
     * verify: '$.age'<=18
     * verify: '$.iq'<=double: 80.0
 
-    * var: 'age'=18
-    * var: 'iq'=80.0
+    * var: age=18
+    * var: iq=80.0
 
     * verify: ${age}<19
     * verify: ${iq}<double: 99.0

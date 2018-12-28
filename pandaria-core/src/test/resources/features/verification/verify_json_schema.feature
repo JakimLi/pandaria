@@ -39,7 +39,7 @@ Feature: verify json schema
   Scenario: verify json schema from variable
     * uri: /products/1
     * send: get
-    * var: 'response'<-'$'
+    * var: response<-'$'
     * verify: ${response} conform to:
     """
     {
