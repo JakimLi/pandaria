@@ -7,7 +7,7 @@ Feature: verify json
     * dir: features/verification
     * base uri: http://localhost:10080
 
-  Scenario: has size for object
+  Scenario: has size for array
     * uri: /users/list
     * send: get
     * verify: '$' same json:

@@ -1187,6 +1187,36 @@ Scenario: contains json, extra fields allowed
   """
 ```
 
+#### has size
+If the json is an array, you can verify the size, if the returning json is an object, then the size verify the key set size.
+
+```gherkin
+Scenario: has size for array
+  * uri: /users/list
+  * send: get
+  * verify: '$' same json:
+  """
+  [
+    {
+      "name": "jakim",
+      "friends": [
+        "james", "jack"
+      ]
+    },
+    {
+      "name": "smart",
+      "friends": ["sue", "lucy"]
+    },
+    {
+      "name": "haha"
+    }
+  ]
+  """
+
+  * verify: '$' has size: 3
+  * verify: '$.size()'=3
+```
+
 ### Verify JSON Schema
 [JSON schema](https://json-schema.org/) is useful to describe the API, and it's useful especially for contract testing. you can verify json
 document(instance) conforms to a given json schema or not.
