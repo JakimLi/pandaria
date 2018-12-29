@@ -29,6 +29,7 @@ Table of Contents
      * [Request body](#request-body)
      * [Upload file](#upload-file)
      * [HTTPS](#https)
+     * [Proxy](#proxy)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -445,6 +446,13 @@ If you enable the host verification, you **MUST** specify the certificates infor
 properties for SSL configuration.
 
 [JSSE](https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html)
+
+
+### Proxy
+Java system properties are used for HTTP(S) proxy. e.g, below is how to add it using gradle
+```shell
+./gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8088 build
+```
 
 
 Database Operations
