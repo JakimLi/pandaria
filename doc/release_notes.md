@@ -1,4 +1,16 @@
-Release 0.2.4 (2018-11-10) Latest
+Release 0.2.5 (2018-12-29) Latest
+=================================
+
+Variables
+---------
+* Remove single quote around variable name for variable definition
+
+Verifications
+-------------
+* JSON verification has size
+
+
+Release 0.2.4 (2018-11-10) 
 =================================
 Issue fixed
 -----------
