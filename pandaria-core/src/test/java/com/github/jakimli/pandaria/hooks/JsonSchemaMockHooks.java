@@ -23,6 +23,7 @@ public class JsonSchemaMockHooks {
                         .put("productId", 1)
                         .put("productName", "A green door")
                         .put("price", 12.50)
+                        .put("enabled", true)
                         .put("tags", of("home", "green"))
                         .build()));
 

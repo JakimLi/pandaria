@@ -32,8 +32,14 @@ public class JsonUtil {
         return new ObjectMapper().writeValueAsString(object);
     }
 
-    public static Object toJSONObjectOrArray(String content) {
-        return content.trim().startsWith("[") ? new JSONArray(content) : new JSONObject(content);
+    public static Object toJSONAware(Object content) throws JsonProcessingException {
+        if (content instanceof List) {
+            return new JSONArray(toJsonString(content));
+        } else if (content instanceof Map) {
+            return new JSONObject(toJsonString(content));
+        } else {
+            return content;
+        }
     }
 
     public static int size(Object json) {

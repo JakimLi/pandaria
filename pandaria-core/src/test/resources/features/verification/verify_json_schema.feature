@@ -35,6 +35,27 @@ Feature: verify json schema
       }
     }
     """
+    
+    * verify: '$.productName' conform to:
+    """
+    {
+      "type": "string"
+    }
+    """
+
+    * verify: '$.price' conform to:
+    """
+    {
+      "type": "number"
+    }
+    """
+
+    * verify: '$.enabled' conform to:
+    """
+    {
+      "type": "boolean"
+    }
+    """
 
   Scenario: verify json schema from variable
     * uri: /products/1

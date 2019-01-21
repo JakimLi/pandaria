@@ -1,8 +1,8 @@
 package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.Given;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
-import static com.github.jakimli.pandaria.utils.JsonUtil.toJSONObjectOrArray;
-import static com.github.jakimli.pandaria.utils.JsonUtil.toJsonString;
+import static com.github.jakimli.pandaria.utils.JsonUtil.toJSONAware;
 
 public class JsonSchemaVerificationSteps {
 
@@ -49,6 +48,6 @@ public class JsonSchemaVerificationSteps {
     private void validateJsonSchema(Object actual, String schemaJson) throws IOException {
         SchemaLoader loader = SchemaLoader.builder().schemaJson(new JSONObject(schemaJson)).build();
         Schema schema = loader.load().build();
-        schema.validate(toJSONObjectOrArray(toJsonString(actual)));
+        schema.validate(toJSONAware(actual));
     }
 }
