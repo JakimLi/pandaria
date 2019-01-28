@@ -93,9 +93,9 @@ SELECT NAME, AGE FROM USERS
 dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:4.0.0",
-            'com.github.jakimli.pandaria:pandaria-core:0.2.6',
-            'com.github.jakimli.pandaria:pandaria-db:0.2.6',
-            'com.github.jakimli.pandaria:pandaria-mongo:0.2.6'
+            'com.github.jakimli.pandaria:pandaria-core:0.2.7',
+            'com.github.jakimli.pandaria:pandaria-db:0.2.7',
+            'com.github.jakimli.pandaria:pandaria-mongo:0.2.7'
     )
 }
 ```
@@ -106,19 +106,19 @@ dependencies {
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-core</artifactId>
-    <version>0.2.6</version>
+    <version>0.2.7</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-db</artifactId>
-    <version>0.2.6</version>
+    <version>0.2.7</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-mongo</artifactId>
-    <version>0.2.6</version>
+    <version>0.2.7</version>
     <scope>test</scope>
   </dependency>
 </dependencies>

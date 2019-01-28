@@ -1,4 +1,10 @@
-Release 0.2.6 (2019-01-28) Latest
+Release 0.2.7 (2019-01-28) Latest
+=================================
+Variables
+-----------
+* Define variable by extract cookies from response
+
+Release 0.2.6 (2019-01-28)
 =================================
 Issue Fixed
 -----------
