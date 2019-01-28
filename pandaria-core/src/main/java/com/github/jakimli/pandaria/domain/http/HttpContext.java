@@ -16,12 +16,12 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.NewCookie;
 import java.io.File;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.github.jakimli.pandaria.utils.FileUtil.file;
 import static com.github.jakimli.pandaria.utils.StringUtil.joinByComma;
-import static com.google.common.collect.Lists.newArrayList;
 import static javax.ws.rs.client.Entity.entity;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
 import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM_TYPE;
@@ -38,7 +38,7 @@ public class HttpContext implements Waitable<String> {
     private String requestBody;
     private MultiPart attachments = new MultiPart();
 
-    private List<Cookie> cookies = newArrayList();
+    private Map<String, Cookie> cookies = new HashMap<>();
     private MultivaluedMap<String, Object> requestHeaders = new MultivaluedHashMap<>();
 
     private String responseBody;
@@ -146,10 +146,10 @@ public class HttpContext implements Waitable<String> {
     }
 
     public void cookie(String key, String value) {
-        this.cookies.add(new NewCookie(key, value));
+        this.cookies.put(key, new NewCookie(key, value));
     }
 
-    public List<Cookie> cookies() {
+    public Map<String, Cookie> cookies() {
         return this.cookies;
     }
 

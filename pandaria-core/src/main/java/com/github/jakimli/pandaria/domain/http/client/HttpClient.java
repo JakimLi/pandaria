@@ -10,8 +10,10 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.logging.Level;
 
@@ -40,8 +42,8 @@ class HttpClient {
         response.close();
     }
 
-    private void addCookies(Builder target, List<Cookie> cookies) {
-        cookies.forEach(target::cookie);
+    private void addCookies(Builder target, Map<String, Cookie> cookies) {
+        cookies.values().forEach(target::cookie);
     }
 
     private HttpClient(HttpContext context) {
@@ -79,5 +81,8 @@ class HttpClient {
         this.context.status(response.getStatus());
         this.context.responseHeaders(response.getStringHeaders());
         this.context.responseBody(response.readEntity(String.class));
+        for (NewCookie cookie : response.getCookies().values()) {
+            this.context.cookie(cookie.getName(), cookie.getValue());
+        }
     }
 }

@@ -12,6 +12,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.ws.rs.core.Cookie;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -119,5 +120,17 @@ public class HttpSteps {
         List<String> values = context.responseHeader(key);
         assertNotNull(values);
         assertThat(join(",", values), is(expected));
+    }
+
+    @Given("var: ([^\"' ]*)<-cookie:'([^\"]*)'$")
+    public void defineVariableByCookieName(String key, String cookieName) {
+        for (Cookie cookie : context.cookies().values()) {
+            if (cookie.getName().equalsIgnoreCase(cookieName)) {
+                variables.assign(key, cookie.getValue());
+                return;
+            }
+        }
+
+        throw new RuntimeException(String.format("Can't find cookie by name: %s", cookieName));
     }
 }

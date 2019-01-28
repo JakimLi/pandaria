@@ -6,7 +6,7 @@ Feature: Http feature
     * dir: features/http
     * base uri: http://localhost:10080
 
-  Scenario: add cookie
+  Scenario: add cookie for request
     * uri: /cookie
     * cookie: 'key'='value'
     * send: get
@@ -23,3 +23,9 @@ Feature: Http feature
     """
     cookie added
     """
+
+  Scenario: read response cookie value
+    * uri: /mock_login
+    * send: POST
+    * var: jsession<-cookie:'SessionId'
+    * verify: ${jsession}='ABCDEFG'
