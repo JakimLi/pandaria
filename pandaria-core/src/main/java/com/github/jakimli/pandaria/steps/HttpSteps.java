@@ -124,13 +124,6 @@ public class HttpSteps {
 
     @Given("var: ([^\"' ]*)<-cookie:'([^\"]*)'$")
     public void defineVariableByCookieName(String key, String cookieName) {
-        for (Cookie cookie : context.cookies().values()) {
-            if (cookie.getName().equalsIgnoreCase(cookieName)) {
-                variables.assign(key, cookie.getValue());
-                return;
-            }
-        }
-
-        throw new RuntimeException(String.format("Can't find cookie by name: %s", cookieName));
+        variables.assign(key, context.getCookieValue(cookieName));
     }
 }

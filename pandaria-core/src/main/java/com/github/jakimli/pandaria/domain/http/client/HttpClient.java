@@ -81,8 +81,6 @@ class HttpClient {
         this.context.status(response.getStatus());
         this.context.responseHeaders(response.getStringHeaders());
         this.context.responseBody(response.readEntity(String.class));
-        for (NewCookie cookie : response.getCookies().values()) {
-            this.context.cookie(cookie.getName(), cookie.getValue());
-        }
+        this.context.addCookies(response.getCookies());
     }
 }

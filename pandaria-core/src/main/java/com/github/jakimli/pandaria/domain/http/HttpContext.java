@@ -167,4 +167,16 @@ public class HttpContext implements Waitable<String> {
                 .filter(entry -> !requestHeaders.containsKey(entry.getKey()))
                 .forEach(entry -> requestHeader(entry.getKey(), entry.getValue()));
     }
+
+    public void addCookies(Map<String, NewCookie> cookies) {
+        this.cookies.putAll(cookies);
+    }
+
+    public Object getCookieValue(String cookieName) {
+        if (! cookies.containsKey(cookieName)) {
+            throw new RuntimeException(String.format("Can't find cookie by name: %s", cookieName));
+        }
+
+        return cookies.get(cookieName).getValue();
+    }
 }
