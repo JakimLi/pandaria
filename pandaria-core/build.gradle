@@ -36,7 +36,8 @@ dependencies {
             "org.glassfish.jersey.media:jersey-media-multipart:${jersey}",
             "org.glassfish.jersey.inject:jersey-hk2:${jersey}",
 
-            "com.github.javafaker:javafaker:${faker}"
+            "com.github.javafaker:javafaker:${faker}",
+            "com.sun.activation:javax.activation:1.2.0"
     )
 
     testCompile(
