@@ -1,4 +1,10 @@
-Release 0.2.5 (2018-12-29) Latest
+Release 0.2.6 (2019-01-28) Latest
+=================================
+Issue Fixed
+-----------
+* Fix json schema verification type checking not working
+
+Release 0.2.5 (2018-12-29)
 =================================
 
 Variables
