@@ -4,6 +4,7 @@ import com.github.jakimli.pandaria.MockServer;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.github.dreamhead.moco.CookieAttribute.path;
 import static com.github.dreamhead.moco.Moco.and;
 import static com.github.dreamhead.moco.Moco.by;
 import static com.github.dreamhead.moco.Moco.contain;
@@ -233,6 +234,15 @@ public class BasicHttpHooks {
                         by(uri("/users")),
                         by(method("TRACE"))
                 )).response(header("Content-Type", "message/http"));
+
+        server.server()
+                .request(and(
+                        by(uri("/mock_login")),
+                        by(method("POST"))
+                ))
+                .response(
+                        cookie("SessionId", "ABCDEFG", path("/")), status(302))
+        ;
 
         server.start();
     }
