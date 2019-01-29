@@ -50,7 +50,7 @@ public class VariableDefinitionSteps {
     }
 
     @Given("^var: ([^\"' ]*)<-response body$")
-    public void defineVariableExtractByResponseBody(String key) throws IOException {
+    public void defineVariableExtractByResponseBody(String key) {
         variables.assign(key, toBeVerified.plainText());
     }
 
