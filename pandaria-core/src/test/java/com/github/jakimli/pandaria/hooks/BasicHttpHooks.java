@@ -245,8 +245,17 @@ public class BasicHttpHooks {
                         by(method("POST"))
                 ))
                 .response(
-                        cookie("SessionId", "ABCDEFG", path("/")), status(302))
-        ;
+                        cookie("SessionId", "ABCDEFG", path("/")), status(302));
+
+        server.server()
+                .request(and(
+                        by(uri("/only_for_certain_header_and_cookie")),
+                        by(method("GET")),
+                        eq(cookie("sessionid"), "888888"),
+                        eq(header("HeaderName"), "a header")
+                ))
+                .response(text("cookie and header is successfully set by Java code."));
+
 
         server.start();
     }

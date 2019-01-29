@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.steps;
 
+import com.github.jakimli.pandaria.domain.http.ScenarioContext;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
 import com.github.jakimli.pandaria.domain.wait.Wait;
@@ -29,6 +30,9 @@ public class HttpSteps {
     HttpContext context;
 
     @Autowired
+    private ScenarioContext scenarioContext;
+
+    @Autowired
     VerificationContext verifier;
 
     @Autowired
@@ -46,6 +50,9 @@ public class HttpSteps {
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
         context.reset();
+        context.addCookies(scenarioContext.getCookies());
+        context.addGlobalRequestHeaders(scenarioContext.getRequestHeaders());
+
         context.uri(URI.create(variables.interpret(configuration.uri(url))));
     }
 
