@@ -23,6 +23,10 @@ public class VerificationContext {
         return JsonContext.json(toJsonObject()).path(path);
     }
 
+    public String plainText() {
+        return toBeVerified.toString();
+    }
+
     private Object toJsonObject() throws IOException {
         if (!(toBeVerified instanceof String)) {
             return toBeVerified;
