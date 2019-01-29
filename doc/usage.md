@@ -48,6 +48,7 @@ Table of Contents
         * [String](#string)
         * [Integer](#integer)
         * [Extract from response body or results](#extract-from-response-body-or-results)
+        * [Extract from response cookie](#extract-from-response-cookie)
         * [Result of code evaluation](#result-of-code-evaluation)
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
@@ -677,6 +678,19 @@ You can also extract from database query results
 ```gherkin
 * query: select.sql
 * var: age<-'$[0].age'
+```
+
+#### Extract from response cookie
+@since 0.2.7
+
+You can extract a cookie and assign it to variable
+
+```gherkin
+Scenario: read response cookie value
+  * uri: /mock_login
+  * send: POST
+  * var: jsession<-cookie:'SessionId'
+  * verify: ${jsession}='ABCDEFG'
 ```
 
 #### Result of code evaluation
