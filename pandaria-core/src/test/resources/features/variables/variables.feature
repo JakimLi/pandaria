@@ -82,3 +82,10 @@ Feature: Variables
     """
     {"user":"${username}"}
     """
+
+  Scenario: assign response body to variable
+    * uri: /simple_response
+    * send: GET
+    * status: 200
+    * var: content<-response body
+    * verify: ${content}='SIMPLE_RESPONSE'

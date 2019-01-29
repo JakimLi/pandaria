@@ -114,6 +114,10 @@ public class BasicHttpHooks {
                 )));
 
         server.server()
+                .get(by(uri("/simple_response")))
+                .response(text("SIMPLE_RESPONSE"));
+
+        server.server()
                 .post(and(
                         by(uri("/users")),
                         eq(jsonPath("$.name"), "someone")))
@@ -153,9 +157,6 @@ public class BasicHttpHooks {
                 .get(by(uri("/users/me")))
                 .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
 
-        server.server()
-                .get(by(uri("/simple_response")))
-                .response(text("SIMPLE_RESPONSE"));
 
         server.server()
                 .get(by(uri("/getnull")))

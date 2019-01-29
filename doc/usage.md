@@ -49,6 +49,7 @@ Table of Contents
         * [Integer](#integer)
         * [Extract from response body or results](#extract-from-response-body-or-results)
         * [Extract from response cookie](#extract-from-response-cookie)
+        * [Extract from response body as plain text](#extract-from-response-body-as-plain-text)
         * [Result of code evaluation](#result-of-code-evaluation)
     * [Use Variables](#use-variables)
         * [In URI](#in-uri)
@@ -691,6 +692,17 @@ Scenario: read response cookie value
   * send: POST
   * var: jsession<-cookie:'SessionId'
   * verify: ${jsession}='ABCDEFG'
+```
+
+#### Extract from response body as plain text
+@since 0.2.8
+
+```gherkin
+* uri: /simple_response
+* send: GET
+* status: 200
+* var: content<-response body
+* verify: ${content}='SIMPLE_RESPONSE'
 ```
 
 #### Result of code evaluation
