@@ -154,6 +154,10 @@ public class BasicHttpHooks {
                 .response(json(of("username", "jakim", "age", 18, "iq", 80.0)));
 
         server.server()
+                .get(by(uri("/simple_response")))
+                .response(text("SIMPLE_RESPONSE"));
+
+        server.server()
                 .get(by(uri("/getnull")))
                 .response(text("{\"notexist\":null}"));
 
@@ -241,8 +245,17 @@ public class BasicHttpHooks {
                         by(method("POST"))
                 ))
                 .response(
-                        cookie("SessionId", "ABCDEFG", path("/")), status(302))
-        ;
+                        cookie("SessionId", "ABCDEFG", path("/")), status(302));
+
+        server.server()
+                .request(and(
+                        by(uri("/only_for_certain_header_and_cookie")),
+                        by(method("GET")),
+                        eq(cookie("sessionid"), "888888"),
+                        eq(header("HeaderName"), "a header")
+                ))
+                .response(text("cookie and header is successfully set by Java code."));
+
 
         server.start();
     }

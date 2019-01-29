@@ -49,6 +49,11 @@ public class VariableDefinitionSteps {
         variables.assign(key, toBeVerified.json(path));
     }
 
+    @Given("^var: ([^\"' ]*)<-response body$")
+    public void defineVariableExtractByResponseBody(String key) throws IOException {
+        variables.assign(key, toBeVerified.plainText());
+    }
+
     @Given("^var: ([^\"' ]*)=code:$")
     public void defineVariableFromCodeBlock(String key, String code) throws ScriptException {
         variables.assign(key, eval(variables.interpret(code)));

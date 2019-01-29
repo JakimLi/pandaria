@@ -101,9 +101,8 @@ public class HttpContext implements Waitable<String> {
         this.method = null;
         this.requestBody = null;
         this.requestHeaders.clear();
-        this.cookies.clear();
         this.attachments.cleanup();
-
+        this.cookies.clear();
         this.responseBody = null;
         this.responseStatus = 0;
         this.responseHeaders.clear();

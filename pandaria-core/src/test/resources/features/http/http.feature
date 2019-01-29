@@ -73,6 +73,14 @@ Feature: Http feature
     success
     """
 
+  Scenario: assign response body to variable
+    * uri: /simple_response
+    * send: GET
+    * status: 200
+    * var: content<-response body
+    * verify: ${content}='SIMPLE_RESPONSE'
+
+
   Scenario: verify plain text response to content in file
     * uri: /custom_header
     * header: 'Accept'='text.plain'
