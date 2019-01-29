@@ -1,4 +1,10 @@
-Release 0.2.7 (2019-01-28) Latest
+Release 0.2.8 (2019-01-29) Latest
+=================================
+Variables
+---------
+* Define variable by extract reponse body as plain text
+
+Release 0.2.7 (2019-01-28)
 =================================
 Variables
 -----------
