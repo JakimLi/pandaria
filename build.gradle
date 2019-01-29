@@ -45,6 +45,8 @@ subprojects {
         mongo = '3.8.2'
 
         faker = '0.16'
+
+        activation = '1.2.0'
     }
 
     test {

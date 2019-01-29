@@ -37,7 +37,9 @@ dependencies {
             "org.glassfish.jersey.inject:jersey-hk2:${jersey}",
 
             "com.github.javafaker:javafaker:${faker}",
-            "com.sun.activation:javax.activation:1.2.0"
+
+            // for jdk upper than 11
+            "com.sun.activation:javax.activation:${activation}"
     )
 
     testCompile(

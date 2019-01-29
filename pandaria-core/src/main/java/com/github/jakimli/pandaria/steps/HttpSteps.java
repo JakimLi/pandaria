@@ -1,19 +1,18 @@
 package com.github.jakimli.pandaria.steps;
 
-import com.github.jakimli.pandaria.domain.http.ScenarioContext;
-import com.github.jakimli.pandaria.domain.variable.Variables;
-import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
-import com.github.jakimli.pandaria.domain.wait.Wait;
-import com.github.jakimli.pandaria.domain.http.HttpContext;
-import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
-import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
+import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.http.HttpContext;
+import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
+import com.github.jakimli.pandaria.domain.http.ScenarioContext;
+import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
+import com.github.jakimli.pandaria.domain.variable.Variables;
+import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.core.Cookie;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -50,9 +49,6 @@ public class HttpSteps {
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
         context.reset();
-        context.addCookies(scenarioContext.getCookies());
-        context.addGlobalRequestHeaders(scenarioContext.getRequestHeaders());
-
         context.uri(URI.create(variables.interpret(configuration.uri(url))));
     }
 
@@ -99,6 +95,8 @@ public class HttpSteps {
 
     @When("^send: ([^\"]*)$")
     public void send(String method) {
+        context.addCookies(scenarioContext.getCookies());
+        context.addGlobalRequestHeaders(scenarioContext.getRequestHeaders());
         context.addGlobalRequestHeaders(headers.getHeaders());
         context.method(HttpMethod.valueOf(method.toUpperCase()));
         context.send();
