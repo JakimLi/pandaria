@@ -52,4 +52,8 @@ public class FeatureConfiguration {
         }
         return "/" + uri;
     }
+
+    public String baseUri() {
+        return this.baseUri;
+    }
 }

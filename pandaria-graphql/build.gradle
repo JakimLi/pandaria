@@ -1,0 +1,17 @@
+ext {
+    archivesBaseName = "pandaria-graphql"
+}
+
+dependencies {
+    compile(
+            project(":pandaria-core"),
+    )
+
+    testCompile(
+            "io.cucumber:cucumber-junit:${cucumber}",
+
+            "com.github.dreamhead:moco-core:${moco}",
+            "com.github.dreamhead:moco-runner:${moco}",
+            "com.github.dreamhead:moco-junit:${moco}"
+    )
+}
