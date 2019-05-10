@@ -15,7 +15,9 @@ import static java.util.Optional.empty;
 @Scope("cucumber-glue")
 public class GraphqlContext {
     private String query;
-    private String variables;
+
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private Optional<String> variables = empty();
 
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<String> operationName = empty();
@@ -25,12 +27,12 @@ public class GraphqlContext {
     }
 
     public void variables(String variables) {
-        this.variables = variables;
+        this.variables = Optional.of(variables);
     }
 
     public void reset() {
         this.query = null;
-        this.variables = null;
+        this.variables = empty();
         operationName = empty();
     }
 
@@ -38,10 +40,11 @@ public class GraphqlContext {
         try {
 
             Builder<String, String> builder = ImmutableMap.<String, String>builder()
-                    .put("query", this.query)
-                    .put("variables", this.variables);
+                    .put("query", this.query);
 
-            operationName.ifPresent(op -> builder.put("operationName", operationName.get()));
+
+            variables.ifPresent(variables -> builder.put("variables", variables));
+            operationName.ifPresent(operationName -> builder.put("operationName", operationName));
 
             return toJsonString(builder.build());
         } catch (JsonProcessingException exception) {

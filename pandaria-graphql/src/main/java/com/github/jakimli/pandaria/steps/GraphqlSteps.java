@@ -52,14 +52,22 @@ public class GraphqlSteps {
     }
 
     @Given("^variables:$")
-    public void graphqlVariables(String graphqlVariables) {
-        graphql.variables(variables.interpret(graphqlVariables));
+    public void graphqlVariables(String variables) {
+        String graphqlVariables = this.variables.interpret(variables);
+
+        assertNotNull(graphqlVariables);
+        assertFalse(graphqlVariables.isEmpty());
+        graphql.variables(graphqlVariables);
     }
 
     @Given("^variables: ([^\"]*)$")
     public void graphqlVariablesFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
-        graphql.variables(variables.interpret(read(fileName)));
+        String graphqlVariables = variables.interpret(read(fileName));
+
+        assertNotNull(graphqlVariables);
+        assertFalse(graphqlVariables.isEmpty());
+        graphql.variables(graphqlVariables);
     }
 
     @Given("^operation: ([^\"]*)$")
