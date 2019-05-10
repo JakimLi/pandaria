@@ -1,4 +1,9 @@
-Release 0.2.8 (2019-01-29) Latest
+Release 0.3.0 (2019-05-11) Latest
+=================================
+Graphql Test
+* Support graphql query and mutation
+
+Release 0.2.8 (2019-01-29)
 =================================
 Variables
 ---------

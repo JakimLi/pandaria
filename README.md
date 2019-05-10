@@ -12,7 +12,7 @@ Lightweight API testing tool based on cucumber JVM
 Introduction
 ------------
 
-Pandaria is a DSL written based on cucumber JVM to simplify the HTTP API testing, everything with cucumber still works.
+Pandaria is a DSL written based on cucumber JVM to simplify the HTTP/Graphql API testing, everything with cucumber still works.
 Using pandaria you don't need to learn programming
 
 [中文介绍](README_zh.md)
@@ -91,7 +91,7 @@ More [Usage](doc/usage.md)
 
 Latest Release
 --------------
-* 0.2.8
+* 0.3.0
 
 See [Release Notes](doc/release_notes.md)
 
@@ -119,19 +119,19 @@ dependencies {
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-core</artifactId>
-    <version>0.2.8</version>
+    <version>0.3.0</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-db</artifactId>
-    <version>0.2.8</version>
+    <version>0.3.0</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-mongo</artifactId>
-    <version>0.2.8</version>
+    <version>0.3.0</version>
     <scope>test</scope>
   </dependency>
 </dependencies>

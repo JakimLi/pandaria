@@ -30,6 +30,12 @@ Table of Contents
      * [Upload file](#upload-file)
      * [HTTPS](#https)
      * [Proxy](#proxy)
+     
+* [Graphql Test](#graphql-test)
+    * [query](#query)
+    * [mutation](#mutation)
+    * [variables](#varaibles)
+    * [operationName](#operation-name)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -454,6 +460,82 @@ properties for SSL configuration.
 Java system properties are used for HTTP(S) proxy. e.g, below is how to add it using gradle
 ```shell
 ./gradlew -Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8088 build
+```
+
+
+Graphql Test
+-------------
+@since 0.3.0
+
+Pandaria support graphql testing over HTTP, currenty query and mutation are supported.
+
+### Query
+```gherkin
+  Scenario: basic query without specify operation name
+    * graphql:
+    """
+    query bookById($id: String){
+      book(id: $id) {
+        title
+        isbn
+        author {
+          name
+        }
+      }
+    }
+    """
+
+    * variables:
+    """
+    {
+      "id": "1"
+    }
+    """
+    * send
+    * verify: '$.data.book.title'='CSS Designer Guide'
+    * verify: '$.data.book.isbn'='ISBN01123'
+    * verify: '$.data.book.author.name'='someone'
+```
+You can send a graphql query and verify the returning data. variables are optional.
+
+Or you can put the query and variables in file as usual.
+```gherkin
+* graphql: query_book_by_id.graphql
+* variables: css_designer_guide.id.json
+* send
+* verify: '$.data.book.title'='CSS Designer Guide'
+* verify: '$.data.book.isbn'='ISBN01123'
+* verify: '$.data.book.author.name'='someone'
+```
+
+### Mutation
+Usage of mutation similar with query, just replace the query with mutation. 
+
+### Variables
+Variable is optional.
+```gherkin
+* variables:
+"""
+{
+  "id": "1"
+}
+
+* variables: css_designer_guide.id.json
+```
+
+### Operation Name
+If multiple operations presented in one single request, operation name is required by graphql server. 
+it's optional when single operation presented in single request.
+
+```gherkin
+  Scenario: query with operation name
+    * graphql: query_book_by_id.graphql
+    * variables: css_designer_guide.id.json
+    * operation: bookById
+    * send
+    * verify: '$.data.book.title'='CSS Designer Guide'
+    * verify: '$.data.book.isbn'='ISBN01123'
+    * verify: '$.data.book.author.name'='someone'
 ```
 
 
