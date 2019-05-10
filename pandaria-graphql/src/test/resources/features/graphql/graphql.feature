@@ -14,7 +14,7 @@ Feature: graphql query
     * verify: '$.data.book.title'='CSS Designer Guide'
     * verify: '$.data.book.isbn'='ISBN01123'
     * verify: '$.data.book.author.name'='someone'
-    
+
 
   Scenario: basic query without specify operation name
     * graphql:
@@ -36,6 +36,15 @@ Feature: graphql query
       "id": "1"
     }
     """
+    * send
+    * verify: '$.data.book.title'='CSS Designer Guide'
+    * verify: '$.data.book.isbn'='ISBN01123'
+    * verify: '$.data.book.author.name'='someone'
+
+  Scenario: query with operation name
+    * graphql: query_book_by_id.graphql
+    * variables: css_designer_guide.id.json
+    * operation: bookById
     * send
     * verify: '$.data.book.title'='CSS Designer Guide'
     * verify: '$.data.book.isbn'='ISBN01123'

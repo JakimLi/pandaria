@@ -15,6 +15,8 @@ import java.net.URI;
 
 import static com.github.jakimli.pandaria.domain.http.client.HttpMethod.POST;
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class GraphqlSteps {
 
@@ -44,6 +46,7 @@ public class GraphqlSteps {
 
     @Given("^graphql: ([^\"]*)$")
     public void graphqlFromFile(String file) throws IOException {
+        graphql.reset();
         String fileName = configuration.classpathFile(file);
         graphql.query(variables.interpret(read(fileName)));
     }
@@ -57,6 +60,15 @@ public class GraphqlSteps {
     public void graphqlVariablesFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
         graphql.variables(variables.interpret(read(fileName)));
+    }
+
+    @Given("^operation: ([^\"]*)$")
+    public void operationName(String operation) {
+        String operationName = variables.interpret(operation);
+
+        assertNotNull(operationName);
+        assertFalse(operationName.isEmpty());
+        graphql.operationName(operationName);
     }
 
     @When("send")
