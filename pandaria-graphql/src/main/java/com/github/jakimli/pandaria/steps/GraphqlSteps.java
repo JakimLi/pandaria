@@ -10,9 +10,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.IOException;
 import java.net.URI;
 
 import static com.github.jakimli.pandaria.domain.http.client.HttpMethod.POST;
+import static com.github.jakimli.pandaria.utils.FileUtil.read;
 
 public class GraphqlSteps {
 
@@ -40,9 +42,21 @@ public class GraphqlSteps {
         graphql.query(variables.interpret(body));
     }
 
+    @Given("^graphql: ([^\"]*)$")
+    public void graphqlFromFile(String file) throws IOException {
+        String fileName = configuration.classpathFile(file);
+        graphql.query(variables.interpret(read(fileName)));
+    }
+
     @Given("^variables:$")
     public void graphqlVariables(String graphqlVariables) {
         graphql.variables(variables.interpret(graphqlVariables));
+    }
+
+    @Given("^variables: ([^\"]*)$")
+    public void graphqlVariablesFromFile(String file) throws IOException {
+        String fileName = configuration.classpathFile(file);
+        graphql.variables(variables.interpret(read(fileName)));
     }
 
     @When("send")
