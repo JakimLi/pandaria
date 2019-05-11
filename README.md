@@ -106,9 +106,9 @@ If you don't need to verify database or mongo, just remove the `pandaria-db` or 
 dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:4.0.0",
-            'com.github.jakimli.pandaria:pandaria-core:0.2.8',
-            'com.github.jakimli.pandaria:pandaria-db:0.2.8',
-            'com.github.jakimli.pandaria:pandaria-mongo:0.2.8'
+            'com.github.jakimli.pandaria:pandaria-core:0.3.0',
+            'com.github.jakimli.pandaria:pandaria-db:0.3.0',
+            'com.github.jakimli.pandaria:pandaria-mongo:0.3.0'
     )
 }
 ```
