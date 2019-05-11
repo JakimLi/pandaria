@@ -30,8 +30,9 @@ Table of Contents
      * [Upload file](#upload-file)
      * [HTTPS](#https)
      * [Proxy](#proxy)
-     
+
 * [Graphql Test](#graphql-test)
+    * [URL](#url)
     * [query](#query)
     * [mutation](#mutation)
     * [variables](#varaibles)
@@ -469,6 +470,15 @@ Graphql Test
 
 Pandaria support graphql testing over HTTP, currenty query and mutation are supported.
 
+### URL
+Unlink REST, Graphql only needs a single endpoint, so you can just set the base url like below:
+
+```
+Background:
+  * dir: features/graphql
+  * base uri: http://localhost:10081/graphql
+```
+
 ### Query
 ```gherkin
   Scenario: basic query without specify operation name
@@ -509,7 +519,7 @@ Or you can put the query and variables in file as usual.
 ```
 
 ### Mutation
-Usage of mutation similar with query, just replace the query with mutation. 
+Usage of mutation similar with query, just replace the query with mutation.
 
 ### Variables
 Variable is optional.
@@ -524,7 +534,7 @@ Variable is optional.
 ```
 
 ### Operation Name
-If multiple operations presented in one single request, operation name is required by graphql server. 
+If multiple operations presented in one single request, operation name is required by graphql server.
 it's optional when single operation presented in single request.
 
 ```gherkin
