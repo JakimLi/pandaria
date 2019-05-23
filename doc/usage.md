@@ -471,7 +471,7 @@ Graphql Test
 Pandaria support graphql testing over HTTP, currenty query and mutation are supported.
 
 ### URL
-Unlink REST, Graphql only needs a single endpoint, so you can just set the base url like below:
+Unlike REST, Graphql only needs a single endpoint, so you can just set the base url like below:
 
 ```
 Background:
