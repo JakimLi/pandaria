@@ -89,6 +89,15 @@ You can also verify JSON schema:
 
 More [Usage](doc/usage.md)
 
+Resources
+---------
+
+* [轻量级API测试工具Pandaria](https://juejin.im/post/5bbcb8e1f265da0ad82c2afd)
+* [Pandaria — Lightweight API Testing tool](https://medium.com/@jianli_30042/pandaria-lightweight-api-testing-tool-951528af79)
+* [使用Pandaria编写API自动化测试进阶用法](https://juejin.im/post/5bdec21fe51d4505212ff791)
+* [Pandaria - GraphQL API测试](https://juejin.im/post/5d2360136fb9a07ebb05583b)
+
+
 Latest Release
 --------------
 * 0.3.0
