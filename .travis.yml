@@ -24,6 +24,8 @@ before_script:
 script:
   - "./gradlew clean build -x signArchives"
 
+dist: xenial
+
 services:
 - mysql
 - mongodb
