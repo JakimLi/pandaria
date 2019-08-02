@@ -172,7 +172,7 @@ public class HttpContext implements Waitable<String> {
     }
 
     public Object getCookieValue(String cookieName) {
-        if (! cookies.containsKey(cookieName)) {
+        if (!cookies.containsKey(cookieName)) {
             throw new RuntimeException(String.format("Can't find cookie by name: %s", cookieName));
         }
 
