@@ -108,7 +108,7 @@ See [Release Notes](doc/release_notes.md)
 Get Started
 -----------
 
-If you don't need to verify database or mongo, just remove the `pandaria-db` or `pandaria-mongo` from dependency declarations.
+If you don't need to verify database mongo, or graphql, just remove the `pandaria-db`, `pandaria-mongo` or `pandaria-graphql` from dependency declarations.
 
 ### Gradle
 ```groovy

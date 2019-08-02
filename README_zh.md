@@ -96,7 +96,7 @@ SELECT NAME, AGE FROM USERS
 快速开始
 -------
 
-如果你不需要验证数据库或者mongodb, 删除`pandaria-db`或`pandaria-mongo`
+如果你不需要验证数据库, mongodb, 或者Graphql 删除`pandaria-db`, `pandaria-mongo`或`pandaria-graphql`
 
 ### Gradle
 ```groovy
