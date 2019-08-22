@@ -58,7 +58,9 @@ public class HttpSteps {
     }
     
     @Given("^header: '([^\"]*)'=\"([^\"]*)\"$")
-    public void headerFromString(String key, String value) { context.requestHeader(key, value); }
+    public void headerFromString(String key, String value) {
+        context.requestHeader(key, variables.interpret(value));
+    }
 
     @Given("^attachment: ([^\"]*)")
     public void attachment(String file) {
