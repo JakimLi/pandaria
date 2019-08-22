@@ -63,6 +63,17 @@ Feature: Http feature
     * verify: '$.username'='jakim'
     * verify: '$.age'=18
 
+  Scenario: get with http header value from a variable
+    * uri: /custom_header_value_from_variable
+    * var: value="some_value"
+    * header: 'SomeName'="${value}"
+    * send: GET
+    * status: 200
+    * response body:
+    """
+    The value of SomeName was some_value
+    """
+
   Scenario: get with http header
     * uri: /custom_header
     * header: 'Accept'='text.plain'
