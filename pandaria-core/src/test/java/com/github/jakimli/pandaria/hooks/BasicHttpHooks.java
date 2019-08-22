@@ -195,7 +195,7 @@ public class BasicHttpHooks {
         server.server()
                 .get(and(
                         by(uri("/custom_header_value_from_variable")),
-                        eq(header("SomeName"),"some_value")
+                        eq(header("SomeName"), "some_value")
                 ))
                 .response(text("The value of SomeName was some_value"));
 
