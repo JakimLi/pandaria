@@ -1,5 +1,10 @@
 Release 0.3.0 (2019-05-11) Latest
 =================================
+HTTP
+* http request header support variables
+
+Release 0.3.0 (2019-05-11) Latest
+=================================
 Graphql Test
 * Support graphql query and mutation
 
