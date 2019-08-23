@@ -857,8 +857,9 @@ Scenario: variable used in request file
 """
 ```
 
-@since 0.3.1
 #### In HTTP request header
+@since 0.3.1
+
 ```gherkin
 * uri: /custom_header_value_from_variable
 * var: value="some_value"
