@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+import static com.github.jakimli.pandaria.utils.JsonContext.json;
 import static com.google.common.collect.Maps.newHashMap;
 import static org.apache.commons.text.StringSubstitutor.replace;
 
@@ -16,6 +17,8 @@ import static org.apache.commons.text.StringSubstitutor.replace;
 @Scope("cucumber-glue")
 @ConfigurationProperties
 public class Variables {
+
+    private static final String DOT = "\\.";
 
     @Autowired
     FeatureConfiguration configuration;
@@ -34,8 +37,19 @@ public class Variables {
         this.variables = variables;
     }
 
-    public Object get(String name) {
-        return variables.get(name);
+    //expression: ${variable.nest.property}
+    //expression: ${variable.nest[0].property}
+    //expression: ${variable}
+    public Object get(String expression) {
+        String name = expression.split(DOT)[0];
+        Object value = variables.get(name);
+
+        if (value == null) {
+            return null;
+        }
+
+        String path = expression.replaceFirst(name, "");
+        return json(value).path("$" + path);
     }
 
     public String interpret(String value) {
