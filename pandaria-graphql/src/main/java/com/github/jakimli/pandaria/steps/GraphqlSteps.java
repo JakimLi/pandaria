@@ -4,7 +4,7 @@ import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.GraphqlContext;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.domain.http.HttpContext;
-import com.github.jakimli.pandaria.domain.variable.Variables;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
@@ -24,7 +24,7 @@ public class GraphqlSteps {
     GraphqlContext graphql;
 
     @Autowired
-    Variables variables;
+    Expressions expressions;
 
     @Autowired
     HttpContext http;
@@ -41,19 +41,19 @@ public class GraphqlSteps {
     @Given("^graphql:$")
     public void graphql(String body) {
         graphql.reset();
-        graphql.query(variables.interpret(body));
+        graphql.query(expressions.evaluate(body));
     }
 
     @Given("^graphql: ([^\"]*)$")
     public void graphqlFromFile(String file) throws IOException {
         graphql.reset();
         String fileName = configuration.classpathFile(file);
-        graphql.query(variables.interpret(read(fileName)));
+        graphql.query(expressions.evaluate(read(fileName)));
     }
 
     @Given("^variables:$")
     public void graphqlVariables(String variables) {
-        String graphqlVariables = this.variables.interpret(variables);
+        String graphqlVariables = this.expressions.evaluate(variables);
 
         assertNotNull(graphqlVariables);
         assertFalse(graphqlVariables.isEmpty());
@@ -63,7 +63,7 @@ public class GraphqlSteps {
     @Given("^variables: ([^\"]*)$")
     public void graphqlVariablesFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
-        String graphqlVariables = variables.interpret(read(fileName));
+        String graphqlVariables = expressions.evaluate(read(fileName));
 
         assertNotNull(graphqlVariables);
         assertFalse(graphqlVariables.isEmpty());
@@ -72,7 +72,7 @@ public class GraphqlSteps {
 
     @Given("^operation: ([^\"]*)$")
     public void operationName(String operation) {
-        String operationName = variables.interpret(operation);
+        String operationName = expressions.evaluate(operation);
 
         assertNotNull(operationName);
         assertFalse(operationName.isEmpty());
@@ -82,7 +82,7 @@ public class GraphqlSteps {
     @When("send")
     public void sendGraphql() {
         http.reset();
-        http.uri(URI.create(variables.interpret(configuration.baseUri())));
+        http.uri(URI.create(expressions.evaluate(configuration.baseUri())));
         http.requestBody(graphql.request());
         http.method(POST);
         http.send();

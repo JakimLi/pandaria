@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,16 @@ public class JsonVerificationSteps {
 
     @Autowired
     Variables variables;
+    
+    @Autowired
+    Expressions expressions;
 
     @Autowired
     FeatureConfiguration configuration;
 
     @Then("^verify: '([^\"]*)' same json:$")
     public void sameJson(String path, String json) throws IOException {
-        assertThat(actual.json(path), jsonEquals(variables.interpret(json)).when(IGNORING_ARRAY_ORDER));
+        assertThat(actual.json(path), jsonEquals(expressions.evaluate(json)).when(IGNORING_ARRAY_ORDER));
     }
 
     @Then("^verify: '([^\"]*)' same json: ([^\"]*)$")
@@ -41,7 +45,7 @@ public class JsonVerificationSteps {
 
     @Then("^verify: '([^\"]*)' contains json:$")
     public void containsJson(String path, String json) throws IOException {
-        assertThat(actual.json(path), jsonEquals(variables.interpret(json))
+        assertThat(actual.json(path), jsonEquals(expressions.evaluate(json))
                 .when(IGNORING_ARRAY_ORDER, IGNORING_EXTRA_ARRAY_ITEMS, IGNORING_EXTRA_FIELDS));
     }
 
@@ -58,7 +62,7 @@ public class JsonVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)} same json:$")
     public void variableSameJson(String name, String json) {
-        assertThat(variables.get(name), jsonEquals(variables.interpret(json)).when(IGNORING_ARRAY_ORDER));
+        assertThat(variables.get(name), jsonEquals(expressions.evaluate(json)).when(IGNORING_ARRAY_ORDER));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} same json: ([^\"]*)$")
@@ -68,7 +72,7 @@ public class JsonVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)} contains json:$")
     public void variableContainsJson(String name, String json) {
-        assertThat(variables.get(name), jsonEquals(variables.interpret(json))
+        assertThat(variables.get(name), jsonEquals(expressions.evaluate(json))
                 .when(IGNORING_ARRAY_ORDER, IGNORING_EXTRA_ARRAY_ITEMS, IGNORING_EXTRA_FIELDS));
     }
 
@@ -84,6 +88,6 @@ public class JsonVerificationSteps {
     }
 
     private String fileContent(String fileName) throws IOException {
-        return variables.interpret(read(configuration.classpathFile(fileName)));
+        return expressions.evaluate(read(configuration.classpathFile(fileName)));
     }
 }

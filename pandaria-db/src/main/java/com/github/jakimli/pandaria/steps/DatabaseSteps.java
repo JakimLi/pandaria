@@ -3,8 +3,8 @@ package com.github.jakimli.pandaria.steps;
 import com.github.jakimli.pandaria.domain.DatabaseExecuteContext;
 import com.github.jakimli.pandaria.domain.DatabaseQueryContext;
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class DatabaseSteps {
     VerificationContext verifier;
 
     @Autowired
-    Variables variables;
+    Expressions expressions;
 
     @Autowired
     FeatureConfiguration configuration;
@@ -35,7 +35,7 @@ public class DatabaseSteps {
 
     @When("^query:$")
     public void query(String sql) {
-        databaseQueryContext.query(variables.interpret(sql));
+        databaseQueryContext.query(expressions.evaluate(sql));
         databaseQueryContext.send();
         verifier.toBeVerified(databaseQueryContext.results());
         wait.waitable(databaseQueryContext);
@@ -44,7 +44,7 @@ public class DatabaseSteps {
     @When("^query: ([^\"]*)$")
     public void queryFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
-        databaseQueryContext.query(variables.interpret(read(file)));
+        databaseQueryContext.query(expressions.evaluate(read(file)));
         databaseQueryContext.send();
         verifier.toBeVerified(databaseQueryContext.results());
         wait.waitable(databaseQueryContext);
@@ -52,7 +52,7 @@ public class DatabaseSteps {
 
     @When("^execute sql:$")
     public void executeSql(String sql) {
-        databaseExecuteContext.statement(variables.interpret(sql));
+        databaseExecuteContext.statement(expressions.evaluate(sql));
         databaseExecuteContext.execute();
         wait.waitable(databaseExecuteContext);
     }
@@ -60,7 +60,7 @@ public class DatabaseSteps {
     @When("^execute sql: ([^\"]*)$")
     public void executeSqlFromFile(String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
-        databaseExecuteContext.statement(variables.interpret(read(file)));
+        databaseExecuteContext.statement(expressions.evaluate(read(file)));
         databaseExecuteContext.execute();
         wait.waitable(databaseExecuteContext);
     }

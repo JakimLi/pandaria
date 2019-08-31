@@ -2,6 +2,9 @@ package com.github.jakimli.pandaria.domain.variable;
 
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import com.github.jakimli.pandaria.domain.variable.Variables.Expression;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -9,10 +12,13 @@ import java.util.regex.Pattern;
 
 import static com.github.jakimli.pandaria.utils.JsonUtil.toJsonString;
 
+@Component
+@Scope("cucumber-glue")
 public class JsonPathExpression implements Expression {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("@\\{([^}]*)}");
 
+    @Autowired
     private VerificationContext verifying;
 
     JsonPathExpression(VerificationContext verifying) {

@@ -2,6 +2,7 @@ package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class VariableDefinitionSteps {
     VerificationContext toBeVerified;
 
     @Autowired
+    Expressions expressions;
+
+    @Autowired
     private FeatureConfiguration configuration;
 
     @Given("^var: ([^\"' ]*)='([^\"]*)'$")
@@ -31,7 +35,7 @@ public class VariableDefinitionSteps {
 
     @Given("^var: ([^\"' ]*)=\"([^\"]*)\"$")
     public void defineStringVariable(String key, String value) {
-        variables.assign(key, variables.interpret(value));
+        variables.assign(key, expressions.evaluate(value));
     }
 
     @Given("^var: ([^\"' ]*)=(\\d+)$")
@@ -56,17 +60,17 @@ public class VariableDefinitionSteps {
 
     @Given("^var: ([^\"' ]*)=code:$")
     public void defineVariableFromCodeBlock(String key, String code) throws ScriptException {
-        variables.assign(key, eval(variables.interpret(code)));
+        variables.assign(key, eval(expressions.evaluate(code)));
     }
 
     @Given("^var: ([^\"' ]*)=code: ([^\"]*)$")
     public void defineVariableFromCodeInLine(String key, String code) throws ScriptException {
-        variables.assign(key, eval(variables.interpret(code)));
+        variables.assign(key, eval(expressions.evaluate(code)));
     }
 
     @Given("^var: ([^\"' ]*)=code file: ([^\"]*)$")
     public void defineVariableFromFile(String key, String file) throws ScriptException, IOException {
-        variables.assign(key, eval(variables.interpret(read(configuration.classpathFile(file)))));
+        variables.assign(key, eval(expressions.evaluate(read(configuration.classpathFile(file)))));
     }
 
 

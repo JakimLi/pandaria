@@ -6,6 +6,7 @@ import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
 import com.github.jakimli.pandaria.domain.http.ScenarioContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.Given;
@@ -39,6 +40,9 @@ public class HttpSteps {
 
     @Autowired
     Variables variables;
+    
+    @Autowired
+    Expressions expressions;
 
     @Autowired
     Wait wait;
@@ -49,7 +53,7 @@ public class HttpSteps {
     @Given("^uri: ([^\"]*)$")
     public void uri(String url) {
         context.reset();
-        context.uri(URI.create(variables.interpret(configuration.uri(url))));
+        context.uri(URI.create(expressions.evaluate(configuration.uri(url))));
     }
 
     @Given("^header: '([^\"]*)'='([^\"]*)'$")
@@ -59,7 +63,7 @@ public class HttpSteps {
     
     @Given("^header: '([^\"]*)'=\"([^\"]*)\"$")
     public void headerFromString(String key, String value) {
-        context.requestHeader(key, variables.interpret(value));
+        context.requestHeader(key, expressions.evaluate(value));
     }
 
     @Given("^attachment: ([^\"]*)")
@@ -74,18 +78,18 @@ public class HttpSteps {
 
     @Given("^query parameter: '([^\"]*)'=\"([^\"]*)\"$")
     public void queryParameterFromString(String name, String value) {
-        context.queryParameter(name, variables.interpret(value));
+        context.queryParameter(name, expressions.evaluate(value));
     }
 
     @Given("^request body:$")
     public void requestBody(String body) {
-        context.requestBody(variables.interpret(body));
+        context.requestBody(expressions.evaluate(body));
     }
 
     @Given("^request body: ([^\"]*)$")
     public void requestBodyFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
-        context.requestBody(variables.interpret(read(fileName)));
+        context.requestBody(expressions.evaluate(read(fileName)));
     }
 
     @Given("^cookie: '([^\"]*)'='([^\"]*)'$")
@@ -95,7 +99,7 @@ public class HttpSteps {
 
     @Given("^cookie: '([^\"]*)'=\"([^\"]*)\"$")
     public void cookieFromString(String key, String value) {
-        context.cookie(key, variables.interpret(value));
+        context.cookie(key, expressions.evaluate(value));
     }
 
     @When("^send: ([^\"]*)$")
@@ -116,12 +120,12 @@ public class HttpSteps {
 
     @Then("^response body:$")
     public void verifyResponseBody(String expected) {
-        assertThat(context.responseBody(), is(variables.interpret(expected)));
+        assertThat(context.responseBody(), is(expressions.evaluate(expected)));
     }
 
     @Then("^response body: ([^\"]*)$")
     public void verifyResponseBodyAgainstFile(String file) throws IOException {
-        String content = variables.interpret(read(configuration.classpathFile(file)));
+        String content = expressions.evaluate(read(configuration.classpathFile(file)));
         assertThat(context.responseBody(), is(content));
     }
 

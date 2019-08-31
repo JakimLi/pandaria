@@ -1,5 +1,6 @@
 package com.github.jakimli.pandaria.steps.verification;
 
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import cucumber.api.java.en.Then;
@@ -20,6 +21,9 @@ public class StringVerificationSteps {
 
     @Autowired
     Variables variables;
+    
+    @Autowired
+    Expressions expressions;
 
     @Then("^verify: '([^\"]*)'='([^\"]*)'$")
     public void verifyEqualsLiteral(String path, final String expected) throws Throwable {
@@ -33,12 +37,12 @@ public class StringVerificationSteps {
 
     @Then("^verify: '([^\"]*)'=\"([^\"]*)\"$")
     public void verifyEqualsString(String path, String expected) throws Throwable {
-        assertThat(toBeVerified.json(path), is(variables.interpret(expected)));
+        assertThat(toBeVerified.json(path), is(expressions.evaluate(expected)));
     }
 
     @Then("^verify: '([^\"]*)'!=\"([^\"]*)\"$")
     public void verifyNotEqualsString(String path, String expected) throws Throwable {
-        assertThat(toBeVerified.json(path), not(variables.interpret(expected)));
+        assertThat(toBeVerified.json(path), not(expressions.evaluate(expected)));
     }
 
     @Then("^verify: '([^\"]*)' contains: '([^\"]*)'$")
@@ -48,7 +52,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: '([^\"]*)' contains: \"([^\"]*)\"$")
     public void verifyContainsString(String path, String contained) throws Throwable {
-        assertThat(String.valueOf(toBeVerified.json(path)), containsString(variables.interpret(contained)));
+        assertThat(String.valueOf(toBeVerified.json(path)), containsString(expressions.evaluate(contained)));
     }
 
     @Then("^verify: '([^\"]*)' starts with: '([^\"]*)'$")
@@ -58,7 +62,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: '([^\"]*)' starts with: \"([^\"]*)\"$")
     public void verifyStartsWithString(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(toBeVerified.json(path)), startsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(toBeVerified.json(path)), startsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: '([^\"]*)' ends with: '([^\"]*)'$")
@@ -68,7 +72,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: '([^\"]*)' ends with: \"([^\"]*)\"$")
     public void verifyEndsWithString(String path, String prefix) throws Throwable {
-        assertThat(String.valueOf(toBeVerified.json(path)), endsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(toBeVerified.json(path)), endsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: '([^\"]*)' length: (\\d+)$")
@@ -88,7 +92,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
     public void verifyVariableEqualsString(String varName, String expected) {
-        assertThat(variables.get(varName), is(variables.interpret(expected)));
+        assertThat(variables.get(varName), is(expressions.evaluate(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains: '([^\"]*)'$")
@@ -98,7 +102,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)} contains: \"([^\"]*)\"$")
     public void verifyVariableContainsString(String varName, String expected) {
-        assertThat(String.valueOf(variables.get(varName)), containsString(variables.interpret(expected)));
+        assertThat(String.valueOf(variables.get(varName)), containsString(expressions.evaluate(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} starts with: '([^\"]*)'$")
@@ -108,7 +112,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)} starts with: \"([^\"]*)\"$")
     public void verifyVariableStartsWithString(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), startsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(variables.get(varName)), startsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} ends with: '([^\"]*)'$")
@@ -118,7 +122,7 @@ public class StringVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)} ends with: \"([^\"]*)\"$")
     public void verifyVariableEndsWithString(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), endsWith(variables.interpret(prefix)));
+        assertThat(String.valueOf(variables.get(varName)), endsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} matches: '([^\"]*)'$")
@@ -138,6 +142,6 @@ public class StringVerificationSteps {
 
     @Then("^verify: \\$\\{([^\"]*)}!=\"([^\"]*)\"$")
     public void verifyVariableNotEqualsString(String varName, String expected) {
-        assertThat(variables.get(varName), not(variables.interpret(expected)));
+        assertThat(variables.get(varName), not(expressions.evaluate(expected)));
     }
 }

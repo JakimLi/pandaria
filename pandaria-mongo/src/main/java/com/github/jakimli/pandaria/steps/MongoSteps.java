@@ -4,8 +4,8 @@ import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.MongoClient;
 import com.github.jakimli.pandaria.domain.MongoExecutionContext;
 import com.github.jakimli.pandaria.domain.MongoQueryContext;
-import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,6 @@ public class MongoSteps {
     MongoClient mongo;
 
     @Autowired
-    Variables variables;
-
-    @Autowired
     VerificationContext verifier;
 
     @Autowired
@@ -30,6 +27,9 @@ public class MongoSteps {
 
     @Autowired
     MongoQueryContext mongoQuery;
+    
+    @Autowired
+    Expressions expressions;
 
     @Autowired
     Wait wait;
@@ -40,7 +40,7 @@ public class MongoSteps {
     @When("^collection: '([^\"]*)' insert:$")
     public void insert(String collection, String document) {
         mongoExecution.collection(collection);
-        mongoExecution.execution(collect -> mongo.insert(collect, variables.interpret(document)));
+        mongoExecution.execution(collect -> mongo.insert(collect, expressions.evaluate(document)));
         mongoExecution.execute();
     }
 
@@ -48,7 +48,7 @@ public class MongoSteps {
     public void insertFromFile(String collection, String file) throws IOException {
         String document = read(configuration.classpathFile(file));
         mongoExecution.collection(collection);
-        mongoExecution.execution(collect -> mongo.insert(collect, variables.interpret(document)));
+        mongoExecution.execution(collect -> mongo.insert(collect, expressions.evaluate(document)));
         mongoExecution.execute();
     }
 
@@ -70,7 +70,7 @@ public class MongoSteps {
     @When("^collection: '([^\"]*)' find:$")
     public void find(String collection, String filter) {
         mongoQuery.collection(collection);
-        mongoQuery.filter(variables.interpret(filter));
+        mongoQuery.filter(expressions.evaluate(filter));
         verifier.toBeVerified(mongoQuery.find());
         wait.waitable(mongoQuery);
     }
@@ -78,7 +78,7 @@ public class MongoSteps {
     @When("^collection: '([^\"]*)' find: ([^\"]*)$")
     public void findFilterFromFile(String collection, String file) throws IOException {
         mongoQuery.collection(collection);
-        mongoQuery.filter(variables.interpret(read(configuration.classpathFile(file))));
+        mongoQuery.filter(expressions.evaluate(read(configuration.classpathFile(file))));
         verifier.toBeVerified(mongoQuery.find());
         wait.waitable(mongoQuery);
     }

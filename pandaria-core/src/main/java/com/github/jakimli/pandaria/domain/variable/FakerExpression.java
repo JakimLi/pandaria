@@ -1,20 +1,22 @@
 package com.github.jakimli.pandaria.domain.variable;
 
+import com.github.jakimli.pandaria.domain.FeatureConfiguration;
 import com.github.jakimli.pandaria.domain.variable.Variables.Expression;
-import com.github.javafaker.Faker;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
+@Scope("cucumber-glue")
 class FakerExpression implements Expression {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("(#?#\\{[a-z0-9A-Z_.]+\\s?(?:'([^']+)')?(?:,'([^']+)')*})");
 
-    private Faker faker;
-
-    FakerExpression(Faker faker) {
-        this.faker = faker;
-    }
+    @Autowired
+    FeatureConfiguration configuration;
 
     @Override
     public String evaluate(String raw) {
@@ -27,7 +29,7 @@ class FakerExpression implements Expression {
                 matcher.appendReplacement(buffer, group.substring(1));
                 continue;
             }
-            matcher.appendReplacement(buffer, this.faker.expression(group));
+            matcher.appendReplacement(buffer, this.configuration.faker().expression(group));
         }
         matcher.appendTail(buffer);
         return buffer.toString();

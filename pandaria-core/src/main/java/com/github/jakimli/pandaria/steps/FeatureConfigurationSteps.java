@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.steps;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.variable.Variables;
+import com.github.jakimli.pandaria.domain.variable.Expressions;
 import cucumber.api.java.en.Given;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +13,7 @@ public class FeatureConfigurationSteps {
     FeatureConfiguration configuration;
 
     @Autowired
-    Variables variables;
+    Expressions expressions;
 
     @Given("^dir: ([^\"]*)")
     public void dir(String dir) {
@@ -22,7 +22,7 @@ public class FeatureConfigurationSteps {
 
     @Given("^base uri: ([^\"]*)")
     public void baseUri(String uri) {
-        configuration.baseUri(variables.interpret(uri));
+        configuration.baseUri(expressions.evaluate(uri));
     }
 
     @Given("^faker locale: ([^\"]*)")
