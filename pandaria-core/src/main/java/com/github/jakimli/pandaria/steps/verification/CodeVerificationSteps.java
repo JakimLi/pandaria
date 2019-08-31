@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.steps.verification;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.variable.Expressions;
+import com.github.jakimli.pandaria.domain.expression.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
 import cucumber.api.java.en.Then;

@@ -1,6 +1,5 @@
-package com.github.jakimli.pandaria.domain.variable;
+package com.github.jakimli.pandaria.domain.expression;
 
-import com.github.jakimli.pandaria.domain.variable.Variables.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,5 +18,9 @@ public class Expressions {
         Optional<Expression> expression = expressions.stream()
                 .reduce((expression1, expression2) -> raw -> expression2.evaluate(expression1.evaluate(raw)));
         return expression.orElse(raw -> raw).evaluate(value);
+    }
+
+    interface Expression {
+        String evaluate(String raw);
     }
 }

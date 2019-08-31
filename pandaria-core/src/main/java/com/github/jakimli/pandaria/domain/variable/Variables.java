@@ -16,7 +16,7 @@ public class Variables {
 
     private static final String DOT = "\\.";
 
-    Map<String, Object> variables = newHashMap();
+    private Map<String, Object> variables = newHashMap();
 
     public void assign(String key, Object value) {
         this.variables.put(key, value);
@@ -42,7 +42,7 @@ public class Variables {
         return json(value).path("$" + path);
     }
 
-    interface Expression {
-        String evaluate(String raw);
+    public Map<String, Object> variables() {
+        return this.variables;
     }
 }

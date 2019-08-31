@@ -5,7 +5,7 @@ import com.github.jakimli.pandaria.domain.MongoClient;
 import com.github.jakimli.pandaria.domain.MongoExecutionContext;
 import com.github.jakimli.pandaria.domain.MongoQueryContext;
 import com.github.jakimli.pandaria.domain.VerificationContext;
-import com.github.jakimli.pandaria.domain.variable.Expressions;
+import com.github.jakimli.pandaria.domain.expression.Expressions;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;

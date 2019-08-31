@@ -1,7 +1,7 @@
-package com.github.jakimli.pandaria.domain.variable;
+package com.github.jakimli.pandaria.domain.expression;
 
 import com.github.jakimli.pandaria.domain.FeatureConfiguration;
-import com.github.jakimli.pandaria.domain.variable.Variables.Expression;
+import com.github.jakimli.pandaria.domain.expression.Expressions.Expression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

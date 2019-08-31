@@ -6,7 +6,7 @@ import com.github.jakimli.pandaria.domain.http.HttpContext;
 import com.github.jakimli.pandaria.domain.http.HttpGlobalHeaders;
 import com.github.jakimli.pandaria.domain.http.ScenarioContext;
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
-import com.github.jakimli.pandaria.domain.variable.Expressions;
+import com.github.jakimli.pandaria.domain.expression.Expressions;
 import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.wait.Wait;
 import cucumber.api.java.en.Given;
