@@ -37,17 +37,17 @@ public class DateTimeVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=datetime: '([^\"]*)' pattern: '([^\"]*)'$")
-    public void verifyVariableDateWithPattern(String name, String date, String pattern) {
-        assertThat(new DateTime(variables.get(name)), is(forPattern(pattern).parseDateTime(date)));
+    public void verifyVariableDateWithPattern(String expression, String date, String pattern) {
+        assertThat(new DateTime(variables.get(expression)), is(forPattern(pattern).parseDateTime(date)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} before: datetime: '([^\"]*)' pattern: '([^\"]*)'$")
-    public void verifyVariableBeforeDateWithPattern(String name, String date, String pattern) {
-        assertTrue(new DateTime(variables.get(name)).isBefore(forPattern(pattern).parseDateTime(date)));
+    public void verifyVariableBeforeDateWithPattern(String expression, String date, String pattern) {
+        assertTrue(new DateTime(variables.get(expression)).isBefore(forPattern(pattern).parseDateTime(date)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} after: datetime: '([^\"]*)' pattern: '([^\"]*)'$")
-    public void verifyVariableAfterDateWithPattern(String name, String date, String pattern) {
-        assertTrue(new DateTime(variables.get(name)).isAfter(forPattern(pattern).parseDateTime(date)));
+    public void verifyVariableAfterDateWithPattern(String expression, String date, String pattern) {
+        assertTrue(new DateTime(variables.get(expression)).isAfter(forPattern(pattern).parseDateTime(date)));
     }
 }

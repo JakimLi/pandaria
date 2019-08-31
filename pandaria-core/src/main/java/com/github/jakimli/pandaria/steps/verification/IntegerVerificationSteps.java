@@ -51,32 +51,32 @@ public class IntegerVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=(\\d+)$")
-    public void verifyVariableEqualsInteger(String varName, Integer expected) {
-        assertThat(variables.get(varName), is(expected));
+    public void verifyVariableEqualsInteger(String expression, Integer expected) {
+        assertThat(variables.get(expression), is(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=(\\d+)$")
-    public void verifyVariableNotEqualsInteger(String varName, Integer expected) {
-        assertThat(variables.get(varName), not(expected));
+    public void verifyVariableNotEqualsInteger(String expression, Integer expected) {
+        assertThat(variables.get(expression), not(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>(\\d+)$")
-    public void verifyVariableGreaterThanInteger(String varName, Integer expected) {
-        assertThat((int) variables.get(varName), greaterThan(expected));
+    public void verifyVariableGreaterThanInteger(String expression, Integer expected) {
+        assertThat((int) variables.get(expression), greaterThan(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=(\\d+)$")
-    public void verifyVariableGreaterThanOrEqualToInteger(String varName, Integer expected) {
-        assertThat((int) variables.get(varName), greaterThanOrEqualTo(expected));
+    public void verifyVariableGreaterThanOrEqualToInteger(String expression, Integer expected) {
+        assertThat((int) variables.get(expression), greaterThanOrEqualTo(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<(\\d+)$")
-    public void verifyVariableLessThanInteger(String varName, Integer expected) {
-        assertThat((int) variables.get(varName), lessThan(expected));
+    public void verifyVariableLessThanInteger(String expression, Integer expected) {
+        assertThat((int) variables.get(expression), lessThan(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=(\\d+)$")
-    public void verifyVariableLessThanOrEqualToInteger(String varName, Integer expected) {
-        assertThat((int) variables.get(varName), lessThanOrEqualTo(expected));
+    public void verifyVariableLessThanOrEqualToInteger(String expression, Integer expected) {
+        assertThat((int) variables.get(expression), lessThanOrEqualTo(expected));
     }
 }

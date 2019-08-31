@@ -53,32 +53,32 @@ public class FloatVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=float: (\\d+\\.\\d+)$")
-    public void verifyVariableEqualsFloat(String name, String expected) {
-        assertThat(variables.get(name), is(parseFloat(expected)));
+    public void verifyVariableEqualsFloat(String expression, String expected) {
+        assertThat(variables.get(expression), is(parseFloat(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=float: (\\d+\\.\\d+)$")
-    public void verifyVariableNotEqualsFloat(String name, String expected) {
-        assertThat(variables.get(name), not(parseFloat(expected)));
+    public void verifyVariableNotEqualsFloat(String expression, String expected) {
+        assertThat(variables.get(expression), not(parseFloat(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>float: (\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanFloat(String name, String expected) {
-        assertThat((Float) variables.get(name), greaterThan(parseFloat(expected)));
+    public void verifyVariableGreaterThanFloat(String expression, String expected) {
+        assertThat((Float) variables.get(expression), greaterThan(parseFloat(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=float: (\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanOrEqualToFloat(String name, String expected) {
-        assertThat((Float) variables.get(name), greaterThanOrEqualTo(parseFloat(expected)));
+    public void verifyVariableGreaterThanOrEqualToFloat(String expression, String expected) {
+        assertThat((Float) variables.get(expression), greaterThanOrEqualTo(parseFloat(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<float: (\\d+\\.\\d+)$")
-    public void verifyVariableLessThanFloat(String name, String expected) {
-        assertThat((Float) variables.get(name), lessThan(parseFloat(expected)));
+    public void verifyVariableLessThanFloat(String expression, String expected) {
+        assertThat((Float) variables.get(expression), lessThan(parseFloat(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=float: (\\d+\\.\\d+)$")
-    public void verifyVariableLessThanOrEqualToFloat(String name, String expected) {
-        assertThat((Float) variables.get(name), lessThanOrEqualTo(parseFloat(expected)));
+    public void verifyVariableLessThanOrEqualToFloat(String expression, String expected) {
+        assertThat((Float) variables.get(expression), lessThanOrEqualTo(parseFloat(expected)));
     }
 }

@@ -53,32 +53,32 @@ public class LongVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=long: ([^\"]*)$")
-    public void verifyVariableEqualsLong(String name, String expected) {
-        assertThat(variables.get(name), is(parseLong(expected)));
+    public void verifyVariableEqualsLong(String expression, String expected) {
+        assertThat(variables.get(expression), is(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=long: ([^\"]*)$")
-    public void verifyVariableNotEqualsLong(String name, String expected) {
-        assertThat(variables.get(name), not(parseLong(expected)));
+    public void verifyVariableNotEqualsLong(String expression, String expected) {
+        assertThat(variables.get(expression), not(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>long: ([^\"]*)$")
-    public void verifyVariableGreaterThanLong(String name, String expected) {
-        assertThat((Long) variables.get(name), greaterThan(parseLong(expected)));
+    public void verifyVariableGreaterThanLong(String expression, String expected) {
+        assertThat((Long) variables.get(expression), greaterThan(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=long: ([^\"]*)$")
-    public void verifyVariableGreaterThanOrEqualToLong(String name, String expected) {
-        assertThat((Long) variables.get(name), greaterThanOrEqualTo(parseLong(expected)));
+    public void verifyVariableGreaterThanOrEqualToLong(String expression, String expected) {
+        assertThat((Long) variables.get(expression), greaterThanOrEqualTo(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<long: ([^\"]*)$")
-    public void verifyVariableLessThanLong(String name, String expected) {
-        assertThat((Long) variables.get(name), lessThan(parseLong(expected)));
+    public void verifyVariableLessThanLong(String expression, String expected) {
+        assertThat((Long) variables.get(expression), lessThan(parseLong(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=long: ([^\"]*)$")
-    public void verifyVariableLessThanOrEqualToLong(String name, String expected) {
-        assertThat((Long) variables.get(name), lessThanOrEqualTo(parseLong(expected)));
+    public void verifyVariableLessThanOrEqualToLong(String expression, String expected) {
+        assertThat((Long) variables.get(expression), lessThanOrEqualTo(parseLong(expected)));
     }
 }

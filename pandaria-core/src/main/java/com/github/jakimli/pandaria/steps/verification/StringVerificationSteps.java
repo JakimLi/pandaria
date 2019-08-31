@@ -86,62 +86,62 @@ public class StringVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}='([^\"]*)'$")
-    public void verifyVariableEqualsLiteral(String varName, String expected) {
-        assertThat(variables.get(varName), is(expected));
+    public void verifyVariableEqualsLiteral(String expression, String expected) {
+        assertThat(variables.get(expression), is(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=\"([^\"]*)\"$")
-    public void verifyVariableEqualsString(String varName, String expected) {
-        assertThat(variables.get(varName), is(expressions.evaluate(expected)));
+    public void verifyVariableEqualsString(String expression, String expected) {
+        assertThat(variables.get(expression), is(expressions.evaluate(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains: '([^\"]*)'$")
-    public void verifyVariableContainsLiteral(String varName, String expected) {
-        assertThat(String.valueOf(variables.get(varName)), containsString(expected));
+    public void verifyVariableContainsLiteral(String expression, String expected) {
+        assertThat(String.valueOf(variables.get(expression)), containsString(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains: \"([^\"]*)\"$")
-    public void verifyVariableContainsString(String varName, String expected) {
-        assertThat(String.valueOf(variables.get(varName)), containsString(expressions.evaluate(expected)));
+    public void verifyVariableContainsString(String expression, String expected) {
+        assertThat(String.valueOf(variables.get(expression)), containsString(expressions.evaluate(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} starts with: '([^\"]*)'$")
-    public void verifyVariableStartsWithLiteral(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), startsWith(prefix));
+    public void verifyVariableStartsWithLiteral(String expression, String prefix) {
+        assertThat(String.valueOf(variables.get(expression)), startsWith(prefix));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} starts with: \"([^\"]*)\"$")
-    public void verifyVariableStartsWithString(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), startsWith(expressions.evaluate(prefix)));
+    public void verifyVariableStartsWithString(String expression, String prefix) {
+        assertThat(String.valueOf(variables.get(expression)), startsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} ends with: '([^\"]*)'$")
-    public void verifyVariableEndsWithLiteral(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), endsWith(prefix));
+    public void verifyVariableEndsWithLiteral(String expression, String prefix) {
+        assertThat(String.valueOf(variables.get(expression)), endsWith(prefix));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} ends with: \"([^\"]*)\"$")
-    public void verifyVariableEndsWithString(String varName, String prefix) {
-        assertThat(String.valueOf(variables.get(varName)), endsWith(expressions.evaluate(prefix)));
+    public void verifyVariableEndsWithString(String expression, String prefix) {
+        assertThat(String.valueOf(variables.get(expression)), endsWith(expressions.evaluate(prefix)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} matches: '([^\"]*)'$")
-    public void verifyVariableMatchesRegex(String varName, String regex) {
-        assertTrue(String.valueOf(variables.get(varName)).matches(regex));
+    public void verifyVariableMatchesRegex(String expression, String regex) {
+        assertTrue(String.valueOf(variables.get(expression)).matches(regex));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} length: (\\d+)$")
-    public void verifyVariableStringLength(String varName, int length) {
-        assertThat(String.valueOf(variables.get(varName)).length(), is(length));
+    public void verifyVariableStringLength(String expression, int length) {
+        assertThat(String.valueOf(variables.get(expression)).length(), is(length));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!='([^\"]*)'$")
-    public void verifyVariableNotEqualsLiteral(String varName, String expected) {
-        assertThat(variables.get(varName), not(expected));
+    public void verifyVariableNotEqualsLiteral(String expression, String expected) {
+        assertThat(variables.get(expression), not(expected));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=\"([^\"]*)\"$")
-    public void verifyVariableNotEqualsString(String varName, String expected) {
-        assertThat(variables.get(varName), not(expressions.evaluate(expected)));
+    public void verifyVariableNotEqualsString(String expression, String expected) {
+        assertThat(variables.get(expression), not(expressions.evaluate(expected)));
     }
 }

@@ -20,22 +20,22 @@ public class VariableVerificationSteps {
     Variables variables;
 
     @Then("^verify: '([^\"]*)'=\\$\\{([^\"]*)}$")
-    public void verifyEqualsVariable(String path, String variable) throws IOException {
-        assertThat(actual.json(path), is(variables.get(variable)));
+    public void verifyEqualsVariable(String path, String expression) throws IOException {
+        assertThat(actual.json(path), is(variables.get(expression)));
     }
 
     @Then("^verify: '([^\"]*)'!=\\$\\{([^\"]*)}$")
-    public void verifyNotEqualsVariable(String path, String variable) throws IOException {
-        assertThat(actual.json(path), not(variables.get(variable)));
+    public void verifyNotEqualsVariable(String path, String expression) throws IOException {
+        assertThat(actual.json(path), not(variables.get(expression)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=\\$\\{([^\"]*)}$")
-    public void verifyVariableEqualsVariable(String varName, String anotherVar) {
-        assertThat(variables.get(varName), is(variables.get(anotherVar)));
+    public void verifyVariableEqualsVariable(String expression, String anotherExpression) {
+        assertThat(variables.get(expression), is(variables.get(anotherExpression)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=\\$\\{([^\"]*)}$")
-    public void verifyVariableNotEqualsVariable(String varName, String anotherVar) {
-        assertThat(variables.get(varName), not(variables.get(anotherVar)));
+    public void verifyVariableNotEqualsVariable(String expression, String anotherExpression) {
+        assertThat(variables.get(expression), not(variables.get(anotherExpression)));
     }
 }

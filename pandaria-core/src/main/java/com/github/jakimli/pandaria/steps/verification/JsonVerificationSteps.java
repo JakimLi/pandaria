@@ -26,7 +26,7 @@ public class JsonVerificationSteps {
 
     @Autowired
     Variables variables;
-    
+
     @Autowired
     Expressions expressions;
 
@@ -61,30 +61,30 @@ public class JsonVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)} same json:$")
-    public void variableSameJson(String name, String json) {
-        assertThat(variables.get(name), jsonEquals(expressions.evaluate(json)).when(IGNORING_ARRAY_ORDER));
+    public void variableSameJson(String expression, String json) {
+        assertThat(variables.get(expression), jsonEquals(expressions.evaluate(json)).when(IGNORING_ARRAY_ORDER));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} same json: ([^\"]*)$")
-    public void variableSameJsonFromFile(String name, String fileName) throws IOException {
-        assertThat(variables.get(name), jsonEquals(fileContent(fileName)).when(IGNORING_ARRAY_ORDER));
+    public void variableSameJsonFromFile(String expression, String fileName) throws IOException {
+        assertThat(variables.get(expression), jsonEquals(fileContent(fileName)).when(IGNORING_ARRAY_ORDER));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains json:$")
-    public void variableContainsJson(String name, String json) {
-        assertThat(variables.get(name), jsonEquals(expressions.evaluate(json))
+    public void variableContainsJson(String expression, String json) {
+        assertThat(variables.get(expression), jsonEquals(expressions.evaluate(json))
                 .when(IGNORING_ARRAY_ORDER, IGNORING_EXTRA_ARRAY_ITEMS, IGNORING_EXTRA_FIELDS));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} contains json: ([^\"]*)$")
-    public void variableContainsJsonFromFile(String name, String fileName) throws IOException {
-        assertThat(variables.get(name), jsonEquals(fileContent(fileName))
+    public void variableContainsJsonFromFile(String expression, String fileName) throws IOException {
+        assertThat(variables.get(expression), jsonEquals(fileContent(fileName))
                 .when(IGNORING_ARRAY_ORDER, IGNORING_EXTRA_ARRAY_ITEMS, IGNORING_EXTRA_FIELDS));
     }
 
     @Then("^verify: \\$\\{([^\"]*)} has size: (\\d+)$")
-    public void variableHasSize(String name, Integer size) {
-        assertThat(size(variables.get(name)), is(size));
+    public void variableHasSize(String expression, Integer size) {
+        assertThat(size(variables.get(expression)), is(size));
     }
 
     private String fileContent(String fileName) throws IOException {

@@ -30,12 +30,12 @@ public class NullableVerificationSteps {
     }
 
     @Given("^verify: \\$\\{([^\"]*)} is null")
-    public void verifyVariableIsNull(String name) {
-        assertThat(variables.get(name), nullValue());
+    public void verifyVariableIsNull(String expression) {
+        assertThat(variables.get(expression), nullValue());
     }
 
     @Given("^verify: \\$\\{([^\"]*)} is not null")
-    public void verifyVariableIsNotNull(String name) {
-        assertThat(variables.get(name), not(nullValue()));
+    public void verifyVariableIsNotNull(String expression) {
+        assertThat(variables.get(expression), not(nullValue()));
     }
 }

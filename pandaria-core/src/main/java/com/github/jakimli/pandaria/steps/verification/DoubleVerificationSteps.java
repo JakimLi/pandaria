@@ -53,32 +53,32 @@ public class DoubleVerificationSteps {
     }
 
     @Then("^verify: \\$\\{([^\"]*)}=double: (\\d+\\.\\d+)$")
-    public void verifyVariableEqualsDouble(String varName, String expected) {
-        assertThat(variables.get(varName), is(Double.parseDouble(expected)));
+    public void verifyVariableEqualsDouble(String expression, String expected) {
+        assertThat(variables.get(expression), is(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}!=double: (\\d+\\.\\d+)$")
-    public void verifyVariableNotEqualsDouble(String varName, String expected) {
-        assertThat(variables.get(varName), not(Double.parseDouble(expected)));
+    public void verifyVariableNotEqualsDouble(String expression, String expected) {
+        assertThat(variables.get(expression), not(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>double: (\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), greaterThan(Double.parseDouble(expected)));
+    public void verifyVariableGreaterThanDouble(String expression, String expected) {
+        assertThat((double) variables.get(expression), greaterThan(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}>=double: (\\d+\\.\\d+)$")
-    public void verifyVariableGreaterThanOrEqualToDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), greaterThanOrEqualTo(Double.parseDouble(expected)));
+    public void verifyVariableGreaterThanOrEqualToDouble(String expression, String expected) {
+        assertThat((double) variables.get(expression), greaterThanOrEqualTo(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<double: (\\d+\\.\\d+)$")
-    public void verifyVariableLessThanDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), lessThan(Double.parseDouble(expected)));
+    public void verifyVariableLessThanDouble(String expression, String expected) {
+        assertThat((double) variables.get(expression), lessThan(Double.parseDouble(expected)));
     }
 
     @Then("^verify: \\$\\{([^\"]*)}<=double: (\\d+\\.\\d+)$")
-    public void verifyVariableLessThanOrEqualToDouble(String varName, String expected) {
-        assertThat((double) variables.get(varName), lessThanOrEqualTo(Double.parseDouble(expected)));
+    public void verifyVariableLessThanOrEqualToDouble(String expression, String expected) {
+        assertThat((double) variables.get(expression), lessThanOrEqualTo(Double.parseDouble(expected)));
     }
 }

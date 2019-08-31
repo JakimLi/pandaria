@@ -36,13 +36,13 @@ public class JsonSchemaVerificationSteps {
     }
 
     @Given("^verify: \\$\\{([^\"]*)} conform to:")
-    public void verifyJsonInVariableConformSchema(String name, String schemaJson) throws IOException {
-        validateJsonSchema(variables.get(name), schemaJson);
+    public void verifyJsonInVariableConformSchema(String expression, String schemaJson) throws IOException {
+        validateJsonSchema(variables.get(expression), schemaJson);
     }
 
     @Given("^verify: \\$\\{([^\"]*)} conform to: ([^\"]*)")
-    public void verifyJsonInVariableConformSchemaFile(String name, String file) throws IOException {
-        validateJsonSchema(variables.get(name), read(configuration.classpathFile(file)));
+    public void verifyJsonInVariableConformSchemaFile(String expression, String file) throws IOException {
+        validateJsonSchema(variables.get(expression), read(configuration.classpathFile(file)));
     }
 
     private void validateJsonSchema(Object actual, String schemaJson) throws IOException {
