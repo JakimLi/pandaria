@@ -14,14 +14,14 @@ import static com.github.jakimli.pandaria.utils.JsonUtil.toJsonString;
 
 @Component
 @Scope("cucumber-glue")
-public class JsonPathExpression implements Expression {
+public class LastResponseExpression implements Expression {
 
     private static final Pattern EXPRESSION_PATTERN = Pattern.compile("@\\{([^}]*)}");
 
     @Autowired
     private VerificationContext verifying;
 
-    JsonPathExpression(VerificationContext verifying) {
+    LastResponseExpression(VerificationContext verifying) {
         this.verifying = verifying;
     }
 
