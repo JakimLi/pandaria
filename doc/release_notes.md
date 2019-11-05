@@ -1,11 +1,26 @@
-Release 0.3.0 (2019-05-11) Latest
+Release 0.3.0 (2019-11-05) Latest
 =================================
 HTTP
+----
+* form(multipart/form-data) supported
+
+Verification
+---------
+* nested variable reference in verification
+
+Release 0.3.0 (2019-05-11)
+=================================
+
+HTTP
+----
+
 * http request header support variables
 
-Release 0.3.0 (2019-05-11) Latest
+Release 0.3.0 (2019-05-11)
 =================================
 Graphql Test
+------------
+
 * Support graphql query and mutation
 
 Release 0.2.8 (2019-01-29)
