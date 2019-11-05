@@ -28,6 +28,7 @@ Table of Contents
      * [Cookie](#cookie)
      * [Request body](#request-body)
      * [Upload file](#upload-file)
+     * [Form](#form)
      * [HTTPS](#https)
      * [Proxy](#proxy)
 
@@ -444,6 +445,31 @@ Feature: file upload
 **If you have attachment, request body(if have) will be ignored**
 
 Multiple attachments are allowed.
+
+### Form
+You can submit a form with an attachment
+```gherkin
+  Scenario: upload file with form data
+    * form: /form
+    * field: name value:
+    """
+    lj
+    """
+    * field: data value:
+    """
+    {"name": "lj", "age", 18}
+    """
+    * field: user value: requests/user.json
+    * field: file attachment: attachments/abc.txt
+    * send: POST
+    * status: 200
+    * response body:
+    """
+    uploaded
+    """
+```
+
+**`attachment` outside of the `field` will also work, the field name will be default to filename.**
 
 ### HTTPS
 In most test environment, self-signed certificates are used for HTTPS, pandaria *DOES NOT* do host verification by
