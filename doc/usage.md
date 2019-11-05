@@ -447,6 +447,8 @@ Feature: file upload
 Multiple attachments are allowed.
 
 ### Form
+@since 0.3.2
+
 You can submit a form with an attachment
 ```gherkin
   Scenario: upload file with form data
@@ -1456,6 +1458,17 @@ You can verify is response/result/variable equals/not-equals to a variable.
 * verify: ${user}=${user}
 * verify: ${user}!=${kim}
 ```
+
+#### Nested variable reference
+@since 0.3.2
+
+```gherkin
+* verify: '$[0]'=${first_user}
+* verify: '$[0].name'=${first_user.name}
+* verify: '$[0].friends'=${first_user.friends}
+```
+**Currently nested variable reference is not supported in script, file and docstring yet. will be supported later.**
+
 
 ### Verify code evaluation
 @since 0.2.1

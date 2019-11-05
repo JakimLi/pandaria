@@ -6,7 +6,7 @@ HTTP
 
 Verification
 ---------
-* nested variable reference in verification
+* nested variable reference in verification key
 
 Release 0.3.0 (2019-05-11)
 =================================
