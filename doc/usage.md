@@ -449,7 +449,7 @@ Multiple attachments are allowed.
 ### Form
 @since 0.3.2
 
-You can submit a form with an attachment
+You can submit form with attachments
 ```gherkin
   Scenario: upload file with form data
     * form: /form
