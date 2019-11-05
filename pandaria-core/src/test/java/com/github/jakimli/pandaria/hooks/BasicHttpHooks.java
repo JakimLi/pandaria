@@ -1,29 +1,12 @@
 package com.github.jakimli.pandaria.hooks;
 
+import com.github.dreamhead.moco.Moco;
 import com.github.jakimli.pandaria.MockServer;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.github.dreamhead.moco.CookieAttribute.path;
-import static com.github.dreamhead.moco.Moco.and;
-import static com.github.dreamhead.moco.Moco.by;
-import static com.github.dreamhead.moco.Moco.contain;
-import static com.github.dreamhead.moco.Moco.cookie;
-import static com.github.dreamhead.moco.Moco.eq;
-import static com.github.dreamhead.moco.Moco.exist;
-import static com.github.dreamhead.moco.Moco.header;
-import static com.github.dreamhead.moco.Moco.json;
-import static com.github.dreamhead.moco.Moco.jsonPath;
-import static com.github.dreamhead.moco.Moco.method;
-import static com.github.dreamhead.moco.Moco.not;
-import static com.github.dreamhead.moco.Moco.or;
-import static com.github.dreamhead.moco.Moco.query;
-import static com.github.dreamhead.moco.Moco.seq;
-import static com.github.dreamhead.moco.Moco.startsWith;
-import static com.github.dreamhead.moco.Moco.status;
-import static com.github.dreamhead.moco.Moco.template;
-import static com.github.dreamhead.moco.Moco.text;
-import static com.github.dreamhead.moco.Moco.uri;
+import static com.github.dreamhead.moco.Moco.*;
 import static com.google.common.collect.ImmutableMap.of;
 import static org.assertj.core.util.Lists.newArrayList;
 
@@ -87,7 +70,17 @@ public class BasicHttpHooks {
         server.server()
                 .post(and(
                         by(uri("/files")),
-                        contain(header("Content-Type"), "multipart/mixed")
+                        contain(header("Content-Type"), "multipart/form-data")
+                ))
+                .response(text("uploaded"));
+
+        server.server()
+                .post(and(
+                        by(uri("/form")),
+                        exist(form("name")),
+                        exist(form("data")),
+                        exist(form("user")),
+                        contain(header("Content-Type"), "multipart/form-data")
                 ))
                 .response(text("uploaded"));
 

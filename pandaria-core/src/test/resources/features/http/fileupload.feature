@@ -15,3 +15,22 @@ Feature: file upload
     """
     uploaded
     """
+
+  Scenario: upload file with form data
+    * form: /form
+    * field: name value:
+    """
+    lj
+    """
+    * field: data value:
+    """
+    {"name": "lj", "age", 18}
+    """
+    * field: user value: requests/user.json
+    * field: file attachment: attachments/abc.txt
+    * send: POST
+    * status: 200
+    * response body:
+    """
+    uploaded
+    """

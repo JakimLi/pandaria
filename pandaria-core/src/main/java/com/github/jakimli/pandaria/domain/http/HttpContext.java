@@ -2,6 +2,8 @@ package com.github.jakimli.pandaria.domain.http;
 
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
 import com.github.jakimli.pandaria.domain.wait.Waitable;
+import com.github.jakimli.pandaria.utils.JsonUtil;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +38,7 @@ public class HttpContext implements Waitable<String> {
     private URI uri;
     private HttpMethod method;
     private String requestBody;
-    private MultiPart attachments = new MultiPart();
+    private MultiPart multiPart = new FormDataMultiPart();
 
     private Map<String, Cookie> cookies = new HashMap<>();
     private MultivaluedMap<String, Object> requestHeaders = new MultivaluedHashMap<>();
@@ -45,11 +47,19 @@ public class HttpContext implements Waitable<String> {
     private int responseStatus;
     private MultivaluedMap<String, String> responseHeaders = new MultivaluedHashMap<>();
 
+    private boolean isForm;
+
     @Value("${http.ssl.verify:false}")
     private boolean httpSslVerify;
 
     public void uri(URI uri) {
         this.uri = uri;
+        this.isForm = false;
+    }
+
+    public void form(URI uri) {
+        this.uri = uri;
+        this.isForm = true;
     }
 
     public void method(HttpMethod method) {
@@ -85,7 +95,7 @@ public class HttpContext implements Waitable<String> {
     }
 
     public Entity<?> requestBody() {
-        return hasAttachment() ? entity(attachments, attachments.getMediaType()) : entity(requestBody, contentType());
+        return hasAttachment() || this.isForm ? entity(multiPart, multiPart.getMediaType()) : entity(requestBody, contentType());
     }
 
     private MediaType contentType() {
@@ -101,11 +111,12 @@ public class HttpContext implements Waitable<String> {
         this.method = null;
         this.requestBody = null;
         this.requestHeaders.clear();
-        this.attachments.cleanup();
+        this.multiPart.cleanup();
         this.cookies.clear();
         this.responseBody = null;
         this.responseStatus = 0;
         this.responseHeaders.clear();
+        this.isForm = false;
     }
 
     public void requestHeader(String key, String value) {
@@ -154,11 +165,19 @@ public class HttpContext implements Waitable<String> {
 
     public void attachment(String attachment) {
         File file = file(attachment);
-        this.attachments.bodyPart(new FileDataBodyPart(file.getName(), file, APPLICATION_OCTET_STREAM_TYPE));
+        addAttachment(file.getName(), file);
+    }
+
+    public void attachment(String alias, String attachment) {
+        addAttachment(alias, file(attachment));
+    }
+
+    private void addAttachment(String name, File file) {
+        this.multiPart.bodyPart(new FileDataBodyPart(name, file, APPLICATION_OCTET_STREAM_TYPE));
     }
 
     private boolean hasAttachment() {
-        return !attachments.getBodyParts().isEmpty();
+        return !multiPart.getBodyParts().isEmpty();
     }
 
     public void addGlobalRequestHeaders(Map<String, String> headers) {
@@ -177,5 +196,9 @@ public class HttpContext implements Waitable<String> {
         }
 
         return cookies.get(cookieName).getValue();
+    }
+
+    public void field(String key, String value) {
+        ((FormDataMultiPart) this.multiPart).field(key, value, APPLICATION_JSON_TYPE);
     }
 }

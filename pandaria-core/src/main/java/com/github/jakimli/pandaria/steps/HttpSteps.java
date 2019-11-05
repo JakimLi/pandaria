@@ -40,7 +40,7 @@ public class HttpSteps {
 
     @Autowired
     Variables variables;
-    
+
     @Autowired
     Expressions expressions;
 
@@ -56,11 +56,17 @@ public class HttpSteps {
         context.uri(URI.create(expressions.evaluate(configuration.uri(url))));
     }
 
+    @Given("^form: ([^\"]*)$")
+    public void form(String url) {
+        context.reset();
+        context.form(URI.create(expressions.evaluate(configuration.uri(url))));
+    }
+
     @Given("^header: '([^\"]*)'='([^\"]*)'$")
     public void headerFromLiteral(String key, String value) {
         context.requestHeader(key, value);
     }
-    
+
     @Given("^header: '([^\"]*)'=\"([^\"]*)\"$")
     public void headerFromString(String key, String value) {
         context.requestHeader(key, expressions.evaluate(value));
@@ -90,6 +96,22 @@ public class HttpSteps {
     public void requestBodyFromFile(String file) throws IOException {
         String fileName = configuration.classpathFile(file);
         context.requestBody(expressions.evaluate(read(fileName)));
+    }
+
+    @Given("^field: ([^\"]*) value: ([^\"]*)$")
+    public void fieldValueFromFile(String key, String valueFile) throws IOException {
+        String fileName = configuration.classpathFile(valueFile);
+        context.field(key, expressions.evaluate(read(fileName)));
+    }
+
+    @Given("^field: ([^\"]*) value:$")
+    public void field(String key, String value) {
+        context.field(key, expressions.evaluate(value));
+    }
+
+    @Given("^field: ([^\"]*) attachment: ([^\"]*)$")
+    public void attachmentField(String key, String file) {
+        context.attachment(key, configuration.classpathFile(file));
     }
 
     @Given("^cookie: '([^\"]*)'='([^\"]*)'$")
