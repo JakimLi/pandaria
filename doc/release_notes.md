@@ -1,4 +1,11 @@
-Release 0.3.0 (2019-11-05) Latest
+Release 0.3.3 (2019-11-20) Latest
+=================================
+Verification
+----
+* fix defect when response body returns simple array
+
+
+Release 0.3.2 (2019-11-05)
 =================================
 HTTP
 ----
@@ -8,7 +15,7 @@ Verification
 ---------
 * nested variable reference in verification key
 
-Release 0.3.0 (2019-05-11)
+Release 0.3.1 (2019-05-11)
 =================================
 
 HTTP
