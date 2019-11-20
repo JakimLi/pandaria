@@ -33,6 +33,18 @@ Feature: verify json
     """
     * verify: '$' has size: 3
 
+    * uri: /numbers
+    * send: get
+    * verify: '$' same json:
+    """
+    [
+     1,
+     2,
+     3
+    ]
+    """
+    * verify: '$' has size: 3
+
 
   Scenario: same json: with array different order
     * uri: /users/list
