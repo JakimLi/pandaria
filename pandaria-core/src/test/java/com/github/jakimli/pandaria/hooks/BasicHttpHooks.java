@@ -132,6 +132,10 @@ public class BasicHttpHooks {
                 .response(text("response"));
 
         server.server()
+                .get(by(uri("/codes")))
+                .response(json(newArrayList("ER", "AC", "WB")));
+
+        server.server()
                 .get(and(
                         by(uri("/cookie")),
                         eq(cookie("key"), "value")))

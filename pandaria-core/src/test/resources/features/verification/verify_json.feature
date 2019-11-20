@@ -20,6 +20,19 @@ Feature: verify json
     """
     * verify: '$' same json: responses/jakim.json
 
+  Scenario: string array with same json
+    * uri: /codes
+    * send: get
+    * response body:
+    """
+    ["ER","AC","WB"]
+    """
+    * verify: '$' same json:
+    """
+    ["ER", "AC", "WB"]
+    """
+    * verify: '$' has size: 3
+
 
   Scenario: same json: with array different order
     * uri: /users/list
