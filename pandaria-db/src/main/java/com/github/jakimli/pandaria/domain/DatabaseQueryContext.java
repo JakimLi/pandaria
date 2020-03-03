@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import java.util.Map;
 @Scope("cucumber-glue")
 public class DatabaseQueryContext implements Waitable<List<Map<String, Object>>> {
 
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private String query;
@@ -39,5 +39,9 @@ public class DatabaseQueryContext implements Waitable<List<Map<String, Object>>>
     @Override
     public List<Map<String, Object>> result() {
         return results;
+    }
+
+    public void dataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 }

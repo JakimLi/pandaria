@@ -12,6 +12,8 @@ dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:${cucumber}",
 
+            "ch.vorburger.mariaDB4j:mariaDB4j:${maria_db_4j}",
+
             "com.github.dreamhead:moco-core:${moco}",
             "com.github.dreamhead:moco-runner:${moco}",
             "com.github.dreamhead:moco-junit:${moco}"
