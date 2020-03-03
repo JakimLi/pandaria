@@ -100,7 +100,7 @@ public class DatabaseSteps {
         wait.waitable(databaseExecuteContext);
     }
 
-    @When("^db: ([^\" ]*) xecute sql: ([^\"]*)$")
+    @When("^db: ([^\" ]*) execute sql: ([^\"]*)$")
     public void executeSqlFromFileByDb(String dbName, String fileName) throws IOException {
         String file = configuration.classpathFile(fileName);
         databaseExecuteContext.dataSource(dataSources.dataSource(dbName));

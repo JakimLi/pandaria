@@ -43,3 +43,14 @@ Feature: multi data sources
     """
     * verify: '$[0].name'='jakim'
     * verify: '$[0].age'=18
+
+  Scenario: with sql files
+    * db: foo execute sql: setup_foo.sql
+    * db: foo query: query_foo.sql
+    * verify: '$[0].name'='jakim'
+    * verify: '$[0].age'=18
+
+    * db: bar execute sql: setup_bar.sql
+    * db: bar query: query_bar.sql
+    * verify: '$[0].name'='jakim'
+    * verify: '$[0].age'=18
