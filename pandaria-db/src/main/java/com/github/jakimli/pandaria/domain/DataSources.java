@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Map;
 
+import static com.github.jakimli.pandaria.configuration.DataSourcesConfiguration.DEFAULT;
 import static com.google.common.collect.Maps.newHashMap;
 
 @Component
@@ -44,5 +46,14 @@ public class DataSources {
                 .username(property.getUsername())
                 .password(property.getPassword())
                 .build();
+    }
+
+
+    @PostConstruct
+    public void validateAdditionalDataSourceName() {
+        if (configuration.getAdditional().stream()
+                .anyMatch(property -> DEFAULT.equalsIgnoreCase(property.getName()))) {
+            throw new RuntimeException(String.format("datasource name: '%s' is reserved", DEFAULT));
+        }
     }
 }
