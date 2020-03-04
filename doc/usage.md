@@ -688,7 +688,10 @@ Then you can specify which database your sql or query be executed against to:
 * verify: '$[0].age'=18
 ```
 
-`execute sql` or `query` without specify db will be executed against to `default` data source.
+`execute sql` or `query` without specify db will be executed against to `default` data source. same as:
+```gherkin
+* db: default sql: setup_foo.sql
+```
 
 
 MongoDB Operations
