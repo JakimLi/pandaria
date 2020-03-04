@@ -1,4 +1,11 @@
-Release 0.3.3 (2019-11-20) Latest
+Release 0.3.4 (2020-03-04) Latest
+=================================
+Database Operations
+----
+* Support multiple/additional datasources
+
+
+Release 0.3.3 (2019-11-20)
 =================================
 Verification
 ----
