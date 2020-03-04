@@ -648,6 +648,7 @@ CREATE TABLE USERS(
 
 ### Multiple DataSource
 @since 0.3.4
+
 You can specify additional data source and specify which one to use while executing sql or query from database.
 
 First in your `application.properties`, add your data source configuration.
