@@ -42,6 +42,7 @@ Table of Contents
 * [Database Operations](#database-operations)
     * [Queries](#queries)
     * [Execute SQL](#execute-sql)
+    * [Multiple DataSource](#multiple-datasource)
 
 * [MongoDB Operations](#mongodb-operations)
     * [Insert](#insert)
@@ -644,6 +645,50 @@ CREATE TABLE USERS(
 * execute sql: drop_table.sql
 * execute sql: setup.sql
 ```
+
+### Multiple DataSource
+@since 0.3.4
+You can specify additional data source and specify which one to use while executing sql or query from database.
+
+First in your `application.properties`, add your data source configuration.
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/pandaria?useSSL=false&allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=password
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+spring.datasource.additional[0].url=jdbc:mysql://localhost:3317/pandaria?useSSL=false&allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.datasource.additional[0].name=foo
+spring.datasource.additional[0].username=root
+spring.datasource.additional[0].password=
+spring.datasource.additional[0].driver-class-name=com.mysql.jdbc.Driver
+
+spring.datasource.additional[1].url=jdbc:mysql://localhost:3318/pandaria?useSSL=false&allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.datasource.additional[1].name=bar
+spring.datasource.additional[1].username=root
+spring.datasource.additional[1].password=
+spring.datasource.additional[1].driver-class-name=com.mysql.jdbc.Driver
+```
+Above configures 3 datasources, the first one will be referenced as `default`, others will be referenced by their name.
+**`default` is a reserved data source name, specify a additoinal data source named as `default` cause error.**
+
+Then you can specify which database your sql or query be executed against to:
+
+```gherkin
+* db: foo execute sql: setup_foo.sql
+* db: foo query: query_foo.sql
+* verify: '$[0].name'='jakim'
+* verify: '$[0].age'=18
+
+* db: bar execute sql: setup_bar.sql
+* db: bar query: query_bar.sql
+* verify: '$[0].name'='jakim'
+* verify: '$[0].age'=18
+```
+
+`execute sql` or `query` without specify db will be executed against to `default` data source.
+
 
 MongoDB Operations
 ------------------
