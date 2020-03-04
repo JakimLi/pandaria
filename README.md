@@ -47,6 +47,8 @@ Or like this:
 * verify: '$[0].name'='jakim'
 * verify: '$[0].age'=18
 ```
+[Multiple data source is supported](doc/usage.md#multiple-datasource)
+
 [Mongo DB also supported](doc/usage.md#mongodb-operations)
 
 And you can wait until the verification passed:

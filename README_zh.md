@@ -41,6 +41,8 @@ SELECT NAME, AGE FROM USERS
 * verify: '$[0].name'='jakim'
 * verify: '$[0].age'=18
 ```
+[支持多数据库](doc/usage.md#multiple-datasource)
+
 [支持Mongo DB](doc/usage.md#mongodb-operations)
 
 等待并重试:
