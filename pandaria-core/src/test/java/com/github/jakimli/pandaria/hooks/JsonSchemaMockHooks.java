@@ -5,9 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.github.dreamhead.moco.Moco.by;
-import static com.github.dreamhead.moco.Moco.json;
-import static com.github.dreamhead.moco.Moco.uri;
+import static com.github.dreamhead.moco.Moco.*;
 import static com.google.common.collect.ImmutableList.of;
 
 public class JsonSchemaMockHooks {

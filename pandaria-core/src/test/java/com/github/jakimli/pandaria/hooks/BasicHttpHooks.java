@@ -1,6 +1,5 @@
 package com.github.jakimli.pandaria.hooks;
 
-import com.github.dreamhead.moco.Moco;
 import com.github.jakimli.pandaria.MockServer;
 import cucumber.api.java.Before;
 import org.springframework.beans.factory.annotation.Autowired;

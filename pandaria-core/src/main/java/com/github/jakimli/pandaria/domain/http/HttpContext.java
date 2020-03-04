@@ -2,7 +2,6 @@ package com.github.jakimli.pandaria.domain.http;
 
 import com.github.jakimli.pandaria.domain.http.client.HttpMethod;
 import com.github.jakimli.pandaria.domain.wait.Waitable;
-import com.github.jakimli.pandaria.utils.JsonUtil;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
@@ -11,11 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Cookie;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.*;
 import java.io.File;
 import java.net.URI;
 import java.util.HashMap;
@@ -25,9 +20,7 @@ import java.util.Map;
 import static com.github.jakimli.pandaria.utils.FileUtil.file;
 import static com.github.jakimli.pandaria.utils.StringUtil.joinByComma;
 import static javax.ws.rs.client.Entity.entity;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE;
-import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM_TYPE;
-import static javax.ws.rs.core.MediaType.valueOf;
+import static javax.ws.rs.core.MediaType.*;
 import static javax.ws.rs.core.UriBuilder.fromUri;
 
 @Component

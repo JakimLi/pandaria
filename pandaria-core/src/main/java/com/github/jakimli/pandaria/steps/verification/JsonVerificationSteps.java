@@ -12,9 +12,7 @@ import java.io.IOException;
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
 import static com.github.jakimli.pandaria.utils.JsonUtil.size;
 import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
-import static net.javacrumbs.jsonunit.core.Option.IGNORING_ARRAY_ORDER;
-import static net.javacrumbs.jsonunit.core.Option.IGNORING_EXTRA_ARRAY_ITEMS;
-import static net.javacrumbs.jsonunit.core.Option.IGNORING_EXTRA_FIELDS;
+import static net.javacrumbs.jsonunit.core.Option.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

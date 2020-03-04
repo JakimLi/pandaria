@@ -1,7 +1,7 @@
 package com.github.jakimli.pandaria.steps.verification;
 
-import com.github.jakimli.pandaria.domain.variable.Variables;
 import com.github.jakimli.pandaria.domain.VerificationContext;
+import com.github.jakimli.pandaria.domain.variable.Variables;
 import cucumber.api.java.en.Then;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;

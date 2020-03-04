@@ -1,10 +1,8 @@
 package com.github.jakimli.pandaria.steps;
 
-import com.github.jakimli.pandaria.configuration.DataSourcesConfiguration;
 import com.github.jakimli.pandaria.domain.*;
 import com.github.jakimli.pandaria.domain.expression.Expressions;
 import com.github.jakimli.pandaria.domain.wait.Wait;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,9 +10,6 @@ import java.io.IOException;
 
 import static com.github.jakimli.pandaria.configuration.DataSourcesConfiguration.DEFAULT;
 import static com.github.jakimli.pandaria.utils.FileUtil.read;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertThat;
 
 public class DatabaseSteps {
 

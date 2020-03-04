@@ -7,13 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 
-import static com.github.dreamhead.moco.Moco.and;
-import static com.github.dreamhead.moco.Moco.by;
-import static com.github.dreamhead.moco.Moco.exist;
-import static com.github.dreamhead.moco.Moco.json;
-import static com.github.dreamhead.moco.Moco.jsonPath;
-import static com.github.dreamhead.moco.Moco.status;
-import static com.github.dreamhead.moco.Moco.uri;
+import static com.github.dreamhead.moco.Moco.*;
 import static com.google.common.collect.ImmutableMap.of;
 
 public class GraphqlHooks {
