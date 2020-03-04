@@ -4,7 +4,8 @@ import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.MariaDB4jService;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import org.apache.commons.lang3.SystemUtils;
+
+import static org.apache.commons.lang3.SystemUtils.JAVA_IO_TMPDIR;
 
 public class MariaDBHook {
 
@@ -30,18 +31,18 @@ public class MariaDBHook {
     }
 
     private MariaDB4jService foo() throws ManagedProcessException {
-        return mariaDb(3317, "foo");
+        return mariaDb("foo", 3317);
     }
 
     private MariaDB4jService bar() throws ManagedProcessException {
-        return mariaDb(3318, "bar");
+        return mariaDb("bar", 3318);
     }
 
-    private MariaDB4jService mariaDb(int port, String name) throws ManagedProcessException {
+    private MariaDB4jService mariaDb(String name, int port) throws ManagedProcessException {
         MariaDB4jService db = new MariaDB4jService();
         db.getConfiguration().setPort(port);
-        db.getConfiguration().setDataDir(String.format("%s/%s/data", SystemUtils.JAVA_IO_TMPDIR, name));
-        db.getConfiguration().setBaseDir(String.format("%s/%s/base", SystemUtils.JAVA_IO_TMPDIR, name));
+        db.getConfiguration().setDataDir(String.format("%s/%s/data", JAVA_IO_TMPDIR, name));
+        db.getConfiguration().setBaseDir(String.format("%s/%s/base", JAVA_IO_TMPDIR, name));
         db.getConfiguration().addArg("--user=root");
         return db;
     }
