@@ -97,7 +97,6 @@ public class DatabaseSteps {
 
     @When("^db: ([^\" ]*) execute sql:$")
     public void executeSqlByDb(String dbName, String sql) {
-        assertNotDefault(dbName);
         databaseExecuteContext.statement(expressions.evaluate(sql));
         databaseExecuteContext.dataSource(dataSources.dataSource(dbName));
         databaseExecuteContext.execute();
@@ -106,17 +105,10 @@ public class DatabaseSteps {
 
     @When("^db: ([^\" ]*) execute sql: ([^\"]*)$")
     public void executeSqlFromFileByDb(String dbName, String fileName) throws IOException {
-        assertNotDefault(dbName);
         String file = configuration.classpathFile(fileName);
         databaseExecuteContext.dataSource(dataSources.dataSource(dbName));
         databaseExecuteContext.statement(expressions.evaluate(read(file)));
         databaseExecuteContext.execute();
         wait.waitable(databaseExecuteContext);
-    }
-
-    private void assertNotDefault(String dbName) {
-        if (dbName.equalsIgnoreCase(DEFAULT)) {
-            throw new RuntimeException("default is a reserved datasource name");
-        }
     }
 }
