@@ -4,6 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -62,6 +64,10 @@ public class DataSourcesConfiguration {
     }
 
     public List<DatasourceProperties> all() {
+        if (!hasAdditional()) {
+            return Collections.singletonList(defaultDataSourceProperties());
+        }
+
         return Stream
                 .concat(Stream.of(defaultDataSourceProperties()), this.additional.stream())
                 .collect(Collectors.toList());
@@ -75,6 +81,10 @@ public class DataSourcesConfiguration {
         defaultProperties.setPassword(this.password);
         defaultProperties.setDriverClassName(this.driverClassName);
         return defaultProperties;
+    }
+
+    public boolean hasAdditional() {
+        return this.additional != null;
     }
 
     @Configuration
