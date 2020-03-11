@@ -672,7 +672,7 @@ spring.datasource.additional[1].password=
 spring.datasource.additional[1].driver-class-name=com.mysql.jdbc.Driver
 ```
 Above configures 3 datasources, the first one will be referenced as `default`, others will be referenced by their name.
-**`default` is a reserved data source name, specify a additoinal data source named as `default` cause error.**
+**`default` is a reserved data source name, specify an additional data source named as `default` cause error.**
 
 Then you can specify which database your sql or query be executed against to:
 
