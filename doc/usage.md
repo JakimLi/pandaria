@@ -1692,6 +1692,17 @@ Example uuid: `123e4567-e89b-12d3-a456-556642440000`
 
 You can generate almost all kinds of random testing data by using [faker expression](#special-variable-with-faker)
 
+### Print
+You can print something for debugging purpose
+```gherkin
+* print: "begin"
+* print: "@{$}"
+* print: "@{$.username}"
+* print: "<string>"
+* print: "${var_id}"
+* print: '${var_id}'
+* print: "end"
+```
 
 Data Driven
 -----------
