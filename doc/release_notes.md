@@ -1,4 +1,10 @@
-Release 0.3.4 (2020-03-04) Latest
+Release 0.3.5 (2020-08-06) Latest
+=================================
+Utilities
+----
+* Add debug step
+
+Release 0.3.4 (2020-03-04) 
 =================================
 Database Operations
 ----

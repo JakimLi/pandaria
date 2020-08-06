@@ -102,7 +102,7 @@ Resources
 
 Latest Release
 --------------
-* 0.3.4
+* 0.3.5
 
 See [Release Notes](doc/release_notes.md)
 
@@ -117,10 +117,10 @@ If you don't need to verify database mongo, or graphql, just remove the `pandari
 dependencies {
     testCompile(
             "io.cucumber:cucumber-junit:4.0.0",
-            'com.github.jakimli.pandaria:pandaria-core:0.3.4',
-            'com.github.jakimli.pandaria:pandaria-db:0.3.4',
-            'com.github.jakimli.pandaria:pandaria-mongo:0.3.4',
-            'com.github.jakimli.pandaria:pandaria-graphql:0.3.4'
+            'com.github.jakimli.pandaria:pandaria-core:0.3.5',
+            'com.github.jakimli.pandaria:pandaria-db:0.3.5',
+            'com.github.jakimli.pandaria:pandaria-mongo:0.3.5',
+            'com.github.jakimli.pandaria:pandaria-graphql:0.3.5'
     )
 }
 ```
@@ -131,25 +131,25 @@ dependencies {
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-core</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-db</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-mongo</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>com.github.jakimli.pandaria</groupId>
     <artifactId>pandaria-graphql</artifactId>
-    <version>0.3.4</version>
+    <version>0.3.5</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
