@@ -51,9 +51,14 @@ public class DataSources {
 
     @PostConstruct
     public void validateAdditionalDataSourceName() {
-        if (configuration.hasAdditional() && configuration.getAdditional().stream()
-                .anyMatch(property -> DEFAULT.equalsIgnoreCase(property.getName()))) {
+        if (configuration.hasAdditional() && usingReservedName(DEFAULT)) {
             throw new RuntimeException(String.format("datasource name: '%s' is reserved", DEFAULT));
         }
+    }
+
+    private boolean usingReservedName(String name) {
+        return configuration.getAdditional()
+                .stream()
+                .anyMatch(property -> name.equalsIgnoreCase(property.getName()));
     }
 }
