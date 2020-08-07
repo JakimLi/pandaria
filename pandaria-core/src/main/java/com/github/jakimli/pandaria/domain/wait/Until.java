@@ -49,7 +49,7 @@ public class Until {
     }
 
     private void retry(int count) {
-        LOGGER.info("retrying: {}/{}, {}", count, wait.maxRetry());
+        LOGGER.info("retrying: {}/{}", count, wait.maxRetry());
         wait.retry();
     }
 
