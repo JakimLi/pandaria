@@ -50,24 +50,25 @@ Pandaria只是基于cucumber抽象的DSL，用于API自动化测试。
     * [查找所有](#查找所有)
     * [查找](#查询)
 
-* [Variables](#variables)
-    * [Initialization](#initializaton)
-    * [Definition](#definition)
-        * [Literal string](#literal-string)
-        * [String](#string)
-        * [Integer](#integer)
-        * [Extract from response body or results](#extract-from-response-body-or-results)
-        * [Extract from response cookie](#extract-from-response-cookie)
-        * [Extract from response body as plain text](#extract-from-response-body-as-plain-text)
-        * [Result of code evaluation](#result-of-code-evaluation)
-    * [Use Variables](#use-variables)
-        * [In URI](#in-uri)
-        * [In File](#in-file)
-        * [In Text](#in-text)
-        * [In Code Evaluation](#in-code-evaluation)
-    * [Escape](#escape)
-    * [Special variable with Faker](#special-variable-with-faker)
-    * [Special variable with last response](#special-variable-with-last-response)
+* [变量](#变量)
+    * [初始化](#初始化)
+    * [定义](#定义)
+        * [字面量](#字面量)
+        * [字符串](#字符串)
+        * [整形](#整形)
+        * [从返回体或结果中抽取](#从返回体或结果中抽取)
+        * [从返回cookie中抽取](#从返回cookie中抽取)
+        * [从返回体中抽取纯文本](#从返回体中抽取纯文本)
+        * [从代码块中抽取](#从代码块中抽取)
+    * [使用变量](#使用变量)
+        * [在URI中](#在URI中)
+        * [在文件中](#在文件中)
+        * [在文本中](#在文本中)
+        * [在请求头信息中](#在请求头信息中)
+        * [在代码块时](#在代码块中)
+    * [转义](#转义)
+    * [Faker特殊变量](#Faker特殊变量)
+    * [上次请求结果特殊变量](#上次结果特殊变量)
 
 * [Verification](#verification)
     * [Verify http response](#verify-http-response)
@@ -771,13 +772,13 @@ MongoDB操作
 ```
 
 
-Variables
+变量
 ---------
 
-### Initialization
+### 初始化
 @since 0.2.1
 
-You can put initial value in `application.properties`.
+你可以在`application.properties`中初始化变量。
 
 application.properties
 ```
@@ -791,15 +792,15 @@ Scenario: initial value from configuration file
   * verify: ${environment}="production"
 ```
 
-### Definition
+### 定义
 
-**COMPATIBILITY WARNING**:
+**兼容性警告**:
 
-If your version <= 0.2.4, you need to define variable with single quote around the name. such as `var: 'three'=3`
+如果你使用的pandaria版本 <= 0.2.4, 你需要在变量定义时在变量名处加上单引号. 比如 `var: 'three'=3`
 
 
-#### Literal string
-If you define variable use single quote, `'${name}'`, variable will **NOT** be replaced.
+#### 字面量
+如果定义变量时使用了单引号，如`'${name}'`, 变量**不会**被替换。
 
 ```gherkin
 Scenario: const string
@@ -807,8 +808,8 @@ Scenario: const string
   * verify: ${name}='panda'
 ```
 
-#### String
-If you define variable use double quote, `"${name}"`, variable will be replaced.
+#### 字符串
+如果你是用双引号定义变量，`"${name}"`, 变量会被替换。
 
 ```gherkin
 Scenario: string
@@ -818,18 +819,18 @@ Scenario: string
   * verify: ${great}="hello ${name}"
 ```
 
-#### Integer
+#### 整形
 ```gherkin
 Scenario: integer
   * var: age=18
   * verify: ${age}=18
 ```
 
-#### Extract from response body or results
+#### 从返回体或结果中抽取
 
-It's useful if we can extract values from response body as variables. you can do it using `<-` like below.
+从返回体或结果中抽取变量很常用，你可以使用`<-`来做到。
 
-`var: name<-'json path'`  will extract value from the http response body json using the json path and assign it to the variable with specified name
+`var: name<-'json path'`  通过指定的json path从http返回体中抽取值，并赋值给这里指定的变量。
 
 ```gherkin
 Scenario: from json
@@ -844,16 +845,16 @@ Scenario: from json
   * verify: ${iq}=double: 80.0
 ```
 
-You can also extract from database query results
+你也可以从数据库查询结果中抽取
 ```gherkin
 * query: select.sql
 * var: age<-'$[0].age'
 ```
 
-#### Extract from response cookie
+#### 从返回cookie中抽取
 @since 0.2.7
 
-You can extract a cookie and assign it to variable
+你可以抽取cookie值并赋值变量
 
 ```gherkin
 Scenario: read response cookie value
@@ -863,7 +864,7 @@ Scenario: read response cookie value
   * verify: ${jsession}='ABCDEFG'
 ```
 
-#### Extract from response body as plain text
+#### 从返回体中抽取纯文本
 @since 0.2.8
 
 ```gherkin
@@ -874,10 +875,10 @@ Scenario: read response cookie value
 * verify: ${content}='SIMPLE_RESPONSE'
 ```
 
-#### Result of code evaluation
+#### 从代码块中抽取
 @since 0.2.1
 
-You can evaluate javascript code and assign the result as a variable.
+你可以通过编写Javascript代码，并把执行结果赋值给变量。
 ```gherkin
 * var: three=3
 
@@ -895,8 +896,8 @@ ${three} + 3
 * verify: ${ten}=10
 ```
 
-### Use Variables
-#### In URI
+### 使用变量
+#### 在URI中
 ```gherkin
 Scenario: variable being replaced in uri
   * var: path="not_important"
@@ -908,7 +909,7 @@ Scenario: variable being replaced in uri
   * verify: '$.iq'=double: 80.0
 ```
 
-#### In file
+#### 在文件中
 
 requsts/someone.json
 ```json
@@ -926,7 +927,7 @@ Scenario: variable used in request file
   * status: 201
 ```
 
-#### In text
+#### 在文本中
 ```gherkin
 * response body:
 """
@@ -934,7 +935,7 @@ Scenario: variable used in request file
 """
 ```
 
-#### In HTTP request header
+#### 在请求头信息中
 @since 0.3.1
 
 ```gherkin
@@ -945,7 +946,7 @@ Scenario: variable used in request file
 * status: 200
 ```
 
-#### In code evaluation
+#### 在代码块中
 @since 0.2.1
 
 ```gherkin
@@ -956,26 +957,25 @@ ${three} + 3
 """
 ```
 
-### Escape
-You can escape the variables by place an extra `$`
+### 转义
+你可以通过多家一个`$`来为变量转义
 ```gherkin
 * var: six=code:
 """
 $${three} + 3
 """
 ```
-This gives error because `${three}` is not understand by javascript engine.
+上述写法会报错因为javascript引擎找不变量`${three}`
 
-### Special variable with Faker
+### Faker特殊变量
 @since 0.2.2
 
-Its useful to have random real-looking fake data for testing, Pandaria has integerated with [java-faker](https://github.com/DiUS/java-faker)
-for fake data generation.
+随机的类真实的测试数据在测试时非常有用，Pandaria集成了[java-faker](https://github.com/DiUS/java-faker)来做测试数据的生成。
 
-#### Define it as variable
+#### 将其定义为变量
 @since 0.2.2
 
-You can generate fake data and assign it to a variable, `#{expression}` is used.
+通过表达式`#{expression}` 你可以生成假数据，然后赋值给变量
 
 ```gherkin
 * var: name=faker: #{Name.firstName}
@@ -985,10 +985,10 @@ You can generate fake data and assign it to a variable, `#{expression}` is used.
 * verify code: "${full_name}".length > 0
 ```
 
-#### Use it immediately
+#### 立即使用
 @since 0.2.2
 
-Or you can directly use it in request body, or sql, mongo json, works in file as well.
+你可以在请求体，sql或者mongo的json中直接使用Faker变量, 文件中也可以。
 ```gherkin
 * uri: /faker/users
 * request body:
@@ -1002,30 +1002,30 @@ success
 """
 ```
 
-#### Locale
+#### 语言
 @since 0.2.2
 
-You can switch locale, default is `en`.
+你可以切换语言，默认是`en`英语。
 ```gherkin
 * faker locale: zh-CN
 * var: name=faker: #{Name.fullName}
 * verify: ${name} matches: '\p{sc=Han}*'
 ```
 
-`* verify: ${name} matches: '\p{sc=Han}*'` ensure `${name}` all chinese characters.
+`* verify: ${name} matches: '\p{sc=Han}*'` 验证 `${name}` 的值全都是中文字符。
 
-#### Change Default locale
+#### 修改默认语言
 @since 0.2.2
 
-Default locale can be set in `application.properties` with `faker.locale`
+通过在`application.properties`中设置`faker.locale`修改默认语言。
 ```
 faker.locale=zh-CN
 ```
 
-#### Escape
+#### 转义
 @since 0.2.2
 
-You can escape it:
+加上额外的井号转义
 ```gherkin
 * uri: /faker/users/escape
 * request body:
@@ -1038,19 +1038,21 @@ You can escape it:
 success
 """
 ```
-In above example, name will be set to a fake name, but city will be set to `#{Address.ctiy}`
+上述例子中，name会被设置成一个随机的名字，但是city会被设置成`#{Address.ctiy}`。
 
 **You are not allowed to escape when define varaible use faker with fake data, `var: name=faker: ##{Name.fullName}`**
 **will not work, use `var: name='#{Name.fullName}'` instead.**
 
+**使用faker数据赋值变量时不允许这样转义, `var: name=faker: ##{Name.fullName}`**
+**请使用 `var: name='#{Name.fullName}'` 代替**
 
-### Special variable with last response
+
+### 上次结果特殊变量
 @since 0.2.3
 
-It's useful that you can use part of or whole http response as next request body. you can use `@{<json path>}` in your
-next request body, Pandaria will replace it for you. Works in file as well.
+通常我们需要将上一次请求的部分或者全部响应体作为下一次请求的请求体。你可以在下一次请求体中使用`@{<json path>}`，Pandaria会自动替换，文件中也适用。
 
-Whole response for next request
+使用上一次整个响应体做下一次请求体
 
 ```gherkin
 * uri: /users/me
@@ -1071,7 +1073,7 @@ Whole response for next request
 * verify: '$.age'=18
 ```
 
-Part of the response for next request
+使用上一次部分响应体做下一次请求体
 
 ```gherkin
 * uri: /users/me
@@ -1095,6 +1097,9 @@ Part of the response for next request
 **Please be careful about the double quotes, because Pandaria assumes the value of json path expression is also a JSON,**
 **so it will automatically handle double quotes, with variables in `${}` or faker expresson `#{}`, you will need to handle**
 **double quotes yourself**
+
+**请注意双引号，因为Pandaria假设json path表达式也是JSON，所以会自动加上双引号，但是对于`${}`中的变量，或者faker表达式`#{}`, 你需要自己**
+**在需要的地方加上双引号**
 
 
 Verification
