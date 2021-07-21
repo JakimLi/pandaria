@@ -44,11 +44,11 @@ Pandaria只是基于cucumber抽象的DSL，用于API自动化测试。
     * [执行SQL](#执行sql)
     * [多数据源](#多数据源)
 
-* [MongoDB Operations](#mongodb-operations)
-    * [Insert](#insert)
-    * [Clear](#clear)
-    * [Find All](#find-all)
-    * [Find](#find)
+* [MongoDB操作](#mongodb操作)
+    * [插入](#插入)
+    * [清除](#清除)
+    * [查找所有](#查找所有)
+    * [查找](#查询)
 
 * [Variables](#variables)
     * [Initialization](#initializaton)
@@ -693,14 +693,14 @@ spring.datasource.additional[1].driver-class-name=com.mysql.jdbc.Driver
 ```
 
 
-MongoDB Operations
+MongoDB操作
 ------------------
 @since 0.2.0
 
-### Insert
+### 插入
 @since 0.2.0
 
-Insert one document into a collection
+在集合中插入一个document
 
 ```gherkin
 * collection: 'users' insert:
@@ -708,35 +708,36 @@ Insert one document into a collection
 {"user": "jakim"}
 """
 ```
-or put document in file
+
+或者将document放在文件中
 
 ```gherkin
 * collection: 'users' insert: document/alice.json
 ```
 
-### Clear
+### 清除
 @since 0.2.0
 
-Delete all documents in collection
+删除集合中所有的documents
 
 ```gherkin
 * collection: 'users' clear
 ```
 
-### Find All
+### 查找所有
 @since 0.2.0
 
-Find all documents from collection, you can verify like verify in database, **it's always an JSON array**.
+查找集合中所有的documents，然后校验，同数据库返回结果一样，**返回的永远是JSON数组**。
 
 ```gherkin
 * collection: 'users' find all
 * verify: '$[0].user'="alice"
 ```
 
-### Find
+### 查找
 @since 0.2.0
 
-Instead of find all documents, you can filter the results.
+除了查找所有documents，你可以过滤你想要的结果。
 
 ```gherkin
 * collection: 'users' clear
