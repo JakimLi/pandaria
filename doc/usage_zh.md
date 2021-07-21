@@ -1094,10 +1094,6 @@ success
 * verify: '$.age'=18
 ```
 
-**Please be careful about the double quotes, because Pandaria assumes the value of json path expression is also a JSON,**
-**so it will automatically handle double quotes, with variables in `${}` or faker expresson `#{}`, you will need to handle**
-**double quotes yourself**
-
 **请注意双引号，因为Pandaria假设json path表达式也是JSON，所以会自动加上双引号，但是对于`${}`中的变量，或者faker表达式`#{}`, 你需要自己**
 **在需要的地方加上双引号**
 
