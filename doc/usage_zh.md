@@ -39,10 +39,10 @@ Pandaria只是基于cucumber抽象的DSL，用于API自动化测试。
     * [variables](#varaibles)
     * [操作名称](#操作名称)
 
-* [Database Operations](#database-operations)
-    * [Queries](#queries)
-    * [Execute SQL](#execute-sql)
-    * [Multiple DataSource](#multiple-datasource)
+* [数据库操作](#数据库操作)
+    * [查询](#查询)
+    * [执行SQL](#执行sql)
+    * [多数据源](#多数据源)
 
 * [MongoDB Operations](#mongodb-operations)
     * [Insert](#insert)
@@ -577,10 +577,9 @@ Variable is optional.
 ```
 
 
-Database Operations
+数据库操作
 -------------------
-You can directly use sql to operate on database, pandaria use spring jdbc, you need to configure your datasource
-in `application.properties` like below
+你可以直接编写sql操作数据库，pandaria使用spring jdbc, 首先你需要在`application.properties`中配置数据源信息。
 
 ```
 spring.datasource.url=jdbc:mysql://localhost:3307/pandaria?useSSL=false&allowMultiQueries=true
@@ -589,10 +588,11 @@ spring.datasource.password=password
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 ```
 
-### Queries
+### 查询
 You can write sql with select statements to query database and verify the results using the json path.
+你可以编写select语句来查询数据库，并使用json path来验证查询的结果。
 
-**The results of select will always be array, keep it in mind when using json path**
+**所有的查询结果都以数组的形式返回, 使用json path的时候别忘了返回结果是数组**
 
 ```gherkin
 Feature: database
@@ -629,7 +629,7 @@ Feature: database
     * verify: '$[0].age'=18
 ```
 
-### Execute SQL
+### 执行SQL
 ```gherkin
 * execute sql:
 """
@@ -645,12 +645,12 @@ CREATE TABLE USERS(
 * execute sql: setup.sql
 ```
 
-### Multiple DataSource
+### 多数据源
 @since 0.3.4
 
-You can specify additional data source and specify which one to use while executing sql or query from database.
+你可以配置更多的数据源，在数据库操作中你可以选择用哪一个数据源。
 
-First in your `application.properties`, add your data source configuration.
+首先在`application.properties`中添加数据源配置。
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/pandaria?useSSL=false&allowMultiQueries=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
@@ -670,10 +670,10 @@ spring.datasource.additional[1].username=root
 spring.datasource.additional[1].password=
 spring.datasource.additional[1].driver-class-name=com.mysql.jdbc.Driver
 ```
-Above configures 3 datasources, the first one will be referenced as `default`, others will be referenced by their name.
-**`default` is a reserved data source name, specify an additional data source named as `default` cause error.**
+上述配置文件中配置了3个数据源，第一个可以通过`default`来访问，其他的可以通过各自的名字来访问。
+**`default`作为数据源名字是一个保留的关键字, 如果你尝试把数据源命名为`default`将会报错。**
 
-Then you can specify which database your sql or query be executed against to:
+你可以指定sql在哪个数据源中执行。
 
 ```gherkin
 * db: foo execute sql: setup_foo.sql
@@ -687,7 +687,7 @@ Then you can specify which database your sql or query be executed against to:
 * verify: '$[0].age'=18
 ```
 
-`execute sql` or `query` without specify db will be executed against to `default` data source. same as:
+未指定数据源的`execute sql` 或者 `query` 将会使用 `default` 作为数据源. 跟如下写法效果一样:
 ```gherkin
 * db: default sql: setup_foo.sql
 ```
