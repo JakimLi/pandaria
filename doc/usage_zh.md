@@ -32,12 +32,12 @@ Pandaria只是基于cucumber抽象的DSL，用于API自动化测试。
      * [HTTPS](#https)
      * [代理](#代理)
 
-* [Graphql Test](#graphql-test)
+* [Graphql测试](#graphql测试)
     * [URL](#url)
     * [query](#query)
     * [mutation](#mutation)
     * [variables](#varaibles)
-    * [operationName](#operation-name)
+    * [操作名称](#操作名称)
 
 * [Database Operations](#database-operations)
     * [Queries](#queries)
@@ -492,14 +492,14 @@ Java系统属性用于配置HTTP(S)代理, 例如下面是用gradle配置代理�
 ```
 
 
-Graphql Test
+Graphql测试
 -------------
 @since 0.3.0
 
-Pandaria support graphql testing over HTTP, currenty query and mutation are supported.
+Pandaria支持基于http的graphql测试，当前支持query和mutation。
 
 ### URL
-Unlike REST, Graphql only needs a single endpoint, so you can just set the base url like below:
+与REST不同，Graphql只需要一个endpoint，所以你只需要好base uri：
 
 ```
 Background:
@@ -534,9 +534,9 @@ Background:
     * verify: '$.data.book.isbn'='ISBN01123'
     * verify: '$.data.book.author.name'='someone'
 ```
-You can send a graphql query and verify the returning data. variables are optional.
+你可以发送graphql查询并校验返回的数据。variables是可选的。
 
-Or you can put the query and variables in file as usual.
+或者你也可以把query和variables放在文件中.
 ```gherkin
 * graphql: query_book_by_id.graphql
 * variables: css_designer_guide.id.json
@@ -547,7 +547,7 @@ Or you can put the query and variables in file as usual.
 ```
 
 ### Mutation
-Usage of mutation similar with query, just replace the query with mutation.
+mutation的有用法与query类似, 只需要把query替换成mutation。
 
 ### Variables
 Variable is optional.
@@ -561,9 +561,9 @@ Variable is optional.
 * variables: css_designer_guide.id.json
 ```
 
-### Operation Name
-If multiple operations presented in one single request, operation name is required by graphql server.
-it's optional when single operation presented in single request.
+### 操作名称
+如果一个请求中包含多个操作，graphql服务端要求制定操作名称。
+如果一个请求中只有一个操作，操作名称则是可选的。
 
 ```gherkin
   Scenario: query with operation name
