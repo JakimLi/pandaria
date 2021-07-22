@@ -70,42 +70,42 @@ Pandaria只是基于cucumber抽象的DSL，用于API自动化测试。
     * [Faker特殊变量](#Faker特殊变量)
     * [上次请求结果特殊变量](#上次结果特殊变量)
 
-* [Verification](#verification)
-    * [Verify http response](#verify-http-response)
-        * [response status](#status)
-        * [response header](#response-header)
-        * [response body](#response-body)
-    * [Verify database tables](#verify-database-tables)
-        * [Different database types](jdbc_types.md#verificaion-for-different-types)
-    * [Verify String](#verify-string)
-        * [Equals](#equals)
-        * [Contains](#contains)
-        * [Starts With](#starts-with)
-        * [Ends With](#ends-with)
-        * [Length](#length)
-        * [Regex Match](#regex-match)
-    * [Verify numbers](#verify-numbers)
-        * [Greater than](#greater-than)
-        * [Less than](#less-than)
-        * [Other types](jdbc_types.md#verificaion-for-different-types)
-    * [Verify datetime](#verify-datetime)
-        * [Equals](#datetime-equals)
-        * [Before](#before)
-        * [After](#after)
-    * [Verify JSON](#verify-json)
-    * [Verify JSON schema](#verify-json-schema)
-    * [Verify null](#verify-null)
-    * [Verify variable](#verify-variable)
-    * [Verify code evaluation](#verify-code-evaluation)
-    * [Write your own](#write-your-own)
+* [验证](#验证)
+    * [验证http响应](#验证http响应)
+        * [响应状态](#响应状态)
+        * [响应头](#响应头)
+        * [响应体](#响应体)
+    * [验证数据库表](#验证数据库表)
+        * [不同表类型](jdbc_types.md#verificaion-for-different-types)
+    * [验证字符串](#验证字符串)
+        * [相等](#相等)
+        * [包含](#包含)
+        * [开始](#开始)
+        * [结束](#结束)
+        * [长度](#长度)
+        * [正则表达式](#正则表达式)
+    * [验证数字](#验证数字)
+        * [大于](#大于)
+        * [小于](#小于)
+        * [其他类型](jdbc_types.md#verificaion-for-different-types)
+    * [验证日期和时间](#验证日期和时间)
+        * [等于](#日期或时间相等)
+        * [之前](#之前)
+        * [之后](#之后)
+    * [验证JSON](#验证json)
+    * [验证JSON schema](#验证json-schema)
+    * [验证null](#验证null)
+    * [验证变量](#验证变量)
+    * [验证代码](#验证代码)
+    * [自定义验证](#自定义验证)
 
-* [Wait](#wait)
-    * [Simple Wait](#simple-wait)
-    * [Wait Until](#wait-until)
+* [等待](#等待)
+    * [简单等待](#简单等待)
+    * [等待直至次数](#等待直至次数)
 
-* [Utilities](#utilities)
+* [工具](#工具)
 
-* [Data Driven](#data-driven)
+* [数据驱动](#数据驱动)
 
 特性配置
 ---------------------
@@ -1098,19 +1098,19 @@ success
 **在需要的地方加上双引号**
 
 
-Verification
+验证
 -----------
 
-### Verify http response
+### 验证http响应
 
-#### response status
+#### 响应状态
 ```gherkin
 * uri: /empty_request
 * send: POST
 * status: 201
 ```
 
-#### response header
+#### 响应头
 ```gherkin
 * uri: /users
 * send: TRACE
@@ -1118,14 +1118,14 @@ Verification
 * response header: 'Content-Type'='message/http'
 ```
 
-#### response body
-verify use json path
+#### 响应体
+使用JSON PATH验证
 ```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.age'=18
 ```
 
-verify as text
+使用纯文本验证
 ```gherkin
 * response body:
 """
@@ -1133,25 +1133,24 @@ success
 """
 ```
 
-verify as text in file
+验证文件中的文本
 ```gherkin
 * response body: responses/success.txt
 ```
 
-Same with the request body, the convention is string right after `* response body:` is the path to file. the text
-in docstring in next line is dirctly the response body.
+与请求体的写法一样，约定`* response body:`后面的字符串为文件路径，换行的docstring中直接写期望的响应体。
 
-### Verify database tables
-You can verify database tables by writing sql with select statements, and then verify the result.
+### 验证数据库表
+你可以编写select sql语句来查询数据库表，并验证结果。
 
-For table
+有如下表：
 
 | name | age |
 |------|-----|
 | jakim | 18 |
 | panda | 28 |
 
-in json array
+其JSON数组表示:
 
 ```json
 [
@@ -1159,9 +1158,9 @@ in json array
     { "name": "panda", "age": 28 }
 ]
 ```
-**The query result will always be json array even if only one row in the result**
+**查询结果永远都是数组形式，即使只有一条数据**
 
-Then just using the same as you verify json http response body
+然后使用与验证http响应同样的方式验证
 
 ```gherkin
 * query: select.sql
@@ -1170,11 +1169,11 @@ Then just using the same as you verify json http response body
 ```
 
 
-### Verify String
-Although you can use string verificaton to non-string types, it will be converted to its string format.
+### 验证字符串
+尽管你可以使用字符串验证非字符串类型，但是验证前会将其转换为字符串格式。
 
-#### Equals
-`=` for equals, `!=` for not equals
+#### 相等
+`=` 用于相等, `!=` 用于不等
 
 ```gherkin
 Scenario: equals
@@ -1206,7 +1205,7 @@ Scenario: equals
   * verify: '$.iq'!=double: 89.0
 ```
 
-#### Contains
+#### 包含
 
 ```gherkin
 Scenario: contains
@@ -1220,7 +1219,7 @@ Scenario: contains
   * verify: ${username} contains: 'anda'
 ```
 
-#### Starts with
+#### 开始
 
 ```gherkin
 * verify: '$.username'='jakim'
@@ -1234,7 +1233,7 @@ Scenario: contains
 * verify: ${username} starts with: "${prefix}i"
 ```
 
-#### Ends with
+#### 结束
 ```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' ends with: 'kim'
@@ -1247,7 +1246,7 @@ Scenario: contains
 * verify: ${username} ends with: "ja${suffix}"
 ```
 
-#### Length
+#### 长度
 ```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' length: 5
@@ -1259,7 +1258,7 @@ Scenario: contains
 * verify: ${abc} length: 1
 ```
 
-#### Regex match
+#### 正则表达式
 ```gherkin
 * verify: '$.username'='jakim'
 * verify: '$.username' matches: '.*'
@@ -1268,9 +1267,9 @@ Scenario: contains
 * verify: ${username} matches: 'j.*im'
 ```
 
-### Verify numbers
+### 验证数字
 
-#### Greater than
+#### 大于
 
 ```gherkin
 * verify: '$.age'>17
@@ -1287,7 +1286,7 @@ Scenario: contains
 * verify: ${iq}>=double: 80.0
 ```
 
-### Less Than
+### 小于
 
 ```gherkin
 * verify: '$.age'<19
@@ -1304,9 +1303,9 @@ Scenario: contains
 * verify: ${iq}<=double: 80.0
 ```
 
-### Verify Datetime
+### 验证日期和时间
 
-#### datetime equals
+#### 日期或时间相等
 ```gherkin
 Scenario: equals
   * query:
@@ -1320,7 +1319,7 @@ Scenario: equals
   * verify: '$[0].time'=datetime: '10:30:10' pattern: 'hh:mm:ss'
 ```
 
-#### before
+#### 之前
 ```gherkin
 Scenario: before
   * query:
@@ -1334,7 +1333,7 @@ Scenario: before
   * verify: '$[0].time' before: datetime: '10:30:11' pattern: 'hh:mm:ss'
 ```
 
-#### After
+#### 之后
 ```gherkin
 Scenario: after
   * query:
@@ -1348,12 +1347,12 @@ Scenario: after
   * verify: '$[0].time' after: datetime: '10:30:09' pattern: 'hh:mm:ss'
 ```
 
-### Verify JSON
+### 验证JSON
 
-#### same json
-* Allow different order in array
-* **NOT** allow extra items in array
-* **NOT** allow extra or missing object
+#### 同一个json
+* 数组允许元素不同顺序出现
+* **不**允许多余的元素在数组中 
+* **不**允许多余或者缺少对象
 
 ```
 * uri: /users/me
@@ -1369,11 +1368,11 @@ Scenario: after
 * verify: '$' same json: responses/jakim.json
 ```
 
-#### contains json
-* Allow different order in array
-* Allow extra item(s) in array
-* Allow extra object(s)
-* **NOT** allow missing fields
+#### 包含json
+* 数组允许元素不同顺序出现
+* 允许多余的元素在数组中 
+* 允许多余的对象
+* **不**允许缺少字段
 
 ```gherkin
 Scenario: contains json, extra fields allowed
@@ -1405,8 +1404,8 @@ Scenario: contains json, extra fields allowed
   """
 ```
 
-#### has size
-If the json is an array, you can verify the size, if the returning json is an object, then the size verify the key set size.
+#### 验证大小
+如果json是数组大小，你可以验证其大小，如果json是对象，则验证的是其key的数量。
 
 ```gherkin
 Scenario: has size for array
@@ -1435,9 +1434,8 @@ Scenario: has size for array
   * verify: '$.size()'=3
 ```
 
-### Verify JSON Schema
-[JSON schema](https://json-schema.org/) is useful to describe the API, and it's useful especially for contract testing. you can verify json
-document(instance) conforms to a given json schema or not.
+### 验证JSON Schema
+[JSON schema](https://json-schema.org/) 用于描述API, 常用与契约测试. 你可以验证一个JSON文档是否满足某个JSON Schema。
 
 ```gherkin
 @verify_json_schema
@@ -1480,7 +1478,7 @@ Feature: verify json schema
 ```
 
 
-### Verify null
+### 验证null
 ```gherkin
 Scenario: null check
   * uri: /users/me
@@ -1499,8 +1497,9 @@ Scenario: null check
   * verify: '$.notexist' is null
 ```
 
-### Verify variable
-You can verify is response/result/variable equals/not-equals to a variable.
+### 验证变量
+你可以验证http响应体，数据库查询结果，或者变量是否等于一个变量。
+
 ```gherkin
 * verify: '$.username'=${user}
 * verify: '$.username'!=${kim}
@@ -1509,7 +1508,7 @@ You can verify is response/result/variable equals/not-equals to a variable.
 * verify: ${user}!=${kim}
 ```
 
-#### Nested variable reference
+#### 变量嵌套引用
 @since 0.3.2
 
 ```gherkin
@@ -1517,16 +1516,15 @@ You can verify is response/result/variable equals/not-equals to a variable.
 * verify: '$[0].name'=${first_user.name}
 * verify: '$[0].friends'=${first_user.friends}
 ```
-**Currently nested variable reference is not supported in script, file and docstring yet. will be supported later.**
+**当前嵌套变量引用不支持在javascript代码块，文件和docstring中使用，日后支持。**
 
 
-### Verify code evaluation
+### 验证代码
 @since 0.2.1
 
-You can write javascript code snippet for verification, there are two forms, verify against the evaluation result or
-verify the evaluation result is true.
+你可以编写javascript代码来进行验证，有两种方式，验证代码执行结果，或者验证代码结果是否为true。
 
-You can write the code snippet in one line, in block as doc string, or in separate file.
+你可以将代码块写在一行，doc string或者单独的文件中。
 
 **Things to note**
 * If you have multiple lines in the code snippet, only the result of the last line will be used as the result.
@@ -1535,7 +1533,13 @@ You can write the code snippet in one line, in block as doc string, or in separa
 * If your jdk version under java 8u40, you might encounter issue about 0 was returned as 0.0, you can either upgrade your jdk version
 or you need to use it as double.
 
-#### verify response and variable equals the result of the evaluation
+**注意事项**
+* 如果代码中有多行代码，只有最后一样的执行结果会被返回使用。
+* 如果你需要在代码块中写很复杂的代码，首先试试自定义cucumber的step来实现。
+* [Nashorn](https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html)用于脚本解析和执行.
+* 如果你的jdk版本低于8u40, 你可能会遇到0被转换成0.0, 你可以升级jdb版本或者考虑其为double类型。
+
+#### 验证响应体和结果等于代码执行结果
 @since 0.2.1
 
 ```gherkin
@@ -1563,10 +1567,10 @@ ${iq} - 10
 * verify: '$.iq'!=code file: 18.js
 ```
 
-#### verify the evaluation to be true
+#### 验证代码是否返回true
 @since 0.2.1
 
-**Be notice the double equals `==` are used for comparison in javascript instead of single equal `=` which was used in pandaria.**
+**注意javascript中使用双等号`==`做相等比较，pandaria中javascript外使用单等号`=`**
 
 ```gherkin
 * verify code: ${name} == ${iq} / 3
@@ -1577,17 +1581,17 @@ ${name} != ${iq} % 3
 * verify code file: verification.js
 ```
 
-### Write your own
-It's impossible for pandaria to provide all the verificaitons, you can always write your own verifications.
-Here is a [tutorial on how](custom_verification_tutorial.md)
+### 自定义验证
+Pandaria不可能支持所有验证方式，你可以编写你自己的校验方式。
+教程 [tutorial on how](custom_verification_tutorial.md)
 
 
-Wait
+等待
 ----
-Wait is useful for automation testing and sometimes is necessary.
+自动测试中经常需要等待一段时间。
 
-### Simple wait
-Only support milliseconds and seconds, we don't recomment to wait for very long time.
+### 简单等待
+目前只支持毫秒和秒，我们也不推荐等待过长时间。
 
 ```gherkin
 Scenario: wait
@@ -1595,17 +1599,19 @@ Scenario: wait
   * wait: 1s
 ```
 
-### Wait until
-Waiting is a time consuming step, sometimes make the tests slow, but it's necessary.
+### 等待直至次数
+等待是一个耗时的操作，很可能让测试变慢，但又是必要的。
 
-`wait 1000ms times 3` specifies the framework to wait 3 times, each time wait 1000ms
+`wait 1000ms times 3`表示等待3次，每次等待1000ms。
 
 Run this step **DOSE NOT** put the thread in sleep immediately. if the first coming verification failed, then it
 actually put the thread in sleep for `1000ms`, and then retry once, and this process will repeat `3` times.
 
-#### wait until API respond expected response
+运行完这步后，线程并**不会**立即休眠。如果接下来的第一个验证类型的步骤失败，则会将线程休眠`1000ms`, 然后重试，这个过程会被重复`3`遍。 
 
-`GET /sequence` returns plain text in sequence
+#### 等待直到API返回期望的结果
+
+`GET /sequence` 依次返回字符串
 
 ```java
 server.server()
@@ -1613,7 +1619,7 @@ server.server()
         .response(seq("1", "2", "3", "4", "5", "6", "7", "8", "9", "10"));
 ```
 
-Wait until:
+等待直到:
 ```gherkin
 Scenario: wait until
   * wait: 1000ms times: 3
@@ -1647,7 +1653,7 @@ Scenario: wait until
   """
 ```
 
-#### wait until database query results expected
+#### 等待直到数据库返回期望结果
 
 ```gherkin
 * wait: 1000ms times: 3
@@ -1659,14 +1665,13 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].age'=18
 ```
 
-**Although between wait and the first verificaiton, there can be multiple actions(http request or database queries),**
-**all actions between will be take as retry, but only the last action can be verified.**
-**For example:**
+**尽管在wait和第一个验证之间可以有多个动作（http请求，数据库查询等）, 之间的所有动作都会被重试，但是只有最后一个动作的结果能够被验证**
+**比如:**
 ```gherkin
 * wait: 1000ms times: 3
 * uri: /sequence
 * send: GET
-# no verifiction for this http request
+# 次http请求不会被校验结果, 但会被重试
 
 * query:
 """
@@ -1675,28 +1680,28 @@ SELECT NAME, AGE FROM USERS;
 * verify: '$[0].name'="jakim"
 * verify: '$[0].age'=18
 ```
-**Both the database query and the http request will be repeated, but verification can only be applied to the database query**
+**http请求和数据库查询都会被重试，但是只有数据库查询会被验证**
 
-Utilities
+工具
 ---------
 
-You use utitlities by assign them as variable and use it.
+你可以通过工具来赋值变量，通过变量的方式使用:
 
-### Random UUID
+### 随机UUID
 ```gherkin
 Scenario: generate random number
   * var: uuid=random uuid
   * verify: ${uuid} length: 36
 ```
 
-Example uuid: `123e4567-e89b-12d3-a456-556642440000`
+示例uuid: `123e4567-e89b-12d3-a456-556642440000`
 
-You can generate almost all kinds of random testing data by using [faker expression](#special-variable-with-faker)
+使用[faker expression](#special-variable-with-faker)你可以生成几乎所有随机的测试数据
 
-### Print
+### 打印
 @since 0.3.5
 
-You can print something for debugging purpose
+你可以打印一些信息用于调试
 ```gherkin
 * print: "begin"
 * print: "@{$}"
@@ -1707,9 +1712,9 @@ You can print something for debugging purpose
 * print: "end"
 ```
 
-Data Driven
+数据驱动
 -----------
-You can use cucumber senario outline for data driven scenarios
+你可以使用cucumber的scenario outline来实现数据驱动的场景
 
 ```gherkin
 
@@ -1739,7 +1744,7 @@ Feature: data driven
       | steve    |
 ```
 
-Use variable, so you can reference data in Examples section in external file.
+使用变量, 你可以在外部文件中引用`Examples`中的值。
 
 ```gherkin
 
