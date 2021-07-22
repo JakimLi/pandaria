@@ -1040,9 +1040,6 @@ success
 ```
 上述例子中，name会被设置成一个随机的名字，但是city会被设置成`#{Address.ctiy}`。
 
-**You are not allowed to escape when define varaible use faker with fake data, `var: name=faker: ##{Name.fullName}`**
-**will not work, use `var: name='#{Name.fullName}'` instead.**
-
 **使用faker数据赋值变量时不允许这样转义, `var: name=faker: ##{Name.fullName}`**
 **请使用 `var: name='#{Name.fullName}'` 代替**
 
@@ -1526,13 +1523,6 @@ Scenario: null check
 
 你可以将代码块写在一行，doc string或者单独的文件中。
 
-**Things to note**
-* If you have multiple lines in the code snippet, only the result of the last line will be used as the result.
-* If you need to write complex code in the snippet, consider to put them in java with cucumber steps first.
-* [Nashorn](https://docs.oracle.com/javase/8/docs/technotes/guides/scripting/nashorn/api.html) is used for script evaluation.
-* If your jdk version under java 8u40, you might encounter issue about 0 was returned as 0.0, you can either upgrade your jdk version
-or you need to use it as double.
-
 **注意事项**
 * 如果代码中有多行代码，只有最后一样的执行结果会被返回使用。
 * 如果你需要在代码块中写很复杂的代码，首先试试自定义cucumber的step来实现。
@@ -1603,9 +1593,6 @@ Scenario: wait
 等待是一个耗时的操作，很可能让测试变慢，但又是必要的。
 
 `wait 1000ms times 3`表示等待3次，每次等待1000ms。
-
-Run this step **DOSE NOT** put the thread in sleep immediately. if the first coming verification failed, then it
-actually put the thread in sleep for `1000ms`, and then retry once, and this process will repeat `3` times.
 
 运行完这步后，线程并**不会**立即休眠。如果接下来的第一个验证类型的步骤失败，则会将线程休眠`1000ms`, 然后重试，这个过程会被重复`3`遍。 
 
