@@ -90,6 +90,7 @@ You can also verify JSON schema:
 ```
 
 More [Usage](doc/usage.md)
+[更多用法](doc/usage_zh.md)
 
 Resources
 ---------

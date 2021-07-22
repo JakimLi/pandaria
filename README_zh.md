@@ -83,7 +83,7 @@ SELECT NAME, AGE FROM USERS
 * verify: '$' conform to: schema/product.schema.json
 ```
 
-[更多用法](doc/usage.md)
+[更多用法](doc/usage_zh.md)
 
 
 学习资源
